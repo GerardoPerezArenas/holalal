@@ -1,0 +1,228 @@
+##################### OPERACIONES DISPONIBLES EN LA PESTA\u00d1A "CONF. SW" #####################
+0/MODULO_INTEGRACION/MELANBIDE45/LISTA_OPERACIONES_DISPONIBLES=altaEspecialidadFicheroEspecialidadesFormacion
+1/MODULO_INTEGRACION/MELANBIDE45/LISTA_OPERACIONES_DISPONIBLES=altaEspecialidadFicheroEspecialidadesFormacion
+
+##################### NOMBRE DEL M\u00d3DULO #####################
+NOMBRE_MODULO = MELANBIDE45
+
+##################### DESCRIPCI\u00d3N DEL M\u00d3DULO #####################
+0/MODULO_INTEGRACION/MELANBIDE45/DESCRIPCION_MODULO = M\u00f3dulo Listas de Listas de Modulos y Espacios Formativos
+1/MODULO_INTEGRACION/MELANBIDE45/DESCRIPCION_MODULO = M\u00f3dulo Listas de Listas de Modulos y Espacios Formativos
+
+##################### NOMBRE DE LAS PANTALLAS DEL M\u00d3DULO #####################
+0/MODULO_INTEGRACION/MELANBIDE45/RGEF/PANTALLA_EXPEDIENTE/NOMBRE_PANTALLAS = MUDULOS_ESPACIOS_FOR
+1/MODULO_INTEGRACION/MELANBIDE45/RGEF/PANTALLA_EXPEDIENTE/NOMBRE_PANTALLAS = MUDULOS_ESPACIOS_FOR
+
+
+##################### URL DE LAS PANTALLAS DEL M\u00d3DULO #####################
+0/MODULO_INTEGRACION/MELANBIDE45/RGEF/URL_PANTALLA_EXPEDIENTE/MUDULOS_ESPACIOS_FOR = /PeticionModuloIntegracion.do?tarea=preparar&modulo=MELANBIDE45&operacion=cargarPantallaPrincipalModulo&tipo=0
+1/MODULO_INTEGRACION/MELANBIDE45/RGEF/URL_PANTALLA_EXPEDIENTE/MUDULOS_ESPACIOS_FOR = /PeticionModuloIntegracion.do?tarea=preparar&modulo=MELANBIDE45&operacion=cargarPantallaPrincipalModulo&tipo=0
+
+
+##################### NOMBRE DE LA OPERACION DEL M\u00d3DULO QUE SE ENCARGA DE PROCESAR LA PANTALLA DE EXPEDIENTE #####################
+0/MODULO_INTEGRACION/MELANBIDE45/RGEF/PANTALLA_EXPEDIENTE/OPERACION_PROCESAR/MUDULOS_ESPACIOS_FOR =
+1/MODULO_INTEGRACION/MELANBIDE45/RGEF/PANTALLA_EXPEDIENTE/OPERACION_PROCESAR/MUDULOS_ESPACIOS_FOR =
+
+0/MODULO_INTEGRACION/MELANBIDE45/RGEF/PANTALLA_EXPEDIENTE/SALIDA = /jsp/extension/MELANBIDE45/melanbide45.jsp
+1/MODULO_INTEGRACION/MELANBIDE45/RGEF/PANTALLA_EXPEDIENTE/SALIDA = /jsp/extension/MELANBIDE45/melanbide45.jsp
+
+##################### NOMBRE DE LA OPERACION DEL MODULO QUE SE ENCARGA DE ACTUALIZAR LOS DATOS DE LA PANTALLA DE EXPEDIENTE #####################
+0/MODULO_INTEGRACION/MELANBIDE45/RGEF/ACTUALIZAR_PANTALLA_EXPEDIENTE/MUDULOS_ESPACIOS_FOR = 
+1/MODULO_INTEGRACION/MELANBIDE45/RGEF/ACTUALIZAR_PANTALLA_EXPEDIENTE/MUDULOS_ESPACIOS_FOR = 
+
+
+##################### NOMBRE DE LA OPERACION DEL M\u00d3DULO QUE SE ENCARGA DE PROCESAR LA PANTALLA DE EXPEDIENTE DE UNA RELACI\u00d3N ENTRE EXPEDIENTES #####################
+0/MODULO_INTEGRACION/MELANBIDE45/RGEF/PANTALLA_EXPEDIENTE_RELACION/OPERACION_PROCESAR/MUDULOS_ESPACIOS_FOR  =
+1/MODULO_INTEGRACION/MELANBIDE45/RGEF/PANTALLA_EXPEDIENTE_RELACION/OPERACION_PROCESAR/MUDULOS_ESPACIOS_FOR  =
+
+#####################################################
+0/MODULO_INTEGRACION/MELANBIDE45/RGEF/ESPECIALIDADES/CODIGOS_UNIDADES_ORGANICAS_VALIDAS
+1/MODULO_INTEGRACION/MELANBIDE45/RGEF/ESPECIALIDADES/CODIGOS_UNIDADES_ORGANICAS_VALIDAS
+
+0/MODULO_INTEGRACION/MELANBIDE45/RGEF/MUDULOS_ESPACIOS_FOR/CODIGOS_UNIDADES_ORGANICAS_VALIDAS
+1/MODULO_INTEGRACION/MELANBIDE45/RGEF/MUDULOS_ESPACIOS_FOR/CODIGOS_UNIDADES_ORGANICAS_VALIDAS
+
+
+##################### NOMBRES DE TABLAS #####################
+TABLA_RGEF_MODFORMATIVO=MELANBIDE45_MODFORMATIVO
+TABLA_RGCF_ESPFORMATIVO=MELANBIDE45_ESPFORMATIVO
+TABLA_RGEF_MATERIALCONSU=MELANBIDE45_MATERIALCONSU
+
+
+
+##################### NOMBRES DE SECUENCIAS #####################
+SEQ_RGEF_MODFOR=SEQ_MELANBIDE45_MODFOR
+SEQ_RGEF_ESPFOR=SEQ_MELANBIDE45_ESPFOR
+SEQ_RGEF_MATCON=SEQ_MELANBIDE45_MATERIALCONSU
+
+
+
+##################### FICHEROS DE MENSAJES #####################
+UBICACION_FICHEROS_MENSAJES = es.altia.flexia.integracion.moduloexterno.melanbide45.i18n.text
+FICHEROS_MENSAJES = MELANBIDE45_TEXT_1;MELANBIDE45_TEXT_4
+
+
+
+
+###########  OTRAS CONFIGURACIONES #####
+
+MSG_ERROR_FECHA_NO_VALIDA_1 = Fecha no v\u00e1lida
+MSG_ERROR_FECHA_NO_VALIDA_4 = Balio gabeko data
+
+
+# URL DEL SERVICIO WEB DE FICHERO DE ESPECIALIDADES FORMATIVAS
+URL_WS_FICHERO_ESPECIALIDADES_FORMACION = http://10.168.212.161:11003/ikaslanWS/WSFicheroEspecialidadesFormacion?wsdl
+
+#Tipo de la espcialidad
+TIPO_ESPECIALIDAD = 3
+
+
+# Codigo del campo suplementario con la fecha de resolucion. Esta definido a nivel de tramite
+CODIGO_CAMPO_TRAMITE_FECHA_RESOLUCION = FECRESOL
+
+# Codigo del campo suplementario "Codigo de centro"
+CODIGO_CAMPO_CODCENTRO   = CODCENTRO
+
+# Codigo del campo suplementario "Codigo de ubicacion"
+CODIGO_CAMPO_CODUBICACION = CODUBICACION
+
+# Codigo campo suplementario texto de expediente del que se lee el codigo de la especialidad
+CODIGO_CAMPO_TEXTO_CODIGO_ESPECIALIDAD = CODESP
+
+# Codigo campo suplementario desplegable externo de expediente del que se lee el subtipo de la especialidad
+CODIGO_CAMPO_DESPLEGABLE_EXTERNO_SUBTIPO = SUBTIPO
+
+# Codigo campo suplementario texto de expediente del que se lee el subtipo de la especialidad
+CODIGO_CAMPO_TEXTO_DENOMINACION = EFDENOM
+
+# Codigo campo suplementario desplegable externo de expediente, del que se lee la familia profesional
+CODIGO_CAMPO_DESPLEGABLE_EXTERNO_FAMILIA = FAMILIA
+
+# Codigo campo suplementario desplegable externo de expediente, del que se lee el area profesional
+CODIGO_CAMPO_DESPLEGABLE_EXTERNO_AREA = AREA
+
+# Codigo campo suplementario de texto largo de expediente del que se lee el objetivo general de la formacion
+CODIGO_CAMPO_TEXTO_LARGO_OBJETIVO_FORMACION = OBJFORMACION
+
+# Codigo campo suplementario numerico de expediente del que se lee la duracion
+CODIGO_CAMPO_NUMERICO_DURACION = EFDURMAXPRES
+
+# Codigo campo suplementario numerico del que se lee la duraci\u00f3n m\u00e1xima de teleformacion
+CODIGO_CAMPO_NUMERICO_DURACION_MAXIMO_PRESENCIAL = EFDURMAXPRES
+
+# Codigo campo suplementario numerico del que se lee la duraci\u00f3n m\u00e1xima de teleformacion
+CODIGO_CAMPO_NUMERICO_DURACION_MAXIMO_TELEFORMACION = EFDURMAXTELE
+
+# Codigo campo suplementario texto del que se lee el nivel de cualificacion
+CODIGO_CAMPO_TEXTO_NIVEL_CUALIFICACION = NIVEL
+
+# C\u00f3digo campo suplementario del que se lee la ocupacion de referencia
+CODIGO_CAMPO_CODOCUPACION = OCUPREFER
+
+# Codigo campo suplementario que contiene el c\u00f3digo de del censo SILCOI
+CODIGO_CAMPO_NUMCENSOSILCOI = NUMCENSOSILCOI2
+
+# Codigo campo suplementario que contiene el c\u00f3digo de del censo Lanbide
+CODIGO_CAMPO_NUMCENSOLANBIDE = NUMCENSOLANBIDE
+
+####### ERRORES PERSONALIZADOS DE LA OPERACION altaEspecialidadFicheroEspecialidadesFormacion 
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/1 = ERR0R_RECUPERAR_PROPIEDADES_FICHERO_CONFIGURACION
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/2 = ERR0R_RECUPERAR_CAMPOS_DESPLEGABLES_EXTERNOS
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/3 = ERR0R_RECUPERAR_DATOS_SERVICIO_WEB
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/4 = ERR0R_VALORES_MODFORMATICOS_UNIDCOMPETENCIA_VACIOS
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/5 = ERR0R_CONEXION_WS
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/6 = ERR0R_ALTA_ESPECIALIDAD_FICHERO_ESPECIALIDADES
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/7 = ERR0R_LLAMADA_SERVICIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/10 = ERR0R_CAMPO_SUPLEMENTARIO_SUTIPO_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/11 = ERR0R_CAMPO_SUPLEMENTARIO_FAMILIA_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/12 = ERR0R_CAMPO_SUPLEMENTARIO_AREA_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/13 = ERR0R_CAMPO_SUPLEMENTARIO_FECHARESOLUCION_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/14 = ERR0R_CAMPO_SUPLEMENTARIO_CODIGOCENTRO_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/15 = ERR0R_CAMPO_SUPLEMENTARIO_CODIGOUBICACION_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/16 = ERR0R_CAMPO_SUPLEMENTARIO_CODIGOESPECIALIDA_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/17 = ERR0R_CAMPO_SUPLEMENTARIO_DENOMINACION_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/18 = ERR0R_CAMPO_SUPLEMENTARIO_OBJETIVO_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/19 = ERR0R_CAMPO_SUPLEMENTARIO_DURACION_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/20 = ERR0R_CAMPO_SUPLEMENTARIO_DURACIONMAXPRESENCIAL_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/21 = ERR0R_CAMPO_SUPLEMENTARIO_DURACIONMAXTELEFORMACION_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/22 = ERR0R_CAMPO_SUPLEMENTARIO_NIVEL_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/23 = ERR0R_CAMPO_SUPLEMENTARIO_OCUPACION_VACIO
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/24 = ERR0R_CAMPO_GUARDAR_MFUC
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/25 = ERR0R_CAMPO_GUARDAR_CODIGO_ESPECIALIDAD
+0/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/26 = ERR0R_CAMPO_GENERAR_CODIGO_ESPECIALIDAD
+
+
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/1 = ERR0R_RECUPERAR_PROPIEDADES_FICHERO_CONFIGURACION
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/2 = ERR0R_RECUPERAR_CAMPOS_DESPLEGABLES_EXTERNOS
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/3 = ERR0R_RECUPERAR_DATOS_SERVICIO_WEB
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/4 = ERR0R_VALORES_MODFORMATICOS_UNIDCOMPETENCIA_VACIOS
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/5 = ERR0R_CONEXION_WS
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/6 = ERR0R_ALTA_ESPECIALIDAD_FICHERO_ESPECIALIDADES
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/7 = ERR0R_LLAMADA_SERVICIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/10 = ERR0R_CAMPO_SUPLEMENTARIO_SUTIPO_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/11 = ERR0R_CAMPO_SUPLEMENTARIO_FAMILIA_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/12 = ERR0R_CAMPO_SUPLEMENTARIO_AREA_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/13 = ERR0R_CAMPO_SUPLEMENTARIO_FECHARESOLUCION_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/14 = ERR0R_CAMPO_SUPLEMENTARIO_CODIGOCENTRO_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/15 = ERR0R_CAMPO_SUPLEMENTARIO_CODIGOUBICACION_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/16 = ERR0R_CAMPO_SUPLEMENTARIO_CODIGOESPECIALIDA_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/17 = ERR0R_CAMPO_SUPLEMENTARIO_DENOMINACION_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/18 = ERR0R_CAMPO_SUPLEMENTARIO_OBJETIVO_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/19 = ERR0R_CAMPO_SUPLEMENTARIO_DURACION_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/20 = ERR0R_CAMPO_SUPLEMENTARIO_DURACIONMAXPRESENCIAL_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/21 = ERR0R_CAMPO_SUPLEMENTARIO_DURACIONMAXTELEFORMACION_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/22 = ERR0R_CAMPO_SUPLEMENTARIO_NIVEL_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/23 = ERR0R_CAMPO_SUPLEMENTARIO_OCUPACION_VACIO
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/24 = ERR0R_CAMPO_GUARDAR_MFUC
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/25 = ERR0R_CAMPO_GUARDAR_CODIGO_ESPECIALIDAD
+1/MODULO_INTEGRACION/altaEspecialidadFicheroEspecialidadesFormacion/MENSAJE_ERROR/26 = ERR0R_CAMPO_GENERAR_CODIGO_ESPECIALIDAD
+
+
+ERR0R_RECUPERAR_PROPIEDADES_FICHERO_CONFIGURACION_1 = Error al recuperar las propiedades del fichero de configuraci\u00f3n
+ERR0R_RECUPERAR_PROPIEDADES_FICHERO_CONFIGURACION_4 = Error al recuperar las propiedades del fichero de configuraci\u00f3n
+ERR0R_RECUPERAR_CAMPOS_DESPLEGABLES_EXTERNOS_1 = Errr al recuperar los campos desplegables externos
+ERR0R_RECUPERAR_CAMPOS_DESPLEGABLES_EXTERNOS_4 = Error al recuperar los campos desplegables externos
+ERR0R_RECUPERAR_DATOS_SERVICIO_WEB_1 = Error al recuperar los datos para la llamada al servicio web
+ERR0R_RECUPERAR_DATOS_SERVICIO_WEB_4 = Error al recuperar los datos para la llamada al servicio web
+ERR0R_VALORES_MODFORMATICOS_UNIDCOMPETENCIA_VACIOS_1 = Alg\u00fan valor obligatorio de los M\u00f3dulos Formativos \u00f3 Unidades de Competencia no est\u00e1 informado. Los valores obligatorios son C\u00f3digo y Existente
+ERR0R_VALORES_MODFORMATICOS_UNIDCOMPETENCIA_VACIOS_4 = Alg\u00fan valor obligatorio de los M\u00f3dulos Formativos \u00f3 Unidades de Competencia no est\u00e1 informado. Los valores obligatorios son C\u00f3digo y Existente
+ERR0R_CONEXION_WS_1 = Error al establecer la conexi\u00f3n con el servicio web
+ERR0R_CONEXION_WS_4 = Error al establecer la conexi\u00f3n con el servicio web
+ERR0R_ALTA_ESPECIALIDAD_FICHERO_ESPECIALIDADES_1 = No se ha podido dar de alta una especialidad en el fichero de especialidades de formaci\u00f3n
+ERR0R_ALTA_ESPECIALIDAD_FICHERO_ESPECIALIDADES_4 = No se ha podido dar de alta una especialidad en el fichero de especialidades de formaci\u00f3n
+ERR0R_LLAMADA_SERVICIO_1 = Error en la llamada al servicio web para dar de alta una especialidad
+ERR0R_LLAMADA_SERVICIO_4 = Error en la llamada al servicio web para dar de alta una especialidad
+ERR0R_CAMPO_SUPLEMENTARIO_SUTIPO_VACIO_1 = El campo suplementartio Subtipo Especialidad es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_SUTIPO_VACIO_4 = El campo suplementartio Subtipo Especialidad es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_FAMILIA_VACIO_1 = El campo suplementartio Familia Profesional es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_FAMILIA_VACIO_4 = El campo suplementartio Familia Profesional es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_AREA_VACIO_1 = El campo suplementartio \u00c1rea Profesional es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_AREA_VACIO_4 = El campo suplementartio \u00c1rea Profesional es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_FECHARESOLUCION_VACIO_1 = El campo suplementartio Fecha Resoluci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_FECHARESOLUCION_VACIO_4 = El campo suplementartio Fecha Resoluci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_CODIGOCENTRO_VACIO_1 = El campo suplementartio C\u00f3digo del Centro es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_CODIGOCENTRO_VACIO_4 = El campo suplementartio C\u00f3digo del Centro es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_CODIGOUBICACION_VACIO_1 = El campo suplementartio C\u00f3digo de Ubicaci\u00f3n del Centro es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_CODIGOUBICACION_VACIO_4 = El campo suplementartio C\u00f3digo de Ubicaci\u00f3n del Centro es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_CODIGOESPECIALIDA_VACIO_1 = El campo suplementartio C\u00f3digo de Especialidad es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_CODIGOESPECIALIDA_VACIO_4 = El campo suplementartio C\u00f3digo de Especialidad es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_DENOMINACION_VACIO_1 = El campo suplementartio Denominaci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_DENOMINACION_VACIO_4 = El campo suplementartio Denominaci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_OBJETIVO_VACIO_1 = El campo suplementartio Objetivo General de Formaci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_OBJETIVO_VACIO_4 = El campo suplementartio Objetivo General de Formaci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_DURACION_VACIO_1 = El campo suplementartio Duraci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_DURACION_VACIO_4 = El campo suplementartio Duraci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_DURACIONMAXPRESENCIAL_VACIO_1 = El campo suplementartio Duraci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_DURACIONMAXPRESENCIAL_VACIO_4 = El campo suplementartio Duraci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_DURACIONMAXTELEFORMACION_VACIO_1 = El campo suplementartio Duraci\u00f3n M\u00e1xima Teleformaci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_DURACIONMAXTELEFORMACION_VACIO_4 = El campo suplementartio Duraci\u00f3n M\u00e1xima Teleformaci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_NIVEL_VACIO_1 = El campo suplementartio Nivel de Cualificaci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_NIVEL_VACIO_4 = El campo suplementartio Nivel de Cualificaci\u00f3n es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_OCUPACION_VACIO_1 = El campo suplementartio Ocupaciones de Referencia es obligatorio
+ERR0R_CAMPO_SUPLEMENTARIO_OCUPACION_VACIO_4 = El campo suplementartio Ocupaciones de Referencia es obligatorio
+ERR0R_CAMPO_GUARDAR_MFUC_1 = Error al guardar los campos de Modulos Mormativos tras llarmar al Servicio Web
+ERR0R_CAMPO_GUARDAR_MFUC_4 = Error al guardar los campos de Modulos Mormativos tras llarmar al Servicio Web
+ERR0R_CAMPO_GUARDAR_CODIGO_ESPECIALIDAD_1 = El campo Codigo Especialidad no se ha guardado correctamente
+ERR0R_CAMPO_GUARDAR_CODIGO_ESPECIALIDAD_4 = El campo Codigo Especialidad no se ha guardado correctamente
+ERR0R_CAMPO_GENERAR_CODIGO_ESPECIALIDAD_1 = El campo Codigo Especialidad no se ha guardado correctamente
+ERR0R_CAMPO_GENERAR_CODIGO_ESPECIALIDAD_4 = El campo Codigo Especialidad no se ha guardado correctamente

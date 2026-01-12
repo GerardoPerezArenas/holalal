@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="5" uuid="cbfc31f6-a90e-447c-96db-08dbe55a6572">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="57"/>
+	<scriptlet name="Scriptlet_1" class="net.sf.jasperreports.engine.JRDefaultScriptlet"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombreC" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="direccion2" class="java.lang.String"/>
+	<field name="codPostal" class="java.lang.String"/>
+	<field name="fechaCas" class="java.lang.String"/>
+	<field name="fechaEus" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="679" splitType="Stretch">
+			<image hAlign="Right">
+				<reportElement x="365" y="0" width="164" height="60" uuid="bc706c76-4732-4a88-8715-44d236c958e1"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/LOGOVASCO.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement mode="Transparent" x="14" y="0" width="129" height="70" uuid="a7571b29-7d79-41fc-bf3d-bb4f253ba360"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/Lanbide_CL.gif"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="280" y="95" width="270" height="20" uuid="07379df9-2f90-4a99-bb79-d55c2656dde3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="83" width="270" height="20" uuid="742f8967-9758-4c60-9b64-4d4bd64bbe6d"/>
+				<textElement markup="styled">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style isBold='true' pdfFontName='Helvetica-Bold'>"+$F{nombreC}+"</style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="108" width="270" height="20" uuid="a578bf92-aa68-41e7-b411-0779ecf72182"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{direccion2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="281" y="120" width="73" height="20" uuid="dc908df3-b346-429c-8482-5bc50e5e5061"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codPostal}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="237" width="240" height="20" uuid="9e06d84b-4657-4344-af7e-660cb493c7fd"/>
+				<textElement markup="styled"/>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'>Jaun/Andere agurgarria:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="347" width="82" height="20" uuid="0b50d2d1-bbc5-4258-b206-b6bd8845dede"/>
+				<textElement markup="styled"/>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'>Begirunez,</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="308" y="347" width="100" height="20" uuid="87be7395-ec9e-4f85-8114-9f541fdbfa8b"/>
+				<textElement markup="styled">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'>Atentamente,</style>]]></text>
+			</staticText>
+			<image>
+				<reportElement x="220" y="496" width="110" height="82" uuid="f54328b3-4b93-4992-9247-dadc45e30577"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/firmaItziar.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="180" y="591" width="195" height="20" uuid="735d65c4-5ca4-47cb-84da-4b1b66f4b788"/>
+				<textElement markup="styled">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Izp./Fdo.: Itziar Etxebarria Lanborena</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="97" y="626" width="361" height="20" uuid="79fb116f-2bf1-4928-892d-fad1b7aaa53f"/>
+				<textElement markup="styled">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ENPLEGURAKO LANBIDE HEZIKETAKO ZERBITZU ARDURADUNA</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="18" y="646" width="524" height="20" uuid="679fd0f5-6799-4ba5-bf65-0ea618e28492"/>
+				<textElement textAlignment="Center">
+					<font size="11" isBold="false"/>
+				</textElement>
+				<text><![CDATA[RESPONSABLE DEL SERVICIO DE FORMACIÓN PROFESIONAL PARA EL EMPLEO]]></text>
+			</staticText>
+			<textField>
+				<reportElement key="" x="307" y="237" width="240" height="20" uuid="6e0c868a-9ce3-413f-b902-df4041bfbbc3"/>
+				<textElement markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Estimado/a señor/señora:</style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="270" width="240" height="30" uuid="ffeea2dc-dea9-4c85-b197-b5b664e4e7b6"/>
+				<textElement markup="styled">
+					<font fontName="SansSerif" size="11" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Le remito adjunto la <style isBold='true' pdfFontName='Helvetica-Bold'>Acreditación Parcial Acumulable</style> solicitada a Lanbide </style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" x="159" y="410" width="242" height="20" uuid="35dcdde1-25ce-43a3-8f54-40a3a9dcd580"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Vitoria-Gasteiz, "+$F{fechaEus}+"</style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" x="159" y="424" width="242" height="20" uuid="c11b60d2-df4e-483f-90df-dcd1b6e29cf7"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Vitoria-Gasteiz, "+$F{fechaCas}+"</style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="270" width="240" height="30" uuid="4d699c42-0ffc-4f49-b23d-cae4f1f007a0"/>
+				<textElement markup="styled"/>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Honekin batera doakizu Lanbideri eskatutako <style isBold='true' pdfFontName='Helvetica-Bold'>Egiaztapen Partzial Metagarria</style></style>. "]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="116">
+			<textField>
+				<reportElement x="170" y="96" width="220" height="20" isRemoveLineWhenBlank="true" uuid="8e06dfc5-579d-485b-8bf5-06f91b239b76"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA["Jose Atxotegi, 1 - 01009 Vitoria-Gasteiz"]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+</jasperReport>

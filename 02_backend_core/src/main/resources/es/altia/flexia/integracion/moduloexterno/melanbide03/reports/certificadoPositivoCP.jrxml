@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="Blank_A4" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="5" uuid="cbfc31f6-a90e-447c-96db-08dbe55a6572">
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
+	<property name="com.jaspersoft.studio.unit." value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="pixel"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="pixel"/>
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="614"/>
+	<scriptlet name="Scriptlet_1" class="net.sf.jasperreports.engine.JRDefaultScriptlet"/>
+	<parameter name="INTERESADO_SOLICITANTE" class="java.lang.String"/>
+	<parameter name="INTERESADO_DomSOLICITANTE" class="java.lang.String"/>
+	<parameter name="INTERESADO_CodPostalSOLICITAN" class="java.lang.String"/>
+	<parameter name="INTERESADO_PobSOLICITANTE" class="java.lang.String"/>
+	<parameter name="INTERESADO_ProvinciaSOLICITAN" class="java.lang.String"/>
+	<parameter name="FECACTEU" class="java.lang.String"/>
+	<parameter name="FECACTESP" class="java.lang.String"/>
+	<parameter name="INTERESADO_DocSOLICITANTE" class="java.lang.String"/>
+	<parameter name="DECRETO" class="java.lang.String"/>
+	<parameter name="FECHARD" class="java.lang.String"/>
+	<parameter name="DECMODTEXT" class="java.lang.String"/>
+	<parameter name="RDFECHAEUSK" class="java.lang.String"/>
+	<parameter name="DECMODTEXTEUSK" class="java.lang.String"/>
+	<parameter name="DESCRIPCIONC" class="java.lang.String"/>
+	<parameter name="DESCRIPCIONE" class="java.lang.String"/>
+	<parameter name="CODIGOCP" class="java.lang.String"/>
+	<parameter name="NIVEL" class="java.lang.String"/>
+	<parameter name="NUMEXPEDIENTE" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="679" splitType="Stretch">
+			<image hAlign="Right">
+				<reportElement x="365" y="0" width="164" height="60" uuid="bc706c76-4732-4a88-8715-44d236c958e1"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/LOGOVASCO.png"]]></imageExpression>
+			</image>
+			<image>
+				<reportElement mode="Transparent" x="14" y="0" width="129" height="70" uuid="a7571b29-7d79-41fc-bf3d-bb4f253ba360"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/Lanbide_CL.gif"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="280" y="115" width="270" height="20" uuid="a578bf92-aa68-41e7-b411-0779ecf72182"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{INTERESADO_DomSOLICITANTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="135" width="49" height="20" uuid="dc908df3-b346-429c-8482-5bc50e5e5061"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{INTERESADO_CodPostalSOLICITAN}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="45" y="204" width="220" height="20" uuid="9e06d84b-4657-4344-af7e-660cb493c7fd"/>
+				<textElement markup="styled"/>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'>Jaun/Andere agurgarria:</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="367" width="82" height="20" uuid="0b50d2d1-bbc5-4258-b206-b6bd8845dede"/>
+				<textElement markup="styled"/>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'>Begirunez,</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement key="" x="308" y="367" width="100" height="20" uuid="87be7395-ec9e-4f85-8114-9f541fdbfa8b"/>
+				<textElement markup="styled">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'>Atentamente,</style>]]></text>
+			</staticText>
+			<image>
+				<reportElement x="178" y="444" width="223" height="194" uuid="f54328b3-4b93-4992-9247-dadc45e30577"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/firmaCertificacionPositiva.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="203" y="578" width="195" height="20" uuid="735d65c4-5ca4-47cb-84da-4b1b66f4b788"/>
+				<textElement markup="styled">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold" size ='12'>Izp./Fdo.: Itziar Etxebarria Lanborena</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="104" y="598" width="376" height="20" uuid="79fb116f-2bf1-4928-892d-fad1b7aaa53f"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold" size ='8'>ENPLEGURAKO LANBIDE HEZIKETAKO ZERBITZU ARDURADUNA</style>]]></text>
+			</staticText>
+			<textField>
+				<reportElement key="" x="307" y="204" width="220" height="33" uuid="6e0c868a-9ce3-413f-b902-df4041bfbbc3"/>
+				<textElement markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Estimado/a señor/señora:</style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="308" y="237" width="220" height="130" uuid="ffeea2dc-dea9-4c85-b197-b5b664e4e7b6"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font fontName="SansSerif" size="11" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Le remito adjunta la <style isBold='true' pdfFontName='Helvetica-Bold'>VALORACIÓN POSITIVA del Certificado de Profesionalidad</style> solicitado a Lanbide, firmada por el Director de Formación para el Empleo y Garantía de Ingresos.</style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" x="159" y="410" width="242" height="14" uuid="35dcdde1-25ce-43a3-8f54-40a3a9dcd580"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Vitoria-Gasteiz, "+$P{FECACTEU}+"</style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" x="159" y="424" width="242" height="20" uuid="c11b60d2-df4e-483f-90df-dcd1b6e29cf7"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Vitoria-Gasteiz, "+$P{FECACTESP}+"</style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="237" width="220" height="130" uuid="4d699c42-0ffc-4f49-b23d-cae4f1f007a0"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Honekin batera doakizu Lanbideri eskatutako <style isBold='true' pdfFontName='Helvetica-Bold'>Profesionaltasun Ziurtagiriaren ALDEKO BALORAZIOA</style>, Enplegurako Prestakuntzako eta Diru Sarreren Bermerako Zuzendariak sinatuta.</style> "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="329" y="135" width="185" height="20" uuid="113e3b52-21b8-4fc8-98ff-9748d2908bbf"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{INTERESADO_PobSOLICITANTE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="155" width="212" height="20" uuid="bd43fbb8-21d7-48c5-931e-34c0d3dc31a3"/>
+				<textElement>
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{INTERESADO_ProvinciaSOLICITAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" x="280" y="94" width="270" height="21" uuid="45f4f420-60de-4c80-b3d1-01595f7ba584"/>
+				<textElement textAlignment="Left" markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'><style isBold='true' pdfFontName='Helvetica-Bold'>"+$P{INTERESADO_SOLICITANTE}+"</style></style>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="104" y="618" width="376" height="20" uuid="5408fdc0-4dd6-43d4-a2b8-1c46d33ffe31"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style  size ="8">RESPONSABLE DEL SERVICIO DE FORMACIÓN PROFESIONAL PARA EL EMPLEO</style>]]></text>
+			</staticText>
+		</band>
+		<band height="701">
+			<image>
+				<reportElement mode="Transparent" x="14" y="0" width="129" height="70" uuid="6169bcf5-23ac-4540-bd26-40d45ee16c14"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/Lanbide_CL.gif"]]></imageExpression>
+			</image>
+			<image hAlign="Right">
+				<reportElement x="365" y="0" width="164" height="60" uuid="033df2b5-1d8c-4027-b40a-3058ef083f19"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/LOGOVASCO.png"]]></imageExpression>
+			</image>
+			<textField>
+				<reportElement x="40" y="239" width="240" height="66" uuid="ab97ea73-1264-4d9a-92c5-94a765b8034d"/>
+				<textElement textAlignment="Justified" markup="styled"/>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>"+$P{INTERESADO_SOLICITANTE}+" jaun/andreari (NAN/AIZ "+$P{INTERESADO_DocSOLICITANTE}+") Profesionaltasun-ziurtagiria egiaztatu egin zaio.</style> "]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="40" y="149" width="240" height="70" uuid="e872d8bc-ecf5-463e-b715-25ea113acfde"/>
+				<textElement textAlignment="Justified" markup="styled"/>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'><style isBold='true' pdfFontName='Helvetica-Bold'>JUAN IBARRETXE KARETXE </style>jaunak, Lanbide-Euskal Enplegu Zerbitzuko Enplegurako Prestakuntzako eta Diru Sarreren Bermerako zuzendariak,</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="285" width="240" height="20" uuid="140b449e-bbfe-40c4-9d17-29f036049fcb"/>
+				<textElement markup="styled"/>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'>Profesionaltasun-ziurtagiriaren izena:</style>]]></text>
+			</staticText>
+			<textField>
+				<reportElement key="" x="303" y="149" width="240" height="70" uuid="3cadf44d-aa3f-4737-a3ef-0238acfb71bc"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'><style isBold='true' pdfFontName='Helvetica-Bold'>JUAN IBARRETXE KARETXE </style>, Director de Formación para el Empleo y Garantía de Ingresos de Lanbide-Servicio Vasco de Empleo,</style> "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="239" width="240" height="66" uuid="6db9d687-86fa-468d-8886-544364258a76"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font fontName="SansSerif" size="11" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Que a D.Dª/ "+$P{INTERESADO_SOLICITANTE}+" con DNI/NIE "+$P{INTERESADO_DocSOLICITANTE}+", se le ha acreditado el Certificado de Profesionalidad de: </style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="302" y="360" width="240" height="80" uuid="aa18621c-1256-48aa-ad89-d62159b9d1b0"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font fontName="SansSerif" size="11" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>regulado en el Real Decreto  "+$P{DECRETO}+" de "+$P{FECHARD}+", estando en tramitación la expedición del correspondiente Certificado de Profesionalidad.</style> "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="363" width="240" height="77" uuid="9bb6c601-d29e-4d98-87ac-1b08b9d0e4f3"/>
+				<textElement textAlignment="Justified" markup="styled"/>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Zeina "+$P{RDFECHAEUSK}+"ko "+$P{DECRETO}+" Errege Dekretuak arautzen baitu. Jakitera ematen da dagokion Profesionaltasun-ziurtagiria izapidetzen ari dela.</style> "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="303" y="440" width="240" height="47" uuid="2f243138-aefb-447a-ba12-03499f996e0d"/>
+				<textElement textAlignment="Justified" markup="styled">
+					<font fontName="SansSerif" size="11" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Y para que conste y surta los efectos oportunos se expide la presente certificación en </style> "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="440" width="240" height="47" uuid="52297603-bcef-4a7f-a456-32210998e867"/>
+				<textElement textAlignment="Justified" markup="styled"/>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Eta horrela jasota gera dadin eta dagozkion ondorioak izan ditzan, egiaztagiri hau ematen da.</style> "]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" x="74" y="513" width="455" height="20" uuid="42c4b2e8-97ca-4945-ad49-edf5e9c2d683"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Vitoria-Gasteiz, "+$P{FECACTESP}+"</style>"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement key="" x="74" y="499" width="455" height="14" uuid="786d3849-a6a7-4648-b175-e2c9748bebb6"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'>Vitoria-Gasteiz, "+$P{FECACTEU}+"</style>"]]></textFieldExpression>
+			</textField>
+			<image>
+				<reportElement x="231" y="546" width="121" height="89" uuid="c17407c2-a191-4e59-b3b6-7c4fc68d0f81"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/firmaCertificacionPositivaIbarretxe.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="195" y="649" width="195" height="20" uuid="6c7eb793-80f4-4752-914a-b2ace31a0065"/>
+				<textElement markup="styled">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">Sin./Fdo: Juan Ibarretxe Karetxe</style>]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="40" y="108" width="503" height="20" uuid="101f50fa-787e-4d4e-a936-7c7a5e2ddc21"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="" x="56" y="108" width="473" height="20" uuid="fe76593f-6077-4dbf-95b0-4a6d0218db19"/>
+				<textElement markup="styled">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">ALDEKO BALORAZIOAREN ZIURTAGIRIA / CERTIFICACIÓN DE  VALORACIÓN POSITIVA</style>]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="40" y="88" width="503" height="20" uuid="b7965d02-4fe0-4da8-accd-903913848911"/>
+			</rectangle>
+			<staticText>
+				<reportElement key="" x="93" y="88" width="436" height="20" uuid="047810aa-e387-4f0e-a63f-18a272234939"/>
+				<textElement markup="styled">
+					<font size="11"/>
+				</textElement>
+				<text><![CDATA[<style isBold="true" pdfFontName="Helvetica-Bold">PROFESIONALTASUN ZIURTAGIRIA / CERTIFICADO DE PROFESIONALIDAD</style>]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="334" width="502" height="29" uuid="797dd16a-2a55-4e04-bf81-a4c810fe37d4"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESCRIPCIONC}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="321" width="503" height="26" uuid="80d150ab-cffd-4f7e-883e-d31d53b63a7e"/>
+				<textElement textAlignment="Center">
+					<font size="11"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{DESCRIPCIONE}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="40" y="305" width="502" height="16" uuid="852916c1-73c4-4c96-bfb8-33cc30c5fe35"/>
+				<textElement textAlignment="Center" markup="styled">
+					<font fontName="SansSerif" size="11" isBold="false" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["<style pdfFontName='Helvetica' size ='11'><style isBold='true' pdfFontName='Helvetica-Bold'> "+$P{CODIGOCP}+" - "+$P{NIVEL}+"</style></style>"]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="303" y="219" width="240" height="20" uuid="1e909855-4d6a-4b3b-bab9-5f6dd437fc0f"/>
+				<textElement markup="styled"/>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'><style isBold='true' pdfFontName='Helvetica-Bold'>CERTIFICA </style></style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="40" y="219" width="240" height="20" uuid="c1d7b499-43ef-47ed-8a79-cd9f324cf964"/>
+				<textElement markup="styled"/>
+				<text><![CDATA[<style pdfFontName='Helvetica' size ='11'>honako hau <style isBold='true' pdfFontName='Helvetica-Bold'>ZIURTATZEN DU: </style></style>]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="129" width="119" height="20" uuid="d0f66599-c246-4569-a4ec-9a14d7dddf01"/>
+				<textElement>
+					<font size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{NUMEXPEDIENTE}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<pageFooter>
+		<band height="116">
+			<staticText>
+				<reportElement x="195" y="37" width="203" height="20" uuid="aa511df1-d898-4cdb-bcf2-18a8054e31b6"/>
+				<textElement markup="styled">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style  size ="9">José Atxotegi 1, 01009 VITORIA-GASTEIZ</style>]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="244" y="57" width="85" height="20" uuid="72622028-21a3-4b38-8aaa-2de893d988dd"/>
+				<textElement markup="styled">
+					<font size="9" isBold="true"/>
+				</textElement>
+				<text><![CDATA[<style  size ="9">Tfno 945181300</style>]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+</jasperReport>

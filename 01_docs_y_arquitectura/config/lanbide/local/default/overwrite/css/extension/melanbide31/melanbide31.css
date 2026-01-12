@@ -1,0 +1,11 @@
+.datoErroneo{
+    color: red;
+}
+
+.sinDatos{
+    color: black;
+}
+
+.datoCorrecto{
+    color: green;
+}

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<quartz xmlns="http://www.opensymphony.com/quartz/JobSchedulingData"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.opensymphony.com/quartz/JobSchedulingData
+                      http://www.opensymphony.com/quartz/xml/job_scheduling_data_1_5.xsd"
+    version="1.5">
+<!--
+    Document   : quartz_jobs.xml
+    Created on : 15 de abril de 2009, 18:29
+    Author     : mjesus.lopez
+    Description:
+        Purpose of the document follows.
+-->
+
+    <job>
+        <job-detail>
+            <name>NotificacionPlazosTramitesJob</name>
+            <group>SIGPNotificacionGroup</group>
+            <description>Notificacion a tramites</description>
+            <job-class>es.altia.agora.interfaces.user.web.sge.notificacion.job.NotificacionPlazoJob</job-class>
+            <job-data-map allows-transient-data="false">
+                <entry>
+                    <key>jndis_lanzamiento_proceso</key>
+                    <value>sge_prueba_jndi</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>QuartzExampleTrigger</name>
+                <group>SIGPNotificacionTriggerGroup</group>
+                <job-name>NotificacionPlazosTramitesJob</job-name>
+                <job-group>SIGPNotificacionGroup</job-group>
+                 <!-- A las 12 de cada dia -->
+                <cron-expression>0 0 0 * * ?</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+    
+    
+	<job>
+        <job-detail>
+            <name>33</name>
+            <group>G33</group>
+            <description>Notificacion de anotaciones sin adjunto</description>
+            <job-class>es.altia.flexia.integracion.moduloexterno.pluginnotificacionplatea.PluginNotificacionJob</job-class>
+            <job-data-map allows-transient-data="false">
+                <entry>
+                    <key>33</key>
+                    <value>33</value>                    
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>5MIN</name>
+                <group>5MINGROUP</group>
+                <job-name>33</job-name>
+                <job-group>G33</job-group>
+
+                <cron-expression>0 0/1 * * * ?</cron-expression>
+
+		<!--
+		<cron-expression>0 05 17 * * ?</cron-expression>
+		-->
+            </cron>
+        </trigger>
+    </job> 
+	
+    <!--
+    <job>
+         <job-detail>
+           <name>InicioExpedienteCirculacionFacturaIFMS</name>
+           <group>FlexiaIFMSGroup</group>
+           <description>Circulacion Facturas CRTVG</description>
+           <job-class>es.altia.flexia.integracion.moduloexterno.tvg.metvgifms.procesos.InicioExpedienteCirculacionFacturaIFMS</job-class>
+           <job-data-map allows-transient-data="false">
+                    <entry>
+                       <key>jndis_lanzamiento_proceso</key>
+                      <value>jdbc_flexia_pruebas</value>
+                    </entry>
+            </job-data-map>
+         </job-detail>
+        <trigger>
+            <cron>                                                                                                                                                                                                                                                                                                                                                                                 
+                <name>QuartzExampleTrigger</name>
+                <group>FlexiaIFMSGroup</group>
+                <job-name>InicioExpedienteCirculacionFacturaIFMS</job-name>                
+                <cron-expression>0 0/1 * * * ?</cron-expression>
+            </cron>
+        </trigger>
+    </job>
+    -->
+    
+  	<!-- 
+     <job>
+        <job-detail>
+            <name>NotificacionAnotacionesSinAdjunto</name>
+            <group>NotificacionAnotacionesSinAdjuntoGroup</group>
+            <description>Notificacion de anotaciones sin adjunto</description>
+            <job-class>es.altia.flexia.notificacion.quartz.lanbide.proceso.NotificacionLanbideAnotacionSinAdjunto</job-class>
+            <job-data-map allows-transient-data="false">
+                <entry>
+                    <key>jndis_lanzamiento_proceso</key>
+                    <value>jdbc_flexia_pruebas</value>
+                </entry>
+            </job-data-map>
+        </job-detail>
+        <trigger>
+            <cron>
+                <name>QuartzExampleTrigger2</name>
+                <group>NotificacionAnotacionesSinAdjuntoGroup</group>
+                <job-name>NotificacionAnotacionesSinAdjunto</job-name>                
+                <cron-expression>0 0/1 * * * ?</cron-expression>
+        
+            </cron>
+        </trigger>
+     </job>
+   	-->
+</quartz>
+

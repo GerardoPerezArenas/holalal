@@ -1,0 +1,16 @@
+
+.legendAzulPasikus{
+    font-family: Arial,Verdana Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: left;
+    text-transform: uppercase;
+}
+
+.etiquetaPasikus{
+    width: 140px;
+    float: left;
+    text-align: left;
+    color: #004595;
+}

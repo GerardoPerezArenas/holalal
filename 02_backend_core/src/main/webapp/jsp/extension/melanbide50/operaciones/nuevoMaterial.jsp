@@ -1,0 +1,277 @@
+<%@ taglib uri="/WEB-INF/struts-logic.tld" prefix="logic" %>
+<%@ taglib uri="/WEB-INF/struts-bean.tld" prefix="bean" %>
+<%@ taglib uri="/WEB-INF/tlds/c.tld" prefix="c" %>
+
+<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide50.i18n.MeLanbide50I18n" %>
+<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide50.vo.material.MaterialVO" %>
+<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide50.vo.especialidades.EspecialidadesVO" %>
+<%@page import="es.altia.agora.business.escritorio.UsuarioValueObject" %>
+<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide50.util.ConstantesMeLanbide50" %>
+<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide50.util.ConfigurationParameter" %>
+<%@page import="java.util.ArrayList" %>
+<%@page import="java.util.List" %>
+<%@page import="java.text.SimpleDateFormat" %>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <%
+            MaterialVO datModif = new MaterialVO();
+            EspecialidadesVO datoEspecialidad = new EspecialidadesVO();
+            String codOrganizacion = "";
+            String numExpediente = "";
+            String nuevo = "1";
+            String fechaAdqui = "";
+            MeLanbide50I18n meLanbide50I18n = MeLanbide50I18n.getInstance();
+            
+            int idiomaUsuario = 1;
+            int apl = 5;
+            String css = "";
+            try
+            {
+                UsuarioValueObject usuario = new UsuarioValueObject();
+                try
+                {
+                    if (session != null) 
+                    {
+                        if (usuario != null) 
+                        {
+                            usuario = (UsuarioValueObject) session.getAttribute("usuario");
+                            idiomaUsuario = usuario.getIdioma();
+                            apl = usuario.getAppCod();
+                            css = usuario.getCss();
+                        }
+                    }
+                }
+                catch(Exception ex)
+                {
+
+                }
+
+                codOrganizacion  = request.getParameter("codOrganizacionModulo");
+                numExpediente    = request.getParameter("numero");
+                nuevo = (String)request.getAttribute("nuevo");
+                String nombreModulo = (String)request.getAttribute("nombreModulo");
+                
+
+                if(request.getAttribute("datModif") != null)
+                {
+                    datModif = (MaterialVO)request.getAttribute("datModif");
+                }
+
+                if(request.getAttribute("datoEspecialidad") != null)
+                {
+                    datoEspecialidad = (EspecialidadesVO)request.getAttribute("datoEspecialidad");
+                }
+            }
+            catch(Exception ex)
+            {
+            }
+        %>
+        <jsp:useBean id="descriptor" scope="request" class="es.altia.agora.interfaces.user.web.util.TraductorAplicacionBean"  type="es.altia.agora.interfaces.user.web.util.TraductorAplicacionBean" />
+        <jsp:setProperty name="descriptor"  property="idi_cod" value="<%=idiomaUsuario%>" />
+        <jsp:setProperty name="descriptor"  property="apl_cod" value="<%=apl%>" />
+        <link rel="StyleSheet" media="screen" type="text/css" href="<%=request.getContextPath()%><%=css%>">
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/jquery/jquery-1.9.1.min.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/DataTables/datatables.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/scripts/DataTables/datatables.min.css"/>
+        <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/extension/melanbide50/melanbide50.css"/>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/general.js"></script>
+        <script type="text/javascript" src="<c:url value='/scripts/listaComboBox.js'/>"></script>
+        <script type="text/javascript" src="<c:url value='/scripts/calendario.js'/>"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/validaciones.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/popup.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/meLanbide50/RgcfmUtils.js"></script>
+        <script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/meLanbide50/lanbide.js"></script>
+        <script type="text/javascript">
+            var APP_CONTEXT_PATH = '<%=request.getContextPath()%>';
+            var mensajeValidacion = '';
+
+            function guardarDatos() {
+                if (validarDatos()) {
+                    var ajax = getXMLHttpRequest();
+                    var nodos = null;
+                    var url = APP_CONTEXT_PATH + "/PeticionModuloIntegracion.do";
+                    var parametros = "";
+                    var nuevo = "<%=nuevo%>";
+
+                    if (nuevo != null && nuevo == "1") {
+                        parametros = "tarea=preparar&modulo=MELANBIDE50&operacion=crearMaterial&tipo=0&numero=<%=numExpediente%>"
+                                + "&cantidad=" + document.getElementById('cantidad').value
+                                + "&denominacionET=" + document.getElementById('denominacionET').value
+                                + "&idEpsol=<%=datoEspecialidad.getId()%>";
+
+                    } else {
+                        parametros = "tarea=preparar&modulo=MELANBIDE50&operacion=modificarMaterial&tipo=0&numero=<%=numExpediente%>"
+                                + "&id=<%=datModif != null && datModif.getId() != null ? datModif.getId().toString() : ""%>"
+                                + "&cantidad=" + document.getElementById('cantidad').value
+                                + "&denominacionET=" + document.getElementById('denominacionET').value
+                                + "&idEpsol=<%=datoEspecialidad.getId()%>";
+                    }
+                    try {
+                        ajax.open("POST", url, false);
+                        ajax.setRequestHeader("Content-Type", "application/x-www-form-urlencoded; charset=UTF-8");
+                        ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                        ajax.send(parametros);
+                        if (ajax.readyState == 4 && ajax.status == 200) {
+                            var xmlDoc = null;
+                            if (navigator.appName.indexOf("Internet Explorer") != -1) {
+                                // En IE el XML viene en responseText y no en la propiedad responseXML
+                                var text = ajax.responseText;
+                                xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+                                xmlDoc.async = "false";
+                                xmlDoc.loadXML(text);
+                            } else {
+                                // En el resto de navegadores el XML se recupera de la propiedad responseXML
+                                xmlDoc = ajax.responseXML;
+                            }//if(navigator.appName.indexOf("Internet Explorer")!=-1)
+                        }//if (ajax.readyState==4 && ajax.status==200)
+                        nodos = xmlDoc.getElementsByTagName("RESPUESTA");
+                        var elemento = nodos[0];
+                        var hijos = elemento.childNodes;
+                        var codigoOperacion = null;
+                        var listaMaterial = new Array();
+                        var fila = new Array();
+                        var nodoFila;
+                        var hijosFila;
+                        for (j = 0; hijos != null && j < hijos.length; j++) {
+                            if (hijos[j].nodeName == "CODIGO_OPERACION") {
+                                codigoOperacion = hijos[j].childNodes[0].nodeValue;
+                                listaMaterial[j] = codigoOperacion;
+                            }//if(hijos[j].nodeName=="CODIGO_OPERACION")                      
+                            else if (hijos[j].nodeName == "FILA") {
+                                nodoFila = hijos[j];
+                                hijosFila = nodoFila.childNodes;
+                                for (var cont = 0; cont < hijosFila.length; cont++) {
+                                    if (hijosFila[cont].nodeName == "ID") {
+                                        if (hijosFila[cont].childNodes.length > 0) {
+                                            fila[0] = hijosFila[cont].childNodes[0].nodeValue;
+                                        } else {
+                                            fila[0] = '-';
+                                        }
+                                    } else if (hijosFila[cont].nodeName == "MAC_NUM") {
+                                        if (hijosFila[cont].childNodes.length > 0) {
+                                            fila[1] = hijosFila[cont].childNodes[0].nodeValue;
+                                        } else {
+                                            fila[1] = '-';
+                                        }
+                                    } else if (hijosFila[cont].nodeName == "MAC_CANT") {
+                                        if (hijosFila[cont].childNodes.length > 0) {
+                                            fila[2] = hijosFila[cont].childNodes[0].nodeValue;
+                                        } else {
+                                            fila[2] = '-';
+                                        }
+                                    } else if (hijosFila[cont].nodeName == "MAC_DET") {
+                                        if (hijosFila[cont].childNodes.length > 0) {
+                                            fila[3] = hijosFila[cont].childNodes[0].nodeValue;
+                                        } else {
+                                            fila[3] = '-';
+                                        }
+                                    }
+                                    if (hijosFila[cont].nodeName == "ID_ESPSOL") {
+                                        if (hijosFila[cont].childNodes.length > 0) {
+                                            fila[4] = hijosFila[cont].childNodes[0].nodeValue;
+                                        } else {
+                                            fila[4] = '-';
+                                        }
+                                    }
+                                }
+                                listaMaterial[j] = fila;
+                                fila = new Array();
+                            }
+                        }//for(j=0;hijos!=null && j<hijos.length;j++)
+                        if (codigoOperacion == "0") {
+                            self.parent.opener.retornoXanelaAuxiliar(listaMaterial);
+                            cerrarVentana();
+                        } else if (codigoOperacion == "1") {
+                            jsp_alerta("A", '<%=meLanbide50I18n.getMensaje(idiomaUsuario,"error.errorBD")%>');
+                        } else if (codigoOperacion == "2") {
+                            jsp_alerta("A", '<%=meLanbide50I18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
+                        } else if (codigoOperacion == "3") {
+                            jsp_alerta("A", '<%=meLanbide50I18n.getMensaje(idiomaUsuario,"error.pasoParametros")%>');
+                        } else if (codigoOperacion == "4") {
+                            jsp_alerta("A", '<%=meLanbide50I18n.getMensaje(idiomaUsuario,"error.expSinTercero")%>');
+                        } else {
+                            jsp_alerta("A", '<%=meLanbide50I18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
+                        }//if(
+                    } catch (Err) {
+
+                    }//try-catch
+                } else {
+                    jsp_alerta("A", mensajeValidacion);
+                }
+            }
+
+            function validarDatos() {
+                mensajeValidacion = "";
+                var correcto = true;
+                var cantidad = document.getElementById('cantidad').value;
+                if (cantidad == null || cantidad == '') {
+                    mensajeValidacion = '<%=meLanbide50I18n.getMensaje(idiomaUsuario, "msg.todosCamposOblig")%>';
+                    return false;
+                } else {
+                    if (!validarNumericoRgcfm(document.getElementById('cantidad'))) {
+                        mensajeValidacion = '<%=meLanbide50I18n.getMensaje(idiomaUsuario, "material.msg.cantidad.errInteger")%>';
+                        return false;
+                    }
+                }
+
+                var denominacionET = document.getElementById('denominacionET').value;
+                if (denominacionET == null || denominacionET == '') {
+                    mensajeValidacion = '<%=meLanbide50I18n.getMensaje(idiomaUsuario, "msg.todosCamposOblig")%>';
+                    return false;
+                } else {
+                    if (!compruebaTamanoCampo(document.getElementById('denominacionET'), 1000)) {
+                        mensajeValidacion = '<%=meLanbide50I18n.getMensaje(idiomaUsuario, "msg.errExcdTexto")%>';
+                        return false;
+                    }
+                }
+                return correcto;
+            }
+
+        </script>
+    </head>
+    <body class="bandaBody">
+        <div class="contenidoPantalla">
+            <form>  <!-- action="/PeticionModuloIntegracion.do" method="POST" -->
+                <div style="width: 100%; padding: 10px; text-align: left;">
+                    <div  class="sub3titulo" style="clear: both; text-align: center; font-size: 14px;">
+                        <span>
+                            <%=meLanbide50I18n.getMensaje(idiomaUsuario,"label.material.nuevoMaterial")%>
+                        </span>
+                    </div>
+                    <div class="lineaFormulario">
+                        <div style="width: 200px; float: left;" class="etiqueta">
+                            <%=meLanbide50I18n.getMensaje(idiomaUsuario,"label.material.cantidad")%>
+                        </div>
+                        <div style="width: 450px; float: left;">
+                            <div style="float: left;">
+                                <input id="cantidad" name="cantidad" type="text" class="inputTexto" size="15" maxlength="9" 
+                                       value="<%=datModif != null && datModif.getCantidad() != null ? datModif.getCantidad().toString().replaceAll("\\.", ",")  : ""%>" onchange="reemplazarPuntos(this);"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br>
+                    <div class="lineaFormulario">
+                        <div style="width: 200px; float: left;" class="etiqueta">
+                            <%=meLanbide50I18n.getMensaje(idiomaUsuario,"label.material.denominacionET")%>
+                        </div>
+                        <div style="width: 450px; float: left;">
+                            <div style="float: left;">
+                                <textarea rows="5" cols="70" id="denominacionET" name="denominacionET" maxlength="1000" onblur="compruebaTamanoCampo(this, 1000)"><%=datModif != null && datModif.getDenominacionET() != null ? datModif.getDenominacionET()  : ""%></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <br><br><br>
+                    <div class="botonera">
+                        <input type="button" id="btnAceptar" name="btnAceptar" class="botonGeneral" value="<%=meLanbide50I18n.getMensaje(idiomaUsuario, "btn.aceptar")%>" onclick="guardarDatos();">
+                        <input type="button" id="btnCancelar" name="btnCancelar" class="botonGeneral" value="<%=meLanbide50I18n.getMensaje(idiomaUsuario, "btn.cancelar")%>" onclick="cancelar();">
+                    </div>
+                </div>
+                <div id="popupcalendar" class="text"></div>
+            </form>
+        </div>
+    </body>
+</html>
+
+

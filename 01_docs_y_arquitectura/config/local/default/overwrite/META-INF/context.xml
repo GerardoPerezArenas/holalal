@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--EWOK-->
+<!--Context crossContext="true" debug="5" path="/flexia19">
+  <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" initialSize="10" logAbandoned="true" maxActive="50" maxIdle="2" maxWait="5000" name="jdbc_flexia_pruebas" password="flexia_pruebas" removeAbandoned="true" removeAbandonedTimeout="300" type="javax.sql.DataSource" url="jdbc:oracle:thin:@//172.30.1.196:1521/altia" username="flexia_pruebas"/>
+  <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" initialSize="10" logAbandoned="true" maxActive="50" maxIdle="2" maxWait="5000" name="jdbc_flexia_organizacion" password="flexia_organizacion" removeAbandoned="true" removeAbandonedTimeout="300" type="javax.sql.DataSource" url="jdbc:oracle:thin:@//172.30.1.196:1521/altia" username="flexia_organizacion"/>
+  <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" initialSize="10" logAbandoned="true" maxActive="50" maxIdle="2" maxWait="5000" name="agora_lectura_jndi" password="flexia_generico" removeAbandoned="true" removeAbandonedTimeout="300" type="javax.sql.DataSource" url="jdbc:oracle:thin:@//172.30.1.196:1521/altia" username="flexia_generico"/>
+</Context-->
+
+<!--DESA-->
+<Context crossContext="true" debug="5" path="/flexia19">
+  <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.commons.dbcp.BasicDataSourceFactory" initialSize="10" logAbandoned="true" maxActive="50" maxIdle="2" maxWait="5000" name="jdbc_flexia_pruebas" password="flbpru" removeAbandoned="true" removeAbandonedTimeout="300" type="javax.sql.DataSource" url="jdbc:oracle:thin:@172.16.64.16:1530/LBDR.BATERA.LANBIDE.EUS" username="flbpru"/>
+  <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.commons.dbcp.BasicDataSourceFactory" initialSize="10" logAbandoned="true" maxActive="50" maxIdle="2" maxWait="5000" name="jdbc_flexia_organizacion" password="flb" removeAbandoned="true" removeAbandonedTimeout="300" type="javax.sql.DataSource" url="jdbc:oracle:thin:@172.16.64.16:1530/LBDR.BATERA.LANBIDE.EUS" username="flb"/>
+  <Resource auth="Container" driverClassName="oracle.jdbc.driver.OracleDriver" factory="org.apache.commons.dbcp.BasicDataSourceFactory" initialSize="10" logAbandoned="true" maxActive="50" maxIdle="2" maxWait="5000" name="agora_lectura_jndi" password="flbgen" removeAbandoned="true" removeAbandonedTimeout="300" type="javax.sql.DataSource" url="jdbc:oracle:thin:@172.16.64.16:1530/LBDR.BATERA.LANBIDE.EUS" username="flbgen"/>
+</Context>

@@ -1,0 +1,14 @@
+.legendTema{
+    font-family: Arial,Verdana Helvetica, sans-serif;
+    font-size: 14px;
+    color: #2d4c9f;
+    /*cuando se implante el nuevo estilo descomentar*/
+    /*color: #A6192E;*/
+    font-weight: bold;
+    padding-top: 15px;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<weblogic-web-app xmlns="http://xmlns.oracle.com/weblogic/weblogic-web-app">
+<session-descriptor>
+  <cookie-path>/flexia</cookie-path>
+</session-descriptor>   
+<context-root>/flexia</context-root>
+  <container-descriptor>
+         <show-archived-real-path-enabled>true</show-archived-real-path-enabled>
+   </container-descriptor>
+  <charset-params> 
+    <input-charset> 
+        <resource-path>/*</resource-path> 
+        <java-charset-name>ISO-8859-1</java-charset-name> 
+    </input-charset> 
+  </charset-params>
+  <container-descriptor>  
+	<prefer-web-inf-classes>true</prefer-web-inf-classes>  
+  </container-descriptor>  
+</weblogic-web-app>
+

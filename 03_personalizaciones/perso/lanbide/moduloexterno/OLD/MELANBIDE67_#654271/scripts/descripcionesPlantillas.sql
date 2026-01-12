@@ -1,0 +1,31 @@
+ SELECT * FROM PLANTILLA_DESCLARGA WHERE PROCEDIMIENTO='LAK';
+ 
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQACREDREPRE','Fotocopia de los poderes notariales que acrediten su representación.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQACREDREPRE','Ordezkotasuna egiaztatzen duten notario-ahalordeen fotokopia.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQALTATER','Documento de Alta de Terceros Interesado.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQALTATER','Hirugarren Interesatuaren alta-dokumentua.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQCIF','Enpresaren identifikazio fiskaleko txartelaren fotokopia.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQCIF','Fotocopia de la tarjeta de identificación fiscal de la empresa.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQCOMUNRPT','Copia de la comunicación efectuada a la RLT.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQCOMUNRPT','LLOri egindako jakinarazpenaren kopia.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQDNIREPRE','Fotocopia del D.N.I. / N.I.E. de la persona representante legal o autorización para la verificación electrónica de sus datos.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQDNIREPRE','Legezko ordezkariaren NAN/AIZren fotokopia, edo datuak elektronikoki egiaztatzeko baimena.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQESCRCONST','Enpresa eratu dela ziurtatzen duten eskritura eguneratuen kopia, erakundea eratu dela justifikatzen duen beste edozein dokumentu.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQESCRCONST','Copia de las Escrituras actualizadas de constitución de la empresa u otro documento de constitución de la Entidad.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQOTRDOCS','Beste dokumentu batzuk');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQOTRDOCS','Otros documentos');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQOTRDOCS','Beste dokumentu batzuk');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQOTRDOCS','Otros documentos');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQRELOFEEMP','RELACIÓN DE OFERTAS DE EMPLEO_eu');
+INSERT INTO PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) VALUES ('es','LAK','BOOL','REQRELOFEEMP','RELACIÓN DE OFERTAS DE EMPLEO');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQCOPCONTR','Egindako kontratuen kopia.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQCOPCONTR','Copia de los contratos celebrados.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQDECLRESP','Senidetasunik ez izateari buruzko erantzukizunpeko adierazpena.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQDECLRESP','Declaración responsable de no relación de parentesco.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQINFPLMED','Txostena,  “Alta egoeran dauden langileen batez besteko plantillaren txostena” izenekoa, Gizarte Segurantzaren Diruzaintza Nagusiak egindakoak (RED sistemaren bidez eskuratuak), enpresak EAEn dituen lantokiei buruzkoa, kontratatutako pertsonari enpresan alta eman aurreko sei hilabeteei dagokiona.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQINFPLMED','Informe de plantilla media de trabajadores en situación de alta seis días anterior a fecha de contratación.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('eu','LAK','BOOL','REQINFPLMED2','Txostena, “Alta egoeran dauden langileen batez besteko plantillaren txostena” izenekoa, Gizarte Segurantzaren Diruzaintza Nagusiak egindakoak (RED sistemaren bidez eskuratuak), enpresak EAEn dituen lantokiei buruzkoa, kontratazioaren alta egunari dagokiona.');
+Insert into PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) values ('es','LAK','BOOL','REQINFPLMED2','Informe de plantilla media de trabajadores en situación de alta en el día de la contratación');
+INSERT INTO PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) VALUES ('eu','LAK','BOOL','REQMEMFINAL','Kontratuak justifikatzeko, enpresa onuradunak azken memoria bat aurkeztu beharko du, kontratatu dituen pertsonen zerrenda eta kontratuen iraupena jasoko dituena.');
+INSERT INTO PLANTILLA_DESCLARGA (IDIOMA,PROCEDIMIENTO,TIPODESPLE,CODIGO,DESCRIPCION) VALUES ('es','LAK','BOOL','REQMEMFINAL','Memoria final que contendrá una relación de las personas jóvenes contratadas y duración de los contratos.');
+               

@@ -1,0 +1,86 @@
+.legendAzul{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.legendRojo{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: rgb(231, 037, 018);
+    font-weight: bold;
+    text-align: left;
+}
+
+.textoAzul {
+    color: #2d4c9f;
+}
+
+.textoRojo {
+    color: red;
+}
+
+table.dataTable td {
+    padding: 3px 10px;
+    width: 1px;
+    white-space: nowrap;
+}
+.sub3titulo {
+    width: 95%;
+}
+
+fieldset {
+    width: 95%;
+    margin: auto;
+}
+
+.etiquetaGo {
+    width: 240px;
+    float: left;
+    text-align: left;
+}
+
+/*estilo de la imagen que sale cuando se esta esperando la recarga de una pagina*/
+div#barraProgresoGO {
+    position: fixed;
+    top:0px; 
+    left:0px; 
+    width:100%; 
+    height:100%;
+    z-index:9999; 
+    background-color: rgba(0, 0, 0, .25);
+    overflow:hidden; 
+}
+
+.contenedorHidepage{
+    width:275px;
+    height:254px;
+    margin-top:20%;
+    margin-left:35%;
+    background-color: rgba(230, 230, 230, 1);    
+    color: #004595;
+    display: block;
+    overflow:hidden; 
+}
+
+.textoHide{    
+    text-align:center;
+    margin: 50px 20px 40px 20px;
+    font-size: 16px; 
+}
+
+.imagenHide{
+    width:100%; 
+    height:60%;
+    font-size: 56px; 
+    color: #004595;
+    text-align:center;
+    vertical-align:middle;
+}
+
+#disco {
+    font-size: 56px !important; 
+}

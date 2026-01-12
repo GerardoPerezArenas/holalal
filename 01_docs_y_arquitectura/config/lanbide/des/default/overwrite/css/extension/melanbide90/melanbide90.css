@@ -1,0 +1,67 @@
+.botonera{
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+    clear: both;
+}
+
+.lineaFormulario{
+    width: 100%;
+    clear: both;
+    padding-top: 5px;
+}
+
+.legendAzul{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.legendRojo{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 10px;
+    color: rgb(231, 037, 018);
+    font-weight: bold;
+    text-align: right;
+}
+
+.legendTema{
+    font-family: Arial,Verdana Helvetica, sans-serif;
+    font-size: 14px;
+    color: #A6192E;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.textoAzul {
+    color: #2d4c9f;
+}
+
+.textoTema {
+    color: #A6192E;
+}
+
+.sub3titulo {
+    width: 95%;
+}
+
+.etiquetaInin {
+    width: 140px;
+    float: left;
+    text-align: left;
+}
+
+.total {
+    text-align: right;
+    color: black;
+    border-color: black;
+    font-weight: bold;
+}
+
+fieldset {
+    width: 95%;
+    margin: auto;
+}

@@ -1,0 +1,1127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:LangaiEECC" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:impl="urn:LangaiEECC" xmlns:intf="urn:LangaiEECC" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tns1="http://langai.altia.es/business/personafisica" xmlns:tns2="http://technical.altia.es" xmlns:tns3="http://langai.altia.es/business/util" xmlns:tns4="http://langai.altia.es/business/acceso" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+<!--WSDL created by Apache Axis version: 1.4
+Built on Apr 22, 2006 (06:55:48 PDT)-->
+ <wsdl:types>
+  <schema targetNamespace="http://langai.altia.es/business/util" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="urn:LangaiEECC"/>
+   <import namespace="http://langai.altia.es/business/acceso"/>
+   <import namespace="http://langai.altia.es/business/personafisica"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://technical.altia.es"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="AuditoriaValueObject">
+    <sequence>
+     <element name="acc_cod_accion" nillable="true" type="xsd:string"/>
+     <element name="aud_corr" nillable="true" type="xsd:long"/>
+     <element name="aud_datos" nillable="true" type="xsd:string"/>
+     <element name="aud_fecha" nillable="true" type="xsd:string"/>
+     <element name="aud_id_oferta" nillable="true" type="xsd:long"/>
+     <element name="centro_uag" nillable="true" type="xsd:string"/>
+     <element name="cod_centro" nillable="true" type="xsd:string"/>
+     <element name="cod_perfil" nillable="true" type="xsd:string"/>
+     <element name="cod_ubic" nillable="true" type="xsd:string"/>
+     <element name="inicializarListas" type="xsd:boolean"/>
+     <element name="num_doc" nillable="true" type="xsd:string"/>
+     <element name="que" nillable="true" type="xsd:string"/>
+     <element name="tipo_doc" nillable="true" type="xsd:string"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://technical.altia.es" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://langai.altia.es/business/util"/>
+   <import namespace="urn:LangaiEECC"/>
+   <import namespace="http://langai.altia.es/business/acceso"/>
+   <import namespace="http://langai.altia.es/business/personafisica"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType abstract="true" name="ValueObject">
+    <sequence>
+     <element name="auditoria" nillable="true" type="tns3:AuditoriaValueObject"/>
+     <element name="objectId" type="xsd:long"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="urn:LangaiEECC" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://langai.altia.es/business/util"/>
+   <import namespace="http://langai.altia.es/business/acceso"/>
+   <import namespace="http://langai.altia.es/business/personafisica"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://technical.altia.es"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="ArrayOf_xsd_anyType">
+    <complexContent>
+     <restriction base="soapenc:Array">
+      <attribute ref="soapenc:arrayType" wsdl:arrayType="xsd:anyType[]"/>
+     </restriction>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://xml.apache.org/xml-soap" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://langai.altia.es/business/util"/>
+   <import namespace="urn:LangaiEECC"/>
+   <import namespace="http://langai.altia.es/business/acceso"/>
+   <import namespace="http://langai.altia.es/business/personafisica"/>
+   <import namespace="http://technical.altia.es"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="Vector">
+    <sequence>
+     <element maxOccurs="unbounded" minOccurs="0" name="item" type="xsd:anyType"/>
+    </sequence>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://langai.altia.es/business/personafisica" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://langai.altia.es/business/util"/>
+   <import namespace="urn:LangaiEECC"/>
+   <import namespace="http://langai.altia.es/business/acceso"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://technical.altia.es"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="PersonaFisicaWSValueObject">
+    <complexContent>
+     <extension base="tns2:ValueObject">
+      <sequence>
+       <element name="apellido1" nillable="true" type="xsd:string"/>
+       <element name="apellido2" nillable="true" type="xsd:string"/>
+       <element name="bloqAgr" nillable="true" type="xsd:string"/>
+       <element name="cert_poli" nillable="true" type="xsd:string"/>
+       <element name="cert_ssss" nillable="true" type="xsd:string"/>
+       <element name="cod_ambitoComarca" nillable="true" type="xsd:string"/>
+       <element name="cod_ambitoMunicipio" nillable="true" type="xsd:string"/>
+       <element name="cod_ambitoProv" nillable="true" type="xsd:string"/>
+       <element name="cod_ambitoccaa" nillable="true" type="xsd:string"/>
+       <element name="cod_ambitoisla" nillable="true" type="xsd:string"/>
+       <element name="cod_tipo_autoriz_admin" nillable="true" type="xsd:string"/>
+       <element name="condicionesEspeciales" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+       <element name="corr" nillable="true" type="xsd:long"/>
+       <element name="correlec" nillable="true" type="xsd:string"/>
+       <element name="cpApdoCorreos" nillable="true" type="xsd:string"/>
+       <element name="demandConVoluntad" nillable="true" type="xsd:string"/>
+       <element name="demandanteUE" nillable="true" type="xsd:string"/>
+       <element name="desc_notmuni_c" nillable="true" type="xsd:string"/>
+       <element name="desc_notmuni_e" nillable="true" type="xsd:string"/>
+       <element name="desc_notprov_c" nillable="true" type="xsd:string"/>
+       <element name="desc_notprov_e" nillable="true" type="xsd:string"/>
+       <element name="desc_remuni_c" nillable="true" type="xsd:string"/>
+       <element name="desc_remuni_e" nillable="true" type="xsd:string"/>
+       <element name="desc_reprov_c" nillable="true" type="xsd:string"/>
+       <element name="desc_reprov_e" nillable="true" type="xsd:string"/>
+       <element name="doc_incompl" nillable="true" type="xsd:string"/>
+       <element name="estado" nillable="true" type="xsd:string"/>
+       <element name="existeLanbide" type="xsd:boolean"/>
+       <element name="existeSISPE" type="xsd:boolean"/>
+       <element name="fax" nillable="true" type="xsd:string"/>
+       <element name="fecConf" nillable="true" type="xsd:dateTime"/>
+       <element name="fec_fin_min" nillable="true" type="xsd:dateTime"/>
+       <element name="fec_fin_vigencia" nillable="true" type="xsd:dateTime"/>
+       <element name="fec_ini_min" nillable="true" type="xsd:dateTime"/>
+       <element name="fec_sol_comunic_ren" nillable="true" type="xsd:dateTime"/>
+       <element name="fecha_nac" nillable="true" type="xsd:dateTime"/>
+       <element name="grado_min" nillable="true" type="xsd:long"/>
+       <element name="histor" nillable="true" type="xsd:string"/>
+       <element name="indBloq" nillable="true" type="xsd:int"/>
+       <element name="indConf" nillable="true" type="xsd:string"/>
+       <element name="indSispe" nillable="true" type="xsd:int"/>
+       <element name="inter" nillable="true" type="xsd:string"/>
+       <element name="intermedia" nillable="true" type="xsd:string"/>
+       <element name="lista_errores" nillable="true" type="apachesoap:Vector"/>
+       <element name="muniApdoCorreos" nillable="true" type="xsd:string"/>
+       <element name="nacion" nillable="true" type="xsd:string"/>
+       <element name="nivfor" nillable="true" type="xsd:string"/>
+       <element name="noapartcorreos" nillable="true" type="xsd:string"/>
+       <element name="nobisdup" nillable="true" type="xsd:string"/>
+       <element name="nocopos" nillable="true" type="xsd:string"/>
+       <element name="noescale" nillable="true" type="xsd:string"/>
+       <element name="noextcodpost" nillable="true" type="xsd:string"/>
+       <element name="noexttexto1" nillable="true" type="xsd:string"/>
+       <element name="noexttexto2" nillable="true" type="xsd:string"/>
+       <element name="nolepu" nillable="true" type="xsd:string"/>
+       <element name="nombre" nillable="true" type="xsd:string"/>
+       <element name="nomuni" nillable="true" type="xsd:string"/>
+       <element name="nonovp" nillable="true" type="xsd:string"/>
+       <element name="nonuvp" nillable="true" type="xsd:string"/>
+       <element name="nopais" nillable="true" type="xsd:string"/>
+       <element name="nopiso" nillable="true" type="xsd:string"/>
+       <element name="noprovin" nillable="true" type="xsd:string"/>
+       <element name="notivipu" nillable="true" type="xsd:string"/>
+       <element name="num_doc" nillable="true" type="xsd:string"/>
+       <element name="num_exp" nillable="true" type="xsd:string"/>
+       <element name="num_exp_act" nillable="true" type="xsd:string"/>
+       <element name="num_ssss" nillable="true" type="xsd:string"/>
+       <element name="pais_fecha_fin" nillable="true" type="xsd:dateTime"/>
+       <element name="pais_marca_eee" nillable="true" type="xsd:string"/>
+       <element name="pasaporte" nillable="true" type="xsd:string"/>
+       <element name="rebisdup" nillable="true" type="xsd:string"/>
+       <element name="reccaa" nillable="true" type="xsd:string"/>
+       <element name="recopos" nillable="true" type="xsd:string"/>
+       <element name="reescale" nillable="true" type="xsd:string"/>
+       <element name="reextcodpost" nillable="true" type="xsd:string"/>
+       <element name="reexttexto1" nillable="true" type="xsd:string"/>
+       <element name="reexttexto2" nillable="true" type="xsd:string"/>
+       <element name="relepu" nillable="true" type="xsd:string"/>
+       <element name="remuni" nillable="true" type="xsd:string"/>
+       <element name="renovp" nillable="true" type="xsd:string"/>
+       <element name="renut" nillable="true" type="xsd:string"/>
+       <element name="renuvp" nillable="true" type="xsd:string"/>
+       <element name="repais" nillable="true" type="xsd:string"/>
+       <element name="repiso" nillable="true" type="xsd:string"/>
+       <element name="reprovin" nillable="true" type="xsd:string"/>
+       <element name="restricciones_Actividad" nillable="true" type="xsd:string"/>
+       <element name="restricciones_Ocupacion" nillable="true" type="xsd:string"/>
+       <element name="retivipu" nillable="true" type="xsd:string"/>
+       <element name="rgi_activa" nillable="true" type="xsd:string"/>
+       <element name="rgi_importe" nillable="true" type="xsd:string"/>
+       <element name="sexo" nillable="true" type="xsd:string"/>
+       <element name="tieneIndSispe" type="xsd:boolean"/>
+       <element name="tipo_benef" nillable="true" type="xsd:string"/>
+       <element name="tipo_doc" nillable="true" type="xsd:string"/>
+       <element name="tlfno1" nillable="true" type="xsd:string"/>
+       <element name="tlfno2" nillable="true" type="xsd:string"/>
+       <element name="tlfno3" nillable="true" type="xsd:string"/>
+       <element name="tlfno4" nillable="true" type="xsd:string"/>
+       <element name="tlfno_notif" nillable="true" type="xsd:string"/>
+       <element name="ultAgr" nillable="true" type="xsd:int"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="EmpresarioWSValueObject">
+    <complexContent>
+     <extension base="tns2:ValueObject">
+      <sequence>
+       <element name="apellido1" nillable="true" type="xsd:string"/>
+       <element name="apellido1_contacto" nillable="true" type="xsd:string"/>
+       <element name="apellido1_contacto_rs" nillable="true" type="xsd:string"/>
+       <element name="apellido2" nillable="true" type="xsd:string"/>
+       <element name="apellido2_contacto" nillable="true" type="xsd:string"/>
+       <element name="apellido2_contacto_rs" nillable="true" type="xsd:string"/>
+       <element name="bis_duplicado" nillable="true" type="xsd:string"/>
+       <element name="bis_duplicado_ett" nillable="true" type="xsd:string"/>
+       <element name="bis_duplicado_rs" nillable="true" type="xsd:string"/>
+       <element name="cod_municipio" nillable="true" type="xsd:string"/>
+       <element name="cod_municipio_ett" nillable="true" type="xsd:string"/>
+       <element name="cod_municipio_rs" nillable="true" type="xsd:string"/>
+       <element name="cod_provincia" nillable="true" type="xsd:string"/>
+       <element name="cod_provincia_ett" nillable="true" type="xsd:string"/>
+       <element name="cod_provincia_rs" nillable="true" type="xsd:string"/>
+       <element name="cod_tipo_empresa" nillable="true" type="xsd:string"/>
+       <element name="cod_tipovia" nillable="true" type="xsd:string"/>
+       <element name="cod_tipovia_ett" nillable="true" type="xsd:string"/>
+       <element name="cod_tipovia_rs" nillable="true" type="xsd:string"/>
+       <element name="contraste_datos" nillable="true" type="xsd:string"/>
+       <element name="cp" nillable="true" type="xsd:string"/>
+       <element name="cp_ett" nillable="true" type="xsd:string"/>
+       <element name="cp_ext_loc" nillable="true" type="xsd:string"/>
+       <element name="cp_ext_rs" nillable="true" type="xsd:string"/>
+       <element name="cp_rs" nillable="true" type="xsd:string"/>
+       <element name="cuentaCot" nillable="true" type="xsd:string"/>
+       <element name="desc_muni_c" nillable="true" type="xsd:string"/>
+       <element name="desc_muni_e" nillable="true" type="xsd:string"/>
+       <element name="desc_muni_ett_c" nillable="true" type="xsd:string"/>
+       <element name="desc_muni_ett_e" nillable="true" type="xsd:string"/>
+       <element name="desc_muni_rs_c" nillable="true" type="xsd:string"/>
+       <element name="desc_muni_rs_e" nillable="true" type="xsd:string"/>
+       <element name="desc_prov_c" nillable="true" type="xsd:string"/>
+       <element name="desc_prov_e" nillable="true" type="xsd:string"/>
+       <element name="desc_prov_ett_c" nillable="true" type="xsd:string"/>
+       <element name="desc_prov_ett_e" nillable="true" type="xsd:string"/>
+       <element name="desc_prov_rs_c" nillable="true" type="xsd:string"/>
+       <element name="desc_prov_rs_e" nillable="true" type="xsd:string"/>
+       <element name="direc_ext_loc" nillable="true" type="xsd:string"/>
+       <element name="direc_ext_rs" nillable="true" type="xsd:string"/>
+       <element name="e_mail" nillable="true" type="xsd:string"/>
+       <element name="e_mail_rs" nillable="true" type="xsd:string"/>
+       <element name="emp_corr" nillable="true" type="xsd:long"/>
+       <element name="escalera" nillable="true" type="xsd:string"/>
+       <element name="escalera_ett" nillable="true" type="xsd:string"/>
+       <element name="escalera_rs" nillable="true" type="xsd:string"/>
+       <element name="existe" nillable="true" type="xsd:string"/>
+       <element name="existeSISPE" type="xsd:boolean"/>
+       <element name="existe_ett" nillable="true" type="xsd:string"/>
+       <element name="fax" nillable="true" type="xsd:string"/>
+       <element name="fax_rs" nillable="true" type="xsd:string"/>
+       <element name="fecCalif" nillable="true" type="xsd:dateTime"/>
+       <element name="fecDesac" nillable="true" type="xsd:dateTime"/>
+       <element name="fecha_fin_autorizacion" nillable="true" type="xsd:string"/>
+       <element name="fecha_inicio_autorizacion" nillable="true" type="xsd:string"/>
+       <element name="fecha_ultima_modificacion" nillable="true" type="xsd:dateTime"/>
+       <element name="gen_emp_fec_regprov" nillable="true" type="xsd:dateTime"/>
+       <element name="gen_emp_ind_impsepe" nillable="true" type="xsd:string"/>
+       <element name="gen_emp_ind_prov" nillable="true" type="xsd:string"/>
+       <element name="indBloq" nillable="true" type="xsd:int"/>
+       <element name="indSispe" nillable="true" type="xsd:int"/>
+       <element name="lista_errores" nillable="true" type="impl:ArrayOf_xsd_anyType"/>
+       <element name="lista_ett" nillable="true" type="apachesoap:Vector"/>
+       <element name="n_via" nillable="true" type="xsd:string"/>
+       <element name="n_via_ett" nillable="true" type="xsd:string"/>
+       <element name="n_via_rs" nillable="true" type="xsd:string"/>
+       <element name="nombre" nillable="true" type="xsd:string"/>
+       <element name="nombre_comercial" nillable="true" type="xsd:string"/>
+       <element name="nombre_contacto" nillable="true" type="xsd:string"/>
+       <element name="nombre_contacto_rs" nillable="true" type="xsd:string"/>
+       <element name="nombre_via" nillable="true" type="xsd:string"/>
+       <element name="nombre_via_ett" nillable="true" type="xsd:string"/>
+       <element name="nombre_via_rs" nillable="true" type="xsd:string"/>
+       <element name="num_autorizacion" nillable="true" type="xsd:string"/>
+       <element name="num_doc" nillable="true" type="xsd:string"/>
+       <element name="nut_ext_loc" nillable="true" type="xsd:string"/>
+       <element name="nut_ext_rs" nillable="true" type="xsd:string"/>
+       <element name="pais" nillable="true" type="xsd:string"/>
+       <element name="pais_ext_loc" nillable="true" type="xsd:string"/>
+       <element name="pais_ext_rs" nillable="true" type="xsd:string"/>
+       <element name="piso" nillable="true" type="xsd:string"/>
+       <element name="piso_ett" nillable="true" type="xsd:string"/>
+       <element name="piso_rs" nillable="true" type="xsd:string"/>
+       <element name="pobl_ext_loc" nillable="true" type="xsd:string"/>
+       <element name="pobl_ext_rs" nillable="true" type="xsd:string"/>
+       <element name="puerta" nillable="true" type="xsd:string"/>
+       <element name="puerta_ett" nillable="true" type="xsd:string"/>
+       <element name="puerta_rs" nillable="true" type="xsd:string"/>
+       <element name="razon_social" nillable="true" type="xsd:string"/>
+       <element name="telefono" nillable="true" type="xsd:string"/>
+       <element name="telefono_rs" nillable="true" type="xsd:string"/>
+       <element name="tipo_empresa" nillable="true" type="xsd:string"/>
+       <element name="titularidad" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+   <complexType name="EntidadesComunesWSValueObject">
+    <complexContent>
+     <extension base="tns2:ValueObject">
+      <sequence>
+       <element name="empresario" nillable="true" type="tns1:EmpresarioWSValueObject"/>
+       <element name="lista_errores" nillable="true" type="apachesoap:Vector"/>
+       <element name="persona" nillable="true" type="tns1:PersonaFisicaWSValueObject"/>
+       <element name="tipo_consulta" nillable="true" type="xsd:string"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+  <schema targetNamespace="http://langai.altia.es/business/acceso" xmlns="http://www.w3.org/2001/XMLSchema">
+   <import namespace="http://langai.altia.es/business/util"/>
+   <import namespace="urn:LangaiEECC"/>
+   <import namespace="http://langai.altia.es/business/personafisica"/>
+   <import namespace="http://xml.apache.org/xml-soap"/>
+   <import namespace="http://technical.altia.es"/>
+   <import namespace="http://schemas.xmlsoap.org/soap/encoding/"/>
+   <complexType name="AccesoValueObject">
+    <complexContent>
+     <extension base="tns2:ValueObject">
+      <sequence>
+       <element name="bd_password" nillable="true" type="xsd:string"/>
+       <element name="cod_actual" nillable="true" type="xsd:string"/>
+       <element name="cod_centro" nillable="true" type="xsd:string"/>
+       <element name="cod_funcion" nillable="true" type="xsd:string"/>
+       <element name="cod_submenu" nillable="true" type="xsd:string"/>
+       <element name="cod_uag" nillable="true" type="xsd:string"/>
+       <element name="codigo" nillable="true" type="xsd:string"/>
+       <element name="confirma_pass" nillable="true" type="xsd:string"/>
+       <element name="cont_hijos" type="xsd:int"/>
+       <element name="cont_hijos1" type="xsd:int"/>
+       <element name="cont_hijos2" type="xsd:int"/>
+       <element name="contenido" nillable="true" type="apachesoap:Vector"/>
+       <element name="dias_aviso" type="xsd:int"/>
+       <element name="dias_cambio" type="xsd:int"/>
+       <element name="error" nillable="true" type="xsd:string"/>
+       <element name="formularioDisp" nillable="true" type="xsd:string"/>
+       <element name="idioma" nillable="true" type="xsd:string"/>
+       <element name="modulo" nillable="true" type="xsd:string"/>
+       <element name="mostrarIconoGestorDocumental" nillable="true" type="xsd:string"/>
+       <element name="nifEmpresa" nillable="true" type="xsd:string"/>
+       <element name="nom_centro" nillable="true" type="xsd:string"/>
+       <element name="nom_funcion" nillable="true" type="xsd:string"/>
+       <element name="nom_ubicacion" nillable="true" type="xsd:string"/>
+       <element name="nombre_array" nillable="true" type="xsd:string"/>
+       <element name="nombre_submenu" nillable="true" type="xsd:string"/>
+       <element name="num_ceros_submenu" nillable="true" type="xsd:string"/>
+       <element name="numeroDemandasIncompletas" nillable="true" type="xsd:string"/>
+       <element name="numeroDemsTutCandPtes" nillable="true" type="xsd:string"/>
+       <element name="numeroOfeRecibidas" nillable="true" type="xsd:string"/>
+       <element name="numeroOfertasBloqueadas" nillable="true" type="xsd:string"/>
+       <element name="numeroOfertasConclCobertura" nillable="true" type="xsd:string"/>
+       <element name="numeroReenviosPtes" nillable="true" type="xsd:string"/>
+       <element name="numeroSolicitudes" nillable="true" type="xsd:string"/>
+       <element name="passRecuperado" nillable="true" type="xsd:string"/>
+       <element name="pass_nuevo" nillable="true" type="xsd:string"/>
+       <element name="preguntaSeguridad" nillable="true" type="xsd:string"/>
+       <element name="respuestaSeguridad" nillable="true" type="xsd:string"/>
+       <element name="respuestaSeguridadUsuario" nillable="true" type="xsd:string"/>
+       <element name="sufijo_nombre_array" nillable="true" type="xsd:string"/>
+       <element name="tipoCentro" nillable="true" type="xsd:string"/>
+       <element name="tipo_acceso_ext" nillable="true" type="xsd:string"/>
+       <element name="url_submenu" nillable="true" type="xsd:string"/>
+       <element name="usu_apellido1" nillable="true" type="xsd:string"/>
+       <element name="usu_apellido2" nillable="true" type="xsd:string"/>
+       <element name="usu_corr" nillable="true" type="xsd:long"/>
+       <element name="usu_estado" nillable="true" type="xsd:string"/>
+       <element name="usu_fecha_aviso" nillable="true" type="xsd:dateTime"/>
+       <element name="usu_fecha_prox_cambio" nillable="true" type="xsd:dateTime"/>
+       <element name="usu_intentos_fall" type="xsd:int"/>
+       <element name="usu_intentos_max" type="xsd:int"/>
+       <element name="usu_nombre" nillable="true" type="xsd:string"/>
+       <element name="usu_num_doc" nillable="true" type="xsd:string"/>
+       <element name="usu_password" nillable="true" type="xsd:string"/>
+       <element name="usu_perfil" nillable="true" type="xsd:string"/>
+       <element name="usu_perfiles" nillable="true" type="apachesoap:Vector"/>
+       <element name="usu_perfiles_desc" nillable="true" type="xsd:string"/>
+       <element name="usu_tipo" nillable="true" type="xsd:string"/>
+       <element name="usu_tipo_doc" nillable="true" type="xsd:string"/>
+       <element name="vec_funciones" nillable="true" type="apachesoap:Vector"/>
+       <element name="vec_menu" nillable="true" type="apachesoap:Vector"/>
+       <element name="vec_nombre_variable_js" nillable="true" type="apachesoap:Vector"/>
+      </sequence>
+     </extension>
+    </complexContent>
+   </complexType>
+  </schema>
+ </wsdl:types>
+
+   <wsdl:message name="altaSimplePFRequest">
+
+      <wsdl:part name="cod_centro_usu" type="xsd:string"/>
+
+      <wsdl:part name="cod_ubic_usu" type="xsd:string"/>
+
+      <wsdl:part name="tipo_doc" type="xsd:string"/>
+
+      <wsdl:part name="num_doc" type="xsd:string"/>
+
+      <wsdl:part name="nombre" type="xsd:string"/>
+
+      <wsdl:part name="ape1" type="xsd:string"/>
+
+      <wsdl:part name="ape2" type="xsd:string"/>
+
+      <wsdl:part name="SS" type="xsd:string"/>
+
+      <wsdl:part name="f_nac" type="xsd:string"/>
+
+      <wsdl:part name="sexo" type="xsd:string"/>
+
+      <wsdl:part name="niv_for" type="xsd:string"/>
+
+      <wsdl:part name="nacion" type="xsd:string"/>
+
+      <wsdl:part name="tel1" type="xsd:string"/>
+
+      <wsdl:part name="tel2" type="xsd:string"/>
+
+      <wsdl:part name="tel3" type="xsd:string"/>
+
+      <wsdl:part name="tel4" type="xsd:string"/>
+
+      <wsdl:part name="tel_notif" type="xsd:string"/>
+
+      <wsdl:part name="fax" type="xsd:string"/>
+
+      <wsdl:part name="email" type="xsd:string"/>
+
+      <wsdl:part name="repais" type="xsd:string"/>
+
+      <wsdl:part name="reexttexto1" type="xsd:string"/>
+
+      <wsdl:part name="reextcodpost" type="xsd:string"/>
+
+      <wsdl:part name="reexttexto2" type="xsd:string"/>
+
+      <wsdl:part name="renut" type="xsd:string"/>
+
+      <wsdl:part name="reprovin" type="xsd:string"/>
+
+      <wsdl:part name="remuni" type="xsd:string"/>
+
+      <wsdl:part name="recopos" type="xsd:string"/>
+
+      <wsdl:part name="retivipu" type="xsd:string"/>
+
+      <wsdl:part name="renovp" type="xsd:string"/>
+
+      <wsdl:part name="renuvp" type="xsd:string"/>
+
+      <wsdl:part name="rebisdup" type="xsd:string"/>
+
+      <wsdl:part name="reescale" type="xsd:string"/>
+
+      <wsdl:part name="repiso" type="xsd:string"/>
+
+      <wsdl:part name="relepu" type="xsd:string"/>
+
+      <wsdl:part name="nopais" type="xsd:string"/>
+
+      <wsdl:part name="noexttexto1" type="xsd:string"/>
+
+      <wsdl:part name="noextcodpost" type="xsd:string"/>
+
+      <wsdl:part name="noexttexto2" type="xsd:string"/>
+
+      <wsdl:part name="noprovin" type="xsd:string"/>
+
+      <wsdl:part name="nomuni" type="xsd:string"/>
+
+      <wsdl:part name="nocopos" type="xsd:string"/>
+
+      <wsdl:part name="notivipu" type="xsd:string"/>
+
+      <wsdl:part name="nonovp" type="xsd:string"/>
+
+      <wsdl:part name="nonuvp" type="xsd:string"/>
+
+      <wsdl:part name="nobisdup" type="xsd:string"/>
+
+      <wsdl:part name="noescale" type="xsd:string"/>
+
+      <wsdl:part name="nopiso" type="xsd:string"/>
+
+      <wsdl:part name="nolepu" type="xsd:string"/>
+
+      <wsdl:part name="grado_discap" type="xsd:string"/>
+
+      <wsdl:part name="f_ini_discap" type="xsd:string"/>
+
+      <wsdl:part name="f_fin_discap" type="xsd:string"/>
+
+      <wsdl:part name="rgi_num_exp_activ" type="xsd:string"/>
+
+      <wsdl:part name="tipo_autoriz" type="xsd:string"/>
+
+      <wsdl:part name="f_autoriz_fin_vig" type="xsd:string"/>
+
+      <wsdl:part name="f_autoriz_renov" type="xsd:string"/>
+
+      <wsdl:part name="cod_ambito_ccaa" type="xsd:string"/>
+
+      <wsdl:part name="cod_ambito_prov" type="xsd:string"/>
+
+      <wsdl:part name="cod_ambito_isla" type="xsd:string"/>
+
+      <wsdl:part name="cod_ambito_muni" type="xsd:string"/>
+
+      <wsdl:part name="cod_ambito_comarca" type="xsd:string"/>
+
+      <wsdl:part name="restric_activ" type="xsd:string"/>
+
+      <wsdl:part name="restric_ocupacion" type="xsd:string"/>
+
+      <wsdl:part name="idioma" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="modificaPFRequest">
+
+      <wsdl:part name="AccesoValueObject" type="tns4:AccesoValueObject"/>
+
+      <wsdl:part name="PersonaFisicaWSValueObject" type="tns1:PersonaFisicaWSValueObject"/>
+
+      <wsdl:part name="idioma" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="modificaPFResponse">
+
+      <wsdl:part name="modificaPFReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="modificaPFNetResponse">
+
+      <wsdl:part name="modificaPFNetReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="consultaSimplePFRequest">
+
+      <wsdl:part name="cod_centro_usu" type="xsd:string"/>
+
+      <wsdl:part name="cod_ubic_usu" type="xsd:string"/>
+
+      <wsdl:part name="tipoDoc" type="xsd:string"/>
+
+      <wsdl:part name="numDoc" type="xsd:string"/>
+
+      <wsdl:part name="gen_per_corr" type="xsd:string"/>
+
+      <wsdl:part name="nombrePF" type="xsd:string"/>
+
+      <wsdl:part name="apellido1PF" type="xsd:string"/>
+
+      <wsdl:part name="apellido2PF" type="xsd:string"/>
+
+      <wsdl:part name="idioma" type="xsd:string"/>
+
+      <wsdl:part name="PersonaFisicaWSValueObject" type="tns1:PersonaFisicaWSValueObject"/>
+
+      <wsdl:part name="EntidadesComunesWSValueObject" type="tns1:EntidadesComunesWSValueObject"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="consultaPF_EmpresarioResponse">
+
+      <wsdl:part name="consultaPF_EmpresarioReturn" type="apachesoap:Vector"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="altaEmpresarioLocalResponse">
+
+      <wsdl:part name="altaEmpresarioLocalReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="consultaPF_EmpresarioRequest">
+
+      <wsdl:part name="cod_centro_usu" type="xsd:string"/>
+
+      <wsdl:part name="cod_ubic_usu" type="xsd:string"/>
+
+      <wsdl:part name="tipoDoc" type="xsd:string"/>
+
+      <wsdl:part name="numDoc" type="xsd:string"/>
+
+      <wsdl:part name="gen_per_corr" type="xsd:string"/>
+
+      <wsdl:part name="nombrePF" type="xsd:string"/>
+
+      <wsdl:part name="apellido1PF" type="xsd:string"/>
+
+      <wsdl:part name="apellido2PF" type="xsd:string"/>
+
+      <wsdl:part name="CIF" type="xsd:string"/>
+
+      <wsdl:part name="razon_social" type="xsd:string"/>
+
+      <wsdl:part name="idioma" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerStringErroresRequest">
+
+      <wsdl:part name="v_registros" type="apachesoap:Vector"/>
+
+      <wsdl:part name="proceso" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="consultaSimilaresPFRequest">
+
+      <wsdl:part name="cod_centro_usu" type="xsd:string"/>
+
+      <wsdl:part name="cod_ubic_usu" type="xsd:string"/>
+
+      <wsdl:part name="tipoDoc" type="xsd:string"/>
+
+      <wsdl:part name="numDoc" type="xsd:string"/>
+
+      <wsdl:part name="gen_per_corr" type="xsd:string"/>
+
+      <wsdl:part name="nombrePF" type="xsd:string"/>
+
+      <wsdl:part name="apellido1PF" type="xsd:string"/>
+
+      <wsdl:part name="apellido2PF" type="xsd:string"/>
+
+      <wsdl:part name="fecNac" type="xsd:string"/>
+
+      <wsdl:part name="pasaporte" type="xsd:string"/>
+
+      <wsdl:part name="idioma" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="modificaPFNetRequest">
+
+      <wsdl:part name="tipo_doc" type="xsd:string"/>
+
+      <wsdl:part name="num_doc" type="xsd:string"/>
+
+      <wsdl:part name="pass_dem" type="xsd:string"/>
+
+      <wsdl:part name="tel1" type="xsd:string"/>
+
+      <wsdl:part name="tel2" type="xsd:string"/>
+
+      <wsdl:part name="tel3" type="xsd:string"/>
+
+      <wsdl:part name="tel4" type="xsd:string"/>
+
+      <wsdl:part name="tel_notif" type="xsd:string"/>
+
+      <wsdl:part name="fax" type="xsd:string"/>
+
+      <wsdl:part name="email" type="xsd:string"/>
+
+      <wsdl:part name="nopais" type="xsd:string"/>
+
+      <wsdl:part name="noexttexto1" type="xsd:string"/>
+
+      <wsdl:part name="noextcodpost" type="xsd:string"/>
+
+      <wsdl:part name="noexttexto2" type="xsd:string"/>
+
+      <wsdl:part name="noprovin" type="xsd:string"/>
+
+      <wsdl:part name="nomuni" type="xsd:string"/>
+
+      <wsdl:part name="nocopos" type="xsd:string"/>
+
+      <wsdl:part name="notivipu" type="xsd:string"/>
+
+      <wsdl:part name="nonovp" type="xsd:string"/>
+
+      <wsdl:part name="nonuvp" type="xsd:string"/>
+
+      <wsdl:part name="nobisdup" type="xsd:string"/>
+
+      <wsdl:part name="noescale" type="xsd:string"/>
+
+      <wsdl:part name="nopiso" type="xsd:string"/>
+
+      <wsdl:part name="nolepu" type="xsd:string"/>
+
+      <wsdl:part name="idioma" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="consultaSimplePFResponse">
+
+      <wsdl:part name="consultaSimplePFReturn" type="apachesoap:Vector"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="consultaSimilaresPFResponse">
+
+      <wsdl:part name="consultaSimilaresPFReturn" type="apachesoap:Vector"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="modificaEmpresarioRequest">
+
+      <wsdl:part name="origen" type="xsd:string"/>
+
+      <wsdl:part name="CIF" type="xsd:string"/>
+
+      <wsdl:part name="razon_social" type="xsd:string"/>
+
+      <wsdl:part name="nombre_comercial" type="xsd:string"/>
+
+      <wsdl:part name="provincia_loccont" type="xsd:string"/>
+
+      <wsdl:part name="municipio_loccont" type="xsd:string"/>
+
+      <wsdl:part name="cp_loccont" type="xsd:string"/>
+
+      <wsdl:part name="tipovia_loccont" type="xsd:string"/>
+
+      <wsdl:part name="via_loccont" type="xsd:string"/>
+
+      <wsdl:part name="numvia_loccont" type="xsd:string"/>
+
+      <wsdl:part name="bisdup_loccont" type="xsd:string"/>
+
+      <wsdl:part name="esc_loccont" type="xsd:string"/>
+
+      <wsdl:part name="piso_loccont" type="xsd:string"/>
+
+      <wsdl:part name="puerta_loccont" type="xsd:string"/>
+
+      <wsdl:part name="tlfno_loccont" type="xsd:string"/>
+
+      <wsdl:part name="fax_loccont" type="xsd:string"/>
+
+      <wsdl:part name="email_loccont" type="xsd:string"/>
+
+      <wsdl:part name="provincia_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="municipio_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="cp_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="tipovia_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="via_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="numvia_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="bisdup_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="esc_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="piso_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="puerta_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="tlfno_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="fax_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="email_razsoc" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="obtenerStringErroresResponse">
+
+      <wsdl:part name="obtenerStringErroresReturn" type="apachesoap:Vector"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="modificaEmpresarioResponse">
+
+      <wsdl:part name="modificaEmpresarioReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="altaSimplePFResponse">
+
+      <wsdl:part name="altaSimplePFReturn" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:message name="altaEmpresarioLocalRequest">
+
+      <wsdl:part name="origen" type="xsd:string"/>
+
+      <wsdl:part name="CIF" type="xsd:string"/>
+
+      <wsdl:part name="nombre_empresario" type="xsd:string"/>
+
+      <wsdl:part name="apellido1_empresario" type="xsd:string"/>
+
+      <wsdl:part name="apellido2_empresario" type="xsd:string"/>
+
+      <wsdl:part name="razon_social" type="xsd:string"/>
+
+      <wsdl:part name="nombre_comercial" type="xsd:string"/>
+
+      <wsdl:part name="tipo_empresa" type="xsd:string"/>
+
+      <wsdl:part name="titularidad" type="xsd:string"/>
+
+      <wsdl:part name="provincia_loc" type="xsd:string"/>
+
+      <wsdl:part name="municipio_loc" type="xsd:string"/>
+
+      <wsdl:part name="cp_loc" type="xsd:string"/>
+
+      <wsdl:part name="tipovia_loc" type="xsd:string"/>
+
+      <wsdl:part name="via_loc" type="xsd:string"/>
+
+      <wsdl:part name="numvia_loc" type="xsd:string"/>
+
+      <wsdl:part name="bisdup_loc" type="xsd:string"/>
+
+      <wsdl:part name="esc_loc" type="xsd:string"/>
+
+      <wsdl:part name="piso_loc" type="xsd:string"/>
+
+      <wsdl:part name="puerta_loc" type="xsd:string"/>
+
+      <wsdl:part name="tlfno_loc" type="xsd:string"/>
+
+      <wsdl:part name="fax_loc" type="xsd:string"/>
+
+      <wsdl:part name="email_loc" type="xsd:string"/>
+
+      <wsdl:part name="nombre_contacto_loc" type="xsd:string"/>
+
+      <wsdl:part name="apellido1_contacto_loc" type="xsd:string"/>
+
+      <wsdl:part name="apellido2_contacto_loc" type="xsd:string"/>
+
+      <wsdl:part name="provincia_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="municipio_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="cp_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="tipovia_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="via_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="numvia_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="bisdup_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="esc_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="piso_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="puerta_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="tlfno_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="fax_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="email_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="nombre_contacto_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="apellido1_contacto_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="apellido2_contacto_razsoc" type="xsd:string"/>
+
+      <wsdl:part name="idioma_cvs" type="xsd:string"/>
+
+      <wsdl:part name="tipo_autoriz" type="xsd:string"/>
+
+      <wsdl:part name="fecAlta_autoriz" type="xsd:string"/>
+
+      <wsdl:part name="fecBaja_autoriz" type="xsd:string"/>
+
+   </wsdl:message>
+
+   <wsdl:portType name="LangaiEECC">
+
+      <wsdl:operation name="consultaSimplePF" parameterOrder="cod_centro_usu cod_ubic_usu tipoDoc numDoc gen_per_corr nombrePF apellido1PF apellido2PF idioma PersonaFisicaWSValueObject EntidadesComunesWSValueObject">
+
+         <wsdl:input message="impl:consultaSimplePFRequest" name="consultaSimplePFRequest"/>
+
+         <wsdl:output message="impl:consultaSimplePFResponse" name="consultaSimplePFResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="consultaSimilaresPF" parameterOrder="cod_centro_usu cod_ubic_usu tipoDoc numDoc gen_per_corr nombrePF apellido1PF apellido2PF fecNac pasaporte idioma">
+
+         <wsdl:input message="impl:consultaSimilaresPFRequest" name="consultaSimilaresPFRequest"/>
+
+         <wsdl:output message="impl:consultaSimilaresPFResponse" name="consultaSimilaresPFResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="consultaPF_Empresario" parameterOrder="cod_centro_usu cod_ubic_usu tipoDoc numDoc gen_per_corr nombrePF apellido1PF apellido2PF CIF razon_social idioma">
+
+         <wsdl:input message="impl:consultaPF_EmpresarioRequest" name="consultaPF_EmpresarioRequest"/>
+
+         <wsdl:output message="impl:consultaPF_EmpresarioResponse" name="consultaPF_EmpresarioResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modificaPF" parameterOrder="AccesoValueObject PersonaFisicaWSValueObject idioma">
+
+         <wsdl:input message="impl:modificaPFRequest" name="modificaPFRequest"/>
+
+         <wsdl:output message="impl:modificaPFResponse" name="modificaPFResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modificaPFNet" parameterOrder="tipo_doc num_doc pass_dem tel1 tel2 tel3 tel4 tel_notif fax email nopais noexttexto1 noextcodpost noexttexto2 noprovin nomuni nocopos notivipu nonovp nonuvp nobisdup noescale nopiso nolepu idioma">
+
+         <wsdl:input message="impl:modificaPFNetRequest" name="modificaPFNetRequest"/>
+
+         <wsdl:output message="impl:modificaPFNetResponse" name="modificaPFNetResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="altaSimplePF" parameterOrder="cod_centro_usu cod_ubic_usu tipo_doc num_doc nombre ape1 ape2 SS f_nac sexo niv_for nacion tel1 tel2 tel3 tel4 tel_notif fax email repais reexttexto1 reextcodpost reexttexto2 renut reprovin remuni recopos retivipu renovp renuvp rebisdup reescale repiso relepu nopais noexttexto1 noextcodpost noexttexto2 noprovin nomuni nocopos notivipu nonovp nonuvp nobisdup noescale nopiso nolepu grado_discap f_ini_discap f_fin_discap rgi_num_exp_activ tipo_autoriz f_autoriz_fin_vig f_autoriz_renov cod_ambito_ccaa cod_ambito_prov cod_ambito_isla cod_ambito_muni cod_ambito_comarca restric_activ restric_ocupacion idioma">
+
+         <wsdl:input message="impl:altaSimplePFRequest" name="altaSimplePFRequest"/>
+
+         <wsdl:output message="impl:altaSimplePFResponse" name="altaSimplePFResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modificaEmpresario" parameterOrder="origen CIF razon_social nombre_comercial provincia_loccont municipio_loccont cp_loccont tipovia_loccont via_loccont numvia_loccont bisdup_loccont esc_loccont piso_loccont puerta_loccont tlfno_loccont fax_loccont email_loccont provincia_razsoc municipio_razsoc cp_razsoc tipovia_razsoc via_razsoc numvia_razsoc bisdup_razsoc esc_razsoc piso_razsoc puerta_razsoc tlfno_razsoc fax_razsoc email_razsoc">
+
+         <wsdl:input message="impl:modificaEmpresarioRequest" name="modificaEmpresarioRequest"/>
+
+         <wsdl:output message="impl:modificaEmpresarioResponse" name="modificaEmpresarioResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="altaEmpresarioLocal" parameterOrder="origen CIF nombre_empresario apellido1_empresario apellido2_empresario razon_social nombre_comercial tipo_empresa titularidad provincia_loc municipio_loc cp_loc tipovia_loc via_loc numvia_loc bisdup_loc esc_loc piso_loc puerta_loc tlfno_loc fax_loc email_loc nombre_contacto_loc apellido1_contacto_loc apellido2_contacto_loc provincia_razsoc municipio_razsoc cp_razsoc tipovia_razsoc via_razsoc numvia_razsoc bisdup_razsoc esc_razsoc piso_razsoc puerta_razsoc tlfno_razsoc fax_razsoc email_razsoc nombre_contacto_razsoc apellido1_contacto_razsoc apellido2_contacto_razsoc idioma_cvs tipo_autoriz fecAlta_autoriz fecBaja_autoriz">
+
+         <wsdl:input message="impl:altaEmpresarioLocalRequest" name="altaEmpresarioLocalRequest"/>
+
+         <wsdl:output message="impl:altaEmpresarioLocalResponse" name="altaEmpresarioLocalResponse"/>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerStringErrores" parameterOrder="v_registros proceso">
+
+         <wsdl:input message="impl:obtenerStringErroresRequest" name="obtenerStringErroresRequest"/>
+
+         <wsdl:output message="impl:obtenerStringErroresResponse" name="obtenerStringErroresResponse"/>
+
+      </wsdl:operation>
+
+   </wsdl:portType>
+
+   <wsdl:binding name="LangaiEECCSoapBinding" type="impl:LangaiEECC">
+
+      <wsdlsoap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+
+      <wsdl:operation name="consultaSimplePF">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="consultaSimplePFRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="consultaSimplePFResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="consultaSimilaresPF">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="consultaSimilaresPFRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="consultaSimilaresPFResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="consultaPF_Empresario">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="consultaPF_EmpresarioRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="consultaPF_EmpresarioResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modificaPF">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="modificaPFRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="modificaPFResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modificaPFNet">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="modificaPFNetRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="modificaPFNetResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="altaSimplePF">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="altaSimplePFRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="altaSimplePFResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="modificaEmpresario">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="modificaEmpresarioRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="modificaEmpresarioResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="altaEmpresarioLocal">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="altaEmpresarioLocalRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="altaEmpresarioLocalResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+      <wsdl:operation name="obtenerStringErrores">
+
+         <wsdlsoap:operation soapAction=""/>
+
+         <wsdl:input name="obtenerStringErroresRequest">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="http://services.langaiWS.es" use="encoded"/>
+
+         </wsdl:input>
+
+         <wsdl:output name="obtenerStringErroresResponse">
+
+            <wsdlsoap:body encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" namespace="urn:LangaiEECC" use="encoded"/>
+
+         </wsdl:output>
+
+      </wsdl:operation>
+
+   </wsdl:binding>
+
+   <wsdl:service name="LangaiEECCService">
+
+      <wsdl:port binding="impl:LangaiEECCSoapBinding" name="LangaiEECC">
+
+         <wsdlsoap:address location="http://integ.serv.pru.lanbide.lan/langaiWS/services/LangaiEECC"/>
+
+      </wsdl:port>
+
+   </wsdl:service>
+
+</wsdl:definitions>

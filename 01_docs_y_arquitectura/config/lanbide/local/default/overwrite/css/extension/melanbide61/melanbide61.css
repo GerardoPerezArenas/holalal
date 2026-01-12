@@ -1,0 +1,91 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 03-jun-2014, 16:58:56
+    Author     : davidg
+*/
+
+.legendAzul{
+    font-family: Arial,Verdana Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+
+.tituloAzul{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    width: 100%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-align: left;
+    clear:both;
+}
+
+
+.botonera{
+    width: 100%;
+    text-align: center;
+    padding-top: 5px;
+    clear: both;
+}
+
+.lineaFormulario{
+    width: 100%;
+    clear: both;
+    padding-top: 5px;
+}
+
+.lineaFormularioFont{
+    width: 100%;
+    clear: both;
+    padding-top: 5px;
+    font-size: 12px;
+}
+/*estilo de la imagen que sale cuando se esta esperando la recarga de una pagina*/
+div#barraProgresoREPLE {
+    position: fixed;
+    top: 0px !important ;
+    left:0px;
+    width:100%;
+    height:100%;
+    z-index:9999;
+    background-color: rgba(0, 0, 0, .25);
+    overflow:hidden;
+}
+
+.tablaPers .xCabecera td + td + td + td + td + td + td + td{
+    background-color: forestgreen;
+}
+
+.tablaPers .xCabecera td + td + td + td + td + td + td + td + td + td{
+    background-color: #FF9966;
+}
+
+.tablaPersCE .xCabecera td + td + td + td + td + td {
+    background-color: #FF9966;
+}
+
+input[type="text"][disabled]
+{
+    background:#dddddd;
+    border: #999999 1px solid;
+    color: #2d4c9f;
+}
+
+.etiquetaReple {
+    width: 240px;
+    float: left;
+    text-align: left;
+}
+.contenedorHidepage {
+   height: 1px ! important; 
+}

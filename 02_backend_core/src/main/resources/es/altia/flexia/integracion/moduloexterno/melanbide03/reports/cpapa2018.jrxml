@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="cpapa2018" pageWidth="596" pageHeight="842" columnWidth="572" leftMargin="12" rightMargin="12" topMargin="12" bottomMargin="0" uuid="784db41e-92ae-4f88-92b8-fa73af6d8b10">
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="140"/>
+	<property name="ireport.zoom" value="1.6528925619834727"/>
+	<field name="nombre" class="java.lang.String">
+		<fieldDescription><![CDATA[nombre]]></fieldDescription>
+	</field>
+	<field name="fechaNacimiento" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaNacimiento]]></fieldDescription>
+	</field>
+	<field name="fechaNacimientoAlt" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaNacimientoAlt]]></fieldDescription>
+	</field>
+	<field name="codigoCU" class="java.lang.String">
+		<fieldDescription><![CDATA[codigoCU]]></fieldDescription>
+	</field>
+	<field name="descripcionCUC" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionCUC]]></fieldDescription>
+	</field>
+	<field name="descripcionCUE" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionCUE]]></fieldDescription>
+	</field>
+	<field name="codigoCP" class="java.lang.String">
+		<fieldDescription><![CDATA[codigoCP]]></fieldDescription>
+	</field>
+	<field name="descripcionCPC" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionCPC]]></fieldDescription>
+	</field>
+	<field name="descripcionCPE" class="java.lang.String">
+		<fieldDescription><![CDATA[descripcionCPE]]></fieldDescription>
+	</field>
+	<field name="fechaRD" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaRD]]></fieldDescription>
+	</field>
+	<field name="fechaRDAlt" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaRDAlt]]></fieldDescription>
+	</field>
+	<field name="numeroRD" class="java.lang.String">
+		<fieldDescription><![CDATA[numeroRD]]></fieldDescription>
+	</field>
+	<field name="fechaModifRD" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaModifRD]]></fieldDescription>
+	</field>
+	<field name="fechaModifRDAlt" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaModifRDAlt]]></fieldDescription>
+	</field>
+	<field name="fechaCreacionAlt" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaCreacionAlt]]></fieldDescription>
+	</field>
+	<field name="fechaCreacion" class="java.lang.String">
+		<fieldDescription><![CDATA[fechaCreacion]]></fieldDescription>
+	</field>
+	<field name="claveRegistral" class="java.lang.String">
+		<fieldDescription><![CDATA[claveRegistral]]></fieldDescription>
+	</field>
+	<field name="codOficina" class="java.lang.String">
+		<fieldDescription><![CDATA[codOficina]]></fieldDescription>
+	</field>
+	<field name="nivel" class="java.lang.String">
+		<fieldDescription><![CDATA[nivel]]></fieldDescription>
+	</field>
+	<field name="decretoMod" class="java.lang.String">
+		<fieldDescription><![CDATA[decretoMod]]></fieldDescription>
+	</field>
+	<field name="flag" class="java.lang.String">
+		<fieldDescription><![CDATA[flag]]></fieldDescription>
+	</field>
+	<detail>
+		<band height="792" splitType="Stretch">
+			<rectangle radius="1">
+				<reportElement mode="Opaque" x="0" y="0" width="572" height="792" forecolor="#3333FF" uuid="3c94624e-c8cb-4ade-afd6-74353019638e"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineColor="#3333FF"/>
+				</graphicElement>
+			</rectangle>
+			<rectangle radius="1">
+				<reportElement mode="Opaque" x="8" y="8" width="557" height="776" forecolor="#669900" uuid="757facfc-1196-4273-b686-6aed92590136"/>
+				<graphicElement>
+					<pen lineWidth="3.0" lineColor="#669900"/>
+				</graphicElement>
+			</rectangle>
+			<image scaleImage="RetainShape" vAlign="Middle">
+				<reportElement x="27" y="17" width="160" height="80" uuid="d1f427d1-ccc1-4458-bf79-f6168229bd30"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/Lanbide_CL.gif"]]></imageExpression>
+			</image>
+			<image hAlign="Center" vAlign="Middle" isUsingCache="true">
+				<reportElement x="187" y="17" width="181" height="80" uuid="7070702d-4a4f-4ea6-b968-a31eaaaaa7fb"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/GV.png"]]></imageExpression>
+			</image>
+			<image hAlign="Right" vAlign="Middle">
+				<reportElement x="368" y="17" width="180" height="80" uuid="87b68534-4191-4f0e-8aea-66a8c7771cb6"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/Europa.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="50" y="113" width="212" height="33" forecolor="#2D4C9F" uuid="672fa086-076a-4a2c-bd58-b38f5ba63398"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[LANBIDE-KUALIFIKAZIOEN GAITASUN-UNITATEEN EGIAZTATZEA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="50" y="145" width="212" height="27" forecolor="#2D4C9F" backcolor="#FFFFFF" uuid="059ad15e-349c-4f91-b4f5-7a3068e9f1c5"/>
+				<textElement textAlignment="Center" verticalAlignment="Top" rotation="None" markup="none">
+					<font fontName="Arial" size="8" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Lanbide-Euskal Enplegu Zerbitzuko Zuzendari nagusiak, ziurtatzen du]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="113" width="212" height="13" forecolor="#6AAF23" uuid="8baa4514-e2d0-428b-ae59-ee8b35f86a7d"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ACREDITACIÓN DE LAS UNIDADES DE]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="156" width="212" height="26" forecolor="#6AAF23" uuid="a77e4269-3d4b-48e6-8d97-51735efb55af"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[El Director General de Lanbide-Servicio Vasco de Empleo, certifica que:]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="8" y="182" width="557" height="36" uuid="abc52f8e-2bea-4068-beea-b70fdfa1cfe7">
+					<property name="local_mesure_unitwidth" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					<property name="local_mesure_unitheight" value="pixel"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="styled">
+					<font fontName="Arial" size="11" isBold="false" pdfEncoding="Cp1252" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["D/Dña. "+"<style isBold='true' size='14'>"+$F{nombre}+"</style>"+" Andreak/jaunak,"]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="15" y="748" width="212" height="12" uuid="826775c6-a7ef-4baf-8964-0e656454630f"/>
+				<textElement>
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{claveRegistral}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="41" y="230" width="231" height="44" uuid="98b7be1e-8dda-4852-8f6f-547a67bf1293"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{fechaNacimientoAlt}+", konpetentzia-atal honekin lotzen den prestakuntza gainditu du:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="300" y="230" width="231" height="44" uuid="91c83c0d-aa72-443c-918e-7eb62a59ded6"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Nacido/a el "+$F{fechaNacimiento}+ " ha superado la formación asociada a la unidad de competencia:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="71" y="295" width="363" height="16" uuid="e639539f-5d22-450f-aa91-54428d5d2870"/>
+				<textElement markup="styled">
+					<font fontName="Arial" size="11" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kodea / Código: "+"<style isBold='true'>" +$F{codigoCU}+ "</style>"]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
+				<reportElement x="95" y="345" width="392" height="83" uuid="d40e305c-eee2-4e55-904b-4ef574dafb27"/>
+				<textElement textAlignment="Center" markup="html">
+					<font fontName="Calibri" size="11" isBold="true" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionCUE}+ "." + "<br> --- <br>" + $F{descripcionCUC}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="40" y="557" width="241" height="12" uuid="dd591468-ea28-46d9-a965-121fec123478"/>
+				<textElement>
+					<font fontName="Arial" size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Vitoria-Gasteizen, "+$F{fechaCreacionAlt}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="291" y="557" width="241" height="12" uuid="8565e056-5e13-4974-be1d-ac3429d2afab"/>
+				<textElement textAlignment="Right">
+					<font fontName="Arial" size="10" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["En Vitoria-Gasteiz,"+" a "+$F{fechaCreacion}]]></textFieldExpression>
+			</textField>
+			<image scaleImage="FillFrame" hAlign="Center">
+				<reportElement x="223" y="586" width="138" height="85" uuid="1943283a-9abb-43cc-995a-61b13264de24"/>
+				<imageExpression><![CDATA["/es/altia/flexia/integracion/moduloexterno/melanbide03/reports/imagenes/firmaBB.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="164" y="690" width="258" height="38" uuid="0604a8b0-7077-47e1-9c28-331df72eb6dc"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="9"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[Izpta./Fdo.: Borja Belandia Fradejas
+Lanbide-Euskal Enplegu Zerbitzuko Zuzendari nagusia
+Director General de Lanbide-Servicio Vasco de Empleo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="125" width="212" height="13" forecolor="#6AAF23" uuid="7bffe634-2910-4e16-ae48-3afac549b5ba"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[COMPETENCIA DE LAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="310" y="137" width="212" height="13" forecolor="#6AAF23" uuid="61df73fb-eb97-420e-8f4b-6561f0282431"/>
+				<textElement textAlignment="Center" markup="none">
+					<font fontName="Arial" size="10" isBold="true"/>
+				</textElement>
+				<text><![CDATA[CUALIFICACIONES PROFESIONALES]]></text>
+			</staticText>
+			<rectangle radius="0">
+				<reportElement mode="Transparent" x="41" y="285" width="491" height="157" forecolor="#000000" uuid="62b7ce37-4d8b-4ad7-8be2-cc0a46e74dd2"/>
+				<graphicElement>
+					<pen lineWidth="1.0" lineColor="#000000"/>
+				</graphicElement>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="71" y="310" width="363" height="16" uuid="d0408b4a-5201-4e15-83e6-e028402869e5"/>
+				<textElement markup="styled">
+					<font fontName="Arial" size="11" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Kualifikazio Maila / Nivel de Cualificación: "+"<style isBold='true'>" +$F{nivel}+ "</style>"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="71" y="329" width="105" height="16" uuid="ddecf270-45e6-4ce4-aafe-f7b6ea7714ad"/>
+				<textElement markup="styled">
+					<font fontName="Arial" size="11" pdfFontName="Helvetica" isPdfEmbedded="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Izena / Descripción:"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="95" y="460" width="177" height="17" uuid="715f9b19-348a-4e04-92fe-f3d3f77b6afb"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Hurrengo profesionaltasun-ziurtagirikoa"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="300" y="460" width="177" height="17" uuid="884468bc-ad5c-488f-8ac6-b05c5ca0703d"/>
+				<textElement textAlignment="Justified">
+					<font fontName="Arial" size="10"/>
+				</textElement>
+				<textFieldExpression><![CDATA["Del certificado de profesionalidad"]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="190" y="481" width="190" height="17" uuid="07f493d3-33f3-4946-9fd0-af11fdf3b130"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="11" isBold="false"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{codigoCP}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="41" y="516" width="491" height="17" uuid="244eff56-5cf2-41de-8c06-2db8875bfab5"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionCPC}.toUpperCase()]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="41" y="500" width="491" height="17" uuid="b9f2d094-f98f-4a8c-83fc-151d3e219182"/>
+				<textElement textAlignment="Center">
+					<font fontName="Verdana" size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descripcionCPE}.toUpperCase()]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

@@ -1,0 +1,88 @@
+##################### OPERACIONES DISPONIBLES EN LA PESTA\u00d1A "CONF. SW" #####################
+0/MODULO_INTEGRACION/MELANBIDE64/LISTA_OPERACIONES_DISPONIBLES=cerrarTramites;impedirAvanceManualNotifTel;inicioExpedienteREINT
+1/MODULO_INTEGRACION/MELANBIDE64/LISTA_OPERACIONES_DISPONIBLES=cerrarTramites;impedirAvanceManualNotifTel;inicioExpedienteREINT
+
+#####URL_WS_REGISTRO#########################################################################
+#URL_WS_REGISTRO=http://10.168.212.21:7081/WSTramitacion/services/WSTramitacionPort?wsdl
+#PRE
+#URL_WS_REGISTRO=http://10.168.212.161:17003/WSTramitacion/services/WSTramitacionPort?wsdl
+#PRO
+URL_WS_REGISTRO=http://integ.serv.lanbide.lan/WSTramitacion/services/WSTramitacionPort?wsdl
+
+
+##Valores wsTramitacion
+USUARIOGLOBAL=5
+
+
+##################### NOMBRE DEL M\u00d3DULO #####################
+NOMBRE_MODULO = MELANBIDE64
+
+##################### DESCRIPCI\u00d3N DEL M\u00d3DULO #####################
+0/MODULO_INTEGRACION/MELANBIDE64/DESCRIPCION_MODULO = M\u00f3dulo de extensi\u00f3n de operaciones de gesti\u00f3n de flujo
+1/MODULO_INTEGRACION/MELANBIDE64/DESCRIPCION_MODULO = M\u00f3dulo de extensi\u00f3n de operaciones de gesti\u00f3n de flujo
+
+##################### NOMBRES DE TABLAS #####################
+TABLA_E_CRO=E_CRO
+TABLA_TRAMITES=E_TRA
+TABLA_VALORDESPLEGCAMPOSUPL=E_TDE
+TABLA_VALORNUMCAMPOSUPL=E_TNU
+TABLA_RELACIONEXPTSFLEXIA=E_REX
+TABLA_RELACIONTERCEROSXEXPTS=E_EXT
+
+TABLA_TERCEROS=T_TER
+TABLA_TERCEROS_HIST=T_HTE
+TABLA_REL_TERCERO_DOMICILIO=E_EXT
+TABLA_DOMICILIO=T_DNN
+TABLA_T_DOT=T_DOT
+TABLA_E_TNU=E_TNU
+TABLA_E_TFE=E_TFE
+TABLA_E_EXP=E_EXP
+TABLA_E_EXR=E_EXR
+TABLA_R_RES=R_RES
+TABLA_T_VIA=T_VIA
+TABLA_E_CRO=E_CRO
+TABLA_TRAMITES=E_TRA
+
+TABLA_SUPLEMENTARIOS_PROCEDIMIENTO=E_PCA
+TABLA_E_TXT=E_TXT
+TABLA_E_TTL=E_TTL
+TABLA_E_TFI=E_TFI
+TABLA_E_TNUC=E_TNUC
+TABLA_E_TFEC=E_TFEC
+TABLA_E_TDEX=E_TDEX
+
+###### TABLAS DE SUPLEMENTARIOS DE TRAMITES ######
+
+TABLA_E_TCA=E_TCA
+TABLA_E_TNUT=E_TNUT
+TABLA_E_TXTT=E_TXTT
+TABLA_E_TFET=E_TFET
+TABLA_E_TTLT=E_TTLT
+TABLA_E_TFIT=E_TFIT
+TABLA_E_TDET=E_TDET
+TABLA_E_TNUCT=E_TNUCT
+TABLA_E_TFECT=E_TFECT
+TABLA_E_TDEXT=E_TDEXT
+##################### CAMPOS SUPLEMENTARIOS #####################
+
+CAMPO_SUPL_FECREGSALIDA=FECREGSALIDA
+CAMPO_SUPL_NUMREGSALIDA=NUMREGSALIDA
+
+
+##################### NOMBRES DE SECUENCIAS #####################
+
+
+
+##################### FICHEROS DE MENSAJES #####################
+UBICACION_FICHEROS_MENSAJES = es.altia.flexia.integracion.moduloexterno.melanbide64.i18n.text
+FICHEROS_MENSAJES = MELANBIDE64_TEXT_1;MELANBIDE64_TEXT_4
+
+##################################################################################################################################
+##################     CODIGOS DE ERROR PARA LA OPERACION IMPEDIR AVANCE MANUAL NOTIFICACION TELEMATICA       ####################
+##################################################################################################################################
+	
+0/MODULO_INTEGRACION/impedirAvanceManualNotifTel/MENSAJE_ERROR/1=ERROR-NOTIFICACION-TELEMATICA
+1/MODULO_INTEGRACION/impedirAvanceManualNotifTel/MENSAJE_ERROR/1=ERROR-NOTIFICACION-TELEMATICA
+	
+ERROR-NOTIFICACION-TELEMATICA_1=No es posible avanzar manualmente el acuse de recibo de una notificaci\u00f3n telem\u00e1tica
+ERROR-NOTIFICACION-TELEMATICA_4=No es posible avanzar manualmente el acuse de recibo de una notificaci\u00f3n telem\u00e1tica.EU

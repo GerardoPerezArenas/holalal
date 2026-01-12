@@ -1,0 +1,72 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 03-jun-2014, 16:58:56
+    Author     : davidg
+*/
+
+.legendAzul{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: center;
+}
+
+.tituloAzul{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    width: 100%;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    text-align: left;
+    clear:both;
+}
+
+
+.botonera{
+    clear: both;
+    text-align: center;
+}
+
+.lineaFormulario{
+    width: 100%;
+    clear: both;
+    padding-top: 5px;
+}
+
+.lineaFormularioFont{
+    width: 100%;
+    clear: both;
+    padding-top: 5px;
+    font-size: 12px;
+}
+
+.tablaPers .xCabecera td + td + td + td + td + td + td + td{
+    background-color: forestgreen;
+}
+
+.tablaPers .xCabecera td + td + td + td + td + td + td + td + td + td{
+    background-color: #FF9966;
+}
+
+.tablaPersCE .xCabecera td + td + td + td + td + td {
+    background-color: #FF9966;
+}
+
+input[type="text"]:disabled
+{
+    background:#dddddd;
+}
+
+.xCabeceraDiv{
+    text-align: left;
+}
+.readOnly{
+    background:#dddddd;
+}

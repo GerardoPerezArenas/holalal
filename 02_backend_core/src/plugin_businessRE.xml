@@ -1,0 +1,33 @@
+<!-- Plugin para generar el nuevo jar de businessRE que incluye otras libs: Altia-Utils.jar, notificacion.jar y RE_Interfaces.jar. Incluir en pom.xml -->
+<!--<plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-jar-plugin</artifactId>
+                        <version>3.2.0</version>
+                        <configuration>
+                            <classifier>
+                                businessRE-Altia-Utils-1.6
+                            </classifier>
+                            <includes>
+                                <include>**/es/altia/agora/**</include>
+                                <include>**/es/altia/common/**</include>
+                                <include>**/es/altia/technical/**</include>
+                                <include>**/es/altia/util/**</include>
+                                <include>**/es/altia/flexia/**</include>
+                                <include>**/es/altia/flexiaWS/**</include>
+                                <include>**/es/altia/arboles/**</include>
+                            </includes>
+                            <excludes>
+                                Se excluyen las clases del servicio de auditoria que estan en una libreria especifica
+                                <exclude>**/es/altia/common/service/auditoria/**</exclude>
+                            </excludes>
+                        </configuration>
+                        <executions>
+                            <execution>
+                                <id>generarJarAltia-Utils</id>
+                                <phase>compile</phase>
+                                <goals>
+                                    <goal>jar</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>-->

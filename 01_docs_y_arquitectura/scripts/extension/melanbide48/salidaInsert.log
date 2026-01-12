@@ -1,0 +1,2231 @@
+Error que empieza en la línea: 1 del comando :
+INSERT INTO COLEC_AMBITO (COLEC_COD_AMBITO, COLEC_DESC_AMBITO) VALUES ('1', 'ARABA / ÁLAVA')
+Informe de error -
+Error SQL: ORA-00001: restricción única (FLBPRU.COLEC_AMBITO_PK) violada
+00001. 00000 -  "unique constraint (%s.%s) violated"
+*Cause:    An UPDATE or INSERT statement attempted to insert a duplicate key.
+           For Trusted Oracle configured in DBMS MAC mode, you may see
+           this message if a duplicate entry exists at a different level.
+*Action:   Either remove the unique restriction or do not insert the key.
+Error que empieza en la línea: 2 del comando :
+INSERT INTO COLEC_AMBITO (COLEC_COD_AMBITO, COLEC_DESC_AMBITO) VALUES ('48', 'BIZKAIA')
+Informe de error -
+Error SQL: ORA-00001: restricción única (FLBPRU.COLEC_AMBITO_PK) violada
+00001. 00000 -  "unique constraint (%s.%s) violated"
+*Cause:    An UPDATE or INSERT statement attempted to insert a duplicate key.
+           For Trusted Oracle configured in DBMS MAC mode, you may see
+           this message if a duplicate entry exists at a different level.
+*Action:   Either remove the unique restriction or do not insert the key.
+Error que empieza en la línea: 3 del comando :
+INSERT INTO COLEC_AMBITO (COLEC_COD_AMBITO, COLEC_DESC_AMBITO) VALUES ('20', 'GIPUZKOA')
+Informe de error -
+Error SQL: ORA-00001: restricción única (FLBPRU.COLEC_AMBITO_PK) violada
+00001. 00000 -  "unique constraint (%s.%s) violated"
+*Cause:    An UPDATE or INSERT statement attempted to insert a duplicate key.
+           For Trusted Oracle configured in DBMS MAC mode, you may see
+           this message if a duplicate entry exists at a different level.
+*Action:   Either remove the unique restriction or do not insert the key.
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+1 fila insertadas.
+
+
+1 fila insertadas.
+
+Error que empieza en la línea: 35 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (36,'HONDARRIBIA',3,20)
+Error en la línea de comandos : 35 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 36 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (45,'IRUN',3,20)
+Error en la línea de comandos : 36 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 37 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (53,'LEZO',3,20)
+Error en la línea de comandos : 37 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 38 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (63,'OIARTZUN',3,20)
+Error en la línea de comandos : 38 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 39 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (64,'PASAIA',3,20)
+Error en la línea de comandos : 39 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 40 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (67,'RENTERIA',3,20)
+Error en la línea de comandos : 40 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 41 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (69,'DONOSTIA-SAN SEBASTIAN',3,20)
+Error en la línea de comandos : 41 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 42 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (9,'ANDOAIN ',3,20)
+Error en la línea de comandos : 42 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 43 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (903,'ASTIGARRAGA',3,20)
+Error en la línea de comandos : 43 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 44 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (40,'HERNANI',3,20)
+Error en la línea de comandos : 44 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 45 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (902,'LASARTE-ORIA',3,20)
+Error en la línea de comandos : 45 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 46 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (73,'USURBIL',3,20)
+Error en la línea de comandos : 46 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 47 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (72,'URNIETA',3,20)
+Error en la línea de comandos : 47 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 48 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (1,'ABALTZISKETA',3,20)
+Error en la línea de comandos : 48 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 49 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (2,'ADUNA',3,20)
+Error en la línea de comandos : 49 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 50 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (4,'ALBIZTUR',3,20)
+Error en la línea de comandos : 50 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 51 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (5,'ALEGIA',3,20)
+Error en la línea de comandos : 51 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 52 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (6,'ALKIZA',3,20)
+Error en la línea de comandos : 52 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 53 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (7,'ALTZO',3,20)
+Error en la línea de comandos : 53 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 54 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (8,'AMEZKETA',3,20)
+Error en la línea de comandos : 54 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 55 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (10,'ANOETA',3,20)
+Error en la línea de comandos : 55 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 56 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (14,'ASTEASU',3,20)
+Error en la línea de comandos : 56 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 57 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (21,'BELAUNTZA',3,20)
+Error en la línea de comandos : 57 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 58 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (22,'BERASTEGI',3,20)
+Error en la línea de comandos : 58 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 59 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (23,'BERROBI',3,20)
+Error en la línea de comandos : 59 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 60 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (24,'BIDEGOIAN',3,20)
+Error en la línea de comandos : 60 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 61 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (28,'ZIZURKIL',3,20)
+Error en la línea de comandos : 61 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 62 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (31,'ELDUAIN',3,20)
+Error en la línea de comandos : 62 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 63 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (41,'HERNIALDE',3,20)
+Error en la línea de comandos : 63 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 64 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (42,'IBARRA',3,20)
+Error en la línea de comandos : 64 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 65 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (44,'IKAZTEGIETA',3,20)
+Error en la línea de comandos : 65 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 66 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (46,'IRURA',3,20)
+Error en la línea de comandos : 66 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 67 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (48,'LARRAUL',3,20)
+Error en la línea de comandos : 67 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 68 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (50,'LEABURU',3,20)
+Error en la línea de comandos : 68 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 69 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (52,'LEGORRETA',3,20)
+Error en la línea de comandos : 69 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 70 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (54,'LIZARTZA',3,20)
+Error en la línea de comandos : 70 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 71 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (60,'OREXA',3,20)
+Error en la línea de comandos : 71 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 72 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (71,'TOLOSA',3,20)
+Error en la línea de comandos : 72 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 73 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (75,'VILLABONA',3,20)
+Error en la línea de comandos : 73 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 74 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (904,'BALIARRAIN',3,20)
+Error en la línea de comandos : 74 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 75 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (905,'ORENDAIN',3,20)
+Error en la línea de comandos : 75 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 76 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (907,'GAZTELU',3,20)
+Error en la línea de comandos : 76 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 77 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (17,'AZKOITIA',3,20)
+Error en la línea de comandos : 77 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 78 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (3,'AIZARNAZABAL',3,20)
+Error en la línea de comandos : 78 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 79 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (18,'AZPEITIA',3,20)
+Error en la línea de comandos : 79 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 80 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (27,'ZESTOA',3,20)
+Error en la línea de comandos : 80 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 81 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (12,'ARAMA',3,20)
+Error en la línea de comandos : 81 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 82 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (15,'ATAUN',3,20)
+Error en la línea de comandos : 82 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 83 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (19,'BEASAIN',3,20)
+Error en la línea de comandos : 83 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 84 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (25,'ZEGAMA',3,20)
+Error en la línea de comandos : 84 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 85 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (26,'ZERAIN',3,20)
+Error en la línea de comandos : 85 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 86 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (37,'GAINTZA',3,20)
+Error en la línea de comandos : 86 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 87 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (38,'GABIRIA',3,20)
+Error en la línea de comandos : 87 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 88 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (43,'IDIAZABAL',3,20)
+Error en la línea de comandos : 88 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 89 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (47,'ITSASONDO',3,20)
+Error en la línea de comandos : 89 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 90 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (49,'LAZKAO',3,20)
+Error en la línea de comandos : 90 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 91 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (57,'MUTILOA',3,20)
+Error en la línea de comandos : 91 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 92 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (58,'OLABERRIA',3,20)
+Error en la línea de comandos : 92 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 93 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (62,'ORMAIZTEGI',3,20)
+Error en la línea de comandos : 93 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 94 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (70,'SEGURA',3,20)
+Error en la línea de comandos : 94 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 95 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (76,'ORDIZIA',3,20)
+Error en la línea de comandos : 95 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 96 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (78,'ZALDIBIA',3,20)
+Error en la línea de comandos : 96 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 97 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (906,'ALTZAGA',3,20)
+Error en la línea de comandos : 97 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 98 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (11,'ANTZUOLA',3,20)
+Error en la línea de comandos : 98 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 99 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (13,'ARETXABALETA',3,20)
+Error en la línea de comandos : 99 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 100 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (33,'ELGETA',3,20)
+Error en la línea de comandos : 100 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 101 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (34,'ESKORIATZA',3,20)
+Error en la línea de comandos : 101 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 102 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (55,'ARRASATE/MONDRAGON',3,20)
+Error en la línea de comandos : 102 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 103 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (59,'OÑATI',3,20)
+Error en la línea de comandos : 103 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 104 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (68,'LEINTZ-GATZAGA',3,20)
+Error en la línea de comandos : 104 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 105 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (74,'BERGARA',3,20)
+Error en la línea de comandos : 105 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 106 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (30,'EIBAR',3,20)
+Error en la línea de comandos : 106 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 107 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (29,'DEBA',3,20)
+Error en la línea de comandos : 107 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 108 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (32,'ELGOIBAR',3,20)
+Error en la línea de comandos : 108 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 109 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (56,'MUTRIKU',3,20)
+Error en la línea de comandos : 109 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 110 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (65,'SORALUCE-PLACENCIA DE LAS ARMAS',3,20)
+Error en la línea de comandos : 110 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 111 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (901,'MENDARO',3,20)
+Error en la línea de comandos : 111 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 112 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (35,'EZKIO-ITSASO',3,20)
+Error en la línea de comandos : 112 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 113 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (51,'LEGAZPI',3,20)
+Error en la línea de comandos : 113 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 114 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (77,'URRETXU',3,20)
+Error en la línea de comandos : 114 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 115 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (80,'ZUMARRAGA',3,20)
+Error en la línea de comandos : 115 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 116 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (16,'AIA',3,20)
+Error en la línea de comandos : 116 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 117 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (20,'BEIZAMA',3,20)
+Error en la línea de comandos : 117 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 118 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (39,'GETARIA',3,20)
+Error en la línea de comandos : 118 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 119 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (61,'ORIO',3,20)
+Error en la línea de comandos : 119 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 120 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (66,'ERREZIL',3,20)
+Error en la línea de comandos : 120 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 121 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (79,'ZARAUTZ',3,20)
+Error en la línea de comandos : 121 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 122 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (81,'ZUMAIA',3,20)
+Error en la línea de comandos : 122 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 123 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (59,'VITORIA-GASTEIZ',1,1)
+Error en la línea de comandos : 123 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 124 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (901,'IRUÑA OKA/IRUÑA DE OCA',1,1)
+Error en la línea de comandos : 124 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 125 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (4,'ARTZINIEGA',1,1)
+Error en la línea de comandos : 125 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 126 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (36,'LLODIO',1,1)
+Error en la línea de comandos : 126 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 127 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (42,'OKONDO',1,1)
+Error en la línea de comandos : 127 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 128 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (2,'AMURRIO',1,1)
+Error en la línea de comandos : 128 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 129 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (74,'URDUÑA-ORDUÑA',2,48)
+Error en la línea de comandos : 129 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 130 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (11,'BAÑOS DE EBRO/MAÑUETA',1,1)
+Error en la línea de comandos : 130 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 131 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (19,'CRIPAN',1,1)
+Error en la línea de comandos : 131 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 132 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (22,'ELCIEGO',1,1)
+Error en la línea de comandos : 132 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 133 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (23,'ELVILLAR',1,1)
+Error en la línea de comandos : 133 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 134 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (31,'LAGUARDIA',1,1)
+Error en la línea de comandos : 134 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 135 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (32,'LANCIEGO',1,1)
+Error en la línea de comandos : 135 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 136 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (33,'LAPUEBLADE LABARCA',1,1)
+Error en la línea de comandos : 136 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 137 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (34,'LEZA',1,1)
+Error en la línea de comandos : 137 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 138 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (39,'MOREDA DE ALAVA',1,1)
+Error en la línea de comandos : 138 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 139 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (41,'NAVARIDAS',1,1)
+Error en la línea de comandos : 139 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 140 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (43,'OYON - OION',1,1)
+Error en la línea de comandos : 140 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 141 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (52,'SAMANIEGO',1,1)
+Error en la línea de comandos : 141 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 142 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (57,'VILLABUENA DE Ã?LAVA',1,1)
+Error en la línea de comandos : 142 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 143 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (14,'ALEGRIA-DULANTZI',1,1)
+Error en la línea de comandos : 143 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 144 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (8,'ARRAZUA-UBARRUNDIA',1,1)
+Error en la línea de comandos : 144 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 145 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (9,'ASPARRENA',1,1)
+Error en la línea de comandos : 145 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 146 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (13,'BARRUNDIA',1,1)
+Error en la línea de comandos : 146 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 147 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (21,'ELBURGO',1,1)
+Error en la línea de comandos : 147 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 148 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (27,'IRURAIZ GAUNA',1,1)
+Error en la línea de comandos : 148 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 149 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (51,'SALVATIERRA-AGURAIN',1,1)
+Error en la línea de comandos : 149 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 150 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (53,'SAN MILLAN',1,1)
+Error en la línea de comandos : 150 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 151 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (61,'ZALDUONDO',1,1)
+Error en la línea de comandos : 151 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 152 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (3,'ARAMAIO',1,1)
+Error en la línea de comandos : 152 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 153 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (18,'ZIGOITIA',1,1)
+Error en la línea de comandos : 153 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 154 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (54,'URKABUSTAIZ',1,1)
+Error en la línea de comandos : 154 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 155 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (58,'LEGUTIANO',1,1)
+Error en la línea de comandos : 155 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 156 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (63,'ZUIA',1,1)
+Error en la línea de comandos : 156 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 157 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (44,'GETXO',2,48)
+Error en la línea de comandos : 157 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 158 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (54,'LEIOA',2,48)
+Error en la línea de comandos : 158 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 159 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (902,'ERANDIO',2,48)
+Error en la línea de comandos : 159 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 160 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (52,'LARRABETZU',2,48)
+Error en la línea de comandos : 160 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 161 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (81,'LEZAMA',2,48)
+Error en la línea de comandos : 161 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 162 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (901,'DERIO',2,48)
+Error en la línea de comandos : 162 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 163 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (903,'LOIU',2,48)
+Error en la línea de comandos : 163 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 164 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (904,'SONDIKA',2,48)
+Error en la línea de comandos : 164 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 165 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (905,'ZAMUDIO',2,48)
+Error en la línea de comandos : 165 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 166 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (10,'ARRIETA',2,48)
+Error en la línea de comandos : 166 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 167 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (12,'BAKIO',2,48)
+Error en la línea de comandos : 167 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 168 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (35,'FRUIZ',2,48)
+Error en la línea de comandos : 168 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 169 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (38,'GAMIZ-FIKA',2,48)
+Error en la línea de comandos : 169 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 170 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (40,'GATIKA',2,48)
+Error en la línea de comandos : 170 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 171 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (53,'LAUKIZ',2,48)
+Error en la línea de comandos : 171 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 172 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (64,'MEÃ‘AKA',2,48)
+Error en la línea de comandos : 172 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 173 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (69,'MUNGIA',2,48)
+Error en la línea de comandos : 173 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 174 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (56,'LEMOIZ',2,48)
+Error en la línea de comandos : 174 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 175 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (77,'PLENTZIA',2,48)
+Error en la línea de comandos : 175 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 176 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (85,'SOPELANA',2,48)
+Error en la línea de comandos : 176 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 177 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (43,'GORLIZ',2,48)
+Error en la línea de comandos : 177 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 178 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (89,'URDULIZ',2,48)
+Error en la línea de comandos : 178 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 179 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (14,'BARRIKA',2,48)
+Error en la línea de comandos : 179 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 180 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (16,'BERANGO',2,48)
+Error en la línea de comandos : 180 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 181 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (1,'ABADIÃ‘O',2,48)
+Error en la línea de comandos : 181 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 182 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (19,'BERRIZ',2,48)
+Error en la línea de comandos : 182 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 183 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (27,'DURANGO',2,48)
+Error en la línea de comandos : 183 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 184 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (32,'ELORRIO',2,48)
+Error en la línea de comandos : 184 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 185 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (34,'ERMUA',2,48)
+Error en la línea de comandos : 185 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 186 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (39,'GARAI',2,48)
+Error en la línea de comandos : 186 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 187 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (50,'IZURTZA',2,48)
+Error en la línea de comandos : 187 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 188 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (58,'MALLABIA',2,48)
+Error en la línea de comandos : 188 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 189 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (59,'MAÑARIA',2,48)
+Error en la línea de comandos : 189 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 190 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (91,'ATXONDO',2,48)
+Error en la línea de comandos : 190 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 191 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (95,'ZALDIBAR',2,48)
+Error en la línea de comandos : 191 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 192 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (910,'IURRETA',2,48)
+Error en la línea de comandos : 192 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 193 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (3,'AMOREBIETA-ETXANO',2,48)
+Error en la línea de comandos : 193 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 194 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (17,'BERMEO',2,48)
+Error en la línea de comandos : 194 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 195 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (21,'BUSTURIA',2,48)
+Error en la línea de comandos : 195 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 196 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (76,'SUKARRIETA',2,48)
+Error en la línea de comandos : 196 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 197 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (68,'MUNDAKA',2,48)
+Error en la línea de comandos : 197 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 198 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (28,'EA',2,48)
+Error en la línea de comandos : 198 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 199 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (31,'ELANTXOBE',2,48)
+Error en la línea de comandos : 199 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 200 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (33,'EREÑO',2,48)
+Error en la línea de comandos : 200 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 201 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (41,'GAUTEGIZ ARTEAGA',2,48)
+Error en la línea de comandos : 201 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 202 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (46,'GERNIKA-LUMO',2,48)
+Error en la línea de comandos : 202 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 203 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (48,'IBARRANGELU',2,48)
+Error en la línea de comandos : 203 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 204 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (62,'MENDATA',2,48)
+Error en la línea de comandos : 204 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 205 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (66,'MORGA',2,48)
+Error en la línea de comandos : 205 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 206 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (67,'MUXIKA',2,48)
+Error en la línea de comandos : 206 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 207 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (79,'ERRIGOITI',2,48)
+Error en la línea de comandos : 207 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 208 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (906,'FORUA',2,48)
+Error en la línea de comandos : 208 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 209 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (907,'KORTEZUBI',2,48)
+Error en la línea de comandos : 209 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 210 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (908,'MURUETA',2,48)
+Error en la línea de comandos : 210 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 211 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (909,'NABARNIZ',2,48)
+Error en la línea de comandos : 211 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 212 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (911,'AJANGIZ',2,48)
+Error en la línea de comandos : 212 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 213 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (914,'ARRATZU',2,48)
+Error en la línea de comandos : 213 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 214 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (4,'AMOROTO',2,48)
+Error en la línea de comandos : 214 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 215 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (7,'MUNITIBAR-ARBATZEGI GERRIKAITZ',2,48)
+Error en la línea de comandos : 215 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 216 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (18,'BERRIATUA',2,48)
+Error en la línea de comandos : 216 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 217 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (30,'ETXEBARRIA',2,48)
+Error en la línea de comandos : 217 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 218 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (47,'GIZABURUAGA',2,48)
+Error en la línea de comandos : 218 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 219 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (49,'ISPASTER',2,48)
+Error en la línea de comandos : 219 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 220 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (57,'LEKEITIO',2,48)
+Error en la línea de comandos : 220 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 221 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (60,'MARKINA-XEMEIN',2,48)
+Error en la línea de comandos : 221 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 222 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (63,'MENDEXA',2,48)
+Error en la línea de comandos : 222 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 223 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (70,'AULESTI',2,48)
+Error en la línea de comandos : 223 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 224 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (73,'ONDARROA',2,48)
+Error en la línea de comandos : 224 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 225 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (915,'BOLIBAR',2,48)
+Error en la línea de comandos : 225 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 226 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (8,'ARCENTALES',2,48)
+Error en la línea de comandos : 226 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 227 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (22,'CARRANZA',2,48)
+Error en la línea de comandos : 227 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 228 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (51,'LANESTOSA',2,48)
+Error en la línea de comandos : 228 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 229 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (86,'SOPUERTA',2,48)
+Error en la línea de comandos : 229 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 230 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (87,'TRUCIOS-TURTZIOZ',2,48)
+Error en la línea de comandos : 230 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 231 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (90,'BALMASEDA',2,48)
+Error en la línea de comandos : 231 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 232 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (37,'GALDAMES',2,48)
+Error en la línea de comandos : 232 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 233 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (42,'GORDEXOLA',2,48)
+Error en la línea de comandos : 233 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 234 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (45,'GÜEÑES',2,48)
+Error en la línea de comandos : 234 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 235 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (96,'ZALLA',2,48)
+Error en la línea de comandos : 235 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 236 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (6,'ARANTZAZU',2,48)
+Error en la línea de comandos : 236 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 237 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (23,'ARTEA',2,48)
+Error en la línea de comandos : 237 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 238 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (24,'ZEANURI',2,48)
+Error en la línea de comandos : 238 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 239 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (26,'DIMA',2,48)
+Error en la línea de comandos : 239 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 240 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (55,'LEMOA',2,48)
+Error en la línea de comandos : 240 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 241 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (72,'OTXANDIO',2,48)
+Error en la línea de comandos : 241 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 242 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (88,'UBIDEA',2,48)
+Error en la línea de comandos : 242 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 243 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (92,'BEDIA',2,48)
+Error en la línea de comandos : 243 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 244 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (93,'AREATZA',2,48)
+Error en la línea de comandos : 244 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 245 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (94,'IGORRE',2,48)
+Error en la línea de comandos : 245 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 246 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (5,'ARAKALDO',2,48)
+Error en la línea de comandos : 246 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 247 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (9,'ARRANKUDIAGA',2,48)
+Error en la línea de comandos : 247 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 248 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (11,'ARRIGORRIAGA',2,48)
+Error en la línea de comandos : 248 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 249 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (25,'ZEBERIO',2,48)
+Error en la línea de comandos : 249 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 250 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (65,'UGAO-MIRABALLES',2,48)
+Error en la línea de comandos : 250 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 251 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (75,'OROZKO',2,48)
+Error en la línea de comandos : 251 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 252 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (912,'ALONSOTEGI',2,48)
+Error en la línea de comandos : 252 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 253 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (97,'ZARATAMO',2,48)
+Error en la línea de comandos : 253 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 254 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (20,'BILBAO',2,48)
+Error en la línea de comandos : 254 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 255 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (13,'BARAKALDO',2,48)
+Error en la línea de comandos : 255 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 256 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (78,'PORTUGALETE',2,48)
+Error en la línea de comandos : 256 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 257 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (83,'ORTUELLA',2,48)
+Error en la línea de comandos : 257 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 258 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (2,'ABANTO Y CIERVANA-ABANTO',2,48)
+Error en la línea de comandos : 258 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 259 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (913,'ZIERBENA',2,48)
+Error en la línea de comandos : 259 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 260 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (71,'MUSKIZ',2,48)
+Error en la línea de comandos : 260 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 261 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (82,'SANTURTZI',2,48)
+Error en la línea de comandos : 261 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 262 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (84,'SESTAO',2,48)
+Error en la línea de comandos : 262 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 263 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (80,'VALLE DE TRAPAGA-TRAPAGARAN',2,48)
+Error en la línea de comandos : 263 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 264 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (15,'BASAURI',2,48)
+Error en la línea de comandos : 264 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 265 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (29,'ETXEBARRI',2,48)
+Error en la línea de comandos : 265 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 266 del comando -
+INSERT INTO COLEC_MUN (COLEC_COD_MUN , COLEC_DESC_MUN , COLEC_COD_COMARCA , COLEC_COD_TTHH ) VALUES (36,'GALDAKAO',2,48)
+Error en la línea de comandos : 266 Columna : 13
+Informe de error -
+Error SQL: ORA-00942: la tabla o vista no existe
+00942. 00000 -  "table or view does not exist"
+*Cause:    
+*Action:
+Error que empieza en la línea: 268 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,1,1,'12')
+Error en la línea de comandos : 268 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 269 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,1,48,'28,30')
+Error en la línea de comandos : 269 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 270 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,1,20,'3,4')
+Error en la línea de comandos : 270 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 271 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,2,1,'12')
+Error en la línea de comandos : 271 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 272 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,2,48,'28')
+Error en la línea de comandos : 272 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 273 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,2,48,'29')
+Error en la línea de comandos : 273 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 274 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,2,20,'1,3,4')
+Error en la línea de comandos : 274 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 275 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,1,'12,15')
+Error en la línea de comandos : 275 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 276 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,1,'13,16')
+Error en la línea de comandos : 276 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 277 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,48,'28 ')
+Error en la línea de comandos : 277 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 278 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,48,'5,29')
+Error en la línea de comandos : 278 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 279 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,48,'19,20,21,23')
+Error en la línea de comandos : 279 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 280 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,48,'26,27,30')
+Error en la línea de comandos : 280 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 281 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,48,'22,24')
+Error en la línea de comandos : 281 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 282 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,20,'1,2,3,4')
+Error en la línea de comandos : 282 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 283 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,20,'5,7,10')
+Error en la línea de comandos : 283 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 284 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,20,'6,11')
+Error en la línea de comandos : 284 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 285 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,20,'8')
+Error en la línea de comandos : 285 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 286 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,3,20,'9')
+Error en la línea de comandos : 286 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 287 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,1,'12,15')
+Error en la línea de comandos : 287 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 288 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,1,'13,16')
+Error en la línea de comandos : 288 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 289 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,1,'14')
+Error en la línea de comandos : 289 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 290 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,48,'28')
+Error en la línea de comandos : 290 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 291 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,48,'25')
+Error en la línea de comandos : 291 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 292 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,48,'29')
+Error en la línea de comandos : 292 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 293 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,48,'19,20,21')
+Error en la línea de comandos : 293 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 294 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,48,'26,27,30')
+Error en la línea de comandos : 294 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 295 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,48,'22')
+Error en la línea de comandos : 295 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 296 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,48,'23,24 ')
+Error en la línea de comandos : 296 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 297 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,20,'1,2,3,4')
+Error en la línea de comandos : 297 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 298 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,20,'5')
+Error en la línea de comandos : 298 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 299 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,20,'6,11')
+Error en la línea de comandos : 299 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 300 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,20,'7,10')
+Error en la línea de comandos : 300 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 301 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,20,'8')
+Error en la línea de comandos : 301 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Error que empieza en la línea: 302 del comando -
+INSERT INTO COLEC_CENTR_MINIMOS ( COLEC_COD_CENTR_MINIMOS,COLEC_EXP_EJE,COLEC_COLECTIVO ,COLEC_AMBITO ,COLEC_COMARCAS) VALUES (select COLEC_CENTR_MINIMOS_SQ.nextval from dual,2017,4,20,'9')
+Error en la línea de comandos : 302 Columna : 128
+Informe de error -
+Error SQL: ORA-00936: falta una expresión
+00936. 00000 -  "missing expression"
+*Cause:    
+*Action:
+Confirmación terminada.

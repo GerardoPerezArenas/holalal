@@ -1,0 +1,51 @@
+DROP TABLE MELANBIDE67_CENTROS;
+CREATE TABLE MELANBIDE67_CENTROS
+  (
+    "ID"                NUMBER(8,0) NOT NULL ENABLE,--Oculto
+    "NUM_EXP"           VARCHAR2(20 BYTE) NOT NULL ENABLE,--Oculto
+    "OFERTA_EMPLEO" 	VARCHAR2(100 BYTE),--(Oferta de Empleo)
+    "NUM_OFERTAS_SOL"   NUMBER(5) DEFAULT 0,--Núm. Ofertas Solicitadas
+    "NUM_OFERTAS_CON"   NUMBER(5) DEFAULT 0,--Núm. Ofertas Concedidas
+    "NUM_CONTR_SOL" NUMBER(5) DEFAULT 0,--Núm. Contratos Subv. Solicitados
+	"NUM_CONTR_CON" NUMBER(5) DEFAULT 0,--Núm. Contratos Subv. Concedidos
+	"IMPORTE_SUBV" 		NUMBER(15,2) DEFAULT 0,--Subvención
+	"IMPORTE_SUBV_SOL" 	NUMBER(15,2) DEFAULT 0,--Importe Solicitado
+	"IMPORTE_SUBV_CON" 	NUMBER(15,2) DEFAULT 0,--Importe Concedido
+	"OBSERVACIONES" VARCHAR2(2500 BYTE),--Parte móvil (Observaciones)
+    CONSTRAINT "MELANBIDE67_CENTROS_PK" PRIMARY KEY ("ID") USING INDEX PCTFREE 10 INITRANS 2 MAXTRANS 255 COMPUTE STATISTICS TABLESPACE "FLBPRU_DBS1" ENABLE
+  )
+  SEGMENT CREATION DEFERRED PCTFREE 10 PCTUSED 40 INITRANS 1 MAXTRANS 255 NOCOMPRESS LOGGING TABLESPACE "FLBPRU_DBS1" ;
+COMMENT ON COLUMN "MELANBIDE67_CENTROS"."ID"
+IS
+  'Identificador secuencial del registro';
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."NUM_EXP"
+IS
+  'Número de expediente';
+  
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."OFERTA_EMPLEO"
+IS
+  'Tipo de oferta de empleo (Ofertas captadas y registradas, Ofertas Gestionadas)';
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."NUM_OFERTAS_SOL"
+IS
+  'Número de ofertas solicitadas';
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."NUM_OFERTAS_CON"
+IS
+   'Número de ofertas concedidas';
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."NUM_CONTR_SOL"
+IS
+  'Número de contratos solictados';
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."NUM_CONTR_CON"
+IS
+  'Número de contratos concedidos';
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."IMPORTE_SUBV"
+IS
+  'Importe de la subvención por concepto';
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."IMPORTE_SUBV_SOL"
+IS
+  'Importe de la subvención solicitado por el centro';
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."IMPORTE_SUBV_CON"
+IS
+  'Importe de la subvención concedido por Lanbide para el centro';
+  COMMENT ON COLUMN "MELANBIDE67_CENTROS"."OBSERVACIONES"
+IS
+  'Observaciones de tramitación';

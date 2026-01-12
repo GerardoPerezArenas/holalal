@@ -1,0 +1,11 @@
+En esta carpeta estan los scripts de creacion de tablas y secuencias para ECA14 que se pasaron a PRO por primera vez. 
+
+También se incluye la carga de las tablas maestras que utiliza este módulo:
+
+- ECA14_CONFIGURACION
+- ECA14_CUMPLELISMI
+- ECA14_DISCAPGRAVEDAD
+- ECA14_RESULTADO
+- ECA14_SECTORACT
+- ECA14_TIPOCONTRATO
+- ECA14_TIPODISCAPACIDAD

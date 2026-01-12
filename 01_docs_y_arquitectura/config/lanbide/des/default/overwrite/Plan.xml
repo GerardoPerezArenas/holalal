@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<deployment-plan xmlns="http://xmlns.oracle.com/weblogic/deployment-plan" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.oracle.com/weblogic/deployment-plan http://xmlns.oracle.com/weblogic/deployment-plan/1.0/deployment-plan.xsd" global-variables="false">
+  <application-name>flexia</application-name>
+  <variable-definition>
+    <variable>
+      <name>SessionDescriptor_maxInMemorySessions_15616392743230</name>
+      <value>-1</value>
+    </variable>
+  </variable-definition>
+  <module-override>
+    <module-name>flexia</module-name>
+    <module-type>war</module-type>
+    <module-descriptor external="false">
+      <root-element>weblogic-web-app</root-element>
+      <uri>WEB-INF/weblogic.xml</uri>
+      <variable-assignment>
+        <name>SessionDescriptor_maxInMemorySessions_15616392743230</name>
+        <xpath>/weblogic-web-app/session-descriptor/max-in-memory-sessions</xpath>
+      </variable-assignment>
+    </module-descriptor>
+    <module-descriptor external="false">
+      <root-element>web-app</root-element>
+      <uri>WEB-INF/web.xml</uri>
+    </module-descriptor>
+  </module-override>
+</deployment-plan>

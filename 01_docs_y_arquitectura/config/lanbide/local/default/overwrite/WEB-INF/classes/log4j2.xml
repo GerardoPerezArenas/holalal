@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN" monitorInterval="30">
+ 
+    <!-- Logging Properties -->
+    <Properties>
+        <Property name="GENERAL_LOG_PATTERN">[%d{dd MMM yyyy HH:mm:ss,SSS}] %5p [%t] %c - %m%n</Property>
+        <Property name="AUDIT_LOG_PATTERN">%d{yyyy-MM-dd HH:mm:ss};%m%n</Property>
+        <Property name="APP_LOG_ROOT">C:/logs/flexiaLanbide</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="${GENERAL_LOG_PATTERN}"/>
+        </Console>
+
+		<!--Rolling file appender-->
+        <RollingFile name="RollingFile" fileName="${APP_LOG_ROOT}/flexia19.log"
+                     filePattern="${APP_LOG_ROOT}/flexia19-%d{yyyy-MM-dd}.log.%i">
+            <PatternLayout pattern="${GENERAL_LOG_PATTERN}"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="4MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="3"/>
+        </RollingFile>
+
+		<!--Rolling file appender auditoria-->
+        <RollingFile name="AuditAccesos" fileName="${APP_LOG_ROOT}/auditoria/auditoriaFlexia19.log"
+                                filePattern="${APP_LOG_ROOT}/auditoria/auditoriaFlexia19-%d{yyyy-MM-dd}.%i.log.zip">
+            <PatternLayout pattern="${AUDIT_LOG_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+                <SizeBasedTriggeringPolicy size="6KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="10"/>
+        </RollingFile>
+    </Appenders>
+
+    <Loggers>
+        <Logger name="es.altia.common.service.auditoria" level="INFO" additivity="false">
+            <AppenderRef ref="AuditAccesos"/>
+        </Logger>
+        <Logger name="org.apache.jasper" level="WARN"/>
+        <Logger name="org.apache.axis" level="WARN"/>
+        <Logger name="org.apache.catalina" level="WARN"/>
+        <Logger name="org.apache.commons" level="INFO"/>
+        <Logger name="org.pdfbox" level="WARN"/>
+        <Logger name="org.apache.struts" level="WARN"/>
+        <Logger name="org.apache.struts.tiles.TilesRequestProcessor" level="DEBUG"/>
+        <Logger name="org.apache.struts.action.RequestProcessor" level="DEBUG"/>
+        <Logger name="org.apache.jsp" level="WARN"/>
+
+        <Root level="all">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="RollingFile"/>
+        </Root>
+    </Loggers>
+
+</Configuration>

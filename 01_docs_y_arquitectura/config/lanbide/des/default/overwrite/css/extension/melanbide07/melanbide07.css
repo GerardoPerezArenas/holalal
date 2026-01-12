@@ -1,0 +1,25 @@
+.lineaFormulario{
+    width: 100%;
+    clear: both;
+    padding-top: 5px;
+}
+
+.legendRojo{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(231, 037, 018);
+    font-weight: bold;
+    text-align: center;
+}
+
+.textoAzul {
+    color: #2d4c9f;
+}
+
+.textoRojo {
+    color: red;
+}
+
+.deshabilitado{
+	background-color:#E6E6E6;
+}

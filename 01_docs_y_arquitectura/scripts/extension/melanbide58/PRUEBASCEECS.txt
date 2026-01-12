@@ -1,0 +1,143 @@
+/*var comboListaSexo;
+       var listaCodigosSexo = new Array();
+       var listaDescripcionesSexo = new Array();
+       
+       var comboListaTipoDis;
+       var listaCodigosTipoDis = new Array();
+       var listaDescripcionesTipoDis = new Array();
+       
+       var comboListaTipoCon1;
+       var listaCodigosTipoCon1 = new Array();
+       var listaDescripcionesTipoCon1 = new Array();
+       
+       var comboListaTipoCon2;
+       var listaCodigosTipoCon2 = new Array();
+       var listaDescripcionesTipoCon2 = new Array();
+       
+       var comboListaTipoCon3;
+       var listaCodigosTipoCon3 = new Array();
+       var listaDescripcionesTipoCon3 = new Array();
+       
+
+        function buscaCodigoSexo(codSexo) {
+            comboListaSexo.buscaCodigo(codSexo);
+        }
+        
+        function cargarDatosSexo() {
+            var codSexoSeleccionado = document.getElementById("codListaSexo").value;
+            buscaCodigoSexo(codSexoSeleccionado);
+        }
+   
+
+        function buscaCodigoTipoDis(codTipoDis) {
+            comboListaTipoDis.buscaCodigo(codTipoDis);
+        }
+
+        function cargarDatosTipoDis() {
+            var codTipoDisSeleccionado = document.getElementById("codListaTipoDis").value;
+            buscaCodigoTipoDis(codTipoDisSeleccionado);
+        }
+      
+
+        function buscaCodigoTipoCon1(codTipoCon1) {
+            comboListaTipoCon1.buscaCodigo(codTipoCon1);
+        }
+
+        function cargarDatosTipoCon1() {
+            var codTipoCon1Seleccionado = document.getElementById("codListaTipoCon1").value;
+            buscaCodigoTipoCon1(codTipoCon1Seleccionado);
+        }
+
+        function buscaCodigoTipoCon2(codTipoCon2) {
+            comboListaTipoCon2.buscaCodigo(codTipoCon2);
+        }
+
+        function cargarDatosTipoCon2() {
+            var codTipoCon2Seleccionado = document.getElementById("codListaTipoCon2").value;
+            buscaCodigoTipoCon2(codTipoCon2Seleccionado);
+        }
+
+        function buscaCodigoTipoCon3(codTipoCon3) {
+            comboListaTipoCon3.buscaCodigo(codTipoCon3);
+        }
+
+        function cargarDatosTipoCon3() {
+            var codTipoCon3Seleccionado = document.getElementById("codListaTipoCon3").value;
+            buscaCodigoTipoCon3(codTipoCon3Seleccionado);
+        }
+        */
+
+
+/*listaCodigosSexo[0] = "";
+        listaDescripcionesSexo[0] = "";
+        contador = 0;
+        
+        <logic:iterate id="sexo" name="listaSexo" scope="request">
+        listaCodigosSexo[contador] = ['<bean:write name="sexo" property="des_val_cod" />'];
+        listaDescripcionesSexo[contador] = ['<bean:write name="sexo" property="des_nom" />'];
+        contador++;
+        </logic:iterate>
+            
+        var comboListaSexo = new Combo("ListaSexo");
+        comboListaSexo.addItems(listaCodigosSexo, listaDescripcionesSexo);
+        comboListaSexo.change = cargarDatosSexo;
+        
+
+        listaCodigosTipoDis[0] = "";
+        listaDescripcionesTipoDis[0] = "";
+        contador = 0;
+        
+        <logic:iterate id="tipoDis" name="listaTipoDis" scope="request">
+        listaCodigosTipoDis[contador] = ['<bean:write name="tipoDis" property="des_val_cod" />'];
+        listaDescripcionesTipoDis[contador] = ['<bean:write name="tipoDis" property="des_nom" />'];
+        contador++;
+        </logic:iterate>
+            
+        var comboListaTipoDis = new Combo("ListaTipoDis");
+        comboListaTipoDis.addItems(listaCodigosTipoDis, listaDescripcionesTipoDis);
+        comboListaTipoDis.change = cargarDatosTipoDis;
+        
+        
+
+        listaCodigosTipoCon1[0] = "";
+        listaDescripcionesTipoCon1[0] = "";
+        contador = 0;
+        
+        <logic:iterate id="tipoCon1" name="listaTipoCon1" scope="request">
+        listaCodigosTipoCon1[contador] = ['<bean:write name="tipoCon1" property="des_val_cod" />'];
+        listaDescripcionesTipoCon1[contador] = ['<bean:write name="tipoCon1" property="des_nom" />'];
+        contador++;
+        </logic:iterate>
+            
+        var comboListaTipoCon1 = new Combo("ListaTipoCon1");
+        comboListaTipoCon1.addItems(listaCodigosTipoCon1, listaDescripcionesTipoCon1);
+        comboListaTipoCon1.change = cargarDatosTipoCon1;
+        
+        listaCodigosTipoCon2[0] = "";
+        listaDescripcionesTipoCon2[0] = "";
+        contador = 0;
+        
+        <logic:iterate id="tipoCon2" name="listaTipoCon2" scope="request">
+        listaCodigosTipoCon2[contador] = ['<bean:write name="tipoCon2" property="des_val_cod" />'];
+        listaDescripcionesTipoCon2[contador] = ['<bean:write name="tipoCon2" property="des_nom" />'];
+        contador++;
+        </logic:iterate>
+            
+        var comboListaTipoCon2 = new Combo("ListaTipoCon2");
+        comboListaTipoCon2.addItems(listaCodigosTipoCon2, listaDescripcionesTipoCon2);
+        comboListaTipoCon2.change = cargarDatosTipoCon2;
+        
+        
+        listaCodigosTipoCon3[0] = "";
+        listaDescripcionesTipoCon3[0] = "";
+        contador = 0;
+        
+        <logic:iterate id="tipoCon3" name="listaTipoCon3" scope="request">
+        listaCodigosTipoCon3[contador] = ['<bean:write name="tipoCon3" property="des_val_cod" />'];
+        listaDescripcionesTipoCon3[contador] = ['<bean:write name="tipoCon3" property="des_nom" />'];
+        contador++;
+        </logic:iterate>
+            
+        var comboListaTipoCon3 = new Combo("ListaTipoCon3");
+        comboListaTipoCon3.addItems(listaCodigosTipoCon3, listaDescripcionesTipoCon3);
+        comboListaTipoCon3.change = cargarDatosTipoCon3;*/

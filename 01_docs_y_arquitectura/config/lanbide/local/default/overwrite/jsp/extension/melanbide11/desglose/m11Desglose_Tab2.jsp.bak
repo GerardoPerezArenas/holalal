@@ -1,0 +1,540 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="es.altia.flexia.integracion.moduloexterno.melanbide11.i18n.MeLanbide11I18n" %>
+<%@page import="es.altia.agora.business.escritorio.UsuarioValueObject" %>
+<%
+	UsuarioValueObject usuarioTab2 = new UsuarioValueObject();
+	int idiomaUsuarioTab2 = 1; int aplTab2 = 5; String cssTab2 = "";
+	if (session.getAttribute("usuario") != null){
+		usuarioTab2 = (UsuarioValueObject) session.getAttribute("usuario");
+		idiomaUsuarioTab2 = usuarioTab2.getIdioma();
+		aplTab2 = usuarioTab2.getAppCod();
+		cssTab2 = usuarioTab2.getCss();
+	}
+	MeLanbide11I18n i18nM11Tab2 = MeLanbide11I18n.getInstance();
+	String numExpedienteTab2 = (String) request.getAttribute("numExp");
+	String idContratoTab2 = (String) request.getAttribute("id");
+%>
+<style>
+/* Ajustes mínimos propios (el resto hereda del FixedColumnTable) */
+.m11-empty { text-align:center; font-style:italic; color:#555; }
+.m11-loader { font-size:12px; color:#333; padding:6px 4px; }
+.m11-actions-bar { padding:6px 0 8px 0; margin-top:8px; }
+.m11-actions-bar button, .m11-actions-bar input[type="button"] { font-size:12px; }
+.m11-input { font-size:11px; }
+.m11-num { text-align:right; }
+.m11-mini-btn { font-size:10px; }
+.m11-title { text-align:center; font-weight:800; font-size:15px; padding:14px 0 12px 0; letter-spacing:0.3px; color:#1a3d6b; }
+.m11-desglose-wrapper { width:100%; box-sizing:border-box; }
+/* Diálogo inline para alta/modificación de línea */
+.m11-dialog-overlay { position:fixed; inset:0; background:rgba(0,0,0,0.25); display:none; align-items:center; justify-content:center; z-index:9999; }
+.m11-dialog { background:#fff; border:1px solid #999; border-radius:6px; min-width:640px; max-width:900px; box-shadow:0 6px 24px rgba(0,0,0,0.25); }
+.m11-dialog header { padding:12px 16px; font-weight:bold; border-bottom:1px solid #e0e0e0; font-size:14px; }
+.m11-dialog .body { padding:14px 16px 8px; }
+.m11-dialog .row { display:flex; gap:12px; align-items:center; margin-bottom:10px; }
+.m11-dialog .row label { display:inline-block; width:160px; text-align:left; font-size:13px; color:#222; font-weight:600; }
+.m11-dialog .row input[type="text"], .m11-dialog .row textarea { flex:1; font-size:13px; padding:6px 8px; border:1px solid #bbb; border-radius:4px; }
+.m11-dialog .row textarea { min-height:90px; resize:vertical; }
+.m11-dialog footer { display:flex; gap:12px; justify-content:flex-end; padding:12px 16px 14px; border-top:1px solid #e0e0e0; }
+</style>
+<!-- Inclusión explícita del script de la tabla (defensivo) -->
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/extension/melanbide11/FixedColumnsTable.js"></script>
+<div class="m11-desglose-wrapper" style="padding:6px 8px 14px 8px;">
+	<div class="m11-title" style="font-size:13px; padding:8px 0 12px 0;">COMPLEMENTOS SALARIALES</div>
+	<div class="m11-loader" id="loaderDesgloseRSB"><%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.cargando") %></div>
+	<div id="wrapperTablaDesgloseRSB" style="display:none; width:100%;">
+		<div id="tablaDesgloseRSB" align="center"></div>
+	</div>
+	<!-- Botonera bajo la primera tabla -->
+	<div class="m11-actions-bar" style="text-align:center; margin-top:4px;">
+		<input type="button" id="btnNuevoT1" class="botonGeneral" value="<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "btn.nuevo") %>" onclick="m11_nuevoLineaTipo1();" />
+		<input type="button" id="btnModificarT1" class="botonGeneral" value="<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "btn.modificar") %>" onclick="m11_modificarLineaTipo1();" />
+		<input type="button" id="btnEliminarT1" class="botonGeneral" value="<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "btn.eliminar") %>" onclick="m11_eliminarLineaTipo1();" />
+	</div>
+	<div id="mensajeVacioDesglose" class="m11-empty" style="display:none;">
+		<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.sinLineas") %>
+	</div>
+	
+	<!-- Segunda tabla para tipo 2 -->
+	<div class="m11-title" style="font-size:13px; padding:16px 0 12px 0;">OTRO TIPO DE PERCEPCIONES Y COMPLEMENTOS EXTRASALARIALES</div>
+	<div class="m11-loader" id="loaderDesgloseRSB2" style="display:none;"><%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.cargando") %></div>
+	<div id="wrapperTablaDesgloseRSB2" style="display:none; width:100%;">
+		<div id="tablaDesgloseRSB2" align="center"></div>
+	</div>
+	<!-- Botonera bajo la segunda tabla -->
+	<div class="m11-actions-bar" style="text-align:center; margin-top:6px;">
+		<input type="button" id="btnNuevoT2" class="botonGeneral" value="<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "btn.nuevo") %>" onclick="m11_nuevoLineaTipo2();" />
+		<input type="button" id="btnModificarT2" class="botonGeneral" value="<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "btn.modificar") %>" onclick="m11_modificarLineaTipo2();" />
+		<input type="button" id="btnEliminarT2" class="botonGeneral" value="<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "btn.eliminar") %>" onclick="m11_eliminarLineaTipo2();" />
+	</div>
+	<div id="mensajeVacioDesglose2" class="m11-empty" style="display:none;">
+		<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.sinLineas") %>
+	</div>
+	
+	<!-- Log visual eliminado a petición. Mantengo función log solo a consola. -->
+    
+	<!-- Diálogo reutilizable para alta/modificación de línea -->
+	<div id="m11DialogOverlay" class="m11-dialog-overlay" role="dialog" aria-modal="true" aria-labelledby="m11DialogTitle">
+		<div class="m11-dialog">
+			<header id="m11DialogTitle">Editar l&iacute;nea</header>
+			<div class="body">
+				<div class="row">
+					<label for="dlgImporte"><%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.col.importe") %> (&euro;)</label>
+					<input type="text" id="dlgImporte" class="inputTexto m11-num" placeholder="0,00" />
+				</div>
+				<div class="row">
+					<label for="dlgConcepto"><%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.col.concepto") %></label>
+					<input type="text" id="dlgConcepto" class="inputTexto" maxlength="200" />
+				</div>
+				<div class="row">
+					<label for="dlgObserv"><%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.col.observ") %></label>
+					<textarea id="dlgObserv" class="inputTexto" maxlength="500"></textarea>
+				</div>
+			</div>
+			<footer>
+				<input type="button" id="dlgCancelar" class="botonGeneral" value="<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "btn.cancelar") %>" />
+				<input type="button" id="dlgAceptar" class="botonGeneral" value="<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "btn.aceptar") %>" />
+			</footer>
+		</div>
+	</div>
+</div>
+
+<script type="text/javascript">
+(function(){
+	var ctx = '<%=request.getContextPath()%>';
+	var numExp = '<%= (numExpedienteTab2!=null?numExpedienteTab2:"") %>';
+	var idContrato = '<%= (idContratoTab2!=null?idContratoTab2:"") %>';
+	var tablaObj = null; // instancia FixedColumnTable primera tabla
+	var tablaObj2 = null; // instancia FixedColumnTable segunda tabla
+	var dniCache = '';
+	var lineasAllCache = []; // cache con todas las líneas [{tipo,importe,concepto,observ}]
+	var indicesTipo1 = [];
+	var indicesTipo2 = [];
+	// loggerDiv eliminado (no se muestra log visual)
+
+	function log(msg){
+		try{ if(window.console){ console.log('[Tab2]', msg); } }catch(e){}
+	}
+	log('Init Tab2. numExp="'+numExp+'" idContrato="'+idContrato+'"');
+
+	function formateaImporte(v){
+		if (v==null || v==='' || isNaN(v)) return '0,00';
+		var n = parseFloat(v);
+		return n.toFixed(2).replace('.', ',');
+	}
+
+	function parseImporte(texto){
+		if(!texto) return 0;
+		var clean = texto.replace(/\./g,'').replace(',', '.');
+		var n = parseFloat(clean); return isNaN(n)?0:n;
+	}
+
+	function escapeHtml(str){
+		if(!str) return '';
+		return String(str)
+			.replace(/&/g,'&amp;')
+			.replace(/</g,'&lt;')
+			.replace(/>/g,'&gt;')
+			.replace(/'/g,'&#39;');
+	}
+
+	function muestraEstado(estado){
+		document.getElementById('loaderDesgloseRSB').style.display = (estado==='cargando')? 'block':'none';
+		document.getElementById('wrapperTablaDesgloseRSB').style.display = (estado==='tabla')? 'block':'none';
+		document.getElementById('mensajeVacioDesglose').style.display = (estado==='vacio')? 'block':'none';
+		
+		// Segunda tabla
+		document.getElementById('loaderDesgloseRSB2').style.display = (estado==='cargando')? 'block':'none';
+		document.getElementById('wrapperTablaDesgloseRSB2').style.display = (estado==='tabla')? 'block':'none';
+		document.getElementById('mensajeVacioDesglose2').style.display = (estado==='vacio')? 'block':'none';
+	}
+
+	function mostrarVacio(){ muestraEstado('vacio'); }
+
+	function crearTablaSiNoExiste(){
+		if(tablaObj){ return; }
+		crearTablaIndividual('tablaDesgloseRSB', 'wrapperTablaDesgloseRSB', function(obj){ tablaObj = obj; });
+	}
+
+	function crearTabla2SiNoExiste(){
+		if(tablaObj2){ return; }
+		crearTablaIndividual('tablaDesgloseRSB2', 'wrapperTablaDesgloseRSB2', function(obj){ tablaObj2 = obj; });
+	}
+
+	function crearTablaIndividual(idTabla, idWrapper, callback){
+		if(typeof FixedColumnTable === 'undefined'){
+			log('ERROR: FixedColumnTable no está cargado. Activando fallback.');
+			// Fallback mínimo: crear una tabla sencilla para no dejar vacío
+			var wrap = document.getElementById(idTabla);
+			wrap.innerHTML = '<table style="width:100%;border-collapse:collapse;font-size:11px;" id="'+idTabla+'Fallback">'
+				+'<thead><tr>'
+				+'<th style="border:1px solid #ccc;">Importe</th>'
+				+'<th style="border:1px solid #ccc;">Concepto</th>'
+				+'<th style="border:1px solid #ccc;">Observ.</th>'
+				+'</tr></thead><tbody></tbody></table>';
+			var objFallback = { // interfaz mínima compatible usada en el resto del código
+				lineas: [],
+				addFila: function(arr){
+					this.lineas.push(arr);
+					var tb = document.querySelector('#'+idTabla+'Fallback tbody');
+					var tr = document.createElement('tr');
+					tr.innerHTML = '<td style="border:1px solid #ccc;">'+arr[0]+'</td>'
+						+'<td style="border:1px solid #ccc;">'+arr[1]+'</td>'
+						+'<td style="border:1px solid #ccc;">'+arr[2]+'</td>';
+					tb.appendChild(tr);
+				},
+				displayTabla: function(){},
+				pack: function(){}
+			};
+			callback(objFallback);
+			return;
+		}
+		var cont = document.getElementById(idWrapper);
+		var anchoRealContenedor = cont ? (cont.clientWidth - 4) : 0; // resta pequeño margen por padding/bordes
+		log('Contenedor '+idWrapper+' ancho real: '+anchoRealContenedor+'px');
+		
+		// Si clientWidth es 0, usar un ancho por defecto mayor y recalcular después
+		var ancho = 960; // Ancho por defecto más generoso para evitar cortes
+		if(anchoRealContenedor > 100) { // Solo usar el real si es razonablemente grande
+			ancho = anchoRealContenedor;
+		} else {
+			log('Contenedor muy pequeño ('+anchoRealContenedor+'px), usando ancho por defecto: '+ancho+'px');
+		}
+		
+		if(ancho < 360) ancho = 360;
+		log('Contenedor '+idWrapper+' ancho: '+ancho+'px');
+		var tabla = new FixedColumnTable(document.getElementById(idTabla), ancho, ancho, idTabla);
+		tabla.height = 280; // más alto para ver más filas
+		tabla.altoCabecera = 32;
+		// Distribución columnas: IMPORTE 140, CONCEPTO 260, OBSERVACIONES resto
+		var anchoObs = ancho - (140 + 260) - 60; // margen para scroll y bordes
+		if(anchoObs < 280) anchoObs = 280; // mínimo legible
+		if(anchoObs > 600) anchoObs = 600; // máximo más amplio
+		log('Distribución columnas '+idTabla+': IMPORTE=140, CONCEPTO=260, OBSERVACIONES='+anchoObs+' (máx 600px)');
+		tabla.addColumna('140', 'right', 'IMPORTE');
+		tabla.addColumna('260', 'left', 'CONCEPTO');
+		tabla.addColumna(String(anchoObs), 'left', 'OBSERVACIONES');
+		tabla.displayCabecera = true;
+		log('Tabla '+idTabla+' creada: columnas='+tabla.columnas.length);
+		callback(tabla);
+	}
+
+	function recalcularAnchoTabla(){
+		recalcularAnchoTablaIndividual(tablaObj, 'wrapperTablaDesgloseRSB');
+		recalcularAnchoTablaIndividual(tablaObj2, 'wrapperTablaDesgloseRSB2');
+	}
+
+	function recalcularAnchoTablaIndividual(tabla, idWrapper){
+		if(!tabla) return;
+		var cont = document.getElementById(idWrapper);
+		if(!cont) return;
+		
+		// Obtener el ancho real del contenedor padre (el modal)
+		var anchoModal = cont.offsetParent ? cont.offsetParent.clientWidth : 0;
+		var anchoWrapper = cont.clientWidth;
+		var nuevoAncho = Math.max(anchoModal - 60, anchoWrapper, 500); // Margen del modal y mínimo
+		
+		log('Recalculo '+idWrapper+': Modal='+anchoModal+'px, Wrapper='+anchoWrapper+'px, Usando='+nuevoAncho+'px');
+		
+		// Recalcular ancho columna observaciones y reconstruir cabecera + cuerpo (alineado con creación inicial)
+		try{
+			// Columnas: IMPORTE 140, CONCEPTO 260, OBSERVACIONES resto con límites 280?600
+			var anchoObs = nuevoAncho - (140 + 260) - 60; // margen para scroll y bordes
+			if(anchoObs < 280) anchoObs = 280;
+			if(anchoObs > 600) anchoObs = 600;
+			
+			// Actualizamos propiedades principales
+			tabla.anchoTabla = nuevoAncho;
+			tabla.parentWidth = nuevoAncho;
+			
+			// Ajustamos las columnas
+			if(tabla.columnas[0]) tabla.columnas[0][0] = '140';
+			if(tabla.columnas[1]) tabla.columnas[1][0] = '260';
+			if(tabla.columnas && tabla.columnas[2]){
+				tabla.columnas[2][0] = String(anchoObs);
+			}
+			// Re-render completo
+			tabla.displayTabla();
+			if(tabla.pack){ tabla.pack(); }
+			log('Recalculo '+idWrapper+' tabla='+nuevoAncho+' (obs='+anchoObs+' máx 600px)');
+		}catch(e){ log('Error recalcular ancho '+idWrapper+': '+e); }
+	}
+
+	function construirFilaSimple(d){
+		var importe = (d && d.importe!=null)? d.importe:'';
+		var concepto = (d && d.concepto)? d.concepto:'';
+		var observ = (d && d.observ)? d.observ:'';
+		return [
+			(importe!==''?formateaImporte(importe):'0,00'),
+			(concepto?escapeHtml(concepto):'&nbsp;'),
+			(observ?escapeHtml(observ):'&nbsp;')
+		];
+	}
+
+	function refrescarTabla(datos){
+		// Filtrar datos por tipo
+		var datosTipo1 = [];
+		var datosTipo2 = [];
+		indicesTipo1 = [];
+		indicesTipo2 = [];
+		// cache global completa (mantener copia independiente)
+		lineasAllCache = [];
+		for (var k=0;k<datos.length;k++){
+			var d = datos[k] || {};
+			lineasAllCache.push({
+				tipo: (d.tipo!=null? String(d.tipo) : ''),
+				importe: (d.importe!=null? Number(d.importe) : 0),
+				concepto: (d.concepto||''),
+				observ: (d.observ||'')
+			});
+		}
+		
+		for(var i=0; i<datos.length; i++){
+			var tipo = datos[i].tipo;
+			if(tipo === '1' || tipo === 1){
+				indicesTipo1.push(i);
+				datosTipo1.push(datos[i]);
+			} else if(tipo === '2' || tipo === 2){
+				indicesTipo2.push(i);
+				datosTipo2.push(datos[i]);
+			}
+		}
+		
+		log('Datos filtrados: Tipo 1 ('+datosTipo1.length+' filas), Tipo 2 ('+datosTipo2.length+' filas)');
+		
+		// Mostrar estado tabla
+		muestraEstado('tabla');
+		
+		// Pequeña pausa para que el display:block surta efecto
+		setTimeout(function(){
+			// Helper para ajustar altura según nº de filas (reduce espacios vacíos)
+			function alturaSegunFilas(numFilas, altoCab){
+				var rowH = 32; // altura aproximada de fila
+				var body = (numFilas>0? (numFilas*rowH) : rowH*1); // al menos una altura de fila
+				// Limitar a un máximo cómodo para no crecer en exceso
+				if(body > 240) body = 240;
+				return (altoCab||32) + body;
+			}
+			// Tabla 1 - Complementos salariales (tipo 1)
+			crearTablaSiNoExiste();
+			tablaObj.lineas = [];
+			tablaObj.tooltipLineas = [];
+			tablaObj.estilosLineas = [];
+			for(var i=0;i<datosTipo1.length;i++){
+				try{ tablaObj.addFila(construirFilaSimple(datosTipo1[i])); }catch(err){ log('Error addFila tabla1 index '+i+': '+err); }
+			}
+			try{ tablaObj.height = alturaSegunFilas(datosTipo1.length, tablaObj.altoCabecera); }catch(e){}
+			try{ tablaObj.tooltipLineas = tablaObj.lineas; }catch(e){}
+			try{ tablaObj.displayTabla(); }catch(err){ log('Error displayTabla tabla1: '+err); }
+			if(tablaObj.pack){ try{ tablaObj.pack(); }catch(e){ log('Error pack tabla1: '+e); } }
+			
+			// Tabla 2 - Otro tipo de percepciones (tipo 2)
+			crearTabla2SiNoExiste();
+			tablaObj2.lineas = [];
+			tablaObj2.tooltipLineas = [];
+			tablaObj2.estilosLineas = [];
+			for(var i=0;i<datosTipo2.length;i++){
+				try{ tablaObj2.addFila(construirFilaSimple(datosTipo2[i])); }catch(err){ log('Error addFila tabla2 index '+i+': '+err); }
+			}
+			try{ tablaObj2.height = alturaSegunFilas(datosTipo2.length, tablaObj2.altoCabecera); }catch(e){}
+			try{ tablaObj2.tooltipLineas = tablaObj2.lineas; }catch(e){}
+			try{ tablaObj2.displayTabla(); }catch(err){ log('Error displayTabla tabla2: '+err); }
+			if(tablaObj2.pack){ try{ tablaObj2.pack(); }catch(e){ log('Error pack tabla2: '+e); } }
+			
+			// Ajuste ancho responsive tras render inicial
+			setTimeout(recalcularAnchoTabla, 200);
+			log('Tablas renderizadas: Tabla1 '+tablaObj.lineas.length+' filas, Tabla2 '+tablaObj2.lineas.length+' filas.');
+			actualizarEstadoBotones();
+		}, 50);
+	}
+
+	function actualizarEstadoBotones(){
+		var enabled = !!dniCache && (dniCache+'').trim().length>0;
+		['btnNuevoT1','btnModificarT1','btnEliminarT1','btnNuevoT2','btnModificarT2','btnEliminarT2']
+			.forEach(function(id){ var el=document.getElementById(id); if(el){ el.disabled = !enabled; }});
+	}
+
+	// Diálogo inline para alta/modificación
+	var _dlgOnOk = null, _dlgTipo = '1';
+	function abrirDialogoLinea(tipo, def, onOk){
+		_dlgTipo = String(tipo||'1');
+		_dlgOnOk = (typeof onOk==='function')? onOk : null;
+		def = def || {importe:0, concepto:'', observ:''};
+		var elImp = document.getElementById('dlgImporte');
+		var elCon = document.getElementById('dlgConcepto');
+		var elObs = document.getElementById('dlgObserv');
+		if(elImp) elImp.value = formateaImporte(def.importe||0);
+		if(elCon) elCon.value = def.concepto||'';
+		if(elObs) elObs.value = def.observ||'';
+		var overlay = document.getElementById('m11DialogOverlay');
+		if(overlay){ overlay.style.display = 'flex'; setTimeout(function(){ try{ elImp && elImp.focus(); }catch(e){} }, 10); }
+	}
+	function cerrarDialogo(){
+		var overlay = document.getElementById('m11DialogOverlay');
+		if(overlay){ overlay.style.display='none'; }
+		_dlgOnOk=null;
+		// Tras cerrar, forzar un pequeño recalculo por si el modal cambia el layout
+		try { setTimeout(recalcularAnchoTabla, 60); } catch(e){}
+	}
+	document.getElementById('dlgCancelar').onclick = function(){ cerrarDialogo(); };
+	document.getElementById('dlgAceptar').onclick = function(){
+		var elImp = document.getElementById('dlgImporte');
+		var elCon = document.getElementById('dlgConcepto');
+		var elObs = document.getElementById('dlgObserv');
+		var impNum = parseImporte((elImp && elImp.value)||'0');
+		if(isNaN(impNum) || impNum<0){ jsp_alerta('A','Importe no válido'); try{ elImp && elImp.focus(); }catch(e){} return; }
+		var datos = { importe: impNum, concepto: (elCon && elCon.value)||'', observ: (elObs && elObs.value)||'' };
+		var cb = _dlgOnOk; cerrarDialogo(); if(cb) cb(datos);
+	};
+
+	function sanitizarTexto(t){ if(!t) return ''; return String(t).replace(/[|;]/g,' ').trim(); }
+
+	function construirRawDesdeCache(){
+		var filas = [];
+		for(var i=0;i<lineasAllCache.length;i++){
+			var it = lineasAllCache[i]||{};
+			var tipo = (it.tipo!=null? String(it.tipo):'');
+			var imp = (it.importe!=null? Number(it.importe):0);
+			var conc = sanitizarTexto(it.concepto);
+			var obs = sanitizarTexto(it.observ);
+			filas.push([tipo, String(imp), conc, obs].join('|'));
+		}
+		return filas.join(';;');
+	}
+
+	function guardarLineasDesglose(callback){
+		if(!dniCache || (dniCache+'').trim()===''){
+			jsp_alerta('A','<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.alert.seleccione") %>');
+			return;
+		}
+		var raw = construirRawDesdeCache();
+	var xhr = new XMLHttpRequest();
+		var url = ctx + '/PeticionModuloIntegracion.do?tarea=preparar&modulo=MELANBIDE11&operacion=guardarLineasDesgloseRSB&tipo=0&numExp=' + encodeURIComponent(numExp) + '&dni=' + encodeURIComponent(dniCache);
+		xhr.open('POST', url, true);
+		xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=UTF-8');
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState===4){
+				if(xhr.status===200){
+					try{
+						var resp = JSON.parse(xhr.responseText||'{}');
+						var cod = resp && resp.resultado ? (resp.resultado.codigoOperacion+'') : '4';
+						if(cod==='0' || cod==='2'){
+							jsp_alerta('I','Guardado correcto');
+								cargarDesgloseTabla();
+								// Reaplicar recalculado tras guardar para evitar "volver" a tamaños por defecto
+								setTimeout(function(){ try{ recalcularAnchoTabla(); }catch(e){} }, 150);
+								// Segundo tick por si el repaint llega más tarde
+								setTimeout(function(){ try{ recalcularAnchoTabla(); }catch(e){} }, 400);
+							if(typeof callback==='function'){ callback(true); }
+						}else if(cod==='3'){
+							jsp_alerta('A','Parámetros insuficientes (DNI)');
+							if(typeof callback==='function'){ callback(false); }
+						}else{
+							jsp_alerta('A','No se pudo guardar (código '+cod+')');
+							if(typeof callback==='function'){ callback(false); }
+						}
+					}catch(e){ jsp_alerta('A','Respuesta no válida del servidor'); if(typeof callback==='function'){ callback(false); } }
+				}else{ jsp_alerta('A','Error de comunicación ('+xhr.status+')'); if(typeof callback==='function'){ callback(false); } }
+			}
+		};
+		xhr.send('lineas=' + encodeURIComponent(raw));
+	}
+
+	function obtenerSeleccion(tTabla){
+		var idx = (tTabla===1? (tablaObj?tablaObj.selectedIndex:-1) : (tablaObj2?tablaObj2.selectedIndex:-1));
+		if(idx==null || idx<0){ jsp_alerta('A','Seleccione una fila'); return {ok:false}; }
+		var globalIdx = (tTabla===1? indicesTipo1[idx] : indicesTipo2[idx]);
+		if(typeof globalIdx==='undefined'){ jsp_alerta('A','No se pudo localizar la fila seleccionada'); return {ok:false}; }
+		return {ok:true, idxTabla: idx, idxGlobal: globalIdx};
+	}
+
+	function agregarLinea(tipo){
+		abrirDialogoLinea(tipo, null, function(datos){
+			lineasAllCache.push({ tipo: String(tipo), importe: Number(datos.importe), concepto: datos.concepto, observ: datos.observ });
+			guardarLineasDesglose();
+		});
+	}
+
+	function modificarLinea(tipo){
+		var sel = obtenerSeleccion(tipo); if(!sel.ok) return;
+		var item = lineasAllCache[sel.idxGlobal] || {tipo:String(tipo), importe:0, concepto:'', observ:''};
+		abrirDialogoLinea(tipo, item, function(datos){
+			lineasAllCache[sel.idxGlobal] = { tipo: String(tipo), importe: Number(datos.importe), concepto: datos.concepto, observ: datos.observ };
+			guardarLineasDesglose();
+		});
+	}
+
+	function eliminarLinea(tipo){
+		var sel = obtenerSeleccion(tipo); if(!sel.ok) return;
+		var r = jsp_alerta('', '¿Eliminar la línea seleccionada?');
+		if(r!=1) return;
+		lineasAllCache.splice(sel.idxGlobal,1);
+		guardarLineasDesglose();
+	}
+
+	// Exponer manejadores a global para los botones
+	window.m11_nuevoLineaTipo1 = function(){ if(!dniCache){ actualizarEstadoBotones(); jsp_alerta('A','<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.alert.seleccione") %>'); return; } agregarLinea(1); };
+	window.m11_modificarLineaTipo1 = function(){ if(!dniCache){ actualizarEstadoBotones(); jsp_alerta('A','<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.alert.seleccione") %>'); return; } modificarLinea(1); };
+	window.m11_eliminarLineaTipo1 = function(){ if(!dniCache){ actualizarEstadoBotones(); jsp_alerta('A','<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.alert.seleccione") %>'); return; } eliminarLinea(1); };
+	window.m11_nuevoLineaTipo2 = function(){ if(!dniCache){ actualizarEstadoBotones(); jsp_alerta('A','<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.alert.seleccione") %>'); return; } agregarLinea(2); };
+	window.m11_modificarLineaTipo2 = function(){ if(!dniCache){ actualizarEstadoBotones(); jsp_alerta('A','<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.alert.seleccione") %>'); return; } modificarLinea(2); };
+	window.m11_eliminarLineaTipo2 = function(){ if(!dniCache){ actualizarEstadoBotones(); jsp_alerta('A','<%= i18nM11Tab2.getMensaje(idiomaUsuarioTab2, "tab2.desglose.alert.seleccione") %>'); return; } eliminarLinea(2); };
+
+	function cargarDesgloseTabla(){
+		if(!numExp){ mostrarVacio(); return; }
+		muestraEstado('cargando');
+		var xhr = new XMLHttpRequest();
+		var url = ctx + '/PeticionModuloIntegracion.do?tarea=preparar&modulo=MELANBIDE11&operacion=listarLineasDesgloseRSB&tipo=0&numExp=' + encodeURIComponent(numExp) + (idContrato?('&id='+encodeURIComponent(idContrato)):'' );
+		if(window.console && console.debug){ console.debug('[Tab2] URL petición desglose:', url); }
+		log('Lanzando petición: '+url);
+		xhr.open('GET', url, true);
+		xhr.onreadystatechange=function(){
+			if(xhr.readyState===4){
+				if(xhr.status===200){
+					try{
+						var resp = xhr.responseText || '';
+						log('Respuesta recibida. length='+resp.length);
+						if(resp.trim().charAt(0) !== '{'){ log('ADVERTENCIA: respuesta no parece JSON (empieza con '+resp.trim().charAt(0)+')'); }
+						var json={};
+						try{ json = JSON.parse(resp); }catch(e){ log('ERROR parseando JSON: '+e); }
+						log('JSON keys: '+Object.keys(json));
+						if(json && json.lineas){ log('json.lineas length='+json.lineas.length); }
+						else { log('json.lineas undefined'); }
+						var lineas = (json && json.lineas)? json.lineas : [];
+						dniCache = (json && json.dni ? json.dni : '');
+						// Siempre mostrar cabecera aunque no haya líneas
+						refrescarTabla(lineas);
+						// No cambiar a estado tabla hasta que refrescarTabla termine
+						if(!lineas.length){ 
+							setTimeout(function(){
+								document.getElementById('mensajeVacioDesglose').style.display='block'; 
+							}, 100);
+						}
+						var snippet = resp.substring(0,200).replace(/</g,'&lt;');
+						log('Snippet respuesta(0-200): '+snippet);
+					}catch(e){ log('Excepción general procesando respuesta: '+e); mostrarVacio(); }
+				} else { log('HTTP status '+xhr.status); mostrarVacio(); }
+			}
+		};
+		xhr.send();
+	}
+
+	// Sin edición: no se recogen líneas
+
+	// Sin guardado
+
+// Sin listeners de edición
+
+	window.refrescarDesgloseRSB = cargarDesgloseTabla;
+	setTimeout(cargarDesgloseTabla, 40);
+	// Listener resize (debounce ligero)
+	var resizeTO=null; window.addEventListener('resize', function(){ if(resizeTO) clearTimeout(resizeTO); resizeTO = setTimeout(recalcularAnchoTabla, 180); });
+	// Fallback visual si tras 2s no se cambió de loader
+	setTimeout(function(){
+		var w = document.getElementById('wrapperTablaDesgloseRSB');
+		var l = document.getElementById('loaderDesgloseRSB');
+		if(l && l.style.display==='block'){
+			log('Timeout 2s sin respuesta. Revisa si la URL es accesible o si hay error servidor.');
+		}
+	}, 2000);
+})();
+</script>

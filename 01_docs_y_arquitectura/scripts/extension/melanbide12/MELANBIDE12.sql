@@ -1,0 +1,182 @@
+--DESPLEGABLE TDOC: valores D: DNI, N: NIE
+select * from e_des where des_cod='TDOC';
+select * from e_des_val where des_cod='TDOC';
+insert into e_des (des_cod,des_nom) values ('TDOC','TIPO DOCUMENTO');
+insert into e_des_val (des_cod,des_val_cod,des_nom,des_val_estado) values ('TDOC','D','DNI|NAN','A');
+insert into e_des_val (des_cod,des_val_cod,des_nom,des_val_estado) values ('TDOC','N','NIE|AIZ','A');
+
+--DESPLEGABLE TDOS: valores D: DNI, N: NIE, P: PASAORTE, O: OTROS
+select * from e_des where des_cod='TDOS';
+select * from e_des_val where des_cod='TDOS';
+insert into e_des (des_cod,des_nom) values ('TDOS','TIPO DOCUMENTO L2');
+insert into e_des_val (des_cod,des_val_cod,des_nom,des_val_estado) values ('TDOS','D','DNI|NAN','A');
+insert into e_des_val (des_cod,des_val_cod,des_nom,des_val_estado) values ('TDOS','N','NIE|AIZ','A');
+insert into e_des_val (des_cod,des_val_cod,des_nom,des_val_estado) values ('TDOS','P','PASAPORTE|PASAPORTEA','A');
+insert into e_des_val (des_cod,des_val_cod,des_nom,des_val_estado) values ('TDOS','O','OTRO|BESTE BAT','A');
+
+
+--TABLAS SEGÚN MAPEO 'Mapeo campos - PRACT - V0.xlsx'
+ --______________________________________________________________________________________________________________________________________
+  CREATE SEQUENCE  SEQ_MELANBIDE12_SUBSOLIC  MINVALUE 0 MAXVALUE 99999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  NOCYCLE;
+  
+  CREATE TABLE MELANBIDE12_SUBSOLIC 
+   (	ID NUMBER(8,0), 
+	NUM_EXP VARCHAR2(20 BYTE), 
+	ESTADO VARCHAR2(1),
+	ORGANISMO VARCHAR2(150),
+	OBJETO VARCHAR2(150),	
+	IMPORTE NUMBER(8,2),
+	FECHA DATE
+   );
+
+   COMMENT ON COLUMN MELANBIDE12_SUBSOLIC.ID IS 'Identificador Secuencial';
+   COMMENT ON COLUMN MELANBIDE12_SUBSOLIC.NUM_EXP IS 'Número de Expediente';
+   COMMENT ON COLUMN MELANBIDE12_SUBSOLIC.ESTADO IS 'Estado de la ayuda';
+   COMMENT ON COLUMN MELANBIDE12_SUBSOLIC.ORGANISMO IS 'Organismo concedente';
+   COMMENT ON COLUMN MELANBIDE12_SUBSOLIC.OBJETO IS 'Descripción objeto de la ayuda';
+   COMMENT ON COLUMN MELANBIDE12_SUBSOLIC.IMPORTE IS 'Importe de la ayuda';
+   COMMENT ON COLUMN MELANBIDE12_SUBSOLIC.FECHA IS 'Fecha solicitud o concesión';   
+
+   ALTER TABLE MELANBIDE12_SUBSOLIC ADD PRIMARY KEY (ID);
+   
+ --______________________________________________________________________________________________________________________________________  
+   CREATE SEQUENCE  SEQ_M12_PERS_PRACT_LIN1  MINVALUE 0 MAXVALUE 99999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  NOCYCLE;
+   
+   CREATE TABLE MELANBIDE12_PERS_PRACT_LIN1 
+   (	ID NUMBER(8,0), 
+	NUM_EXP VARCHAR2(20 BYTE), 
+	TIPO_DOC VARCHAR2(1),
+	DOC VARCHAR2(15 BYTE),
+	NOMBRE VARCHAR2(150),
+	APE1 VARCHAR2(150),
+	APE2 VARCHAR2(150),
+	NSS VARCHAR2(50),
+	COD_ACT_FORM VARCHAR2(50),
+    FEC_INI_PRACT DATE,
+    FEC_FIN_PRACT DATE,	
+	CC_COT VARCHAR2(50),
+	DIAS_COT NUMBER(6,2),
+	IMP_SOLIC NUMBER(8,2)
+   );
+   
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.ID IS 'Identificador Secuencial';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.NUM_EXP IS 'Número de Expediente';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.TIPO_DOC IS 'Tipo de identificación - DESPLEGABLE TDOC: valores D: DNI, N: NIE';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.DOC IS 'Número de documento de la persona en prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.NOMBRE IS 'Nombre de la persona en prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.APE1 IS 'Apellido1 de la persona en prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.APE2 IS 'Apellido2 de la persona en prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.NSS IS 'Número Seguridad Social';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.COD_ACT_FORM IS 'Código acción formativa';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.FEC_INI_PRACT IS 'Fecha inicio prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.FEC_FIN_PRACT IS 'Fecha fin prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.CC_COT IS 'Cuenta cotización empresa-entidad';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.DIAS_COT IS 'Días cotizados';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN1.IMP_SOLIC IS 'Importe solicitado';
+
+   ALTER TABLE MELANBIDE12_PERS_PRACT_LIN1 ADD PRIMARY KEY (ID);
+ --______________________________________________________________________________________________________________________________________     
+   CREATE SEQUENCE  SEQ_M12_EMPR_EXT_LIN1  MINVALUE 0 MAXVALUE 99999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  NOCYCLE;
+   
+   CREATE TABLE MELANBIDE12_EMPR_EXT_LIN1 
+   (	ID NUMBER(8,0), 
+	NUM_EXP VARCHAR2(20 BYTE), 
+	CIF VARCHAR2(15 BYTE),
+	DENOM_EMPR VARCHAR2(200),
+	N_FACTURA VARCHAR2(50),
+    FEC_EMIS DATE,
+    FEC_PAGO DATE,	
+	IMP_BASE NUMBER(8,2),
+	IMP_IVA NUMBER(8,2),
+	IMP_TOTAL NUMBER(8,2),
+	PERSONAS NUMBER(6,2),
+	IMP_PERSONA_FACT NUMBER(8,2),
+	IMP_SOLIC NUMBER(8,2)
+   );
+   
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.ID IS 'Identificador Secuencial';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.NUM_EXP IS 'Número de Expediente';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.CIF IS 'CIF empresa externa';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.DENOM_EMPR IS 'Denominación empresa externa (asesoría, gestoría, ...)';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.N_FACTURA IS 'Número de factura';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.FEC_EMIS IS 'Fecha emisión';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.FEC_PAGO IS 'Fecha pago';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.IMP_BASE IS 'Importe base';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.IMP_IVA IS 'Importe IVA';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.IMP_TOTAL IS 'Total importe';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.PERSONAS IS 'Número de personas gestiones';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.IMP_PERSONA_FACT IS 'Importe facturado por persona';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_EXT_LIN1.IMP_SOLIC IS 'Importe solicitado';
+   
+   ALTER TABLE MELANBIDE12_EMPR_EXT_LIN1 ADD PRIMARY KEY (ID);
+ --______________________________________________________________________________________________________________________________________     
+   CREATE SEQUENCE  SEQ_M12_EMPR_PROP_LIN1  MINVALUE 0 MAXVALUE 99999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  NOCYCLE;
+   
+   CREATE TABLE MELANBIDE12_EMPR_PROP_LIN1 
+   (	ID NUMBER(8,0), 
+	NUM_EXP VARCHAR2(20 BYTE), 
+	DNI VARCHAR2(15 BYTE),
+	NOMBRE VARCHAR2(150),
+	APE1 VARCHAR2(150),
+	APE2 VARCHAR2(150),
+	RETR_ANUAL_BRUTA NUMBER(8,2),
+	CC_COT_SS NUMBER(8,2),
+	HORAS_LAB_ANUAL NUMBER(6,2),
+	HORAS_IMPUT NUMBER(6,2),
+	IMP_GEST NUMBER(8,2),
+	PERSON_PRACT NUMBER(6,2),
+	IMP_SOLIC NUMBER(8,2)
+   );
+   
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.ID IS 'Identificador Secuencial';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.NUM_EXP IS 'Número de Expediente';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.DNI IS 'DNI trabajador';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.NOMBRE IS 'Nombre trabajador';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.APE1 IS 'Apellido1 trabajador';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.APE2 IS 'Apellido2 trabajador';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.RETR_ANUAL_BRUTA IS 'Retribución anual bruta';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.CC_COT_SS IS 'Coste cotización Seguridad Solcial';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.HORAS_LAB_ANUAL IS 'Horas jornada laboral anual';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.HORAS_IMPUT IS 'Horas imputadas gestiones';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.IMP_GEST IS 'Importe económico gestiones';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.PERSON_PRACT IS 'Número personas en prácticas';
+   COMMENT ON COLUMN MELANBIDE12_EMPR_PROP_LIN1.IMP_SOLIC IS 'Importe solicitado';
+   
+   ALTER TABLE MELANBIDE12_EMPR_PROP_LIN1 ADD PRIMARY KEY (ID);
+ --______________________________________________________________________________________________________________________________________     
+   CREATE SEQUENCE  SEQ_M12_PERS_PRACT_LIN2  MINVALUE 0 MAXVALUE 99999999 INCREMENT BY 1 START WITH 1 NOCACHE  NOORDER  NOCYCLE;
+   
+   CREATE TABLE MELANBIDE12_PERS_PRACT_LIN2 
+   (	ID NUMBER(8,0), 
+	NUM_EXP VARCHAR2(20 BYTE), 
+	TIPO_DOC VARCHAR2(1),
+	DOC VARCHAR2(15 BYTE),
+	NOMBRE VARCHAR2(150),
+	APE1 VARCHAR2(150),
+	APE2 VARCHAR2(150),
+	COD_ACT_FORM VARCHAR2(50),
+	HORAS_PRACT NUMBER(6,2),
+	IMP_SOLIC NUMBER(8,2)
+   );
+   
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.ID IS 'Identificador Secuencial'; 
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.NUM_EXP IS 'Número de Expediente';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.TIPO_DOC IS 'Tipo de identificación - DESPLEGABLE TDOC: valores D: DNI, N: NIE';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.DOC IS 'Número de documento de la persona en prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.NOMBRE IS 'Nombre de la persona en prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.APE1 IS 'Apellido1 de la persona en prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.APE2 IS 'Apellido2 de la persona en prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.COD_ACT_FORM IS 'Código acción formativa';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.HORAS_PRACT IS 'Horas prácticas';
+   COMMENT ON COLUMN MELANBIDE12_PERS_PRACT_LIN2.IMP_SOLIC IS 'Importe solicitado';   
+   
+   ALTER TABLE MELANBIDE12_PERS_PRACT_LIN2 ADD PRIMARY KEY (ID);
+   
+   
+   
+   
+   
+
+
+
+

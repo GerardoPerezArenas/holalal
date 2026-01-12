@@ -1,0 +1,52 @@
+input[type="text"][disabled]
+{
+    background:#dddddd;
+    border: #999999 1px solid;
+    color: #2d4c9f;
+}
+
+.readOnly{
+    background:#dddddd;
+}
+
+.textoAzul{
+    color: #4B95D3;
+}
+
+.legendAzul{
+    font-family: Arial,Verdana Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: left;
+}
+
+.lineaFormulario{
+    width: 100%;
+    clear: both;
+    padding-top: 5px;
+}
+
+.botonera{
+    width: 100%; 
+    text-align: center; 
+    padding-top: 5px;
+    clear: both;
+}
+
+.btn_calculadora{
+    background-image: url(/images/extension/melanbide46/calculadora.png); /* 16px x 16px */
+    background-color: transparent; /* make the button transparent */
+    background-repeat: no-repeat;  /* make the background image appear only once */
+    background-position: 0px 0px;  /* equivalent to 'top left' */
+}
+
+.textoNumerico{
+    text-align: right;
+}
+
+TABLE.xTabla .JSTHighlited TD {
+    color: #1766A7; 
+    background-color: #a0d767;
+  
+}

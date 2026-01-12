@@ -1,0 +1,14 @@
+.legendAzul{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.wrapper_1 { clear: left; float: left; position: relative; left: 50%; margin-top: 2%}
+
+.container_1 { display: block; float: left; position: relative; right: 50%; }
+
+.separador { clear: both; margin:1%; }

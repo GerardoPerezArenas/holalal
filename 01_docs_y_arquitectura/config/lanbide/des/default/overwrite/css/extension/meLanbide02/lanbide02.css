@@ -1,0 +1,24 @@
+.totales{
+    font-family: Verdana, Arial, Helvetica, sans-serif;
+  	font-size: 10px;
+  	font-style: normal;
+  	color:#000000;
+}
+
+.botonLargoLanbide{
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: bold;
+  font-variant: normal;
+  color: #ffffff;
+  background-color: #AC0DA5;
+  background-image:url("../../../images/menu/botonGeneralLargo.png");
+  border-top: 0px;
+  border-bottom: 0px;
+  border-left: 0px;
+  border-right: 0px;
+  width : 130px;
+  height: 21px;
+  cursor: pointer;
+}

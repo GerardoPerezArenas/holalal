@@ -1,0 +1,107 @@
+ .legendAzul{
+    font-family: Arial,Verdana Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: left;
+}
+
+.botonera{
+    width: 100%; 
+    text-align: center; 
+    padding-top: 5px;
+    clear: both;
+}
+.botonExtraLargo {
+    width: calc(1.2 * var(--botonLargo-width)); /* Ajusta el tamaño según sea necesario */
+    /* O puedes definir directamente el ancho */
+    width: 180px; /* Personaliza este valor */
+}
+.lineaFormulario{
+    width: 100%;
+    clear: both;
+    padding-top: 5px;
+}
+
+.textoNumerico{
+    text-align: right;
+}
+
+TABLE.xTabla .JSTHighlited TD{
+    background-color: #a0d767;  
+}
+
+.xTabla { 
+    cursor: pointer;
+    table-layout:fixed;
+    border-collapse:collapse;
+    font-size: 12px; 
+    font-weight: normal; 
+ }
+
+.inputTextoMinus {
+    font-size: 12px;
+    font-style:normal;
+    font-weight: normal;
+    font-variant: normal;
+    color: #2d4c9f;
+    border : #999999 1px solid;
+    background-color : #FFFFFF; 
+    margin: 1px 0 1px 0;
+}
+
+table.dataTable td {
+    padding: 3px 10px;
+    width: 1px;
+    white-space: normal;
+}
+/* Ajustar la lista del combo desplegable */
+/* Aislar el combo desplegable */
+#select-dropdown {
+    position: fixed !important; /* Rompe la relación con el contenedor padre */
+    top: 50%; /* Ajustar según posición deseada */
+    left: 50%; /* Ajustar según posición deseada */
+    transform: translate(-50%, -50%); /* Centrarlo */
+    width: 400px; /* Ancho personalizado */
+    max-height: 500px; /* Altura para mostrar más opciones */
+    overflow-y: auto; /* Scroll interno para listas largas */
+    background-color: white; /* Fondo claro para visibilidad */
+    border: 1px solid #ccc; /* Borde para destacar */
+    border-radius: 8px; /* Bordes redondeados */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+    z-index: 9999; /* Asegura que esté encima de todo */
+    display: none; /* Inicialmente oculto */
+}
+
+
+/* Opciones dentro del combo */
+.select-dropdown .dropdown-item {
+    padding: 10px;
+    font-size: 16px;
+    cursor: pointer;
+    border-bottom: 1px solid #ddd; /* Línea entre opciones */
+}
+
+.select-dropdown .dropdown-item:hover {
+    background-color: #f0f0f0; /* Fondo al pasar el ratón */
+}
+
+.select-dropdown .dropdown-item:last-child {
+    border-bottom: none; /* Sin línea en la última opción */
+}
+.ordenAsc::after {
+    content: ' ?'; /* Indicador ascendente */
+}
+.ordenDesc::after {
+    content: ' ?'; /* Indicador descendente */
+}
+
+th, td {
+    white-space: normal; /* Permite que el texto se ajuste a más de una línea */
+    overflow: visible; /* Asegura que no se oculte el texto */
+}
+th, td {
+    line-height: 1.2; /* Ajusta la separación entre líneas */
+    padding: 5px; /* Añade espacio dentro de las celdas */
+}
+

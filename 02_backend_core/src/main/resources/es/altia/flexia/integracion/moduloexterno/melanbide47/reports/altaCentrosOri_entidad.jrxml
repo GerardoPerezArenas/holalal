@@ -1,0 +1,508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="altaCentrosOri_entidad" pageWidth="555" pageHeight="800" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0">
+	<property name="ireport.zoom" value="1.100000000000002"/>
+	<property name="ireport.x" value="15"/>
+	<property name="ireport.y" value="40"/>
+	<import value="es.altia.flexia.integracion.moduloexterno.melanbide47.vo.reports.*"/>
+	<parameter name="razonSocial" class="java.lang.String"/>
+	<parameter name="documento" class="java.lang.String"/>
+	<parameter name="domicilio" class="java.lang.String"/>
+	<parameter name="telefono" class="java.lang.String"/>
+	<parameter name="fax" class="java.lang.String"/>
+	<parameter name="municipio" class="java.lang.String"/>
+	<parameter name="provincia" class="java.lang.String"/>
+	<parameter name="codPostal" class="java.lang.String"/>
+	<parameter name="mail" class="java.lang.String"/>
+	<parameter name="nomApel" class="java.lang.String"/>
+	<parameter name="cargo" class="java.lang.String"/>
+	<parameter name="dniRepresentante" class="java.lang.String"/>
+	<parameter name="subreportOri" class="es.altia.flexia.integracion.moduloexterno.melanbide47.vo.reports.Subreport"/>
+	<parameter name="subreportCe" class="es.altia.flexia.integracion.moduloexterno.melanbide47.vo.reports.Subreport"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="320" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20"/>
+				<textElement textAlignment="Left" verticalAlignment="Middle">
+					<font size="14" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[(ORILA 2013) ALTA HARTZEKO ESKAERA  / SOLICITUD DE ALTA DE ENTIDAD (ORI 2013)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="30" width="555" height="40"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[1. ERAKUNDE ESKATZAILEAREN IDENTIFIKAZIO DATUAK / DATOS DE IDENTIFICACIÓN DE LA ENTIDAD SOLICITANTE]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="80" width="400" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="0" y="110" width="400" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="400" y="80" width="155" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="400" y="110" width="155" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="81" width="398" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="10" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[IZEN SOZIALA / NOMBRE O RAZÓN SOCIAL (INTERESATUA / INTERESADO)]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="81" width="153" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[IFZ/IFK / NIF/CIF (DOKUMENTUA /DOCUMENTO)]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="130" width="295" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="295" y="130" width="130" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="425" y="130" width="130" height="20"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="131" width="293" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[HELBIDEA / DOMICILIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="296" y="131" width="128" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[TELEFONOA / TELÉFONO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="426" y="131" width="128" height="18"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[FAXA / FAX]]></text>
+			</staticText>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="111" width="398" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{razonSocial}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="401" y="111" width="153" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{documento}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="150" width="295" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="295" y="150" width="130" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="425" y="150" width="130" height="20"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="151" width="293" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{domicilio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="296" y="151" width="128" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{telefono}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="426" y="151" width="128" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{fax}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="0" y="170" width="187" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="187" y="170" width="123" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="310" y="170" width="90" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="400" y="170" width="155" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="171" width="185" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[UDALERRIA
+MUNICIPIO]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="188" y="171" width="121" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[HERRIALDEA
+PROVINCIA]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="311" y="171" width="88" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[POSTA KODEA
+CÓDIGO POSTAL]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="401" y="171" width="153" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[HELBIDE ELEKTRONIKOA
+CORREO ELECTRÓNICO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="200" width="187" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="187" y="200" width="123" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="310" y="200" width="90" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="400" y="200" width="155" height="20"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="201" width="185" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{municipio}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="188" y="201" width="121" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{provincia}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="311" y="201" width="88" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{codPostal}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="401" y="201" width="153" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{mail}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="0" y="230" width="555" height="20"/>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[2. LEGEZKO ORDEZKARIAREN DATUAK / DATOS DEL REPRESENTANTE LEGAL]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="260" width="220" height="30"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="220" y="260" width="210" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="1" y="261" width="218" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[IZEN ABIZENAK
+NOMBRE Y APELLIDOS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="221" y="261" width="208" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[KARGUA
+CARGO]]></text>
+			</staticText>
+			<rectangle>
+				<reportElement x="0" y="290" width="220" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="220" y="290" width="210" height="20"/>
+			</rectangle>
+			<rectangle>
+				<reportElement x="430" y="290" width="125" height="20"/>
+			</rectangle>
+			<textField isBlankWhenNull="true">
+				<reportElement x="1" y="291" width="218" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{nomApel}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="221" y="291" width="208" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{cargo}]]></textFieldExpression>
+			</textField>
+			<textField isBlankWhenNull="true">
+				<reportElement x="431" y="291" width="123" height="18"/>
+				<textElement verticalAlignment="Middle">
+					<font isBold="false"/>
+					<paragraph firstLineIndent="2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{dniRepresentante}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement mode="Opaque" x="430" y="260" width="125" height="30"/>
+			</rectangle>
+			<staticText>
+				<reportElement mode="Transparent" x="431" y="261" width="123" height="28"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" markup="none">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[DNI/NIE
+NAN/AIZ]]></text>
+			</staticText>
+			<line>
+				<reportElement x="0" y="260" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="310" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="555" y="261" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="430" y="261" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="220" y="261" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="0" y="290" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="261" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="555" y="291" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="430" y="291" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="220" y="291" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="0" y="291" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="0" y="80" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="110" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="130" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="150" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="170" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="200" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="220" width="555" height="1"/>
+			</line>
+			<line>
+				<reportElement x="0" y="81" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="0" y="111" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="0" y="131" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="0" y="151" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="0" y="171" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="0" y="201" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="187" y="171" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="187" y="201" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="295" y="131" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="295" y="151" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="310" y="171" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="310" y="201" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="400" y="171" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="400" y="201" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="400" y="81" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="400" y="111" width="1" height="18"/>
+			</line>
+			<line>
+				<reportElement x="425" y="131" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="425" y="151" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="555" y="81" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="555" y="111" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="555" y="131" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="555" y="151" width="1" height="19"/>
+			</line>
+			<line>
+				<reportElement x="555" y="171" width="1" height="29"/>
+			</line>
+			<line>
+				<reportElement x="555" y="201" width="1" height="19"/>
+			</line>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="40" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20">
+					<printWhenExpression><![CDATA[$P{subreportOri} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[3. KOKAPENAK / UBICACIONES (ORIENTAZIOA / ORIENTACIÓN)]]></text>
+			</staticText>
+			<subreport isUsingCache="false">
+				<reportElement x="0" y="30" width="554" height="4">
+					<printWhenExpression><![CDATA[$P{subreportOri} != null]]></printWhenExpression>
+				</reportElement>
+				<parametersMapExpression><![CDATA[$P{subreportOri}.getSubreportParams()]]></parametersMapExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{subreportOri}.getDatasource())]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subreportOri}.getSubreport()]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="40">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="20">
+					<printWhenExpression><![CDATA[$P{subreportCe} != null]]></printWhenExpression>
+				</reportElement>
+				<textElement verticalAlignment="Middle">
+					<font size="11" isBold="true" pdfFontName="Helvetica-Bold"/>
+				</textElement>
+				<text><![CDATA[4. KOKAPENAK / UBICACIONES (ENPLEGU ZENTROA / CENTRO EMPLEO)]]></text>
+			</staticText>
+			<subreport isUsingCache="false">
+				<reportElement x="0" y="30" width="554" height="4">
+					<printWhenExpression><![CDATA[$P{subreportCe} != null]]></printWhenExpression>
+				</reportElement>
+				<parametersMapExpression><![CDATA[$P{subreportCe}.getSubreportParams()]]></parametersMapExpression>
+				<dataSourceExpression><![CDATA[new net.sf.jasperreports.engine.data.JRBeanCollectionDataSource($P{subreportCe}.getDatasource())]]></dataSourceExpression>
+				<subreportExpression><![CDATA[$P{subreportCe}.getSubreport()]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band splitType="Stretch"/>
+	</pageFooter>
+	<lastPageFooter>
+		<band height="210">
+			<staticText>
+				<reportElement x="0" y="10" width="555" height="200"/>
+				<textElement>
+					<font size="7"/>
+				</textElement>
+				<text><![CDATA[(*) Zerbitzu Zentraletan beteko da / A rellenar por servicios centrales
+
+Eskabide honekin batera kontratua, hitzarmena edo tresna juridiko baliokidea gehitu beharko duzu. Horretan ezarriko dira isilekotasun-klausulak eta horien bidez beteko dira, batetik, Datu pertsonalak babesteari buruzko abenduaren 13ko 15/1999 Lege Organikoaren 12.2 artikuluan ezarritakoa eta, bestetik, lege horren 9. artikuluan eta legea garatzen duen 1720/2007 Errege Dekretuaren 79. artikuluan ezarritako segurtasun-neurriak.
+
+A la presente solicitud debe adjuntar el contrato, convenio o instrumento jurídico equivalente en el que se establezcan las cláusulas de confidencialidad que permitan dar cumplimiento a lo establecido en el art. 12.2 de la Ley Orgánica 15/1999, de 13 de diciembre, de Protección de Datos de Carácter Personal, con las medidas de seguridad establecidas por el artículo 9 de la citada ley y en el artículo 79 del Real Decreto 1720/2007, que desarrolla la misma.
+
+_______n, 201  ko          __________ (a)re  _____an, 	En __________, a  _____ de ___de 201___
+Firma y sello de la Entidad / Erankundearen sinadura eta zigilua
+
+
+
+
+LANBIDEKO SARRERA-ZIGILUA
+SELLO DE ENTRADA EN LANBIDE]]></text>
+			</staticText>
+		</band>
+	</lastPageFooter>
+	<summary>
+		<band splitType="Stretch"/>
+	</summary>
+</jasperReport>

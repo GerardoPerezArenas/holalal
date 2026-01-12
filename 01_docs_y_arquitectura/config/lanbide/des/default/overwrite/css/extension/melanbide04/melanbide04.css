@@ -1,0 +1,9 @@
+ .mensajeError{
+    font-family: Verdana, Arial, Helvetica, Sans-serif;
+    font-size: 11px;
+    font-style:normal;
+    font-weight: bold;
+    color: red;
+    nowrap:true;
+}
+

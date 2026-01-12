@@ -1,0 +1,56 @@
+.inputTextoCombos03 {
+  	font-family: Verdana, Arial, Helvetica, sans-serif;
+  	font-size: 9px;
+  	font-style:normal;
+  	font-weight: normal;
+  	font-variant: normal;
+  	color: #2d4c9f;
+  	border : #999999 1px solid;
+  	background-color : #FFFFFF; 
+        text-transform:uppercase;
+ }
+
+ .legendAzul{
+    font-family: Arial,Verdana Helvetica, sans-serif;
+    font-size: 14px;
+    color: rgb(43, 98, 181);
+    font-weight: bold;
+    text-align: left;
+}
+
+.scroll
+{
+width:100%;
+height:165px;
+overflow: scroll;
+}
+
+.lineaFormulario{
+    width: 100%;
+    clear: both;
+    padding-top: 5px;
+}
+
+.textoNumerico{
+    text-align: right;
+}
+/* los dos estilos siguientes son para que la tabla cambie el fondo a verde
+   cuando seleccionen una línea */
+TABLE.xTabla .JSTHighlited TD{
+    background-color: #a0d767;  
+}
+
+.xTabla { 
+    cursor: pointer;
+    table-layout:fixed;
+    border-collapse:collapse;
+    font-size: 12px; 
+    font-weight: normal; 
+ }
+
+.botonera{
+    width: 100%; 
+    text-align: center; 
+    padding-top: 5px;
+    clear: both;
+}

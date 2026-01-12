@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version last-->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="etiquetas_Sub" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="1" bottomMargin="1" uuid="a1540296-2b27-4aba-b743-67bd34106e07">
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<field name="nombreC" class="java.lang.String"/>
+	<field name="direccion" class="java.lang.String"/>
+	<field name="direccion2" class="java.lang.String"/>
+	<field name="codPostal" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="166" splitType="Stretch">
+			<property name="border" value="1px"/>
+			<property name="local_mesure_unitheight" value="pixel"/>
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="-1" y="89" width="297" height="20" uuid="0c1d224f-95cd-423a-a77b-b647c2d72d36"/>
+				<textFieldExpression><![CDATA[$F{direccion2}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="60" width="297" height="20" uuid="270acc7b-71bf-4c3a-935d-07a88aee6f07"/>
+				<textFieldExpression><![CDATA[$F{direccion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="-1" y="30" width="297" height="20" uuid="d40e1cfe-c4a1-4710-ac07-d29dce47f2f6"/>
+				<textFieldExpression><![CDATA[$F{nombreC}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="120" width="100" height="20" uuid="cd77cf4c-fdbc-4a2b-b33d-41fd476eb944"/>
+				<textFieldExpression><![CDATA[$F{codPostal}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

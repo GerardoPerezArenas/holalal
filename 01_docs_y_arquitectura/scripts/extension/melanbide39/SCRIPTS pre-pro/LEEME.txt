@@ -1,0 +1,15 @@
+En pre (así como en pro) existen solo las tablas CPE_PUESTO y CPE_SALARIOS.
+
+Por tanto las otras dos (CPE_OFERTA y CPE_JUSTIFICACION) hay que crearlas. En esta carpeta dejo:
+
+1) Los create de CPE_OFERTA y CPE_JUSTIFICACION
+
+2) El alter de la tabla CPE_PUESTO (OJO!! En pro seguro y en pre casi seguro que hay datos en esta tabla, con lo que no se si dará problemas. 
+	No creo, puesto que las modifiaciones son:
+		a) Campos que pasan de VARCHAR(4 Byte) --> VARCHAR(8 Byte): al aumentar tamaño de columna, no debería quejarse)
+		b) Rename de columnas --> como ya existen datos, no puedo eliminar las columnas. Un rename tampoco debería dar problemas.
+		c) Añadir nuevas columnas --> Esto tp debería dar problemas.
+
+3) Unos insert en la tabla CPE_SALARIOS. Este creo que tendrá que pasartelo de nuevo Ricardo, ya que han cambiado algunos codigos. Coméntale.
+
+En cualquier caso, si eso, revisad los scripts entre los dos.

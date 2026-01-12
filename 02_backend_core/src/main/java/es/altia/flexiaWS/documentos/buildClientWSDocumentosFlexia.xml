@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<project name="servicioWebDocumentosFlexia" default="init" basedir=".">
+    <!-- ======================   Propiedades comunes   ========================== -->
+    <!-- Tomcat -->
+    <property name="tomcat.home" value="C:/Program Files/Apache Software/apache-tomcat-9.0.40"/>
+    <property name="tomcat.libs" value="${tomcat.home}/lib"/>
+
+    <!-- Opciones del entorno de desarrollo  -->
+    <property name="build.compiler" value="modern"/>
+
+    <property name="javac.debug" value="on"/>
+    <property name="javac.optimize" value="off"/>
+    <property name="javac.deprecation" value="on"/>
+    <property name="javac.nowarn" value="on"/>
+    <presetdef name="javac">
+        <javac includeantruntime="false" />
+    </presetdef>
+    <patternset id="ignored.files">
+        <exclude name="**/SVN/**"/>
+        <exclude name="**/*.bak"/>
+    </patternset>
+
+    <!-- ============================  Properties ============================== -->
+    <property name="project.home" value="C:/Proyectos/Lanbide/flexia19-git"/>
+    <property name="project.deploy" value="${project.home}/target/flexia19"/>
+    <property name="projectBuildPath" value="${project.deploy}/WEB-INF"/>
+
+    <property name="ext.libs" value="${projectBuildPath}\lib"/>
+    <property name="clases" value="${projectBuildPath}\classes\es\altia"/>
+
+    <property name="projectSrcPath" value="{project.home}\src\main\java"/>
+
+    <property name="fuentes" value="${projectSrcPath}\es\altia\flexiaWS\documentos"/>
+    <property name="fuentesGeneradasCliente" value="${fuentes}\cliente"/>
+    <property name="clasesCliente" value="${projectBuildPath}\classes\es\altia\flexiaWS\documentos\cliente"/>
+    <property name="jarCliente" value="C:/Proyectos/Lanbide/WebServicesClientes/WSDocumentosFlexiaClient-19.00.jar"/>
+
+    <property name="wsdl" value="${projectSrcPath}\es\altia\flexiaWS\documentos\WSDocumentosFlexiaImpl.wsdl"/>
+
+    <!-- == Classpath ==================================================== -->
+    <path id="classpath">
+        <fileset dir="${clases}">
+            <include name="*.class"/>
+        </fileset>
+        <fileset dir="${ext.libs}">
+            <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${tomcat.libs}">
+            <include name="*.jar"/>
+        </fileset>
+    </path>
+
+    <!-- ========================== "axis" target =========================== -->
+    <taskdef name="java2wsdl" classname="org.apache.axis.tools.ant.wsdl.Java2WsdlAntTask" classpathref="classpath"/>
+    <taskdef name="wsdl2java" classname="org.apache.axis.tools.ant.wsdl.Wsdl2javaAntTask" classpathref="classpath"/>
+    <taskdef name="wsadmin"   classname="org.apache.axis.tools.ant.axis.AdminClientTask" classpathref="classpath"/>
+
+    <!-- == objetivo "init" ==================================================== -->
+    <target name="init">
+        <echo>
+            --------------------------------------------------------------------------------
+            "WSDocumentosFlexia" build client...
+            --------------------------------------------------------------------------------
+        </echo>
+    </target>
+
+    <!-- ==  ========== -->
+    <target name="cleanClient" depends="init">
+        <echo>
+            --> Ejecutando target cleanClient
+        </echo>
+        <delete dir="${clasesCliente}"/>
+    </target>
+
+    <!-- == generar los fuentes del cliente para comunicarse con el servicio web ========== -->
+    <target name="wsdl2javaClient">
+        <echo>
+            --> Ejecutando target wsdl2javaClient
+        </echo>
+        <mkdir dir="${fuentesGeneradasCliente}"/>
+        <wsdl2java all="true" debug="false" helperGen="false"
+                   noimports="false"
+                   output="${projectSrcPath}"
+                   serverside="true" testcase="false"
+                   typeMappingVersion="1.1"
+                   url="${wsdl}"
+                   verbose="true" noWrapped="true">
+            <mapping namespace="http://datos.bd.documentos.flexiaWS.altia.es"
+                     package="es.altia.flexiaWS.documentos.cliente.bd.datos" />
+            <mapping namespace="http://datos.bd.documentos.flexiaWS.altia.es-impl"
+                     package="es.altia.flexiaWS.documentos.cliente.bd.datos" />
+            <mapping namespace="http://datos.bd.documentos.flexiaWS.altia.es-intf"
+                     package="es.altia.flexiaWS.documentos.cliente.bd.datos" />
+            <mapping namespace="http://servicios.flexia"
+                     package="es.altia.flexiaWS.documentos.cliente.servicios" />
+        </wsdl2java>
+    </target>
+
+    <!-- == objetivo "compileCliente" ============================================ -->
+    <target name="compileClient">
+        <echo>
+            --> Ejecutando target compileClient
+        </echo>
+        <mkdir dir="${clasesCliente}"/>
+        <javac srcdir="${fuentesGeneradasCliente}"
+               destdir="${clasesCliente}"
+               classpathref="classpath"
+               debug="${javac.debug}"
+               target="1.8"
+               source="1.8"
+               optimize="${javac.optimize}"
+               deprecation="${javac.deprecation}"
+               nowarn="${javac.nowarn}"/>
+    </target>
+
+    <target name="jarClient" depends="init, wsdl2javaClient, compileClient">
+        <echo>
+            --> Ejecutando target jarClient
+        </echo>
+        <jar destfile="${jarCliente}"
+             basedir="${clasesCliente}"/>
+    </target>
+
+</project>
