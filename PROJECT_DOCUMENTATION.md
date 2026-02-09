@@ -18,12 +18,12 @@ El sistema se basa en el framework propietario **AGORA** (paquete `es.altia.agor
 *   **Persistencia**: JDBC Manual (DAO Pattern) con construcción de SQL dinámica.
 *   **Base de Datos**: Oracle (driver `ojdbc8`).
 *   **Servicios Web**: Apache Axis 1.4 y Axis2 (SOAP/WSDL).
-*   **Codificación**: **ISO-8859-15**. Toda la aplicación debe usar esta codificación de forma consistente (directivas de página JSP, cabeceras HTTP de request/response, filtro `ISO885915Filter` y codificación de los ficheros fuente/recursos) para evitar corrupción de caracteres.
+*   **Codificación**: **ISO-8859-1** (o ISO-8859-15). Es crítico respetar esto para evitar corrupción de caracteres.
 
 ## 3. Arquitectura del Código
 
 ### 3.1 Estructura de Directorios (Lógica)
-El código fuente se encuentra en el directorio `./02_backend_core` en la raíz del repositorio (si está presente en la rama actual).
+El código fuente se encuentra en `02_backend_core`.
 *   `src/main/java`: Código fuente Java.
 *   `src/main/webapp`: Recursos Web (JSP, CSS, WEB-INF).
 *   `src/main/resources`: Archivos de propiedades y configuración.
@@ -58,25 +58,16 @@ No se usa `@Autowired` ni inyección estándar de Spring.
 ### 4.3 Capa de Persistencia (Manual DAO)
 *   Patrón: **Singleton DAO**.
 *   Acceso: `AnotacionRegistroDAO.getInstance().insertar(...)`.
-*   **Manejo de SQL (LEGADO / NO RECOMENDADO)**: Concatenación de Strings manual (**NO USAR / anti-pattern**, riesgo de SQL injection).
+*   **Manejo de SQL**: Concatenación de Strings manual.
     ```java
-    // ❌ EJEMPLO LEGADO (NO USAR): vulnerable a SQL injection
     String sql = "INSERT INTO TABLA (CAMPO) VALUES (" + valor + ")";
-    ```
-*   **Manejo de SQL (RECOMENDADO)**: Uso de `PreparedStatement` con parámetros enlazados.
-    ```java
-    // ✅ EJEMPLO RECOMENDADO: usar parámetros en PreparedStatement
-    String sql = "INSERT INTO TABLA (CAMPO) VALUES (?)";
-    PreparedStatement ps = connection.prepareStatement(sql);
-    ps.setString(1, valor);
-    ps.executeUpdate();
     ```
 *   **Transacciones**: Gestión manual mediante `SigpGeneralOperations.commit()` y `rollback()`.
 *   **Helper**: Uso de `AdaptadorSQLBD` para abstracción de funciones de base de datos (fechas, nulos).
 
 ## 5. Configuración y Arranque
 
-### 5.1 Descriptor de despliegue `web.xml`
+### 5.1 `web.xml` (`01_docs_y_arquitectura/.../web.xml`)
 *   Define el **`ApplicationInitContextListener`**: Responsable de inicializar el entorno "Agora" (Configuración, Cachés, etc.).
 *   Filtro `ISO885915Filter`: Fuerza la codificación.
 *   DataSources JNDI: `jdbc_flexia_generico`, `jdbc_flexia_organizacion`.
