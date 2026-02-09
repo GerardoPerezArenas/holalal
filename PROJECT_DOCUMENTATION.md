@@ -58,9 +58,18 @@ No se usa `@Autowired` ni inyección estándar de Spring.
 ### 4.3 Capa de Persistencia (Manual DAO)
 *   Patrón: **Singleton DAO**.
 *   Acceso: `AnotacionRegistroDAO.getInstance().insertar(...)`.
-*   **Manejo de SQL**: Concatenación de Strings manual.
+*   **Manejo de SQL (LEGADO / NO RECOMENDADO)**: Concatenación de Strings manual (**NO USAR / anti-pattern**, riesgo de SQL injection).
     ```java
+    // ❌ EJEMPLO LEGADO (NO USAR): vulnerable a SQL injection
     String sql = "INSERT INTO TABLA (CAMPO) VALUES (" + valor + ")";
+    ```
+*   **Manejo de SQL (RECOMENDADO)**: Uso de `PreparedStatement` con parámetros enlazados.
+    ```java
+    // ✅ EJEMPLO RECOMENDADO: usar parámetros en PreparedStatement
+    String sql = "INSERT INTO TABLA (CAMPO) VALUES (?)";
+    PreparedStatement ps = connection.prepareStatement(sql);
+    ps.setString(1, valor);
+    ps.executeUpdate();
     ```
 *   **Transacciones**: Gestión manual mediante `SigpGeneralOperations.commit()` y `rollback()`.
 *   **Helper**: Uso de `AdaptadorSQLBD` para abstracción de funciones de base de datos (fechas, nulos).
