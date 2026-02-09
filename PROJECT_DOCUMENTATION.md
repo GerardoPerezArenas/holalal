@@ -23,7 +23,7 @@ El sistema se basa en el framework propietario **AGORA** (paquete `es.altia.agor
 ## 3. Arquitectura del Código
 
 ### 3.1 Estructura de Directorios (Lógica)
-El código fuente se encuentra en `02_backend_core`.
+El código fuente se encuentra en el directorio `./02_backend_core` en la raíz del repositorio (si está presente en la rama actual).
 *   `src/main/java`: Código fuente Java.
 *   `src/main/webapp`: Recursos Web (JSP, CSS, WEB-INF).
 *   `src/main/resources`: Archivos de propiedades y configuración.
