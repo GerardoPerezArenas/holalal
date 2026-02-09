@@ -76,7 +76,7 @@ No se usa `@Autowired` ni inyección estándar de Spring.
 
 ## 5. Configuración y Arranque
 
-### 5.1 `web.xml` (`01_docs_y_arquitectura/.../web.xml`)
+### 5.1 Descriptor de despliegue `web.xml`
 *   Define el **`ApplicationInitContextListener`**: Responsable de inicializar el entorno "Agora" (Configuración, Cachés, etc.).
 *   Filtro `ISO885915Filter`: Fuerza la codificación.
 *   DataSources JNDI: `jdbc_flexia_generico`, `jdbc_flexia_organizacion`.
