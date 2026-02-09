@@ -78,7 +78,7 @@ No se usa `@Autowired` ni inyección estándar de Spring.
 
 ### 5.1 Descriptor de despliegue `web.xml`
 *   Define el **`ApplicationInitContextListener`**: Responsable de inicializar el entorno "Agora" (Configuración, Cachés, etc.).
-*   Filtro `ISO885915Filter`: Fuerza la codificación.
+*   Filtro `ISO885915Filter`: Fuerza la codificación **ISO-8859-15** en todas las peticiones y respuestas HTTP.
 *   DataSources JNDI: `jdbc_flexia_generico`, `jdbc_flexia_organizacion`.
 
 ### 5.2 Configuración Propietaria
@@ -112,7 +112,7 @@ El sistema utiliza archivos `.properties` y una tabla de configuración (probabl
 
 ### Cómo depurar errores
 *   **Logs**: Buscar trazas de `Log4j` (`m_Log.error(...)`).
-*   **Encoding**: Si los acentos fallan, verificar que el archivo JSP tiene encoding ISO-8859-1 y el navegador también.
+*   **Encoding**: Si los acentos fallan, verificar que el archivo JSP tiene encoding ISO-8859-15 (declarado en la directiva `<%@ page contentType="..." pageEncoding="ISO-8859-15" %>`) y que las cabeceras HTTP del navegador también usen ISO-8859-15.
 *   **NullPointer**: Común en este código legacy si los objetos VO (Value Objects) no se inicializan correctamente.
 
 ## 8. Integraciones Externas
