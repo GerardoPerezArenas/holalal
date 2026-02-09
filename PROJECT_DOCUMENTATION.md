@@ -18,7 +18,7 @@ El sistema se basa en el framework propietario **AGORA** (paquete `es.altia.agor
 *   **Persistencia**: JDBC Manual (DAO Pattern) con construcción de SQL dinámica.
 *   **Base de Datos**: Oracle (driver `ojdbc8`).
 *   **Servicios Web**: Apache Axis 1.4 y Axis2 (SOAP/WSDL).
-*   **Codificación**: **ISO-8859-1** (o ISO-8859-15). Es crítico respetar esto para evitar corrupción de caracteres.
+*   **Codificación**: **ISO-8859-15**. Toda la aplicación debe usar esta codificación de forma consistente (directivas de página JSP, cabeceras HTTP de request/response, filtro `ISO885915Filter` y codificación de los ficheros fuente/recursos) para evitar corrupción de caracteres.
 
 ## 3. Arquitectura del Código
 
