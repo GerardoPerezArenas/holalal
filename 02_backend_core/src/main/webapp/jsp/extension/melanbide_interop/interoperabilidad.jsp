@@ -48,7 +48,7 @@
     TerceroVO _tercero = new TerceroVO();
     List<TerceroVO> _tercerosxExpediente = (List<TerceroVO>)request.getAttribute("listaTerceros");	
     
-    //Clase para internacionalizar los mensajes de la aplicación.
+    //Clase para internacionalizar los mensajes de la aplicaciÃ³n.
     MeLanbideInteropI18n meLanbideInteropI18n = MeLanbideInteropI18n.getInstance();   
 
     Config m_Config = ConfigServiceHelper.getConfig("common");
@@ -435,8 +435,8 @@
                 }//for(j=0;hijos!=null && j<hijos.length;j++)
                 /*
                     * 0 - No existe demandante o se ha producido un error
-                    * 1 - Existe demandante y está en alta (SituAdm A)
-                    * 2 - Existe demandante y está en suspensión (SituAdm S)
+                    * 1 - Existe demandante y estÃ¡ en alta (SituAdm A)
+                    * 2 - Existe demandante y estÃ¡ en suspensiÃ³n (SituAdm S)
                     * 9 - Existe demandante y el estado es otro (SituAdm 'else')
                     */
                 if(codigoOperacion=="0"){
@@ -860,14 +860,6 @@
                             <input type="button" id="btnObligacionesTribuDipu" name="btnObligacionesTribuDipu" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnObligacionesTribuDipu")%>" onclick="llamarServicioObligacionesTribuDipu()" >
                             <br><br>
                         </logic:equal>    
-                        <logic:equal name="hidenbtnLangaiDemanda" value="1" scope="request">
-                            <input type="button" id="btnLangaiDemanda" name="btnLangaiDemanda" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.langaiDemanda")%>" onclick="llamarServicioLagaiDemanda()" >
-                            <br><br>
-                        </logic:equal>    
-                        <logic:equal name="hidenbtnLangaiDemandaFSE" value="1" scope="request">
-                            <input type="button" id="btnLangaiDemandaFSE" name="btnLangaiDemandaFSE" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.langaiDemandaFSE")%>" onclick="llamarServicioLagaiDemandaFSE()" >
-                            <br><br>
-                        </logic:equal> 
                         <logic:equal name="hidenbtnDatosPadron" value="1" scope="request">
                             <input type="button" id="btnDatosPadron" name="btnDatosPadron" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnDatosPadron")%>" onclick="llamarServicioVerificarDatosPadron()" >
                             <br><br>
@@ -876,6 +868,33 @@
                             <input type="button" id="btnDatosResidencia" name="btnDatosResidencia" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnDatosResidencia")%>" onclick="llamarServicioVerificarDatosResidencia()" >
                             <br><br>
                         </logic:equal> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="tab-page" id="tabPageLak" style="height:520px; width: 100%;">
+        <h2 class="tab" id="pestanaLak">LAK</h2>
+        <script type="text/javascript">tp1.addTabPage(document.getElementById("tabPageLak"));</script>
+        <div style="clear: both;">
+            <div>
+                <div style="width: 100%; padding: 10px; text-align: left;">
+                    <div class="sub3titulo" style="clear: both; text-align: center; font-size: 14px;">
+                        <span>
+                            <%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.interoperabilidad.tituloBotones")%>
+                        </span>
+                    </div>
+                    <br><br>
+                    <div class="botonera" style="text-align: center">
+                        <logic:equal name="hidenbtnLangaiDemanda" value="1" scope="request">
+                            <input type="button" id="btnLangaiDemanda" name="btnLangaiDemanda" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.langaiDemanda")%>" onclick="llamarServicioLagaiDemanda()" >
+                            <br><br>
+                        </logic:equal>
+                        <logic:equal name="hidenbtnLangaiDemandaFSE" value="1" scope="request">
+                            <input type="button" id="btnLangaiDemandaFSE" name="btnLangaiDemandaFSE" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.langaiDemandaFSE")%>" onclick="llamarServicioLagaiDemandaFSE()" >
+                            <br><br>
+                        </logic:equal>
                     </div>
                 </div>
             </div>
