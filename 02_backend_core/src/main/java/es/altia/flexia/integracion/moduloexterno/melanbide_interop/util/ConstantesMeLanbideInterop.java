@@ -216,7 +216,9 @@ public class ConstantesMeLanbideInterop {
     public static String CAMPO_SUPLEMENTARIO_TIPO_TEXTO_LARGO="TEXTO_LARGO";
     
     public static final String TABLA_INTEROP_VIDALABORAL = "TABLA_INTEROP_VIDALABORAL";    
+    public static final String TABLA_INTEROP_CVL_MASIVO_NIF = "TABLA_INTEROP_CVL_MASIVO_NIF";
     public static final String VISTA_PROVINCIA = "VISTA_PROVINCIA";    
     public static final String FORMATO_FECHA = "dd/MM/yyyy";       
     public static final String SEQ_VIDALABORAL = "SEQ_VIDALABORAL";  
+    public static final String SEQ_INTEROP_CVL_MASIVO_NIF = "SEQ_INTEROP_CVL_MASIVO_NIF";
 }

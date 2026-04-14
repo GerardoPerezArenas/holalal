@@ -28,9 +28,9 @@
     UsuarioValueObject usuario = new UsuarioValueObject();
     try
     {
-        if (session != null) 
+        if (session != null)
         {
-            if (usuario != null) 
+            if (usuario != null)
             {
                 usuario = (UsuarioValueObject) session.getAttribute("usuario");
                 idiomaUsuario = usuario.getIdioma();
@@ -41,96 +41,153 @@
     }
     catch(Exception ex)
     {
-        
+
     }
 
     // Para coger los datos del tercero y pasarlos al WS
     TerceroVO _tercero = new TerceroVO();
-    List<TerceroVO> _tercerosxExpediente = (List<TerceroVO>)request.getAttribute("listaTerceros");	
-    
-    //Clase para internacionalizar los mensajes de la aplicación.
-    MeLanbideInteropI18n meLanbideInteropI18n = MeLanbideInteropI18n.getInstance();   
+    List<TerceroVO> _tercerosxExpediente = (List<TerceroVO>)request.getAttribute("listaTerceros");
 
-    Config m_Config = ConfigServiceHelper.getConfig("common");
-    String statusBar = m_Config.getString("JSP.StatusBar");
-    String nombreModulo     = request.getParameter("nombreModulo");
-    String codOrganizacion  = request.getParameter("codOrganizacionModulo");
-    String numExpediente    = request.getParameter("numero");
-    
-    String userAgent = request.getHeader("user-agent");
-    String margenIzqPestanaEpecialidadesRecursos = "";
-
-    if(userAgent.indexOf("MSIE")!=-1) {
-        // Internet Explorer
-        margenIzqPestanaEpecialidadesRecursos = "";
-    }else{
-        // Firefox u otro navegador
-        margenIzqPestanaEpecialidadesRecursos = "margin-left:10px;";
-    }
-    
-    // recogemos atributos para ocultar WS NO Autorizados para e procedimiento
-    /*
-    String hidenbtnDatosIdentidad=(String)request.getAttribute("hidenbtnDatosIdentidad");
-    String hidenbtnEpigrafesIae=(String)request.getAttribute("hidenbtnDatosIdentidad");
-    String hidenbtnDomicilioFiscal=(String)request.getAttribute("hidenbtnDatosIdentidad");
-    String hidenbtnCorrientePagoTGSS=(String)request.getAttribute("hidenbtnDatosIdentidad");
-    String hidenbtnObligacionesTribuDipu=(String)request.getAttribute("hidenbtnDatosIdentidad");
-    String hidenbtnLangaiDemanda=(String)request.getAttribute("hidenbtnDatosIdentidad");
-*/
-
-    
+    MeLanbideInteropI18n meLanbideInteropI18n = MeLanbideInteropI18n.getInstance();
 
 
-%>
 
-<jsp:useBean id="descriptor" scope="request" class="es.altia.agora.interfaces.user.web.util.TraductorAplicacionBean"  type="es.altia.agora.interfaces.user.web.util.TraductorAplicacionBean" />
-<jsp:setProperty name="descriptor"  property="idi_cod" value="<%=idiomaUsuario%>" />
-<jsp:setProperty name="descriptor"  property="apl_cod" value="<%=apl%>" />
-<link rel="StyleSheet" media="screen" type="text/css" href="<%=request.getContextPath()%><%=css%>">
-<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/jquery/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/DataTables/datatables.min.js"></script>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/scripts/DataTables/datatables.min.css"/>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/extension/melanbide_interop/melanbide_interop.css"/>
 
-<script type="text/javascript">   
-    var tp41_interop;
-    var codTercero;
-    
-    function configurarPestanas(){        
-        mostrarPestanaEpecialidadesRecursos();        
-    }
-    
-    function ocultarPestanaEpecialidadesRecursos(){
-        tp41_interop.hideTabPage(1);
-        //tp41_interop.hideTabPage(2);
-    }
-    
-    function mostrarPestanaEpecialidadesRecursos(){
-        tp41_interop.showTabPage(1);
-        //tp41_interop.showTabPage(2);
-    }
-    
-    function recogerListaTerceros(){
-        var listaTercerosExp;
-        var nooChlidren = 0;
-        var uno = document.forms[0];
-        if(navigator.appName.indexOf("Internet Explorer")!=-1){
-            // En IE el XML viene en responseText y no en la propiedad responseXML
-            nooChlidren = uno.children.length;
+<script type="text/javascript">
+
+    function configurarPestanas(){
+        mostrarPestanaEpecialidadesRecursos();
+
+
+
+                listaTercerosExp = uno.children[i].value;
+
+        var listaTercerosExp = recogerListaTerceros();
+                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
+                        }//if(hijos[j].nodeName=="CODIGO_OPERACION")
+                        else if(hijos[j].nodeName=="RESULTADO"){
+                        }
+
+        var listaTercerosExp = recogerListaTerceros();
+                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
+                        else if(hijos[j].nodeName=="RESULTADO"){
+
+        var listaTercerosExp = recogerListaTerceros();
+                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
+                        }//if(hijos[j].nodeName=="CODIGO_OPERACION")
+                        else if(hijos[j].nodeName=="RESULTADO"){
+
+        var listaTercerosExp = recogerListaTerceros();
+                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
+                    }//if(hijos[j].nodeName=="CODIGO_OPERACION")
+                    else if(hijos[j].nodeName=="RESULTADO"){
+                    }//if(hijos[j].nodeName=="CODIGO_OPERACION")
+                    }
+                    jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.pasoParametros")%>');
+                    jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorConectionWS")%>');
+
+        var listaTercerosExp = recogerListaTerceros();
+
+                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
+        var listaTercerosExp = recogerListaTerceros();
+                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
+        var listaTercerosExp = recogerListaTerceros();
+                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
+        var listaTercerosExp = recogerListaTerceros();
+                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
+                        else if(hijos[j].nodeName=="RESULTADO"){
+
+        var listaTercerosExp = recogerListaTerceros();
+                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
+                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
+                        else if(hijos[j].nodeName=="RESULTADO"){
+                        }
+        if(navigator.appName=="Microsoft Internet Explorer") {
+              window.parent.window.opener=null;
+              window.parent.window.close();
+        }else if(navigator.appName=="Netscape") {
+              top.window.opener = top;
+              top.window.open('','_parent','');
+              top.window.close();
         }else{
-            // En el resto de navegadores el XML se recupera de la propiedad responseXML
-            nooChlidren = uno.childElementCount;
+             window.close();
         }
-        for(i=0; i<nooChlidren; i++)
-        {
-            if(uno.children[i].name=="listaCodTercero"){
-                //alert('lo encontramos : teceros del expediente:'+ uno.children[i].value);
-                listaTercerosExp = uno.children[i].value;     
-                break;
+                        </logic:equal>
+                        </logic:equal>
+                        </logic:equal>
+                        </logic:equal>
+                        </logic:equal>
+                        </logic:equal>
+                        <hr>
+                        <div style="text-align:left; border:1px solid #cccccc; padding:8px; margin-top:8px;">
+                            <label class="legendAzul">CVL masivo por lista de NIF/NIE (CSV pegado)</label><br>
+                            <label>Fecha desde (yyyy-MM-dd)</label>
+                            <input type="text" id="fechaDesdeCVLMasivo" style="width:120px;"/>
+                            <label>Fecha hasta (yyyy-MM-dd)</label>
+                            <input type="text" id="fechaHastaCVLMasivo" style="width:120px;"/>
+                            <br><br>
+                            <textarea id="listaDocsMasivo" rows="6" style="width:98%;" placeholder="NIF;TIPO_DOC
+12345678Z;NIF"></textarea>
+                            <br>
+                            <input type="button" id="btnCvlMasivoTexto" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeTexto()">
+                        </div>
+
+        <%
+            List<TerceroVO> List = (List<TerceroVO>)request.getAttribute("listaTerceros");
+
+    <script type="text/javascript">
+        function ejecutarCvlMasivoDesdeTexto(){
+            var lista = document.getElementById('listaDocsMasivo').value;
+            if(!lista || lista.replace(/\s/g,'').length===0){
+                jsp_alerta('A','Debe indicar una lista CSV de NIF/NIE.');
+                return;
+            }
+            var fechaDesde = document.getElementById('fechaDesdeCVLMasivo').value;
+            var fechaHasta = document.getElementById('fechaHastaCVLMasivo').value;
+            var ajax = getXMLHttpRequest();
+            var url = '<%=request.getContextPath()%>/PeticionModuloIntegracion.do';
+            var params = 'tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=ejecutarCvlMasivoDesdeTexto&tipo=0&numero=<%=numExpediente%>'
+                + '&fechaDesdeCVL=' + encodeURIComponent(fechaDesde)
+                + '&fechaHastaCVL=' + encodeURIComponent(fechaHasta)
+                + '&fkWSSolicitado=1'
+                + '&listaDocsMasivo=' + encodeURIComponent(lista);
+            try{
+                ajax.open('POST', url, false);
+                ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=ISO-8859-1');
+                ajax.setRequestHeader('Accept','text/xml, application/xml, text/plain');
+                ajax.send(params);
+                if (ajax.readyState==4 && ajax.status==200){
+                    var xmlDoc = (navigator.appName.indexOf('Internet Explorer')!=-1) ? new ActiveXObject('Microsoft.XMLDOM') : ajax.responseXML;
+                    if(navigator.appName.indexOf('Internet Explorer')!=-1){
+                        xmlDoc.async='false';
+                        xmlDoc.loadXML(ajax.responseText);
+                    }
+                    var nodos = xmlDoc.getElementsByTagName('RESPUESTA');
+                    if(nodos.length>0){
+                        var codigo = nodos[0].getElementsByTagName('CODIGO_OPERACION')[0].childNodes[0].nodeValue;
+                        var resultado = nodos[0].getElementsByTagName('RESULTADO')[0].childNodes[0].nodeValue;
+                        if(codigo=='0'){
+                            jsp_alerta('A', resultado);
+                        }else{
+                            jsp_alerta('A', 'Error: ' + resultado);
+                        }
+                    }
+                }
+            }catch(err){
+                jsp_alerta('A','Error ejecutando CVL masivo: ' + err.message);
             }
         }
-        return listaTercerosExp;
-    }
+    </script>
+
+    <script type="text/javascript">
     
     function llamarServicioDatosIdentidad(){
         var listaTercerosExp = recogerListaTerceros();    
@@ -435,8 +492,8 @@
                 }//for(j=0;hijos!=null && j<hijos.length;j++)
                 /*
                     * 0 - No existe demandante o se ha producido un error
-                    * 1 - Existe demandante y está en alta (SituAdm A)
-                    * 2 - Existe demandante y está en suspensión (SituAdm S)
+                    * 1 - Existe demandante y estÃ¡ en alta (SituAdm A)
+                    * 2 - Existe demandante y estÃ¡ en suspensiÃ³n (SituAdm S)
                     * 9 - Existe demandante y el estado es otro (SituAdm 'else')
                     */
                 if(codigoOperacion=="0"){
