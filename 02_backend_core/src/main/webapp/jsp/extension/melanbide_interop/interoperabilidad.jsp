@@ -532,18 +532,6 @@
             }//try-catch
         }else{
             jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-        }//try-catch
-        }else{
-            jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-        }//try-catch
-        }else{
-            jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-        }//try-catch
-        }else{
-            jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-        }
-        }else{
-            jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
         }
     }
 
