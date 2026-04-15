@@ -140,9 +140,6 @@
                             <input type="button" id="btnCvlMasivoTexto" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeTexto()">
                         </div>
 
-        <%
-            List<TerceroVO> List = (List<TerceroVO>)request.getAttribute("listaTerceros");
-
     <script type="text/javascript">
         function ejecutarCvlMasivoDesdeTexto(){
             var lista = document.getElementById('listaDocsMasivo').value;

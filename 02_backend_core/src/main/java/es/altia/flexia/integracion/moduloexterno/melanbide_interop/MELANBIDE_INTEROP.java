@@ -5772,6 +5772,26 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
                 celda.setCellValue(meLanbideInteropI18n.getMensaje(idioma, "label.vidalaboral.col16").toUpperCase());
                 celda.setCellStyle(estiloCelda);
 
+                // Días alta
+                estiloCelda = libro.createCellStyle();
+                estiloCelda.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+                estiloCelda.setFillForegroundColor(hssfColor.getIndex());
+                estiloCelda.setBorderBottom(HSSFCellStyle.BORDER_THICK);
+                estiloCelda.setBorderTop(HSSFCellStyle.BORDER_THICK);
+                estiloCelda.setBorderLeft(HSSFCellStyle.BORDER_THICK);
+                estiloCelda.setWrapText(true);
+                estiloCelda.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+                estiloCelda.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
+                estiloCelda.setFont(negritaTitulo);
+                celda = fila.createCell(16);
+                celda.setCellValue(meLanbideInteropI18n.getMensaje(idioma, "label.vidalaboral.col17").toUpperCase());
+                celda.setCellStyle(estiloCelda);
+            } catch (Exception e) {
+            }
+        } catch (Exception ex) {
+        }
+    }
+    // Fin tarea IKER - [40984] - Interoperabilidad - Consulta vida laboral desde la ficha de expediente
 
     public void ejecutarCvlMasivoDesdeTexto(int codOrganizacion, int codTramite, int ocurrenciaTramite,
             String numExpediente, HttpServletRequest request, HttpServletResponse response) {
@@ -5842,25 +5862,4 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
             log.error("Error preparando response ejecutarCvlMasivoDesdeTexto", e);
         }
     }
-
-                // Días alta
-                estiloCelda = libro.createCellStyle();
-                estiloCelda.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
-                estiloCelda.setFillForegroundColor(hssfColor.getIndex());
-                estiloCelda.setBorderBottom(HSSFCellStyle.BORDER_THICK);
-                estiloCelda.setBorderTop(HSSFCellStyle.BORDER_THICK);
-                estiloCelda.setBorderLeft(HSSFCellStyle.BORDER_THICK);
-                estiloCelda.setWrapText(true);
-                estiloCelda.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-                estiloCelda.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
-                estiloCelda.setFont(negritaTitulo);
-                celda = fila.createCell(16);
-                celda.setCellValue(meLanbideInteropI18n.getMensaje(idioma, "label.vidalaboral.col17").toUpperCase());
-                celda.setCellStyle(estiloCelda);
-            } catch (Exception e) {
-            }
-        } catch (Exception ex) {
-        }
-    }
-    // Fin tarea IKER - [40984] - Interoperabilidad - Consulta vida laboral desde la ficha de expediente
 }
