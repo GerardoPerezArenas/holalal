@@ -2,6 +2,8 @@ package es.altia.flexia.integracion.moduloexterno.melanbide_interop.services;
 
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.dao.InteropCvlMasivoNifDAO;
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.dao.MeLanbideInteropVidaLaboralDAO;
+import es.altia.flexia.integracion.moduloexterno.melanbide_interop.util.ConfigurationParameter;
+import es.altia.flexia.integracion.moduloexterno.melanbide_interop.util.ConstantesMeLanbideInterop;
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.util.MeLanbideInteropMappingUtils;
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.vo.InteropCvlMasivoNifVO;
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.vo.InteropCvlMasivoResultadoVO;
@@ -27,7 +29,6 @@ public class InteropCvlMasivoCsvService {
     private static final Logger log = LogManager.getLogger(InteropCvlMasivoCsvService.class);
     private static final String SEPARADOR_CSV = ";";
     private static final String PREFIJO_EXP_TECNICO = "CVL_MASIVO";
-    private static final String TABLA_INTEROP_VIDA_LABORAL = "INTEROP_VIDALABORAL";
 
     public InteropCvlMasivoResultadoVO procesarCsv(final Reader csvReader,
             final String fechaDesdeCVL, final String fechaHastaCVL,
@@ -165,8 +166,10 @@ public class InteropCvlMasivoCsvService {
         try {
             final int year = Calendar.getInstance().get(Calendar.YEAR);
             final String patron = PREFIJO_EXP_TECNICO + "/" + year + "/%";
+            final String tablaVidaLaboral = ConfigurationParameter.getParameter(
+                    ConstantesMeLanbideInterop.TABLA_INTEROP_VIDALABORAL, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
             final String sql = "SELECT NVL(MAX(TO_NUMBER(SUBSTR(NUMEXP, -6))), 0) + 1 AS SIGUIENTE "
-                    + "FROM " + TABLA_INTEROP_VIDA_LABORAL + " WHERE NUMEXP LIKE ?";
+                    + "FROM " + tablaVidaLaboral + " WHERE NUMEXP LIKE ?";
             st = con.prepareStatement(sql);
             st.setString(1, patron);
             rs = st.executeQuery();
@@ -175,7 +178,7 @@ public class InteropCvlMasivoCsvService {
                 siguiente = rs.getInt("SIGUIENTE");
             }
 
-            final String secuencia6 = String.format("%06d", new Object[]{new Integer(siguiente)});
+            final String secuencia6 = String.format("%06d", Integer.valueOf(siguiente));
             return PREFIJO_EXP_TECNICO + "/" + year + "/" + secuencia6;
         } catch (Exception ex) {
             log.error("Error generando expediente tecnico CVL masivo", ex);
