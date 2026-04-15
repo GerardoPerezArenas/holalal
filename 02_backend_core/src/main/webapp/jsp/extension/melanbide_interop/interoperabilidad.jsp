@@ -3,7 +3,6 @@
 <%@ taglib uri="/WEB-INF/tlds/c.tld" prefix="c" %>
 
 
-
 <%@page import="es.altia.flexia.integracion.moduloexterno.melanbide_interop.i18n.MeLanbideInteropI18n"%>
 <%@page import="es.altia.flexia.integracion.moduloexterno.melanbide_interop.vo.tercero.TerceroVO"%>
 <%@page import="es.altia.agora.business.escritorio.UsuarioValueObject" %>
@@ -14,8 +13,8 @@
 
 <%
     int idiomaUsuario = 1;
- int apl = 5;
- String css = "";
+    int apl = 5;
+    String css = "";
     if(request.getParameter("idioma") != null)
     {
         try
@@ -28,166 +27,108 @@
     UsuarioValueObject usuario = new UsuarioValueObject();
     try
     {
-        if (session != null)
+        if (session != null) 
         {
-            if (usuario != null)
+            if (usuario != null) 
             {
                 usuario = (UsuarioValueObject) session.getAttribute("usuario");
                 idiomaUsuario = usuario.getIdioma();
-	 apl = usuario.getAppCod();
-	 css = usuario.getCss();
+            apl = usuario.getAppCod();
+            css = usuario.getCss();
             }
         }
     }
     catch(Exception ex)
     {
-
+        
     }
 
     // Para coger los datos del tercero y pasarlos al WS
     TerceroVO _tercero = new TerceroVO();
-    List<TerceroVO> _tercerosxExpediente = (List<TerceroVO>)request.getAttribute("listaTerceros");
+    List<TerceroVO> _tercerosxExpediente = (List<TerceroVO>)request.getAttribute("listaTerceros");	
+    
+    //Clase para internacionalizar los mensajes de la aplicaci�n.
+    MeLanbideInteropI18n meLanbideInteropI18n = MeLanbideInteropI18n.getInstance();   
 
-    MeLanbideInteropI18n meLanbideInteropI18n = MeLanbideInteropI18n.getInstance();
+    Config m_Config = ConfigServiceHelper.getConfig("common");
+    String statusBar = m_Config.getString("JSP.StatusBar");
+    String nombreModulo     = request.getParameter("nombreModulo");
+    String codOrganizacion  = request.getParameter("codOrganizacionModulo");
+    String numExpediente    = request.getParameter("numero");
+    
+    String userAgent = request.getHeader("user-agent");
+    String margenIzqPestanaEpecialidadesRecursos = "";
+
+    if(userAgent.indexOf("MSIE")!=-1) {
+        // Internet Explorer
+        margenIzqPestanaEpecialidadesRecursos = "";
+    }else{
+        // Firefox u otro navegador
+        margenIzqPestanaEpecialidadesRecursos = "margin-left:10px;";
+    }
+    
+    // recogemos atributos para ocultar WS NO Autorizados para e procedimiento
+    /*
+    String hidenbtnDatosIdentidad=(String)request.getAttribute("hidenbtnDatosIdentidad");
+    String hidenbtnEpigrafesIae=(String)request.getAttribute("hidenbtnDatosIdentidad");
+    String hidenbtnDomicilioFiscal=(String)request.getAttribute("hidenbtnDatosIdentidad");
+    String hidenbtnCorrientePagoTGSS=(String)request.getAttribute("hidenbtnDatosIdentidad");
+    String hidenbtnObligacionesTribuDipu=(String)request.getAttribute("hidenbtnDatosIdentidad");
+    String hidenbtnLangaiDemanda=(String)request.getAttribute("hidenbtnDatosIdentidad");
+*/  
+
+%>
+
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/extension/melanbide_interop/melanbide_interop.css"/>
+<jsp:useBean id="descriptor" scope="request" class="es.altia.agora.interfaces.user.web.util.TraductorAplicacionBean"  type="es.altia.agora.interfaces.user.web.util.TraductorAplicacionBean" />
+<jsp:setProperty name="descriptor"  property="idi_cod" value="<%=idiomaUsuario%>" />
+<jsp:setProperty name="descriptor"  property="apl_cod" value="<%=apl%>" />
+<link rel="StyleSheet" media="screen" type="text/css" href="<%=request.getContextPath()%><%=css%>">
+<script type="text/javascript" src="<%=request.getContextPath()%>/scripts/jquery/jquery-1.9.1.min.js"></script>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/extension/melanbide_interop/melanbide_interop.css"/>
 
 
 
 
-<script type="text/javascript">
-
-    function configurarPestanas(){
-        mostrarPestanaEpecialidadesRecursos();
-
-
-
-                listaTercerosExp = uno.children[i].value;
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        }//if(hijos[j].nodeName=="CODIGO_OPERACION")
-                        else if(hijos[j].nodeName=="RESULTADO"){
-                        }
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        else if(hijos[j].nodeName=="RESULTADO"){
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        }//if(hijos[j].nodeName=="CODIGO_OPERACION")
-                        else if(hijos[j].nodeName=="RESULTADO"){
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                    }//if(hijos[j].nodeName=="CODIGO_OPERACION")
-                    else if(hijos[j].nodeName=="RESULTADO"){
-                    }//if(hijos[j].nodeName=="CODIGO_OPERACION")
-                    }
-                    jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.pasoParametros")%>');
-                    jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorConectionWS")%>');
-
-        var listaTercerosExp = recogerListaTerceros();
-
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        else if(hijos[j].nodeName=="RESULTADO"){
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        else if(hijos[j].nodeName=="RESULTADO"){
-                        }
-        if(navigator.appName=="Microsoft Internet Explorer") {
-              window.parent.window.opener=null;
-              window.parent.window.close();
-        }else if(navigator.appName=="Netscape") {
-              top.window.opener = top;
-              top.window.open('','_parent','');
-              top.window.close();
+<script type="text/javascript">   
+    var tp41_interop;
+    var codTercero;
+    
+    function configurarPestanas(){        
+        mostrarPestanaEpecialidadesRecursos();        
+    }
+    
+    function ocultarPestanaEpecialidadesRecursos(){
+        tp41_interop.hideTabPage(1);
+        //tp41_interop.hideTabPage(2);
+    }
+    
+    function mostrarPestanaEpecialidadesRecursos(){
+        tp41_interop.showTabPage(1);
+        //tp41_interop.showTabPage(2);
+    }
+    
+    function recogerListaTerceros(){
+        var listaTercerosExp;
+        var nooChlidren = 0;
+        var uno = document.forms[0];
+        if(navigator.appName.indexOf("Internet Explorer")!=-1){
+            // En IE el XML viene en responseText y no en la propiedad responseXML
+            nooChlidren = uno.children.length;
         }else{
-             window.close();
+            // En el resto de navegadores el XML se recupera de la propiedad responseXML
+            nooChlidren = uno.childElementCount;
         }
-                        </logic:equal>
-                        </logic:equal>
-                        </logic:equal>
-                        </logic:equal>
-                        </logic:equal>
-                        </logic:equal>
-                        <hr>
-                        <div style="text-align:left; border:1px solid #cccccc; padding:8px; margin-top:8px;">
-                            <label class="legendAzul">CVL masivo por lista de NIF/NIE (CSV pegado)</label><br>
-                            <label>Fecha desde (yyyy-MM-dd)</label>
-                            <input type="text" id="fechaDesdeCVLMasivo" style="width:120px;"/>
-                            <label>Fecha hasta (yyyy-MM-dd)</label>
-                            <input type="text" id="fechaHastaCVLMasivo" style="width:120px;"/>
-                            <br><br>
-                            <textarea id="listaDocsMasivo" rows="6" style="width:98%;" placeholder="NIF;TIPO_DOC
-12345678Z;NIF"></textarea>
-                            <br>
-                            <input type="button" id="btnCvlMasivoTexto" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeTexto()">
-                        </div>
-
-        <%
-            List<TerceroVO> List = (List<TerceroVO>)request.getAttribute("listaTerceros");
-
-    <script type="text/javascript">
-        function ejecutarCvlMasivoDesdeTexto(){
-            var lista = document.getElementById('listaDocsMasivo').value;
-            if(!lista || lista.replace(/\s/g,'').length===0){
-                jsp_alerta('A','Debe indicar una lista CSV de NIF/NIE.');
-                return;
-            }
-            var fechaDesde = document.getElementById('fechaDesdeCVLMasivo').value;
-            var fechaHasta = document.getElementById('fechaHastaCVLMasivo').value;
-            var ajax = getXMLHttpRequest();
-            var url = '<%=request.getContextPath()%>/PeticionModuloIntegracion.do';
-            var params = 'tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=ejecutarCvlMasivoDesdeTexto&tipo=0&numero=<%=numExpediente%>'
-                + '&fechaDesdeCVL=' + encodeURIComponent(fechaDesde)
-                + '&fechaHastaCVL=' + encodeURIComponent(fechaHasta)
-                + '&fkWSSolicitado=1'
-                + '&listaDocsMasivo=' + encodeURIComponent(lista);
-            try{
-                ajax.open('POST', url, false);
-                ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=ISO-8859-1');
-                ajax.setRequestHeader('Accept','text/xml, application/xml, text/plain');
-                ajax.send(params);
-                if (ajax.readyState==4 && ajax.status==200){
-                    var xmlDoc = (navigator.appName.indexOf('Internet Explorer')!=-1) ? new ActiveXObject('Microsoft.XMLDOM') : ajax.responseXML;
-                    if(navigator.appName.indexOf('Internet Explorer')!=-1){
-                        xmlDoc.async='false';
-                        xmlDoc.loadXML(ajax.responseText);
-                    }
-                    var nodos = xmlDoc.getElementsByTagName('RESPUESTA');
-                    if(nodos.length>0){
-                        var codigo = nodos[0].getElementsByTagName('CODIGO_OPERACION')[0].childNodes[0].nodeValue;
-                        var resultado = nodos[0].getElementsByTagName('RESULTADO')[0].childNodes[0].nodeValue;
-                        if(codigo=='0'){
-                            jsp_alerta('A', resultado);
-                        }else{
-                            jsp_alerta('A', 'Error: ' + resultado);
-                        }
-                    }
-                }
-            }catch(err){
-                jsp_alerta('A','Error ejecutando CVL masivo: ' + err.message);
+        for(i=0; i<nooChlidren; i++)
+        {
+            if(uno.children[i].name=="listaCodTercero"){
+                //alert('lo encontramos : teceros del expediente:'+ uno.children[i].value);
+                listaTercerosExp = uno.children[i].value;     
+                break;
             }
         }
-    </script>
-
-    <script type="text/javascript">
+        return listaTercerosExp;
+    }
     
     function llamarServicioDatosIdentidad(){
         var listaTercerosExp = recogerListaTerceros();    
@@ -254,7 +195,7 @@
                     }//for(j=0;hijos!=null && j<hijos.length;j++)
                     if(codigoOperacion=="0"){
                         jsp_alerta("A",' ' + textoRespuestaWS);
-                        //self.parent.opener.retornoXanelaAuxiliar(  lista);
+                        //window.returnValue =  lista;
                         //cerrarVentana();
                     }else if(codigoOperacion=="1" || "4" < codigoOperacion ){
                         jsp_alerta("A",textoRespuestaWS); /*'<=//meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorBD")%>'*/
@@ -492,8 +433,8 @@
                 }//for(j=0;hijos!=null && j<hijos.length;j++)
                 /*
                     * 0 - No existe demandante o se ha producido un error
-                    * 1 - Existe demandante y está en alta (SituAdm A)
-                    * 2 - Existe demandante y está en suspensión (SituAdm S)
+                    * 1 - Existe demandante y est� en alta (SituAdm A)
+                    * 2 - Existe demandante y est� en suspensi�n (SituAdm S)
                     * 9 - Existe demandante y el estado es otro (SituAdm 'else')
                     */
                 if(codigoOperacion=="0"){
@@ -526,199 +467,74 @@
         }
     }
     
-    function llamarServicioVerificarDatosPadron(){
-        var listaTercerosExp = recogerListaTerceros(); 
-        var docvacio = isDocumentoVacio(listaTerceros[tabTerceros.selectedIndex][1]);
-        if(tabTerceros.selectedIndex != -1 && !docvacio ){
+    function llamarServicioCorrientePagoHHFF(){
+        var listaTercerosExp = recogerListaTerceros();    
+        if(tabTerceros.selectedIndex != -1){
             var ajax = getXMLHttpRequest();
             var nodos = null;
             var CONTEXT_PATH = '<%=request.getContextPath()%>';
             var url = CONTEXT_PATH + "/PeticionModuloIntegracion.do";
             var parametros = "";
 
-            parametros = "tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=WS_verificarDatosPadron&tipo=0&numero=<%=numExpediente%>&listaTercerosExp="+listaTercerosExp
+            parametros = "tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=GetConsultaCorrientePagoHHFF&tipo=0&numero=<%=numExpediente%>&listaTercerosExp="+listaTercerosExp
                            + "&codTer="+ listaTerceros[tabTerceros.selectedIndex][0]
-                           + "&documento="+ listaTerceros[tabTerceros.selectedIndex][1]
-                           + "&versionTer="+ listaTerceros[tabTerceros.selectedIndex][4]
-                   ;
+                           + "&documento="+ listaTerceros[tabTerceros.selectedIndex][1];
             try{
                 ajax.open("POST",url,false);
                 ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=ISO-8859-1");
                 ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");     
-                //var formData = new FormData(document.getElementById('formContrato'));
                 ajax.send(parametros);
                 if (ajax.readyState==4 && ajax.status==200){
                     var xmlDoc = null;
                     if(navigator.appName.indexOf("Internet Explorer")!=-1){
-                        // En IE el XML viene en responseText y no en la propiedad responseXML
                         var text = ajax.responseText;
                         xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
                         xmlDoc.async="false";
                         xmlDoc.loadXML(text);
                     }else{
-                        // En el resto de navegadores el XML se recupera de la propiedad responseXML
                         xmlDoc = ajax.responseXML;
-                    }//if(navigator.appName.indexOf("Internet Explorer")!=-1)
-                }//if (ajax.readyState==4 && ajax.status==200)
-                nodos = xmlDoc.getElementsByTagName("RESPUESTA");
-                var elemento = nodos[0];
-                var hijos = elemento.childNodes;
-                //var codigoOperacion = null;
-                var textoRespuestaWS = null;
-                var lista = new Array();
-                for(j=0;hijos!=null && j<hijos.length;j++){
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){                            
-                        textoRespuestaWS = hijos[j].childNodes[0].nodeValue;
-                        lista[j] = textoRespuestaWS;
                     }
                 }
-                jsp_alerta_Grande("A",textoRespuestaWS);
-            }
-            catch(err){
-                 jsp_alerta_Grande('A',"Error procesando la solicitud : " + err.message);
-            }//try-catch
-        }else{
-            if(docvacio){
-                jsp_alerta_Grande('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjDocumentoInterNull")%>');
-            }else{
-                jsp_alerta_Grande('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-            }
-        }
-    }
-    function llamarServicioVerificarDatosResidencia(){
-        var listaTercerosExp = recogerListaTerceros(); 
-        var docvacio = isDocumentoVacio(listaTerceros[tabTerceros.selectedIndex][1]);
-        if(tabTerceros.selectedIndex != -1 && !docvacio ){
-            var ajax = getXMLHttpRequest();
-            var nodos = null;
-            var CONTEXT_PATH = '<%=request.getContextPath()%>';
-            var url = CONTEXT_PATH + "/PeticionModuloIntegracion.do";
-            var parametros = "";
-
-            parametros = "tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=WS_verificarDatosResidencia&tipo=0&numero=<%=numExpediente%>&listaTercerosExp="+listaTercerosExp
-                           + "&codTer="+ listaTerceros[tabTerceros.selectedIndex][0]
-                           + "&documento="+ listaTerceros[tabTerceros.selectedIndex][1]
-                           + "&versionTer="+ listaTerceros[tabTerceros.selectedIndex][4]
-                   ;
-            try{
-                ajax.open("POST",url,false);
-                ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=ISO-8859-1");
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");     
-                //var formData = new FormData(document.getElementById('formContrato'));
-                ajax.send(parametros);
-                if (ajax.readyState==4 && ajax.status==200){
-                    var xmlDoc = null;
-                    if(navigator.appName.indexOf("Internet Explorer")!=-1){
-                        // En IE el XML viene en responseText y no en la propiedad responseXML
-                        var text = ajax.responseText;
-                        xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
-                        xmlDoc.async="false";
-                        xmlDoc.loadXML(text);
+                nodos = xmlDoc.getElementsByTagName("RESPUESTA");
+                if(nodos.length>0){
+                    var elemento = nodos[0];
+                    var hijos = elemento.childNodes;
+                    var codigoOperacion = null;
+                    var textoRespuestaWS = null;
+                    for(j=0;hijos!=null && j<hijos.length;j++){
+                        if(hijos[j].nodeName=="CODIGO_OPERACION"){                            
+                            codigoOperacion = hijos[j].childNodes[0].nodeValue;
+                        }
+                        else if(hijos[j].nodeName=="RESULTADO"){                            
+                            textoRespuestaWS = hijos[j].childNodes[0].nodeValue;
+                        }
+                    }
+                    var codigoOperacionNum = parseInt(codigoOperacion, 10);
+                    if(codigoOperacion=="0"){
+                        jsp_alerta("A",textoRespuestaWS);
+                    }else if(codigoOperacion=="1" || codigoOperacionNum > 4){
+                        jsp_alerta("A",textoRespuestaWS);
+                    }else if(codigoOperacion=="2"){
+                        jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
+                    }else if(codigoOperacion=="3"){
+                        jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.pasoParametros")%>');
+                    }else if(codigoOperacion=="4"){
+                        jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.expSinTercero")%>');
                     }else{
-                        // En el resto de navegadores el XML se recupera de la propiedad responseXML
-                        xmlDoc = ajax.responseXML;
-                    }//if(navigator.appName.indexOf("Internet Explorer")!=-1)
-                }//if (ajax.readyState==4 && ajax.status==200)
-                nodos = xmlDoc.getElementsByTagName("RESPUESTA");
-                var elemento = nodos[0];
-                var hijos = elemento.childNodes;
-                //var codigoOperacion = null;
-                var textoRespuestaWS = null;
-                var lista = new Array();
-                for(j=0;hijos!=null && j<hijos.length;j++){
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){                            
-                        textoRespuestaWS = hijos[j].childNodes[0].nodeValue;
-                        lista[j] = textoRespuestaWS;
+                            jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
                     }
-                }
-                jsp_alerta("A",textoRespuestaWS);
-            }
-            catch(err){
-                 jsp_alerta('A',"Error procesando la solicitud : " + err.message);
-            }//try-catch
-        }else{
-            if(docvacio){
-                jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjDocumentoInterNull")%>');
-            }else{
-                jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-            }
-        }
-    }
-    function llamarServicioLagaiDemandaFSE(){
-        var listaTercerosExp = recogerListaTerceros(); 
-        var docvacio = isDocumentoVacio(listaTerceros[tabTerceros.selectedIndex][1]);
-        if(tabTerceros.selectedIndex != -1 && !docvacio ){
-            var ajax = getXMLHttpRequest();
-            var nodos = null;
-            var CONTEXT_PATH = '<%=request.getContextPath()%>';
-            var url = CONTEXT_PATH + "/PeticionModuloIntegracion.do";
-            var parametros = "";
-
-            parametros = "tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=wsFSE_altaServicio&tipo=0&numero=<%=numExpediente%>&listaTercerosExp="+listaTercerosExp
-                           + "&codTer="+ listaTerceros[tabTerceros.selectedIndex][0]
-                           + "&documento="+ listaTerceros[tabTerceros.selectedIndex][1]
-                           + "&versionTer="+ listaTerceros[tabTerceros.selectedIndex][4]
-                   ;
-            try{
-                ajax.open("POST",url,false);
-                ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded; charset=ISO-8859-1");
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");     
-                //var formData = new FormData(document.getElementById('formContrato'));
-                ajax.send(parametros);
-                if (ajax.readyState==4 && ajax.status==200){
-                    var xmlDoc = null;
-                    if(navigator.appName.indexOf("Internet Explorer")!=-1){
-                        // En IE el XML viene en responseText y no en la propiedad responseXML
-                        var text = ajax.responseText;
-                        xmlDoc=new ActiveXObject("Microsoft.XMLDOM");
-                        xmlDoc.async="false";
-                        xmlDoc.loadXML(text);
-                    }else{
-                        // En el resto de navegadores el XML se recupera de la propiedad responseXML
-                        xmlDoc = ajax.responseXML;
-                    }//if(navigator.appName.indexOf("Internet Explorer")!=-1)
-                }//if (ajax.readyState==4 && ajax.status==200)
-                nodos = xmlDoc.getElementsByTagName("RESPUESTA");
-                var elemento = nodos[0];
-                var hijos = elemento.childNodes;
-                var codigoOperacion = null;
-                var textoRespuestaWS = null;
-                var lista = new Array();
-                for(j=0;hijos!=null && j<hijos.length;j++){
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){                            
-                        codigoOperacion = hijos[j].childNodes[0].nodeValue;
-                        lista[j] = codigoOperacion;
-                    }
-                }
-                jsp_alerta("A",codigoOperacion);
-                /*
-                if(codigoOperacion=="0"){
-                    jsp_alerta("A",'< %=meLanbideInteropI18n.getMensaje(idiomaUsuario,"msg.respuesta.langaidemaWS.fse.0")%>');
                 }else{
-                    var arreglo = codigoOperacion.split(",");
-                    var textoErrores ="";
-                    for(j=0;arreglo!=null && j<arreglo.length;j++){
-                        if(textoErrores!=null && textoErrores!=""){
-                            textoErrores = textoErrores + " \n " + arreglo[j]; // + " - " '< %=meLanbideInteropI18n.getMensaje(idiomaUsuario,"msg.respuesta.langaidemaWS.fse."+arreglo[j])%>'
-                        }else{
-                            textoErrores = arreglo[j];// + " - " '< %=meLanbideInteropI18n.getMensaje(idiomaUsuario,"msg.respuesta.langaidemaWS.fse."+arreglo[j])%>'
-                         }
-                    }
-                    jsp_alerta("A",textoErrores);
-                }//if(
-                */
+                    jsp_alerta('A',"Error procesando la solicitud. No se ha podido establecer conexion/obtener respuesta del WebService.");
+                }
             }
-            catch(err){
-                 jsp_alerta('A',"Error procesando la solicitud : " + err.message);
+            catch(Err){
+                 jsp_alerta('A',"Error procesando la solicitud : " + Err.message);
             }//try-catch
         }else{
-            if(docvacio){
-                jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjDocumentoInterNull")%>');
-            }else{
-                jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-            }
+            jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
         }
     }
+
     function llamarServicioCorrientePagoTgss(){
         var listaTercerosExp = recogerListaTerceros();    
         if(tabTerceros.selectedIndex != -1){
@@ -877,7 +693,7 @@
     }
 </script>
 
-<!--<body>-->
+<body>
     <div class="tab-page" id="tabPageinterop" style="height:520px; width: 100%;">
         <h2 class="tab" id="pestanainterop"><%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.interoperabilidad.tituloPestana")%></h2>
         <script type="text/javascript">tp1.addTabPage( document.getElementById( "tabPageinterop" ) );</script>
@@ -888,7 +704,7 @@
                 </div>
         </div>
         <div style="clear: both;">
-            <div> <!--class="contenidoPantalla"-->
+            <div class="contenidoPantalla">
                 <div style="width: 100%; padding: 10px; text-align: left;">
                     <div  class="sub3titulo" style="clear: both; text-align: center; font-size: 14px;">
                         <span>
@@ -913,32 +729,23 @@
                             <input type="button" id="btnCorrientePagoTGSS" name="btnCorrientePagoTGSS" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnCorrientePagoTGSS")%>" onclick="llamarServicioCorrientePagoTgss()" >
                             <br><br>
                         </logic:equal>    
+                        <logic:equal name="hidenbtnHHFF" value="1" scope="request">
+                            <input type="button" id="btnCorrientePagoHHFF" name="btnCorrientePagoHHFF" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnCorrientePagoHHFF")%>" onclick="llamarServicioCorrientePagoHHFF()" >
+                            <br><br>
+                        </logic:equal>
                         <logic:equal name="hidenbtnObligacionesTribuDipu" value="1" scope="request">
                             <input type="button" id="btnObligacionesTribuDipu" name="btnObligacionesTribuDipu" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnObligacionesTribuDipu")%>" onclick="llamarServicioObligacionesTribuDipu()" >
                             <br><br>
                         </logic:equal>    
                         <logic:equal name="hidenbtnLangaiDemanda" value="1" scope="request">
                             <input type="button" id="btnLangaiDemanda" name="btnLangaiDemanda" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.langaiDemanda")%>" onclick="llamarServicioLagaiDemanda()" >
-                            <br><br>
                         </logic:equal>    
-                        <logic:equal name="hidenbtnLangaiDemandaFSE" value="1" scope="request">
-                            <input type="button" id="btnLangaiDemandaFSE" name="btnLangaiDemandaFSE" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.langaiDemandaFSE")%>" onclick="llamarServicioLagaiDemandaFSE()" >
-                            <br><br>
-                        </logic:equal> 
-                        <logic:equal name="hidenbtnDatosPadron" value="1" scope="request">
-                            <input type="button" id="btnDatosPadron" name="btnDatosPadron" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnDatosPadron")%>" onclick="llamarServicioVerificarDatosPadron()" >
-                            <br><br>
-                        </logic:equal> 
-                        <logic:equal name="hidenbtnDatosResidencia" value="1" scope="request">
-                            <input type="button" id="btnDatosResidencia" name="btnDatosResidencia" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnDatosResidencia")%>" onclick="llamarServicioVerificarDatosResidencia()" >
-                            <br><br>
-                        </logic:equal> 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-<!--</body>-->
+</body>
     <script type="text/javascript">
         //Tabla Terceros
         var tabTerceros;
@@ -946,7 +753,7 @@
         var listaTercerosTabla = new Array();
         
 
-        tabTerceros = new Tabla(true,'<%=descriptor.getDescripcion("buscar")%>','<%=descriptor.getDescripcion("anterior")%>','<%=descriptor.getDescripcion("siguiente")%>','<%=descriptor.getDescripcion("mosFilasPag")%>','<%=descriptor.getDescripcion("msgNoResultBusq")%>','<%=descriptor.getDescripcion("mosPagDePags")%>', '<%=descriptor.getDescripcion("noRegDisp")%>','<%=descriptor.getDescripcion("filtrDeTotal")%>','<%=descriptor.getDescripcion("primero")%>','<%=descriptor.getDescripcion("ultimo")%>',document.getElementById('listaTerceros'), 820);
+        tabTerceros = new Tabla(document.getElementById('listaTerceros'), 820);
         tabTerceros.addColumna('100','left',"<%= meLanbideInteropI18n.getMensaje(idiomaUsuario,"interoperabilidad.tablaTerceros.col1")%>");
         tabTerceros.addColumna('400','left',"<%= meLanbideInteropI18n.getMensaje(idiomaUsuario,"interoperabilidad.tablaTerceros.col2")%>");
         tabTerceros.addColumna('300','left',"<%= meLanbideInteropI18n.getMensaje(idiomaUsuario,"interoperabilidad.tablaTerceros.col3")%>");
