@@ -182,7 +182,7 @@
                 }
                 if(codigoOperacion=="0"){
                     mostrarRespuestaWS(textoRespuestaWS);
-                }else if(codigoOperacion=="1" || "4"<codigoOperacion){
+                }else if(codigoOperacion=="1" || parseInt(codigoOperacion,10) > 4){
                     mostrarRespuestaWS(textoRespuestaWS);
                 }else if(codigoOperacion=="2"){
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
