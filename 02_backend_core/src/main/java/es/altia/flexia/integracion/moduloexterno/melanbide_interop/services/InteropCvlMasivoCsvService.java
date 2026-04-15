@@ -2,6 +2,8 @@ package es.altia.flexia.integracion.moduloexterno.melanbide_interop.services;
 
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.dao.InteropCvlMasivoNifDAO;
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.dao.MeLanbideInteropVidaLaboralDAO;
+import es.altia.flexia.integracion.moduloexterno.melanbide_interop.util.ConfigurationParameter;
+import es.altia.flexia.integracion.moduloexterno.melanbide_interop.util.ConstantesMeLanbideInterop;
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.util.MeLanbideInteropMappingUtils;
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.vo.InteropCvlMasivoNifVO;
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.vo.InteropCvlMasivoResultadoVO;
@@ -12,8 +14,8 @@ import es.altia.flexia.integracion.moduloexterno.melanbide_interop.ws.client.vid
 import java.io.BufferedReader;
 import java.io.Reader;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import org.apache.logging.log4j.LogManager;
@@ -27,7 +29,6 @@ public class InteropCvlMasivoCsvService {
     private static final Logger log = LogManager.getLogger(InteropCvlMasivoCsvService.class);
     private static final String SEPARADOR_CSV = ";";
     private static final String PREFIJO_EXP_TECNICO = "CVL_MASIVO";
-    private static final String TABLA_INTEROP_VIDA_LABORAL = "INTEROP_VIDALABORAL";
 
     public InteropCvlMasivoResultadoVO procesarCsv(final Reader csvReader,
             final String fechaDesdeCVL, final String fechaHastaCVL,
@@ -39,7 +40,7 @@ public class InteropCvlMasivoCsvService {
                 ? numExpediente.trim() : generarNumExpedienteTecnico(con);
         resumen.setNumExpedienteContexto(numExpedienteTrabajo);
 
-        final BufferedReader br = new BufferedReader(csvReader);
+        try (final BufferedReader br = new BufferedReader(csvReader)) {
 
         String linea = null;
         int numLinea = 0;
@@ -109,6 +110,7 @@ public class InteropCvlMasivoCsvService {
                 registrarAuditoriaError(nif, tipoDoc, usuario, "ERROR", ex.getMessage(), con);
             }
         }
+        } // end try-with-resources BufferedReader
 
         return resumen;
     }
@@ -160,19 +162,18 @@ public class InteropCvlMasivoCsvService {
     }
 
     private String generarNumExpedienteTecnico(final Connection con) throws Exception {
-        PreparedStatement st = null;
+        Statement st = null;
         ResultSet rs = null;
         try {
             final int year = Calendar.getInstance().get(Calendar.YEAR);
-            final String patron = PREFIJO_EXP_TECNICO + "/" + year + "/%";
-            final String sql = "SELECT NVL(MAX(TO_NUMBER(SUBSTR(NUMEXP, -6))), 0) + 1 AS SIGUIENTE "
-                    + "FROM " + TABLA_INTEROP_VIDA_LABORAL + " WHERE NUMEXP LIKE ?";
-            st = con.prepareStatement(sql);
-            st.setString(1, patron);
-            rs = st.executeQuery();
+            final String seqName = ConfigurationParameter.getParameter(
+                    ConstantesMeLanbideInterop.SEQ_VIDALABORAL,
+                    ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT " + seqName + ".NEXTVAL FROM DUAL");
             int siguiente = 1;
             if (rs.next()) {
-                siguiente = rs.getInt("SIGUIENTE");
+                siguiente = rs.getInt(1);
             }
 
             final String secuencia6 = String.format("%06d", new Object[]{new Integer(siguiente)});

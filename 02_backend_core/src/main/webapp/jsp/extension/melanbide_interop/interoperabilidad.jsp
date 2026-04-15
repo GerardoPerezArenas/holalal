@@ -49,101 +49,15 @@
     List<TerceroVO> _tercerosxExpediente = (List<TerceroVO>)request.getAttribute("listaTerceros");
 
     MeLanbideInteropI18n meLanbideInteropI18n = MeLanbideInteropI18n.getInstance();
-
-
-
-
+    String numExpediente = request.getParameter("numero");
+%>
 <script type="text/javascript">
-
     function configurarPestanas(){
         mostrarPestanaEpecialidadesRecursos();
+    }
+</script>
 
-
-
-                listaTercerosExp = uno.children[i].value;
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        }//if(hijos[j].nodeName=="CODIGO_OPERACION")
-                        else if(hijos[j].nodeName=="RESULTADO"){
-                        }
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        else if(hijos[j].nodeName=="RESULTADO"){
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        }//if(hijos[j].nodeName=="CODIGO_OPERACION")
-                        else if(hijos[j].nodeName=="RESULTADO"){
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                    }//if(hijos[j].nodeName=="CODIGO_OPERACION")
-                    else if(hijos[j].nodeName=="RESULTADO"){
-                    }//if(hijos[j].nodeName=="CODIGO_OPERACION")
-                    }
-                    jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.pasoParametros")%>');
-                    jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorConectionWS")%>');
-
-        var listaTercerosExp = recogerListaTerceros();
-
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                    if(hijos[j].nodeName=="CODIGO_OPERACION"){
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        else if(hijos[j].nodeName=="RESULTADO"){
-
-        var listaTercerosExp = recogerListaTerceros();
-                ajax.setRequestHeader("Accept", "text/xml, application/xml, text/plain");
-                        if(hijos[j].nodeName=="CODIGO_OPERACION"){
-                        else if(hijos[j].nodeName=="RESULTADO"){
-                        }
-        if(navigator.appName=="Microsoft Internet Explorer") {
-              window.parent.window.opener=null;
-              window.parent.window.close();
-        }else if(navigator.appName=="Netscape") {
-              top.window.opener = top;
-              top.window.open('','_parent','');
-              top.window.close();
-        }else{
-             window.close();
-        }
-                        </logic:equal>
-                        </logic:equal>
-                        </logic:equal>
-                        </logic:equal>
-                        </logic:equal>
-                        </logic:equal>
-                        <hr>
-                        <div style="text-align:left; border:1px solid #cccccc; padding:8px; margin-top:8px;">
-                            <label class="legendAzul">CVL masivo por lista de NIF/NIE (CSV pegado)</label><br>
-                            <label>Fecha desde (yyyy-MM-dd)</label>
-                            <input type="text" id="fechaDesdeCVLMasivo" style="width:120px;"/>
-                            <label>Fecha hasta (yyyy-MM-dd)</label>
-                            <input type="text" id="fechaHastaCVLMasivo" style="width:120px;"/>
-                            <br><br>
-                            <textarea id="listaDocsMasivo" rows="6" style="width:98%;" placeholder="NIF;TIPO_DOC
-12345678Z;NIF"></textarea>
-                            <br>
-                            <input type="button" id="btnCvlMasivoTexto" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeTexto()">
-                        </div>
-
-        <%
-            List<TerceroVO> List = (List<TerceroVO>)request.getAttribute("listaTerceros");
-
-    <script type="text/javascript">
+<script type="text/javascript">
         function ejecutarCvlMasivoDesdeTexto(){
             var lista = document.getElementById('listaDocsMasivo').value;
             if(!lista || lista.replace(/\s/g,'').length===0){
@@ -933,6 +847,18 @@
                             <input type="button" id="btnDatosResidencia" name="btnDatosResidencia" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnDatosResidencia")%>" onclick="llamarServicioVerificarDatosResidencia()" >
                             <br><br>
                         </logic:equal> 
+                        <hr>
+                        <div style="text-align:left; border:1px solid #cccccc; padding:8px; margin-top:8px;">
+                            <label class="legendAzul">CVL masivo por lista de NIF/NIE (CSV pegado)</label><br>
+                            <label>Fecha desde (yyyy-MM-dd)</label>
+                            <input type="text" id="fechaDesdeCVLMasivo" style="width:120px;"/>
+                            <label>Fecha hasta (yyyy-MM-dd)</label>
+                            <input type="text" id="fechaHastaCVLMasivo" style="width:120px;"/>
+                            <br><br>
+                            <textarea id="listaDocsMasivo" rows="6" style="width:98%;" placeholder="NIF;TIPO_DOC&#10;12345678Z;NIF"></textarea>
+                            <br>
+                            <input type="button" id="btnCvlMasivoTexto" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeTexto()">
+                        </div>
                     </div>
                 </div>
             </div>
