@@ -120,15 +120,16 @@
                         textoRespuestaWS = hijos[j].childNodes[0].nodeValue;
                     }
                 }
-                if(codigoOperacion=="0"){
+                var codigoOperacionNumero = parseInt(codigoOperacion, 10);
+                if(codigoOperacionNumero===0){
                     mostrarRespuestaWS(textoRespuestaWS);
-                }else if(codigoOperacion=="1" || "4"<codigoOperacion){
+                }else if(codigoOperacionNumero===1 || codigoOperacionNumero>4){
                     mostrarRespuestaWS(textoRespuestaWS);
-                }else if(codigoOperacion=="2"){
+                }else if(codigoOperacionNumero===2){
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
-                }else if(codigoOperacion=="3"){
+                }else if(codigoOperacionNumero===3){
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.pasoParametros")%>');
-                }else if(codigoOperacion=="4"){
+                }else if(codigoOperacionNumero===4){
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.expSinTercero")%>');
                 }else{
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
@@ -181,7 +182,7 @@
                 }
                 if(codigoOperacion=="0"){
                     mostrarRespuestaWS(textoRespuestaWS);
-                }else if(codigoOperacion=="1" || "4"<codigoOperacion){
+                }else if(codigoOperacion=="1" || parseInt(codigoOperacion,10) > 4){
                     mostrarRespuestaWS(textoRespuestaWS);
                 }else if(codigoOperacion=="2"){
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
@@ -198,6 +199,48 @@
         }
         catch(Err){
             jsp_alerta('A',"Error procesando la solicitud : " + Err.message);
+        }
+    }
+
+    function ejecutarCvlMasivoDesdeTexto(){
+        var lista = document.getElementById('listaDocsMasivo').value;
+        if(!lista || lista.replace(/\s/g,'').length===0){
+            jsp_alerta('A','Debe indicar una lista CSV de NIF/NIE.');
+            return;
+        }
+        var fechaDesde = document.getElementById('fechaDesdeCVLMasivo').value;
+        var fechaHasta = document.getElementById('fechaHastaCVLMasivo').value;
+        var ajax = getXMLHttpRequest();
+        var url = '<%=request.getContextPath()%>/PeticionModuloIntegracion.do';
+        var params = 'tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=ejecutarCvlMasivoDesdeTexto&tipo=0&numero=<%=numExpediente%>'
+            + '&fechaDesdeCVL=' + encodeURIComponent(fechaDesde)
+            + '&fechaHastaCVL=' + encodeURIComponent(fechaHasta)
+            + '&fkWSSolicitado=1'
+            + '&listaDocsMasivo=' + encodeURIComponent(lista);
+        try{
+            ajax.open('POST', url, false);
+            ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=ISO-8859-1');
+            ajax.setRequestHeader('Accept','text/xml, application/xml, text/plain');
+            ajax.send(params);
+            if (ajax.readyState==4 && ajax.status==200){
+                var xmlDoc = (navigator.appName.indexOf('Internet Explorer')!=-1) ? new ActiveXObject('Microsoft.XMLDOM') : ajax.responseXML;
+                if(navigator.appName.indexOf('Internet Explorer')!=-1){
+                    xmlDoc.async='false';
+                    xmlDoc.loadXML(ajax.responseText);
+                }
+                var nodos = xmlDoc.getElementsByTagName('RESPUESTA');
+                if(nodos.length>0){
+                    var codigo = nodos[0].getElementsByTagName('CODIGO_OPERACION')[0].childNodes[0].nodeValue;
+                    var resultado = nodos[0].getElementsByTagName('RESULTADO')[0].childNodes[0].nodeValue;
+                    if(codigo=='0'){
+                        jsp_alerta('A', resultado);
+                    }else{
+                        jsp_alerta('A', 'Error: ' + resultado);
+                    }
+                }
+            }
+        }catch(err){
+            jsp_alerta('A','Error ejecutando CVL masivo: ' + err.message);
         }
     }
 
@@ -222,6 +265,18 @@
                         <logic:equal name="hidenbtnHHFF" value="1" scope="request">
                             <input type="button" id="btnCorrientePagoHHFF" name="btnCorrientePagoHHFF" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.btnCorrientePagoHHFF")%>" onclick="llamarServicioCorrientePagoHHFF()">
                         </logic:equal>
+                        <hr>
+                        <div style="text-align:left; border:1px solid #cccccc; padding:8px; margin-top:8px;">
+                            <label class="legendAzul">CVL masivo por lista de NIF/NIE (CSV pegado)</label><br>
+                            <label>Fecha desde (yyyy-MM-dd)</label>
+                            <input type="text" id="fechaDesdeCVLMasivo" style="width:120px;"/>
+                            <label>Fecha hasta (yyyy-MM-dd)</label>
+                            <input type="text" id="fechaHastaCVLMasivo" style="width:120px;"/>
+                            <br><br>
+                            <textarea id="listaDocsMasivo" rows="6" style="width:98%;" placeholder="NIF;TIPO_DOC&#10;12345678Z;NIF"></textarea>
+                            <br>
+                            <input type="button" id="btnCvlMasivoTexto" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeTexto()">
+                        </div>
                     </div>
                 </div>
             </div>

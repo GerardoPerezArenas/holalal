@@ -509,9 +509,10 @@
                             textoRespuestaWS = hijos[j].childNodes[0].nodeValue;
                         }
                     }
+                    var codigoOperacionNum = parseInt(codigoOperacion, 10);
                     if(codigoOperacion=="0"){
                         jsp_alerta("A",textoRespuestaWS);
-                    }else if(codigoOperacion=="1" || "4"<codigoOperacion){
+                    }else if(codigoOperacion=="1" || codigoOperacionNum > 4){
                         jsp_alerta("A",textoRespuestaWS);
                     }else if(codigoOperacion=="2"){
                         jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
@@ -529,18 +530,6 @@
             catch(Err){
                  jsp_alerta('A',"Error procesando la solicitud : " + Err.message);
             }//try-catch
-        }else{
-            jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-        }//try-catch
-        }else{
-            jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-        }//try-catch
-        }else{
-            jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-        }//try-catch
-        }else{
-            jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
-        }
         }else{
             jsp_alerta('A', '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "msg.msjNoSelecFila")%>');
         }
