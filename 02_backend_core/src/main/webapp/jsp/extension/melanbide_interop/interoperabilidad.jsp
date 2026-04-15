@@ -509,9 +509,10 @@
                             textoRespuestaWS = hijos[j].childNodes[0].nodeValue;
                         }
                     }
+                    var codigoOperacionNum = parseInt(codigoOperacion, 10);
                     if(codigoOperacion=="0"){
                         jsp_alerta("A",textoRespuestaWS);
-                    }else if(codigoOperacion=="1" || "4"<codigoOperacion){
+                    }else if(codigoOperacion=="1" || codigoOperacionNum > 4){
                         jsp_alerta("A",textoRespuestaWS);
                     }else if(codigoOperacion=="2"){
                         jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
