@@ -41,7 +41,7 @@ public class InteropCvlMasivoCsvService {
         resumen.setNumExpedienteContexto(numExpedienteTrabajo);
 
         final BufferedReader br = new BufferedReader(csvReader);
-
+        try {
         String linea = null;
         int numLinea = 0;
         while ((linea = br.readLine()) != null) {
@@ -108,6 +108,13 @@ public class InteropCvlMasivoCsvService {
                 resumen.setTotalErrores(resumen.getTotalErrores() + 1);
                 resumen.addError("Linea " + numLinea + ": error tecnico para " + nif + " -> " + ex.getMessage());
                 registrarAuditoriaError(nif, tipoDoc, usuario, "ERROR", ex.getMessage(), con);
+            }
+        }
+        } finally {
+            try {
+                br.close();
+            } catch (Exception e) {
+                log.error("Error cerrando BufferedReader en procesarCsv", e);
             }
         }
 
