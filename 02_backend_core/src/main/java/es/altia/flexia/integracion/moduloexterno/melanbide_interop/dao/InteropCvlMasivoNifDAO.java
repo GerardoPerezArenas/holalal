@@ -152,6 +152,9 @@ public class InteropCvlMasivoNifDAO {
                 ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
         Statement st = null;
         ResultSet rs = null;
+        final String seqName = ConfigurationParameter.getParameter(
+                ConstantesMeLanbideInterop.SEQ_INTEROP_CVL_MASIVO_NIF,
+                ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
         try {
             st = con.createStatement();
             rs = st.executeQuery("SELECT " + secuencia + ".NEXTVAL FROM DUAL");
