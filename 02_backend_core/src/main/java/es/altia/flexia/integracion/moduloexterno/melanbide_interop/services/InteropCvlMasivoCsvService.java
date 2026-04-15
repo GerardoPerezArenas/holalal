@@ -14,8 +14,8 @@ import es.altia.flexia.integracion.moduloexterno.melanbide_interop.ws.client.vid
 import java.io.BufferedReader;
 import java.io.Reader;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import org.apache.logging.log4j.LogManager;
@@ -40,8 +40,8 @@ public class InteropCvlMasivoCsvService {
                 ? numExpediente.trim() : generarNumExpedienteTecnico(con);
         resumen.setNumExpedienteContexto(numExpedienteTrabajo);
 
-        final BufferedReader br = new BufferedReader(csvReader);
-        try {
+        try (final BufferedReader br = new BufferedReader(csvReader)) {
+
         String linea = null;
         int numLinea = 0;
         while ((linea = br.readLine()) != null) {
@@ -110,13 +110,7 @@ public class InteropCvlMasivoCsvService {
                 registrarAuditoriaError(nif, tipoDoc, usuario, "ERROR", ex.getMessage(), con);
             }
         }
-        } finally {
-            try {
-                br.close();
-            } catch (Exception e) {
-                log.error("Error cerrando BufferedReader en procesarCsv", e);
-            }
-        }
+        } // end try-with-resources BufferedReader
 
         return resumen;
     }
@@ -168,21 +162,18 @@ public class InteropCvlMasivoCsvService {
     }
 
     private String generarNumExpedienteTecnico(final Connection con) throws Exception {
-        PreparedStatement st = null;
+        Statement st = null;
         ResultSet rs = null;
         try {
             final int year = Calendar.getInstance().get(Calendar.YEAR);
-            final String patron = PREFIJO_EXP_TECNICO + "/" + year + "/%";
-            final String tablaVidaLaboral = ConfigurationParameter.getParameter(
-                    ConstantesMeLanbideInterop.TABLA_INTEROP_VIDALABORAL, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
-            final String sql = "SELECT NVL(MAX(TO_NUMBER(SUBSTR(NUMEXP, -6))), 0) + 1 AS SIGUIENTE "
-                    + "FROM " + tablaVidaLaboral + " WHERE NUMEXP LIKE ?";
-            st = con.prepareStatement(sql);
-            st.setString(1, patron);
-            rs = st.executeQuery();
+            final String seqName = ConfigurationParameter.getParameter(
+                    ConstantesMeLanbideInterop.SEQ_VIDALABORAL,
+                    ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
+            st = con.createStatement();
+            rs = st.executeQuery("SELECT " + seqName + ".NEXTVAL FROM DUAL");
             int siguiente = 1;
             if (rs.next()) {
-                siguiente = rs.getInt("SIGUIENTE");
+                siguiente = rs.getInt(1);
             }
 
             final String secuencia6 = String.format("%06d", siguiente);

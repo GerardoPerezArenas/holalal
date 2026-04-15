@@ -5791,7 +5791,6 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
         } catch (Exception ex) {
         }
     }
-    // Fin tarea IKER - [40984] - Interoperabilidad - Consulta vida laboral desde la ficha de expediente
 
     public void ejecutarCvlMasivoDesdeTexto(int codOrganizacion, int codTramite, int ocurrenciaTramite,
             String numExpediente, HttpServletRequest request, HttpServletResponse response) {
@@ -5848,7 +5847,7 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
         final StringBuffer xmlSalida = new StringBuffer();
         xmlSalida.append("<RESPUESTA>");
         xmlSalida.append("<CODIGO_OPERACION>").append(codigoOperacion).append("</CODIGO_OPERACION>");
-        xmlSalida.append("<RESULTADO>").append(resultado).append("</RESULTADO>");
+        xmlSalida.append("<RESULTADO><![CDATA[").append(resultado).append("]]></RESULTADO>");
         xmlSalida.append("</RESPUESTA>");
 
         try {
@@ -5862,4 +5861,5 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
             log.error("Error preparando response ejecutarCvlMasivoDesdeTexto", e);
         }
     }
+    // Fin tarea IKER - [40984] - Interoperabilidad - Consulta vida laboral desde la ficha de expediente
 }
