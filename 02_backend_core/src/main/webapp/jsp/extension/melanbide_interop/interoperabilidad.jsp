@@ -152,6 +152,9 @@
             }
             var fechaDesde = document.getElementById('fechaDesdeCVLMasivo').value;
             var fechaHasta = document.getElementById('fechaHastaCVLMasivo').value;
+            var btn = document.getElementById('btnCvlMasivoTexto');
+            btn.disabled = true;
+            btn.value = 'Procesando...';
             var ajax = getXMLHttpRequest();
             var url = '<%=request.getContextPath()%>/PeticionModuloIntegracion.do';
             var params = 'tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=ejecutarCvlMasivoDesdeTexto&tipo=0&numero=<%=numExpediente%>'
@@ -160,28 +163,42 @@
                 + '&fkWSSolicitado=1'
                 + '&listaDocsMasivo=' + encodeURIComponent(lista);
             try{
-                ajax.open('POST', url, false);
+                ajax.open('POST', url, true);
                 ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=ISO-8859-1');
                 ajax.setRequestHeader('Accept','text/xml, application/xml, text/plain');
-                ajax.send(params);
-                if (ajax.readyState==4 && ajax.status==200){
-                    var xmlDoc = (navigator.appName.indexOf('Internet Explorer')!=-1) ? new ActiveXObject('Microsoft.XMLDOM') : ajax.responseXML;
-                    if(navigator.appName.indexOf('Internet Explorer')!=-1){
-                        xmlDoc.async='false';
-                        xmlDoc.loadXML(ajax.responseText);
-                    }
-                    var nodos = xmlDoc.getElementsByTagName('RESPUESTA');
-                    if(nodos.length>0){
-                        var codigo = nodos[0].getElementsByTagName('CODIGO_OPERACION')[0].childNodes[0].nodeValue;
-                        var resultado = nodos[0].getElementsByTagName('RESULTADO')[0].childNodes[0].nodeValue;
-                        if(codigo=='0'){
-                            jsp_alerta('A', resultado);
+                ajax.onreadystatechange = function(){
+                    if(ajax.readyState==4){
+                        btn.disabled = false;
+                        btn.value = 'Ejecutar CVL masivo';
+                        if(ajax.status==200){
+                            try{
+                                var xmlDoc = (navigator.appName.indexOf('Internet Explorer')!=-1) ? new ActiveXObject('Microsoft.XMLDOM') : ajax.responseXML;
+                                if(navigator.appName.indexOf('Internet Explorer')!=-1){
+                                    xmlDoc.async='false';
+                                    xmlDoc.loadXML(ajax.responseText);
+                                }
+                                var nodos = xmlDoc.getElementsByTagName('RESPUESTA');
+                                if(nodos.length>0){
+                                    var codigo = nodos[0].getElementsByTagName('CODIGO_OPERACION')[0].childNodes[0].nodeValue;
+                                    var resultado = nodos[0].getElementsByTagName('RESULTADO')[0].childNodes[0].nodeValue;
+                                    if(codigo=='0'){
+                                        jsp_alerta('A', resultado);
+                                    }else{
+                                        jsp_alerta('A', 'Error: ' + resultado);
+                                    }
+                                }
+                            }catch(parseErr){
+                                jsp_alerta('A','Error procesando respuesta CVL masivo: ' + parseErr.message);
+                            }
                         }else{
-                            jsp_alerta('A', 'Error: ' + resultado);
+                            jsp_alerta('A','Error de comunicacion ejecutando CVL masivo (HTTP ' + ajax.status + ').');
                         }
                     }
-                }
+                };
+                ajax.send(params);
             }catch(err){
+                btn.disabled = false;
+                btn.value = 'Ejecutar CVL masivo';
                 jsp_alerta('A','Error ejecutando CVL masivo: ' + err.message);
             }
         }
