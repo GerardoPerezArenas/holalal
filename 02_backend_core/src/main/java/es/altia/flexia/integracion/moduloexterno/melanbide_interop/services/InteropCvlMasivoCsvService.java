@@ -178,7 +178,7 @@ public class InteropCvlMasivoCsvService {
                 siguiente = rs.getInt("SIGUIENTE");
             }
 
-            final String secuencia6 = String.format("%06d", Integer.valueOf(siguiente));
+            final String secuencia6 = String.format("%06d", siguiente);
             return PREFIJO_EXP_TECNICO + "/" + year + "/" + secuencia6;
         } catch (Exception ex) {
             log.error("Error generando expediente tecnico CVL masivo", ex);
