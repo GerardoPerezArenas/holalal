@@ -140,15 +140,16 @@ public class InteropCvlMasivoNifDAO {
     private int getNextId(final Connection con) throws Exception {
         Statement st = null;
         ResultSet rs = null;
+        final String secuencia = ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.SEQ_INTEROP_CVL_MASIVO_NIF, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
         try {
             st = con.createStatement();
-            rs = st.executeQuery("SELECT " + ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.SEQ_INTEROP_CVL_MASIVO_NIF, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES) + ".NEXTVAL FROM DUAL");
+            rs = st.executeQuery("SELECT " + secuencia + ".NEXTVAL FROM DUAL");
             if (rs.next()) {
                 return rs.getInt(1);
             }
-            throw new Exception("No se pudo obtener identificador de secuencia " + ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.SEQ_INTEROP_CVL_MASIVO_NIF, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES));
+            throw new Exception("No se pudo obtener identificador de secuencia " + secuencia);
         } catch (Exception ex) {
-            log.error("Error generando secuencia " + ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.SEQ_INTEROP_CVL_MASIVO_NIF, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES), ex);
+            log.error("Error generando secuencia " + secuencia, ex);
             throw new Exception(ex);
         } finally {
             if (rs != null) {
