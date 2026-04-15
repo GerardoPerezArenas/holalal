@@ -120,15 +120,16 @@
                         textoRespuestaWS = hijos[j].childNodes[0].nodeValue;
                     }
                 }
-                if(codigoOperacion=="0"){
+                var codigoOperacionNumero = parseInt(codigoOperacion, 10);
+                if(codigoOperacionNumero===0){
                     mostrarRespuestaWS(textoRespuestaWS);
-                }else if(codigoOperacion=="1" || "4"<codigoOperacion){
+                }else if(codigoOperacionNumero===1 || codigoOperacionNumero>4){
                     mostrarRespuestaWS(textoRespuestaWS);
-                }else if(codigoOperacion=="2"){
+                }else if(codigoOperacionNumero===2){
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
-                }else if(codigoOperacion=="3"){
+                }else if(codigoOperacionNumero===3){
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.pasoParametros")%>');
-                }else if(codigoOperacion=="4"){
+                }else if(codigoOperacionNumero===4){
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.expSinTercero")%>');
                 }else{
                     jsp_alerta("A",'<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"error.errorGen")%>');
