@@ -95,11 +95,11 @@ public class InteropCvlMasivoNifDAO {
      */
     public List<InteropCvlMasivoNifVO> getRegistrosByFechaEjecucion(final Timestamp fechaDesde,
             final Timestamp fechaHasta, final Connection con) throws Exception {
-        final String tabla = ConfigurationParameter.getParameter(
+        final String tabla2 = ConfigurationParameter.getParameter(
                 ConstantesMeLanbideInterop.TABLA_INTEROP_CVL_MASIVO_NIF,
                 ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
         final String sql = "SELECT ID, FECHA_EJECUCION, NIF, TIPO_DOC, COD_RESPUESTA, DESC_RESPUESTA, PAYLOAD_RESUMEN, USUARIO"
-                + " FROM " + tabla + " WHERE FECHA_EJECUCION BETWEEN ? AND ? ORDER BY FECHA_EJECUCION DESC, ID DESC";
+                + " FROM " + tabla2 + " WHERE FECHA_EJECUCION BETWEEN ? AND ? ORDER BY FECHA_EJECUCION DESC, ID DESC";
         return ejecutarConsulta(sql, null, new Timestamp[]{fechaDesde, fechaHasta}, con);
     }
 
