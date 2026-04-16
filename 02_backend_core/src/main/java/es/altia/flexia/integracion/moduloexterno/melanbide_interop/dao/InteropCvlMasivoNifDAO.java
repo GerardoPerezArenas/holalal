@@ -20,7 +20,7 @@ public class InteropCvlMasivoNifDAO {
 
     private static final Logger log = LogManager.getLogger(InteropCvlMasivoNifDAO.class);
 
-    private static volatile InteropCvlMasivoNifDAO instance = null;
+    private static InteropCvlMasivoNifDAO instance = null;
 
     private InteropCvlMasivoNifDAO() {
     }
@@ -50,10 +50,7 @@ public class InteropCvlMasivoNifDAO {
         PreparedStatement st = null;
         try {
             final int id = getNextId(con);
-            final String tabla = ConfigurationParameter.getParameter(
-                    ConstantesMeLanbideInterop.TABLA_INTEROP_CVL_MASIVO_NIF,
-                    ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
-            final String sql = "INSERT INTO " + tabla
+            final String sql = "INSERT INTO " + ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.TABLA_INTEROP_CVL_MASIVO_NIF, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES)
                     + " (ID, FECHA_EJECUCION, NIF, TIPO_DOC, COD_RESPUESTA, DESC_RESPUESTA, PAYLOAD_RESUMEN, USUARIO)"
                     + " VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
@@ -86,7 +83,7 @@ public class InteropCvlMasivoNifDAO {
                 ConstantesMeLanbideInterop.TABLA_INTEROP_CVL_MASIVO_NIF,
                 ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
         final String sql = "SELECT ID, FECHA_EJECUCION, NIF, TIPO_DOC, COD_RESPUESTA, DESC_RESPUESTA, PAYLOAD_RESUMEN, USUARIO"
-                + " FROM " + tabla + " WHERE ID = ?";
+                + " FROM " + ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.TABLA_INTEROP_CVL_MASIVO_NIF, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES) + " WHERE ID = ?";
         return ejecutarConsulta(sql, id, null, con);
     }
 
@@ -99,7 +96,7 @@ public class InteropCvlMasivoNifDAO {
                 ConstantesMeLanbideInterop.TABLA_INTEROP_CVL_MASIVO_NIF,
                 ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
         final String sql = "SELECT ID, FECHA_EJECUCION, NIF, TIPO_DOC, COD_RESPUESTA, DESC_RESPUESTA, PAYLOAD_RESUMEN, USUARIO"
-                + " FROM " + tabla2 + " WHERE FECHA_EJECUCION BETWEEN ? AND ? ORDER BY FECHA_EJECUCION DESC, ID DESC";
+                + " FROM " + ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.TABLA_INTEROP_CVL_MASIVO_NIF, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES) + " WHERE FECHA_EJECUCION BETWEEN ? AND ? ORDER BY FECHA_EJECUCION DESC, ID DESC";
         return ejecutarConsulta(sql, null, new Timestamp[]{fechaDesde, fechaHasta}, con);
     }
 
@@ -152,9 +149,7 @@ public class InteropCvlMasivoNifDAO {
                 ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
         Statement st = null;
         ResultSet rs = null;
-        final String seqName = ConfigurationParameter.getParameter(
-                ConstantesMeLanbideInterop.SEQ_INTEROP_CVL_MASIVO_NIF,
-                ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
+        final String secuencia = ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.SEQ_INTEROP_CVL_MASIVO_NIF, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
         try {
             st = con.createStatement();
             rs = st.executeQuery("SELECT " + secuencia + ".NEXTVAL FROM DUAL");
