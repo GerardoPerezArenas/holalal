@@ -255,12 +255,12 @@
         var lector = new FileReader();
         lector.onload = function(evento){
             var contenido = evento && evento.target ? evento.target.result : null;
-            if(!contenido || contenido.indexOf(',')<0){
+            if(!contenido || contenido.indexOf('data:')!==0 || contenido.indexOf(',')<0){
                 jsp_alerta('A','No se pudo leer el fichero Excel seleccionado.');
                 return;
             }
             var excelBase64 = contenido.split(',')[1];
-            if(!excelBase64 || excelBase64.length===0){
+            if(!excelBase64 || excelBase64.replace(/\s/g,'').length===0){
                 jsp_alerta('A','El fichero Excel seleccionado no contiene datos válidos.');
                 return;
             }
@@ -303,7 +303,7 @@
                             <br><br>
                             <input type="file" id="listaDocsMasivoExcel" accept=".xls,.xlsx" style="width:98%;"/>
                             <br>
-                            <span style="font-size:11px;color:#666;">Primera hoja: columnas en orden NIF+TIPO_DOC o TIPO_DOC+DNI/NIF.</span>
+                            <span style="font-size:11px;color:#666;">Primera hoja: columnas en orden NIF+TIPO_DOC o TIPO_DOC+DOCUMENTO.</span>
                             <br>
                             <input type="button" id="btnCvlMasivoExcel" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeExcel()">
                         </div>

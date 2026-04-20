@@ -15,14 +15,17 @@ import java.io.ByteArrayInputStream;
 import java.io.BufferedReader;
 import java.io.Reader;
 import java.io.StringReader;
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.Calendar;
+import java.util.regex.Pattern;
 import org.apache.commons.codec.binary.Base64;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.DataFormatter;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -37,6 +40,11 @@ public class InteropCvlMasivoCsvService {
     private static final Logger log = LogManager.getLogger(InteropCvlMasivoCsvService.class);
     private static final String SEPARADOR_CSV = ";";
     private static final String PREFIJO_EXP_TECNICO = "CVL_MASIVO";
+    private static final String TIPO_DOC_NIF = "NIF";
+    private static final String TIPO_DOC_DNI = "DNI";
+    private static final String TIPO_DOC_NIE = "NIE";
+    private static final String TIPO_DOC_CIF = "CIF";
+    private static final Pattern BASE64_PATTERN = Pattern.compile("^[A-Za-z0-9+/=]+$");
 
     public InteropCvlMasivoResultadoVO procesarEntrada(final String listaDocsMasivo,
             final String excelBase64, final String fechaDesdeCVL, final String fechaHastaCVL,
@@ -79,7 +87,7 @@ public class InteropCvlMasivoCsvService {
 
             final String[] columnas = normalizarSeparador(linea).split(SEPARADOR_CSV);
             final String nif = columnas.length > 0 ? columnas[0].trim().toUpperCase() : "";
-            final String tipoDoc = columnas.length > 1 ? columnas[1].trim().toUpperCase() : "NIF";
+            final String tipoDoc = columnas.length > 1 ? columnas[1].trim().toUpperCase() : TIPO_DOC_NIF;
 
             if (!esDocumentoValido(nif)) {
                 resumen.setTotalErrores(resumen.getTotalErrores() + 1);
@@ -193,7 +201,11 @@ public class InteropCvlMasivoCsvService {
     private String convertirExcelEnCsv(final String excelBase64) throws Exception {
         Workbook libro = null;
         try {
-            final byte[] bytesExcel = Base64.decodeBase64(excelBase64.getBytes("ISO-8859-1"));
+            final String excelBase64Normalizado = excelBase64 != null ? excelBase64.replaceAll("\\s+", "") : "";
+            if (excelBase64Normalizado.length() == 0 || !BASE64_PATTERN.matcher(excelBase64Normalizado).matches()) {
+                throw new IllegalArgumentException("Contenido Excel en base64 no válido.");
+            }
+            final byte[] bytesExcel = Base64.decodeBase64(excelBase64Normalizado.getBytes(StandardCharsets.UTF_8));
             libro = WorkbookFactory.create(new ByteArrayInputStream(bytesExcel));
             if (libro == null || libro.getNumberOfSheets() <= 0) {
                 return "";
@@ -214,14 +226,17 @@ public class InteropCvlMasivoCsvService {
                 if (fila == null) {
                     continue;
                 }
-                final String col0 = dataFormatter.formatCellValue(fila.getCell(0));
-                final String col1 = dataFormatter.formatCellValue(fila.getCell(1));
+                final Cell celdaCol0 = fila.getCell(0);
+                final Cell celdaCol1 = fila.getCell(1);
+                final String col0 = celdaCol0 != null ? dataFormatter.formatCellValue(celdaCol0) : "";
+                final String col1 = celdaCol1 != null ? dataFormatter.formatCellValue(celdaCol1) : "";
                 String docNormalizado = col0 != null ? col0.trim() : "";
                 String tipoDocNormalizado = col1 != null ? col1.trim() : "";
 
-                if (esTipoDocumento(col0) && (col1 != null && col1.trim().length() > 0)) {
-                    tipoDocNormalizado = col0.trim();
-                    docNormalizado = col1.trim();
+                if (esTipoDocumento(docNormalizado) && tipoDocNormalizado.length() > 0) {
+                    final String tempDocumento = tipoDocNormalizado;
+                    tipoDocNormalizado = docNormalizado;
+                    docNormalizado = tempDocumento;
                 }
                 if (docNormalizado.length() == 0 && tipoDocNormalizado.length() == 0) {
                     continue;
@@ -231,12 +246,12 @@ public class InteropCvlMasivoCsvService {
                 }
                 csv.append(docNormalizado);
                 csv.append(SEPARADOR_CSV);
-                csv.append(tipoDocNormalizado.length() > 0 ? tipoDocNormalizado : "NIF");
+                csv.append(tipoDocNormalizado.length() > 0 ? tipoDocNormalizado : TIPO_DOC_NIF);
             }
             return csv.toString();
         } catch (Exception ex) {
             log.error("Error convirtiendo Excel CVL masivo a CSV", ex);
-            throw ex;
+            throw new Exception("No se ha podido convertir el Excel a lista de documentos: " + ex.getMessage(), ex);
         } finally {
             if (libro != null) {
                 try {
@@ -253,7 +268,8 @@ public class InteropCvlMasivoCsvService {
             return false;
         }
         final String tipo = valor.trim().toUpperCase();
-        return "DNI".equals(tipo) || "NIF".equals(tipo) || "NIE".equals(tipo) || "CIF".equals(tipo);
+        return TIPO_DOC_DNI.equals(tipo) || TIPO_DOC_NIF.equals(tipo)
+                || TIPO_DOC_NIE.equals(tipo) || TIPO_DOC_CIF.equals(tipo);
     }
 
     private String generarNumExpedienteTecnico(final Connection con) throws Exception {
