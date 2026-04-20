@@ -230,8 +230,8 @@ public class InteropCvlMasivoCsvService {
                 final Cell celdaCol1 = fila.getCell(1);
                 final String col0 = celdaCol0 != null ? dataFormatter.formatCellValue(celdaCol0) : "";
                 final String col1 = celdaCol1 != null ? dataFormatter.formatCellValue(celdaCol1) : "";
-                String docNormalizado = col0 != null ? col0.trim() : "";
-                String tipoDocNormalizado = col1 != null ? col1.trim() : "";
+                String docNormalizado = col0.trim();
+                String tipoDocNormalizado = col1.trim();
 
                 if (esTipoDocumento(docNormalizado) && tipoDocNormalizado.length() > 0) {
                     final String tempDocumento = tipoDocNormalizado;
