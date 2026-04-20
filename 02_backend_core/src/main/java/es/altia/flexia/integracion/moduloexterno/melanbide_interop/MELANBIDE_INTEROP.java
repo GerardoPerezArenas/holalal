@@ -5799,6 +5799,7 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
         java.sql.Connection con = null;
         try {
             final String listaDocsMasivo = request.getParameter("listaDocsMasivo");
+            final String excelBase64 = request.getParameter("excelBase64");
             final String fechaDesdeCVL = request.getParameter("fechaDesdeCVL");
             final String fechaHastaCVL = request.getParameter("fechaHastaCVL");
             final String fkWSSolicitado = request.getParameter("fkWSSolicitado");
@@ -5817,7 +5818,7 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
 
             final es.altia.flexia.integracion.moduloexterno.melanbide_interop.services.InteropCvlMasivoCsvService servicio = new es.altia.flexia.integracion.moduloexterno.melanbide_interop.services.InteropCvlMasivoCsvService();
             final es.altia.flexia.integracion.moduloexterno.melanbide_interop.vo.InteropCvlMasivoResultadoVO resumen
-                    = servicio.procesarCsv(new java.io.StringReader(listaDocsMasivo != null ? listaDocsMasivo : ""),
+                    = servicio.procesarEntrada(listaDocsMasivo, excelBase64,
                             fechaDesdeCVL, fechaHastaCVL, codOrganizacion,
                             numExpediente, fkWSSolicitado, usuario, con);
 
