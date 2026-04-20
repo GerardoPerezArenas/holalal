@@ -214,10 +214,15 @@ public class InteropCvlMasivoCsvService {
                 if (fila == null) {
                     continue;
                 }
-                final String doc = dataFormatter.formatCellValue(fila.getCell(0));
-                final String tipoDoc = dataFormatter.formatCellValue(fila.getCell(1));
-                final String docNormalizado = doc != null ? doc.trim() : "";
-                final String tipoDocNormalizado = tipoDoc != null ? tipoDoc.trim() : "";
+                final String col0 = dataFormatter.formatCellValue(fila.getCell(0));
+                final String col1 = dataFormatter.formatCellValue(fila.getCell(1));
+                String docNormalizado = col0 != null ? col0.trim() : "";
+                String tipoDocNormalizado = col1 != null ? col1.trim() : "";
+
+                if (esTipoDocumento(col0) && (col1 != null && col1.trim().length() > 0)) {
+                    tipoDocNormalizado = col0.trim();
+                    docNormalizado = col1.trim();
+                }
                 if (docNormalizado.length() == 0 && tipoDocNormalizado.length() == 0) {
                     continue;
                 }
@@ -241,6 +246,14 @@ public class InteropCvlMasivoCsvService {
                 }
             }
         }
+    }
+
+    private boolean esTipoDocumento(final String valor) {
+        if (valor == null) {
+            return false;
+        }
+        final String tipo = valor.trim().toUpperCase();
+        return "DNI".equals(tipo) || "NIF".equals(tipo) || "NIE".equals(tipo) || "CIF".equals(tipo);
     }
 
     private String generarNumExpedienteTecnico(final Connection con) throws Exception {

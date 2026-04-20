@@ -248,7 +248,7 @@
         }
         var ficheroExcel = inputExcel.files[0];
         var nombreFichero = ficheroExcel.name ? ficheroExcel.name.toLowerCase() : '';
-        if(nombreFichero.indexOf('.xls')<0 && nombreFichero.indexOf('.xlsx')<0){
+        if(!(/\.(xls|xlsx)$/i).test(nombreFichero)){
             jsp_alerta('A','Formato no válido. Debe seleccionar un fichero .xls o .xlsx.');
             return;
         }
@@ -303,7 +303,7 @@
                             <br><br>
                             <input type="file" id="listaDocsMasivoExcel" accept=".xls,.xlsx" style="width:98%;"/>
                             <br>
-                            <span style="font-size:11px;color:#666;">Primera hoja: columna 1 = NIF/NIE, columna 2 (opcional) = TIPO_DOC.</span>
+                            <span style="font-size:11px;color:#666;">Primera hoja: columnas en orden NIF+TIPO_DOC o TIPO_DOC+DNI/NIF.</span>
                             <br>
                             <input type="button" id="btnCvlMasivoExcel" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeExcel()">
                         </div>
