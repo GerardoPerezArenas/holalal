@@ -202,12 +202,7 @@
         }
     }
 
-    function ejecutarCvlMasivoDesdeTexto(){
-        var lista = document.getElementById('listaDocsMasivo').value;
-        if(!lista || lista.replace(/\s/g,'').length===0){
-            jsp_alerta('A','Debe indicar una lista CSV de NIF/NIE.');
-            return;
-        }
+    function enviarPeticionCvlMasivo(lista, excelBase64){
         var fechaDesde = document.getElementById('fechaDesdeCVLMasivo').value;
         var fechaHasta = document.getElementById('fechaHastaCVLMasivo').value;
         var ajax = getXMLHttpRequest();
@@ -216,7 +211,8 @@
             + '&fechaDesdeCVL=' + encodeURIComponent(fechaDesde)
             + '&fechaHastaCVL=' + encodeURIComponent(fechaHasta)
             + '&fkWSSolicitado=1'
-            + '&listaDocsMasivo=' + encodeURIComponent(lista);
+            + '&listaDocsMasivo=' + encodeURIComponent(lista ? lista : '')
+            + '&excelBase64=' + encodeURIComponent(excelBase64 ? excelBase64 : '');
         try{
             ajax.open('POST', url, false);
             ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=ISO-8859-1');
@@ -244,6 +240,38 @@
         }
     }
 
+    function ejecutarCvlMasivoDesdeExcel(){
+        var inputExcel = document.getElementById('listaDocsMasivoExcel');
+        if(!inputExcel || !inputExcel.files || inputExcel.files.length===0){
+            jsp_alerta('A','Debe seleccionar un fichero Excel con NIF/NIE.');
+            return;
+        }
+        var ficheroExcel = inputExcel.files[0];
+        var nombreFichero = ficheroExcel.name ? ficheroExcel.name.toLowerCase() : '';
+        if(nombreFichero.indexOf('.xls')<0 && nombreFichero.indexOf('.xlsx')<0){
+            jsp_alerta('A','Formato no válido. Debe seleccionar un fichero .xls o .xlsx.');
+            return;
+        }
+        var lector = new FileReader();
+        lector.onload = function(evento){
+            var contenido = evento && evento.target ? evento.target.result : null;
+            if(!contenido || contenido.indexOf(',')<0){
+                jsp_alerta('A','No se pudo leer el fichero Excel seleccionado.');
+                return;
+            }
+            var excelBase64 = contenido.split(',')[1];
+            if(!excelBase64 || excelBase64.length===0){
+                jsp_alerta('A','El fichero Excel seleccionado no contiene datos válidos.');
+                return;
+            }
+            enviarPeticionCvlMasivo('', excelBase64);
+        };
+        lector.onerror = function(){
+            jsp_alerta('A','Error leyendo el fichero Excel.');
+        };
+        lector.readAsDataURL(ficheroExcel);
+    }
+
 </script>
 
 <body>
@@ -267,15 +295,17 @@
                         </logic:equal>
                         <hr>
                         <div style="text-align:left; border:1px solid #cccccc; padding:8px; margin-top:8px;">
-                            <label class="legendAzul">CVL masivo por lista de NIF/NIE (CSV pegado)</label><br>
+                            <label class="legendAzul">CVL masivo por Excel de NIF/NIE</label><br>
                             <label>Fecha desde (yyyy-MM-dd)</label>
                             <input type="text" id="fechaDesdeCVLMasivo" style="width:120px;"/>
                             <label>Fecha hasta (yyyy-MM-dd)</label>
                             <input type="text" id="fechaHastaCVLMasivo" style="width:120px;"/>
                             <br><br>
-                            <textarea id="listaDocsMasivo" rows="6" style="width:98%;" placeholder="NIF;TIPO_DOC&#10;12345678Z;NIF"></textarea>
+                            <input type="file" id="listaDocsMasivoExcel" accept=".xls,.xlsx" style="width:98%;"/>
                             <br>
-                            <input type="button" id="btnCvlMasivoTexto" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeTexto()">
+                            <span style="font-size:11px;color:#666;">Primera hoja: columna 1 = NIF/NIE, columna 2 (opcional) = TIPO_DOC.</span>
+                            <br>
+                            <input type="button" id="btnCvlMasivoExcel" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeExcel()">
                         </div>
                     </div>
                 </div>
