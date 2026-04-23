@@ -742,7 +742,7 @@
         var ficheroExcel = inputExcel.files[0];
         var nombreFichero = ficheroExcel.name ? ficheroExcel.name.toLowerCase() : '';
         if(!(/\.(xls|xlsx)$/i).test(nombreFichero)){
-            jsp_alerta('A','Formato no valido. Debe seleccionar un fichero .xls o .xlsx.');
+            jsp_alerta('A','Formato no válido. Debe seleccionar un fichero .xls o .xlsx.');
             return;
         }
         var lector = new FileReader();
@@ -754,7 +754,7 @@
             }
             var excelBase64 = contenido.split(',')[1];
             if(!excelBase64 || excelBase64.replace(/\s/g,'').length===0){
-                jsp_alerta('A','El fichero Excel seleccionado no contiene datos validos.');
+                jsp_alerta('A','El fichero Excel seleccionado no contiene datos válidos.');
                 return;
             }
             enviarPeticionCvlMasivoInterop('', excelBase64);

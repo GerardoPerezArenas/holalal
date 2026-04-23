@@ -81,7 +81,7 @@ public class InteropCvlMasivoCsvService {
         while ((linea = br.readLine()) != null) {
             numLinea++;
 
-            if (linea.trim().length() == 0) {
+            if (linea == null || linea.trim().length() == 0) {
                 continue;
             }
 
