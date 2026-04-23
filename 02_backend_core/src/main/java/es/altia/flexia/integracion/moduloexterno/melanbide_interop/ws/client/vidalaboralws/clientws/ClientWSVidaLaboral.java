@@ -60,13 +60,18 @@ public class ClientWSVidaLaboral {
             conn.setDoOutput(true);
 
             final String codigoProcFlexia = MeLanbideInteropGeneralUtils.getCodProcedimientoFromNumExpediente(numExpediente);
-            final String cifUsuarioLogueado = ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.RESPONSABLE_SERVICIO_NIF + numExpediente.split("/")[1] + ConstantesMeLanbideInterop.BARRA_BAJA + fkWSSolicitado, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
-            final String nombreUsuarioLogueado = ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.RESPONSABLE_SERVICIO_NOMBRE + numExpediente.split("/")[1] + ConstantesMeLanbideInterop.BARRA_BAJA + fkWSSolicitado, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
+            final String claveProcedimientoCvl = "CVL" + ConstantesMeLanbideInterop.BARRA_BAJA + codigoProcFlexia;
+            final String cifUsuarioLogueado = ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.RESPONSABLE_SERVICIO_NIF
+                    + codigoProcFlexia + ConstantesMeLanbideInterop.BARRA_BAJA + fkWSSolicitado, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
+            final String nombreUsuarioLogueado = ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.RESPONSABLE_SERVICIO_NOMBRE
+                    + codigoProcFlexia + ConstantesMeLanbideInterop.BARRA_BAJA + fkWSSolicitado, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
 
-            // Crear el cuerpo de la petición
+            // Crear el cuerpo de la peticiï¿½n
             Request req = new Request(new DatosEspecificos(fechaDesde, fechaHasta),
                     persona,
-                    new Tramitador(ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.PREFIJO_CODIGO_PROCEDIMIENTO + "CVL" + ConstantesMeLanbideInterop.BARRA_BAJA + codigoProcFlexia, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES),
+                    new Tramitador(getParameterWithFallback(
+                            ConstantesMeLanbideInterop.PREFIJO_CODIGO_PROCEDIMIENTO + claveProcedimientoCvl,
+                            ConstantesMeLanbideInterop.PREFIJO_CODIGO_PROCEDIMIENTO + codigoProcFlexia),
                             ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.NOMBRE_PROCEDIMIENTO + codigoProcFlexia, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES),
                             ConfigurationParameter.getParameter("FINALIDAD_PROCEDIMIENTO_CVL_" + codigoProcFlexia, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES),
                             ConfigurationParameter.getParameter("CONSENTIMIENTO_FIRMADO_CVL_" + codigoProcFlexia, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES),
@@ -105,5 +110,13 @@ public class ClientWSVidaLaboral {
             log.error("ClientWSVidaLaboral getVidaLaboral Exception: " + ex.getMessage());
             return null;
         }
+    }
+
+    private static String getParameterWithFallback(final String primaryKey, final String fallbackKey) {
+        final String primaryValue = ConfigurationParameter.getParameter(primaryKey, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
+        if (primaryValue != null && primaryValue.trim().length() > 0) {
+            return primaryValue;
+        }
+        return ConfigurationParameter.getParameter(fallbackKey, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
     }
 }
