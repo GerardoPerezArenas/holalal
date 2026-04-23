@@ -16,7 +16,7 @@ var ESTILO_CSS_INPUT_NORMAL      = "inputTexto";
 var ESTILO_CSS_INPUT_OBLIGATORIO = "inputTextoObligatorio";
 var separador = '��';
 
-function normalizarTextoVidaLaboral(texto) {
+function normalizarTexto(texto) {
     return (texto || '')
         .toString()
         .toLowerCase()
@@ -28,18 +28,18 @@ function normalizarTextoVidaLaboral(texto) {
 }
 
 function esCampoVidaLaboralRespuesta(descCampo) {
-    var texto = normalizarTextoVidaLaboral(descCampo);
+    var texto = normalizarTexto(descCampo);
     return texto.indexOf('vida laboral') >= 0
         && (texto.indexOf('respuesta') >= 0 || texto.indexOf('resultado') >= 0);
 }
 
 function esCampoVidaLaboralPeticion(descCampo) {
-    var texto = normalizarTextoVidaLaboral(descCampo);
+    var texto = normalizarTexto(descCampo);
     return texto.indexOf('vida laboral') >= 0
         && (texto.indexOf('peticion') >= 0 || texto.indexOf('llamada') >= 0);
 }
 
-function escaparHtmlParaPdfVidaLaboral(texto) {
+function escaparHtml(texto) {
     return (texto || '')
         .toString()
         .replace(/&/g, '&amp;')
@@ -89,16 +89,16 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRe
         minute: '2-digit',
         second: '2-digit'
     });
-    var ventanaPdf = window.open('', '_blank');
+    var ventanaPdf = window.open('', '_blank', 'noopener,noreferrer');
     if (!ventanaPdf) {
-        jsp_alerta('A', 'No se pudo abrir la ventana para generar el PDF.');
+        jsp_alerta('A', 'No se pudo abrir la ventana para generar el PDF. Por favor, verifique que su navegador permite ventanas emergentes.');
         return;
     }
 
     var titulo = 'Certificado de consulta de vida laboral';
     var etiquetaRespuesta = descCampoRespuesta || 'Respuesta consulta vida laboral';
     var html = '';
-    html += '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escaparHtmlParaPdfVidaLaboral(titulo) + '</title>';
+    html += '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escaparHtml(titulo) + '</title>';
     html += '<style>';
     html += 'body{font-family:Arial,sans-serif;color:#111;margin:24px;}';
     html += '.acciones{margin-bottom:12px;text-align:right;}';
@@ -113,13 +113,13 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRe
     html += '</style></head><body>';
     html += '<div class="acciones"><button type="button" onclick="window.print();">Imprimir / Guardar PDF</button></div>';
     html += '<div class="cert">';
-    html += '<div class="titulo">' + escaparHtmlParaPdfVidaLaboral(titulo) + '</div>';
+    html += '<div class="titulo">' + escaparHtml(titulo) + '</div>';
     html += '<div class="subtitulo">Documento generado automáticamente desde datos suplementarios del expediente</div>';
-    html += '<div class="bloque"><h3>Datos de llamada (petición)</h3><div class="contenido">' + escaparHtmlParaPdfVidaLaboral(peticion) + '</div></div>';
-    html += '<div class="bloque"><h3>' + escaparHtmlParaPdfVidaLaboral(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtmlParaPdfVidaLaboral(respuesta) + '</div></div>';
-    html += '<div class="pie"><strong>Fecha/Hora de generación:</strong> ' + escaparHtmlParaPdfVidaLaboral(fechaGeneracion) + '</div>';
+    html += '<div class="bloque"><h3>Datos de llamada (petición)</h3><div class="contenido">' + escaparHtml(peticion) + '</div></div>';
+    html += '<div class="bloque"><h3>' + escaparHtml(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtml(respuesta) + '</div></div>';
+    html += '<div class="pie"><strong>Fecha/Hora de generación:</strong> ' + escaparHtml(fechaGeneracion) + '</div>';
     html += '</div>';
-    html += '<script>window.onload=function(){window.focus();};<\/script>';
+    html += '<script>window.onload=function(){window.focus();};</script>';
     html += '</body></html>';
 
     ventanaPdf.document.open();
