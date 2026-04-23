@@ -14,17 +14,23 @@ var TIPO_ERROR_CSV_DOCUMENTO_FORMATO_NO_SOPORTADO = 111;
 var TIPO_ERROR_CSV_CODIGO_DESCONOCIDO = 112;
 var ESTILO_CSS_INPUT_NORMAL      = "inputTexto";
 var ESTILO_CSS_INPUT_OBLIGATORIO = "inputTextoObligatorio";
+var BLOB_URL_CLEANUP_DELAY_MS = 60000;
 var separador = '��';
+var MAPA_ACENTOS_NORMALIZACION = {
+    'á': 'a', 'à': 'a', 'ä': 'a', 'â': 'a',
+    'é': 'e', 'è': 'e', 'ë': 'e', 'ê': 'e',
+    'í': 'i', 'ì': 'i', 'ï': 'i', 'î': 'i',
+    'ó': 'o', 'ò': 'o', 'ö': 'o', 'ô': 'o',
+    'ú': 'u', 'ù': 'u', 'ü': 'u', 'û': 'u'
+};
 
 function normalizarTexto(texto) {
     return (texto || '')
         .toString()
         .toLowerCase()
-        .replace(/[áàäâ]/g, 'a')
-        .replace(/[éèëê]/g, 'e')
-        .replace(/[íìïî]/g, 'i')
-        .replace(/[óòöô]/g, 'o')
-        .replace(/[úùüû]/g, 'u');
+        .replace(/[áàäâéèëêíìïîóòöôúùüû]/g, function (caracter) {
+            return MAPA_ACENTOS_NORMALIZACION[caracter] || caracter;
+        });
 }
 
 function esCampoVidaLaboralRespuesta(descCampo) {
@@ -66,7 +72,7 @@ function obtenerValorCampoSuplementarioVidaLaboral(esCampoBuscadoFn, campoExclui
         if (campoExcluirId && control.attr('id') === campoExcluirId) return true;
 
         valor = control.val() || '';
-        return false;
+        return false; // En jQuery.each, return false rompe el bucle.
     });
     return valor;
 }
@@ -133,7 +139,7 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
     }
     setTimeout(function () {
         URL.revokeObjectURL(blobUrl);
-    }, 60000);
+    }, BLOB_URL_CLEANUP_DELAY_MS);
 }
  
 function validarDocumento(){ 
