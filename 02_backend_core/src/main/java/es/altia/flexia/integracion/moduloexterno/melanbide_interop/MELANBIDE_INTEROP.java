@@ -286,6 +286,7 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
             List<String> proAutoLangaiDemandaFSE = Arrays.asList(ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.COD_PROC_AUTO_LANGAIDEMANDFSE,ConstantesMeLanbideInterop.FICHERO_PROPIEDADES).split(ConstantesMeLanbideInterop.SEPARADOR_VALORES_CONF));
             List<String> proAutoDatosPadron = Arrays.asList(ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.COD_PROC_AUTO_DATOSPADRON,ConstantesMeLanbideInterop.FICHERO_PROPIEDADES).split(ConstantesMeLanbideInterop.SEPARADOR_VALORES_CONF));
             List<String> proAutoDatosResidencia = Arrays.asList(ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.COD_PROC_AUTO_DATOSRESIDENCIA,ConstantesMeLanbideInterop.FICHERO_PROPIEDADES).split(ConstantesMeLanbideInterop.SEPARADOR_VALORES_CONF));
+            List<String> proAutoCvlMasivo = Arrays.asList(ConfigurationParameter.getParameter(ConstantesMeLanbideInterop.COD_PROC_AUTO_CVL_MASIVO,ConstantesMeLanbideInterop.FICHERO_PROPIEDADES).split(ConstantesMeLanbideInterop.SEPARADOR_VALORES_CONF));
 
             String hidenbtnDatosIdentidad= proAutoDatosIndent.contains(codProcExpte)?"1":"0";
             String hidenbtnEpigrafesIae=proAutoEpigrafesIAE.contains(codProcExpte)?"1":"0";
@@ -296,6 +297,7 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
             String hidenbtnLangaiDemandaFSE=proAutoLangaiDemandaFSE.contains(codProcExpte)?"1":"0";
             String hidenbtnDatosPadron=proAutoDatosPadron.contains(codProcExpte)?"1":"0";
             String hidenbtnDatosResidencia=proAutoDatosResidencia.contains(codProcExpte)?"1":"0";
+            String hidenbtnCvlMasivo=proAutoCvlMasivo.contains(codProcExpte)?"1":"0";
 
             request.setAttribute("hidenbtnDatosIdentidad", hidenbtnDatosIdentidad);
             request.setAttribute("hidenbtnEpigrafesIae",hidenbtnEpigrafesIae);
@@ -306,6 +308,7 @@ public class MELANBIDE_INTEROP extends ModuloIntegracionExterno {
             request.setAttribute("hidenbtnLangaiDemandaFSE",hidenbtnLangaiDemandaFSE);
             request.setAttribute("hidenbtnDatosPadron",hidenbtnDatosPadron);
             request.setAttribute("hidenbtnDatosResidencia",hidenbtnDatosResidencia);
+            request.setAttribute("hidenbtnCvlMasivo",hidenbtnCvlMasivo);
         }
         catch(Exception ex)
         {
