@@ -210,7 +210,7 @@
         var params = 'tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=ejecutarCvlMasivoDesdeTexto&tipo=0&numero=<%=numExpediente%>'
             + '&fechaDesdeCVL=' + encodeURIComponent(fechaDesde)
             + '&fechaHastaCVL=' + encodeURIComponent(fechaHasta)
-            + '&fkWSSolicitado=1'
+            + '&fkWSSolicitado=5'
             + '&listaDocsMasivo=' + encodeURIComponent(lista ? lista : '')
             + '&excelBase64=' + encodeURIComponent(excelBase64 ? excelBase64 : '');
         try{

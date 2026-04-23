@@ -13,9 +13,9 @@ import es.altia.flexia.integracion.moduloexterno.melanbide_interop.ws.client.vid
 import es.altia.flexia.integracion.moduloexterno.melanbide_interop.ws.client.vidalaboralws.response.Response;
 import java.io.ByteArrayInputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
-import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -39,7 +39,8 @@ public class InteropCvlMasivoCsvService {
 
     private static final Logger log = LogManager.getLogger(InteropCvlMasivoCsvService.class);
     private static final String SEPARADOR_CSV = ";";
-    private static final String PREFIJO_EXP_TECNICO = "CVL_MASIVO";
+    /** Codigo de procedimiento tecnico usado como componente central del numero de expediente ficticio. */
+    private static final String PROC_TECNICO_CVMN = "CVMN";
     private static final String TIPO_DOC_NIF = "NIF";
     private static final String TIPO_DOC_DNI = "DNI";
     private static final String TIPO_DOC_NIE = "NIE";
@@ -53,8 +54,10 @@ public class InteropCvlMasivoCsvService {
             final Connection con) throws Exception {
 
         final String csvEntrada = obtenerCsvDesdeEntrada(listaDocsMasivo, excelBase64);
+        // Se genera siempre un expediente tecnico propio (YYYY/CVMN/NNNNNN) para
+        // aislar las llamadas masivas del expediente funcional del usuario.
         return procesarCsv(new StringReader(csvEntrada), fechaDesdeCVL, fechaHastaCVL,
-                codOrganizacion, numExpediente, fkWSSolicitado, usuario, con);
+                codOrganizacion, null, fkWSSolicitado, usuario, con);
     }
 
     public InteropCvlMasivoResultadoVO procesarCsv(final Reader csvReader,
@@ -67,7 +70,11 @@ public class InteropCvlMasivoCsvService {
                 ? numExpediente.trim() : generarNumExpedienteTecnico(con);
         resumen.setNumExpedienteContexto(numExpedienteTrabajo);
 
-        try (final BufferedReader br = new BufferedReader(csvReader)) {
+        final BufferedReader br = new BufferedReader(csvReader);
+        // fkWSSolicitado=5 corresponde al servicio CVL en el catalogo NISAE
+        final String fkWSSolicitadoCvl = (fkWSSolicitado != null && fkWSSolicitado.trim().length() > 0)
+                ? fkWSSolicitado.trim() : "5";
+        try {
 
         String linea = null;
         int numLinea = 0;
@@ -104,7 +111,7 @@ public class InteropCvlMasivoCsvService {
 
                 final Response response = ClientWSVidaLaboral.getVidaLaboral(p,
                         fechaDesdeCVL, fechaHastaCVL, codOrganizacion, numExpedienteTrabajo,
-                        fkWSSolicitado);
+                        fkWSSolicitadoCvl);
 
                 final String codRespuesta = response != null ? response.getCodRespuesta() : "WS_NULL";
                 final String descRespuesta = response != null ? response.getDescRespuesta() : "Respuesta nula del WS CVL";
@@ -137,7 +144,13 @@ public class InteropCvlMasivoCsvService {
                 registrarAuditoriaError(nif, tipoDoc, usuario, "ERROR", ex.getMessage(), con);
             }
         }
-        } // end try-with-resources BufferedReader
+        } finally {
+            try {
+                br.close();
+            } catch (IOException ioe) {
+                log.error("Error cerrando BufferedReader en procesarCsv", ioe);
+            }
+        }
 
         return resumen;
     }
@@ -205,7 +218,7 @@ public class InteropCvlMasivoCsvService {
             if (excelBase64Normalizado.length() == 0 || !BASE64_PATTERN.matcher(excelBase64Normalizado).matches()) {
                 throw new IllegalArgumentException("Contenido Excel en base64 no válido.");
             }
-            final byte[] bytesExcel = Base64.decodeBase64(excelBase64Normalizado.getBytes(StandardCharsets.UTF_8));
+            final byte[] bytesExcel = Base64.decodeBase64(excelBase64Normalizado.getBytes("UTF-8"));
             libro = WorkbookFactory.create(new ByteArrayInputStream(bytesExcel));
             if (libro == null || libro.getNumberOfSheets() <= 0) {
                 return "";
@@ -278,7 +291,7 @@ public class InteropCvlMasivoCsvService {
         try {
             final int year = Calendar.getInstance().get(Calendar.YEAR);
             final String seqName = ConfigurationParameter.getParameter(
-                    ConstantesMeLanbideInterop.SEQ_VIDALABORAL,
+                    ConstantesMeLanbideInterop.SEQ_INTEROP_CVL_MASIVO_NIF,
                     ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
             st = con.createStatement();
             rs = st.executeQuery("SELECT " + seqName + ".NEXTVAL FROM DUAL");
@@ -288,7 +301,12 @@ public class InteropCvlMasivoCsvService {
             }
 
             final String secuencia6 = String.format("%06d", siguiente);
-            return PREFIJO_EXP_TECNICO + "/" + year + "/" + secuencia6;
+            // Formato compatible con ClientWSVidaLaboral: YYYY/PROC/NNNNNN
+            // El componente central (indice [1]) es usado para buscar las properties CVMN
+            return year + ConstantesMeLanbideInterop.BARRA_SEPARADORA
+                    + PROC_TECNICO_CVMN
+                    + ConstantesMeLanbideInterop.BARRA_SEPARADORA
+                    + secuencia6;
         } catch (Exception ex) {
             log.error("Error generando expediente tecnico CVL masivo", ex);
             throw new Exception(ex);

@@ -691,6 +691,79 @@
              window.close(); 
         } 
     }
+
+    function enviarPeticionCvlMasivoInterop(lista, excelBase64){
+        var fechaDesde = document.getElementById('fechaDesdeCVLMasivoInterop').value;
+        var fechaHasta = document.getElementById('fechaHastaCVLMasivoInterop').value;
+        var ajax = getXMLHttpRequest();
+        var url = '<%=request.getContextPath()%>/PeticionModuloIntegracion.do';
+        var params = 'tarea=preparar&modulo=MELANBIDE_INTEROP&operacion=ejecutarCvlMasivoDesdeTexto&tipo=0&numero=<%=numExpediente%>'
+            + '&fechaDesdeCVL=' + encodeURIComponent(fechaDesde)
+            + '&fechaHastaCVL=' + encodeURIComponent(fechaHasta)
+            + '&fkWSSolicitado=5'
+            + '&listaDocsMasivo=' + encodeURIComponent(lista ? lista : '')
+            + '&excelBase64=' + encodeURIComponent(excelBase64 ? excelBase64 : '');
+        try{
+            ajax.open('POST', url, false);
+            ajax.setRequestHeader('Content-Type','application/x-www-form-urlencoded; charset=ISO-8859-1');
+            ajax.setRequestHeader('Accept','text/xml, application/xml, text/plain');
+            ajax.send(params);
+            if (ajax.readyState==4 && ajax.status==200){
+                var xmlDoc = null;
+                if(navigator.appName.indexOf('Internet Explorer')!=-1){
+                    xmlDoc=new ActiveXObject('Microsoft.XMLDOM');
+                    xmlDoc.async='false';
+                    xmlDoc.loadXML(ajax.responseText);
+                }else{
+                    xmlDoc = ajax.responseXML;
+                }
+                var nodos = xmlDoc.getElementsByTagName('RESPUESTA');
+                if(nodos.length>0){
+                    var codigo = nodos[0].getElementsByTagName('CODIGO_OPERACION')[0].childNodes[0].nodeValue;
+                    var resultado = nodos[0].getElementsByTagName('RESULTADO')[0].childNodes[0].nodeValue;
+                    if(codigo=='0'){
+                        jsp_alerta('A', resultado);
+                    }else{
+                        jsp_alerta('A', 'Error: ' + resultado);
+                    }
+                }
+            }
+        }catch(err){
+            jsp_alerta('A','Error ejecutando CVL masivo: ' + err.message);
+        }
+    }
+
+    function ejecutarCvlMasivoDesdeExcelInterop(){
+        var inputExcel = document.getElementById('listaDocsMasivoExcelInterop');
+        if(!inputExcel || !inputExcel.files || inputExcel.files.length===0){
+            jsp_alerta('A','Debe seleccionar un fichero Excel con NIF/NIE.');
+            return;
+        }
+        var ficheroExcel = inputExcel.files[0];
+        var nombreFichero = ficheroExcel.name ? ficheroExcel.name.toLowerCase() : '';
+        if(!(/\.(xls|xlsx)$/i).test(nombreFichero)){
+            jsp_alerta('A','Formato no válido. Debe seleccionar un fichero .xls o .xlsx.');
+            return;
+        }
+        var lector = new FileReader();
+        lector.onload = function(evento){
+            var contenido = evento && evento.target ? evento.target.result : null;
+            if(!contenido || contenido.indexOf('data:')!==0 || contenido.indexOf(',')<0){
+                jsp_alerta('A','No se pudo leer el fichero Excel seleccionado.');
+                return;
+            }
+            var excelBase64 = contenido.split(',')[1];
+            if(!excelBase64 || excelBase64.replace(/\s/g,'').length===0){
+                jsp_alerta('A','El fichero Excel seleccionado no contiene datos válidos.');
+                return;
+            }
+            enviarPeticionCvlMasivoInterop('', excelBase64);
+        };
+        lector.onerror = function(){
+            jsp_alerta('A','Error leyendo el fichero Excel.');
+        };
+        lector.readAsDataURL(ficheroExcel);
+    }
 </script>
 
 <body>
@@ -739,7 +812,23 @@
                         </logic:equal>    
                         <logic:equal name="hidenbtnLangaiDemanda" value="1" scope="request">
                             <input type="button" id="btnLangaiDemanda" name="btnLangaiDemanda" class="interopBotonMuylargoBoton" value="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"btn.langaiDemanda")%>" onclick="llamarServicioLagaiDemanda()" >
-                        </logic:equal>    
+                        </logic:equal>
+                        <logic:equal name="hidenbtnCvlMasivo" value="1" scope="request">
+                            <hr>
+                            <div style="text-align:left; border:1px solid #cccccc; padding:8px; margin-top:8px;">
+                                <label class="legendAzul">CVL masivo por Excel de NIF/NIE</label><br>
+                                <label>Fecha desde (yyyy-MM-dd)</label>
+                                <input type="text" id="fechaDesdeCVLMasivoInterop" style="width:120px;"/>
+                                <label>Fecha hasta (yyyy-MM-dd)</label>
+                                <input type="text" id="fechaHastaCVLMasivoInterop" style="width:120px;"/>
+                                <br><br>
+                                <input type="file" id="listaDocsMasivoExcelInterop" accept=".xls,.xlsx" style="width:98%;"/>
+                                <br>
+                                <span style="font-size:11px;color:#666;">Primera hoja: columnas en orden NIF+TIPO_DOC o TIPO_DOC+DOCUMENTO.</span>
+                                <br>
+                                <input type="button" id="btnCvlMasivoExcelInterop" class="interopBotonMuylargoBoton" value="Ejecutar CVL masivo" onclick="ejecutarCvlMasivoDesdeExcelInterop()">
+                            </div>
+                        </logic:equal>
                     </div>
                 </div>
             </div>
