@@ -114,7 +114,7 @@ public class ClientWSVidaLaboral {
 
     private static String getParameterWithFallback(final String primaryKey, final String fallbackKey) {
         final String primaryValue = ConfigurationParameter.getParameter(primaryKey, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
-        if (primaryValue != null && primaryValue.trim().length() > 0) {
+        if (primaryValue != null && !primaryValue.trim().isEmpty()) {
             return primaryValue;
         }
         return ConfigurationParameter.getParameter(fallbackKey, ConstantesMeLanbideInterop.FICHERO_PROPIEDADES);
