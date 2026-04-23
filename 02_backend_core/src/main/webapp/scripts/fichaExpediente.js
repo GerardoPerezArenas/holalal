@@ -81,7 +81,14 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRe
         respuesta = 'No disponible';
     }
 
-    var fechaGeneracion = new Date().toLocaleString();
+    var fechaGeneracion = new Date().toLocaleString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
     var ventanaPdf = window.open('', '_blank');
     if (!ventanaPdf) {
         jsp_alerta('A', 'No se pudo abrir la ventana para generar el PDF.');
@@ -94,6 +101,8 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRe
     html += '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escaparHtmlParaPdfVidaLaboral(titulo) + '</title>';
     html += '<style>';
     html += 'body{font-family:Arial,sans-serif;color:#111;margin:24px;}';
+    html += '.acciones{margin-bottom:12px;text-align:right;}';
+    html += '.acciones button{background:#1766A7;color:#fff;border:0;padding:8px 14px;cursor:pointer;font-weight:bold;border-radius:3px;}';
     html += '.cert{border:2px solid #000;padding:20px;}';
     html += '.titulo{font-size:20px;font-weight:bold;text-transform:uppercase;text-align:center;margin-bottom:6px;}';
     html += '.subtitulo{text-align:center;color:#444;margin-bottom:20px;}';
@@ -102,6 +111,7 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRe
     html += '.contenido{border:1px solid #d8d8d8;background:#fafafa;padding:10px;white-space:pre-wrap;word-break:break-word;font-family:"Courier New",monospace;font-size:12px;}';
     html += '.pie{margin-top:18px;font-size:12px;color:#444;}';
     html += '</style></head><body>';
+    html += '<div class="acciones"><button type="button" onclick="window.print();">Imprimir / Guardar PDF</button></div>';
     html += '<div class="cert">';
     html += '<div class="titulo">' + escaparHtmlParaPdfVidaLaboral(titulo) + '</div>';
     html += '<div class="subtitulo">Documento generado automáticamente desde datos suplementarios del expediente</div>';
@@ -109,7 +119,7 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRe
     html += '<div class="bloque"><h3>' + escaparHtmlParaPdfVidaLaboral(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtmlParaPdfVidaLaboral(respuesta) + '</div></div>';
     html += '<div class="pie"><strong>Fecha/Hora de generación:</strong> ' + escaparHtmlParaPdfVidaLaboral(fechaGeneracion) + '</div>';
     html += '</div>';
-    html += '<script>window.onload=function(){window.focus();window.print();};<\/script>';
+    html += '<script>window.onload=function(){window.focus();};<\/script>';
     html += '</body></html>';
 
     ventanaPdf.document.open();
