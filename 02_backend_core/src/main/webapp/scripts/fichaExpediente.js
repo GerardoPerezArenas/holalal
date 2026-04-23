@@ -14,38 +14,21 @@ var TIPO_ERROR_CSV_DOCUMENTO_FORMATO_NO_SOPORTADO = 111;
 var TIPO_ERROR_CSV_CODIGO_DESCONOCIDO = 112;
 var ESTILO_CSS_INPUT_NORMAL      = "inputTexto";
 var ESTILO_CSS_INPUT_OBLIGATORIO = "inputTextoObligatorio";
-var BLOB_URL_CLEANUP_DELAY_MS = 300000;
 var separador = '��';
-var MAPA_ACENTOS_NORMALIZACION = {
-    'á': 'a', 'à': 'a', 'ä': 'a', 'â': 'a',
-    'é': 'e', 'è': 'e', 'ë': 'e', 'ê': 'e',
-    'í': 'i', 'ì': 'i', 'ï': 'i', 'î': 'i',
-    'ó': 'o', 'ò': 'o', 'ö': 'o', 'ô': 'o',
-    'ú': 'u', 'ù': 'u', 'ü': 'u', 'û': 'u'
-};
-
-function normalizarTexto(texto) {
-    return (texto || '')
-        .toString()
-        .toLowerCase()
-        .replace(/[áàäâéèëêíìïîóòöôúùüû]/g, function (caracter) {
-            return MAPA_ACENTOS_NORMALIZACION[caracter] || caracter;
-        });
-}
 
 function esCampoVidaLaboralRespuesta(descCampo) {
-    var texto = normalizarTexto(descCampo);
+    var texto = (descCampo || '').toLowerCase();
     return texto.indexOf('vida laboral') >= 0
         && (texto.indexOf('respuesta') >= 0 || texto.indexOf('resultado') >= 0);
 }
 
 function esCampoVidaLaboralPeticion(descCampo) {
-    var texto = normalizarTexto(descCampo);
+    var texto = (descCampo || '').toLowerCase();
     return texto.indexOf('vida laboral') >= 0
         && (texto.indexOf('peticion') >= 0 || texto.indexOf('llamada') >= 0);
 }
 
-function escaparHtml(texto) {
+function escaparHtmlVidaLaboral(texto) {
     return (texto || '')
         .toString()
         .replace(/&/g, '&amp;')
@@ -56,59 +39,60 @@ function escaparHtml(texto) {
 }
 
 function formatearFechaHoraCertificado(fecha) {
-    var dosDigitos = function (num) {
+    var dosDigitos = function(num) {
         return (num < 10 ? '0' : '') + num;
     };
     return dosDigitos(fecha.getDate()) + '/' + dosDigitos(fecha.getMonth() + 1) + '/' + fecha.getFullYear()
         + ' ' + dosDigitos(fecha.getHours()) + ':' + dosDigitos(fecha.getMinutes()) + ':' + dosDigitos(fecha.getSeconds());
 }
 
-function obtenerValorCampoSuplementarioVidaLaboral(esCampoBuscadoFn, campoExcluirId) {
+function obtenerPeticionVidaLaboral(campoExcluirId) {
     var valor = '';
-    $('#capaDatosSuplementarios td.etiqueta').each(function () {
-        if (valor !== '') return false;
-
-        var descripcionCampo = $(this).text();
-        if (!esCampoBuscadoFn(descripcionCampo)) return true;
-
-        var celdaValor = $(this).next('td');
-        if (!celdaValor || celdaValor.length === 0) return true;
-
+    var celdas = $('#capaDatosSuplementarios td.etiqueta');
+    for(var i = 0; i < celdas.length; i++) {
+        var celda = $(celdas[i]);
+        if(!esCampoVidaLaboralPeticion(celda.text())) continue;
+        var celdaValor = celda.next('td');
+        if(!celdaValor || celdaValor.length == 0) continue;
         var control = celdaValor.find('textarea, input[type="text"]').first();
-        if (!control || control.length === 0) return true;
-
-        if (campoExcluirId && control.attr('id') === campoExcluirId) return true;
-
+        if(!control || control.length == 0) continue;
+        if(campoExcluirId && control.attr('id') == campoExcluirId) continue;
         valor = control.val() || '';
-        return false; // En jQuery.each, return false rompe el bucle.
-    });
+        break;
+    }
     return valor;
 }
 
 function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
     var respuesta = $('#' + nombreCampoRespuesta).val() || '';
-    var peticion = obtenerValorCampoSuplementarioVidaLaboral(esCampoVidaLaboralPeticion, nombreCampoRespuesta);
-    if (peticion === '') {
+    var peticion = obtenerPeticionVidaLaboral(nombreCampoRespuesta);
+    if(peticion == '') {
         peticion = 'No disponible';
     }
-    if (respuesta === '') {
+    if(respuesta == '') {
         respuesta = 'No disponible';
     }
 
-    var fechaGeneracion = formatearFechaHoraCertificado(new Date());
     var etiquetaRespuesta = 'Respuesta consulta vida laboral';
     var controlRespuesta = $('#' + nombreCampoRespuesta);
-    if (controlRespuesta && controlRespuesta.length > 0) {
+    if(controlRespuesta && controlRespuesta.length > 0) {
         var celdaRespuesta = controlRespuesta.closest('td');
         var etiquetaCampo = celdaRespuesta.prevAll('td.etiqueta').first().text();
-        if (etiquetaCampo && etiquetaCampo !== '') {
+        if(etiquetaCampo && etiquetaCampo != '') {
             etiquetaRespuesta = etiquetaCampo;
         }
     }
 
+    var fechaGeneracion = formatearFechaHoraCertificado(new Date());
     var titulo = 'Certificado de consulta de vida laboral';
+    var ventanaPdf = window.open('', '_blank');
+    if(!ventanaPdf) {
+        jsp_alerta('A', 'No se pudo abrir la ventana para generar el PDF. Verifique que su navegador permite ventanas emergentes.');
+        return;
+    }
+
     var html = '';
-    html += '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escaparHtml(titulo) + '</title>';
+    html += '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>' + escaparHtmlVidaLaboral(titulo) + '</title>';
     html += '<style>';
     html += 'body{font-family:Arial,sans-serif;color:#111;margin:24px;}';
     html += '.indicacion{margin-bottom:12px;color:#333;font-size:12px;}';
@@ -120,29 +104,21 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
     html += '.contenido{border:1px solid #d8d8d8;background:#fafafa;padding:10px;white-space:pre-wrap;word-break:break-word;font-family:"Courier New",monospace;font-size:12px;}';
     html += '.pie{margin-top:18px;font-size:12px;color:#444;}';
     html += '</style></head><body>';
-    html += '<div class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opción de imprimir del navegador (Ctrl+P).</div>';
+    html += '<p class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opcion de imprimir del navegador (Ctrl+P).</p>';
     html += '<div class="cert">';
-    html += '<div class="titulo">' + escaparHtml(titulo) + '</div>';
-    html += '<div class="subtitulo">Documento generado automáticamente desde datos suplementarios del expediente</div>';
-    html += '<div class="bloque"><h3>Datos de llamada (petición)</h3><div class="contenido">' + escaparHtml(peticion) + '</div></div>';
-    html += '<div class="bloque"><h3>' + escaparHtml(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtml(respuesta) + '</div></div>';
-    html += '<div class="pie"><strong>Fecha/Hora de generación:</strong> ' + escaparHtml(fechaGeneracion) + '</div>';
+    html += '<div class="titulo">' + escaparHtmlVidaLaboral(titulo) + '</div>';
+    html += '<div class="subtitulo">Documento generado automaticamente desde datos suplementarios del expediente</div>';
+    html += '<div class="bloque"><h3>Datos de llamada (peticion)</h3><div class="contenido">' + escaparHtmlVidaLaboral(peticion) + '</div></div>';
+    html += '<div class="bloque"><h3>' + escaparHtmlVidaLaboral(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtmlVidaLaboral(respuesta) + '</div></div>';
+    html += '<div class="pie"><strong>Fecha/Hora de generacion:</strong> ' + escaparHtmlVidaLaboral(fechaGeneracion) + '</div>';
     html += '</div>';
     html += '</body></html>';
 
-    var blobHtml = new Blob([html], {type: 'text/html'});
-    var blobUrl = URL.createObjectURL(blobHtml);
-    var ventanaPdf = window.open(blobUrl, '_blank', 'noopener,noreferrer');
-    if (!ventanaPdf) {
-        jsp_alerta('A', 'No se pudo abrir la ventana para generar el PDF. Por favor, verifique que su navegador permite ventanas emergentes.');
-        URL.revokeObjectURL(blobUrl);
-        return;
-    }
-    setTimeout(function () {
-        URL.revokeObjectURL(blobUrl);
-    }, BLOB_URL_CLEANUP_DELAY_MS);
+    ventanaPdf.document.open();
+    ventanaPdf.document.write(html);
+    ventanaPdf.document.close();
 }
- 
+
 function validarDocumento(){ 
     var tipo = document.forms[0].codTipoDoc.value;
     var documento = document.forms[0].txtDNI.value;
