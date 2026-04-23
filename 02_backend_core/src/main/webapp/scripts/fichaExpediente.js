@@ -14,7 +14,108 @@ var TIPO_ERROR_CSV_DOCUMENTO_FORMATO_NO_SOPORTADO = 111;
 var TIPO_ERROR_CSV_CODIGO_DESCONOCIDO = 112;
 var ESTILO_CSS_INPUT_NORMAL      = "inputTexto";
 var ESTILO_CSS_INPUT_OBLIGATORIO = "inputTextoObligatorio";
-var separador = '§¥';
+var separador = 'ï¿½ï¿½';
+
+function normalizarTextoVidaLaboral(texto) {
+    return (texto || '')
+        .toString()
+        .toLowerCase()
+        .replace(/[Ã¡Ã Ã¤Ã¢]/g, 'a')
+        .replace(/[Ã©Ã¨Ã«Ãª]/g, 'e')
+        .replace(/[Ã­Ã¬Ã¯Ã®]/g, 'i')
+        .replace(/[Ã³Ã²Ã¶Ã´]/g, 'o')
+        .replace(/[ÃºÃ¹Ã¼Ã»]/g, 'u');
+}
+
+function esCampoVidaLaboralRespuesta(descCampo) {
+    var texto = normalizarTextoVidaLaboral(descCampo);
+    return texto.indexOf('vida laboral') >= 0
+        && (texto.indexOf('respuesta') >= 0 || texto.indexOf('resultado') >= 0);
+}
+
+function esCampoVidaLaboralPeticion(descCampo) {
+    var texto = normalizarTextoVidaLaboral(descCampo);
+    return texto.indexOf('vida laboral') >= 0
+        && (texto.indexOf('peticion') >= 0 || texto.indexOf('llamada') >= 0);
+}
+
+function escaparHtmlParaPdfVidaLaboral(texto) {
+    return (texto || '')
+        .toString()
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#39;');
+}
+
+function obtenerValorCampoSuplementarioVidaLaboral(esCampoBuscadoFn, campoExcluirId) {
+    var valor = '';
+    $('#capaDatosSuplementarios td.etiqueta').each(function () {
+        if (valor !== '') return false;
+
+        var descripcionCampo = $(this).text();
+        if (!esCampoBuscadoFn(descripcionCampo)) return true;
+
+        var celdaValor = $(this).next('td');
+        if (!celdaValor || celdaValor.length === 0) return true;
+
+        var control = celdaValor.find('textarea, input[type="text"]').first();
+        if (!control || control.length === 0) return true;
+
+        if (campoExcluirId && control.attr('id') === campoExcluirId) return true;
+
+        valor = control.val() || '';
+        return false;
+    });
+    return valor;
+}
+
+function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRespuesta) {
+    var respuesta = $('#' + nombreCampoRespuesta).val() || '';
+    var peticion = obtenerValorCampoSuplementarioVidaLaboral(esCampoVidaLaboralPeticion, nombreCampoRespuesta);
+    if (peticion === '') {
+        peticion = 'No disponible';
+    }
+    if (respuesta === '') {
+        respuesta = 'No disponible';
+    }
+
+    var fechaGeneracion = new Date().toLocaleString();
+    var ventanaPdf = window.open('', '_blank');
+    if (!ventanaPdf) {
+        jsp_alerta('A', 'No se pudo abrir la ventana para generar el PDF.');
+        return;
+    }
+
+    var titulo = 'Certificado de consulta de vida laboral';
+    var etiquetaRespuesta = descCampoRespuesta || 'Respuesta consulta vida laboral';
+    var html = '';
+    html += '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escaparHtmlParaPdfVidaLaboral(titulo) + '</title>';
+    html += '<style>';
+    html += 'body{font-family:Arial,sans-serif;color:#111;margin:24px;}';
+    html += '.cert{border:2px solid #000;padding:20px;}';
+    html += '.titulo{font-size:20px;font-weight:bold;text-transform:uppercase;text-align:center;margin-bottom:6px;}';
+    html += '.subtitulo{text-align:center;color:#444;margin-bottom:20px;}';
+    html += '.bloque{margin-bottom:16px;}';
+    html += '.bloque h3{font-size:14px;margin:0 0 8px 0;border-bottom:1px solid #ccc;padding-bottom:4px;text-transform:uppercase;}';
+    html += '.contenido{border:1px solid #d8d8d8;background:#fafafa;padding:10px;white-space:pre-wrap;word-break:break-word;font-family:"Courier New",monospace;font-size:12px;}';
+    html += '.pie{margin-top:18px;font-size:12px;color:#444;}';
+    html += '</style></head><body>';
+    html += '<div class="cert">';
+    html += '<div class="titulo">' + escaparHtmlParaPdfVidaLaboral(titulo) + '</div>';
+    html += '<div class="subtitulo">Documento generado automÃ¡ticamente desde datos suplementarios del expediente</div>';
+    html += '<div class="bloque"><h3>Datos de llamada (peticiÃ³n)</h3><div class="contenido">' + escaparHtmlParaPdfVidaLaboral(peticion) + '</div></div>';
+    html += '<div class="bloque"><h3>' + escaparHtmlParaPdfVidaLaboral(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtmlParaPdfVidaLaboral(respuesta) + '</div></div>';
+    html += '<div class="pie"><strong>Fecha/Hora de generaciÃ³n:</strong> ' + escaparHtmlParaPdfVidaLaboral(fechaGeneracion) + '</div>';
+    html += '</div>';
+    html += '<script>window.onload=function(){window.focus();window.print();};<\/script>';
+    html += '</body></html>';
+
+    ventanaPdf.document.open();
+    ventanaPdf.document.write(html);
+    ventanaPdf.document.close();
+}
  
 function validarDocumento(){ 
     var tipo = document.forms[0].codTipoDoc.value;
@@ -353,7 +454,7 @@ function verificarPantallaExterna(i){
         }catch(Err){
             alert("Error.descripcion: " + Err.description);
         }
-        // Se solicita ahora los parámetros de configuración de la ventana
+        // Se solicita ahora los parï¿½metros de configuraciï¿½n de la ventana
 		var parametros = "opcion=parametrosPluginTramitacionExterna&codTramite=" + escape(codTramite) + "&codProcedimiento=" + escape(codProcedimiento)
             + "&codOrganizacion=" + escape(codMunicipio) + "&ocurrenciaTramite=" + escape(ocurrenciaTramite) + "&numExpediente=" + escape(numero)
             + "&fechaInicioTramite=" + escape(fechaInicio) + "&fechaFinTramite=" + escape(fechaFin) + "&codUorTramitadora=" + escape(codUtr) + "&ejercicio=" + escape(ejercicio);
@@ -384,7 +485,7 @@ function verificarPantallaExterna(i){
 }
 
 
-// Visualizar un documento asociado al expediente de la pestaña 'Otros Documentos'
+// Visualizar un documento asociado al expediente de la pestaï¿½a 'Otros Documentos'
 function pulsarVisualizarOtroDocumento(){
     var codMun = document.forms[0].codMunicipio.value;
     var ejercicio = document.forms[0].ejercicio.value;
@@ -543,15 +644,15 @@ function actualizaEliminarDoc(){
             alturaCapaPrincipal = alturaCapaPrincipal + tamanho + 100;
             document.getElementById("capaDatosSuplementarios").style.height = alturaCapaPrincipal + "px";
         }catch(Err){
-            // Puede dar error establecer el tamaño de la agrupación por defecto, se captura el error pero no se hace nada
+            // Puede dar error establecer el tamaï¿½o de la agrupaciï¿½n por defecto, se captura el error pero no se hace nada
         }
         
       }
     }//calcularAltoAgrupacion
    
    /**
-     * Función utilizada cuando se ha indicado que un tipo de documento es un CIF, pero se va a valir
-     * si se trata de un NIF. No vacía el campo de formulario con el documento como hace la función
+     * Funciï¿½n utilizada cuando se ha indicado que un tipo de documento es un CIF, pero se va a valir
+     * si se trata de un NIF. No vacï¿½a el campo de formulario con el documento como hace la funciï¿½n
      * @param {String} campo: Cadena de caracteres con el documento a validar
      * @returns {Boolean}
      */
@@ -589,8 +690,8 @@ function actualizaEliminarDoc(){
 
 
     /**
-      * Función utilizada cuando se ha indicado que un tipo de documento es un CIF, pero se va a valir
-      * si se trata de un NIF. No vacía el campo de formulario con el documento como hace la función
+      * Funciï¿½n utilizada cuando se ha indicado que un tipo de documento es un CIF, pero se va a valir
+      * si se trata de un NIF. No vacï¿½a el campo de formulario con el documento como hace la funciï¿½n
       * validarNif de gestionTerceros.jsp
       * @param {document.forms[0].text} campo
       * @returns {Boolean
@@ -740,7 +841,7 @@ function procesarRespuestaListadoDocumentosExternos(ajaxResult){
         pleaseWait('off');
         tabOtrosDocumentos.lineas=listaOtrosDocumentos;
         tabOtrosDocumentos.displayTabla();
-        // Se pone a true esta variable, para que al seleccionar la pestaña "Otros documentos",
+        // Se pone a true esta variable, para que al seleccionar la pestaï¿½a "Otros documentos",
         // no se recargue de nuevo el contenido de la misma.
         cargadoOtrosDocumentos = true;
 
@@ -992,7 +1093,7 @@ function procesarRespuestaOtrosDatosExpediente(ajaxResult){
              mostrarMensajeErrorCargarParcialExpediente(TIPO_ERROR_CARGAR_LISTADO_OTROS_DATOS_EXPEDIENTE);
         }else{
         
-            // Se actualiza la sección de Enlaces, si los hubiese
+            // Se actualiza la secciï¿½n de Enlaces, si los hubiese
             if(resultado.enlaces!=null && resultado.enlaces!=undefined){
 
                 for(var i=0;resultado.enlaces!=null && i<resultado.enlaces.length;i++){                        
@@ -1005,21 +1106,21 @@ function procesarRespuestaOtrosDatosExpediente(ajaxResult){
                 if(listaEnlaces.length>0){
                     $('#filaSubtituloEnlaces').css("display","");
                     $('#filaContenidoEnlaces').css("display","");                        
-                    // Se genera el contenido en la función enlaces() y se muestra en la capa "capaEnlaces"
+                    // Se genera el contenido en la funciï¿½n enlaces() y se muestra en la capa "capaEnlaces"
                     domlay('capaEnlaces',1,0,0,enlaces());
                 }
             }
             
             
-            // Se actualiza la sección de asientos de registro, si los hubiese
+            // Se actualiza la secciï¿½n de asientos de registro, si los hubiese
             if(resultado.asientos!=null && resultado.asientos!=undefined){    
                 
-                // Si se ha producido algún al recuperar asientos de registro externos, se muestran los errores al usuario
+                // Si se ha producido algï¿½n al recuperar asientos de registro externos, se muestran los errores al usuario
                 if(resultado.errores!=null && resultado.errores!=undefined){
                     mostrarMensajesErrorAsientosRegistroExternos(resultado.errores);
                 }
                 
-                // Se obtienen los asientos de registro recuperados, que están asociados al expediente
+                // Se obtienen los asientos de registro recuperados, que estï¿½n asociados al expediente
                 var contadorAsientos = 0;
                 for(var i=0;i<resultado.asientos.length;i++){                                
                     var codigoDepartamento  = resultado.asientos[i].codigoDepartamento;
@@ -1092,11 +1193,11 @@ function procesarRespuestaOtrosDatosExpediente(ajaxResult){
                 tabDocumentos.displayTabla();
                 
                 if(estadoExpediente==1 || estadoExpediente==9) { 
-                    // Si el expediente está anulado o finalizado, se habilita el botón [Ver] 
+                    // Si el expediente estï¿½ anulado o finalizado, se habilita el botï¿½n [Ver] 
                     // para poder visualizar un documento de inicio de expediente
                     document.forms[0].cmdVerDocumentoExpediente.disabled = false;
                     document.forms[0].cmdVerDocumentoExpediente.style.color = '#ffffff';                        
-                    // Se deshabilitan los checkbox de cada documento de inicio, porque está habilitado y el usuario
+                    // Se deshabilitan los checkbox de cada documento de inicio, porque estï¿½ habilitado y el usuario
                     // pulsa sobre ellos, se puede llegar a eliminar el documento de inicio
                     for(var i=0;listaDocumentos!=undefined && i<listaDocumentos.length;i++){                                                
                         $('#documentoEntregado' + i).prop('disabled',true);                        
@@ -1104,7 +1205,7 @@ function procesarRespuestaOtrosDatosExpediente(ajaxResult){
                 }// if                 
             }
             
-            // Se pone a true esta variable, para indicar que la pestaña "Otros Datos" 
+            // Se pone a true esta variable, para indicar que la pestaï¿½a "Otros Datos" 
             // ya ha sido cargada, y evitar volver a recargarla de nuevo
             cargadoOtrosDatos = true;
             
@@ -1138,7 +1239,7 @@ function getHTMLCampoTexto(campo,mostrarDescTramite){
            
         if(campo.soloLectura=="true") modoLectura='readonly';
         if(campo.bloqueado=="SI") modoLectura='readonly';
-        // Si se están consultando, entonces se deshabilita el campo de texto
+        // Si se estï¿½n consultando, entonces se deshabilita el campo de texto
         if(gConsultando) disabled='disabled';            
                     
         var estiloCss = (campo.obligatorio=="1")?ESTILO_CSS_INPUT_OBLIGATORIO:ESTILO_CSS_INPUT_NORMAL;
@@ -1163,7 +1264,7 @@ function getHTMLCampoTexto(campo,mostrarDescTramite){
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
             inputForm +="<div id='campo_" + campo.codCampo + "' style='width:" + tamanoVista + "%'>";
             if(mostrarDescTramite)
-                inputForm +="<div class='deTramite'> Trámite " + campo.descripcionTramite + "</div>";
+                inputForm +="<div class='deTramite'> Trï¿½mite " + campo.descripcionTramite + "</div>";
             inputForm +="<table id='" + idTabla + "' name='" + idTabla + "' width='100%' border='0px' cellspacing='2px' cellpadding='1px'>";       
             inputForm +="<tr><td class='deTramite' style='width:3%;text-transform:capitalize;'>&nbsp;</td>";
             inputForm += "<td class='etiqueta' style='text-transform:capitalize;' width='150px' align='left'>"
@@ -1176,7 +1277,7 @@ function getHTMLCampoTexto(campo,mostrarDescTramite){
        return inputForm;
                 
     }catch(Err){
-        alert("Error al obtener el HTML de un campo suplementario de texto con código " + codCampo + ": " + Err.description);
+        alert("Error al obtener el HTML de un campo suplementario de texto con cï¿½digo " + codCampo + ": " + Err.description);
     }
 }
 
@@ -1185,8 +1286,8 @@ function getHTMLCampoTexto(campo,mostrarDescTramite){
 
 
 /**
- * Devuelve el código HTML para un campo suplementario de tipo numérico
- * @param: Objeto que contiene la estructura del campo a crear, así como su valor
+ * Devuelve el cï¿½digo HTML para un campo suplementario de tipo numï¿½rico
+ * @param: Objeto que contiene la estructura del campo a crear, asï¿½ como su valor
  */
 function getHTMLCampoNumerico(campo,mostrarDescTramite){
     try{                
@@ -1202,7 +1303,7 @@ function getHTMLCampoNumerico(campo,mostrarDescTramite){
                         
         if(campo.soloLectura=="true") modoLectura="readonly";
         if(campo.bloqueado=="SI") modoLectura="readonly";
-        // Si se están consultando, entonces se deshabilita el campo numérico
+        // Si se estï¿½n consultando, entonces se deshabilita el campo numï¿½rico
         if(gConsultando) disabled='disabled';            
         
         /********************************/
@@ -1255,7 +1356,7 @@ function getHTMLCampoNumerico(campo,mostrarDescTramite){
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
             inputForm +="<div id='campo_" + campo.codCampo + "' style='width:" + campo.tamanoVista + "%'>";
             if(mostrarDescTramite)
-                inputForm +="<div class='deTramite'> Trámite " + campo.descripcionTramite + "</div>";
+                inputForm +="<div class='deTramite'> Trï¿½mite " + campo.descripcionTramite + "</div>";
             inputForm +="<table id='" + idTabla + "' name='" + idTabla + "' width='100%' border='0px' cellspacing='2px' cellpadding='1px'>";        
             inputForm +="<tr><td class='deTramite' style='width:3%;text-transform:capitalize;'>&nbsp;</td><td class='etiqueta' style='text-transform:capitalize;' width='150px' align='left'>";
             inputForm += descCampo + "</td>";        
@@ -1267,15 +1368,15 @@ function getHTMLCampoNumerico(campo,mostrarDescTramite){
        return inputForm;
         
     }catch(Err){
-        alert("Error al obtener el HTML de un campo suplementario de texto con código " + codCampo + ": " + Err.description);
+        alert("Error al obtener el HTML de un campo suplementario de texto con cï¿½digo " + codCampo + ": " + Err.description);
     }
 }
 
 
 
 /**
- * Devuelve el código HTML para un campo suplementario de tipo fichero
- * @param: Objeto que contiene la estructura del campo a crear, así como su valor
+ * Devuelve el cï¿½digo HTML para un campo suplementario de tipo fichero
+ * @param: Objeto que contiene la estructura del campo a crear, asï¿½ como su valor
  */
 function getHTMLCampoFichero(campo,mostrarDescTramite){
     try{                
@@ -1297,7 +1398,7 @@ function getHTMLCampoFichero(campo,mostrarDescTramite){
                 
         if(campo.soloLectura=="true") modoLectura="readonly";
         if(campo.bloqueado=="SI") modoLectura="readonly";
-        // Si se están consultando, entonces se deshabilita el campo fichero
+        // Si se estï¿½n consultando, entonces se deshabilita el campo fichero
         if(gConsultando) deshabilitado='disabled';            
         
         
@@ -1338,7 +1439,7 @@ function getHTMLCampoFichero(campo,mostrarDescTramite){
         
         inputForm += "<td style='width: 2px'></td>";
         if(campo.codTramite==undefined || campo.codTramite==''){
-            // Si el campo no es de trámite, se añade el botón eliminar. Pero hay que comprobar si se muestra o no deshabilitado
+            // Si el campo no es de trï¿½mite, se aï¿½ade el botï¿½n eliminar. Pero hay que comprobar si se muestra o no deshabilitado
             
             var disabled = '';
             if(valor==undefined || valor=='' || gConsultando) disabled = "disabled";  
@@ -1365,7 +1466,7 @@ function getHTMLCampoFichero(campo,mostrarDescTramite){
         }else{                              
             salida +="<div id='campo_" + campo.codCampo + "' style='width:" + campo.tamanoVista + "%'>";
             if(mostrarDescTramite)
-                salida +="<div class='deTramite'> Trámite " + campo.descripcionTramite + "</div>";
+                salida +="<div class='deTramite'> Trï¿½mite " + campo.descripcionTramite + "</div>";
             salida +="<table id='prueba' name='prueba' width='100%' border='0px' cellspacing='2px' cellpadding='1px'>";        
             
             salida +="<tr><td class='deTramite' style='width:3%;text-transform;'>&nbsp;</td><td class='etiqueta' style='text-transform:capitalize;' width='150px' align='left'>";
@@ -1380,13 +1481,13 @@ function getHTMLCampoFichero(campo,mostrarDescTramite){
         return salida;
         
     }catch(Err){
-        alert("Error al obtener el HTML de un campo suplementario de fichero con código " + codCampo + ": " + Err.description);
+        alert("Error al obtener el HTML de un campo suplementario de fichero con cï¿½digo " + codCampo + ": " + Err.description);
     }
 }
 
 /**
- * Devuelve el código HTML para un campo suplementario de tipo texto largo
- * @param: Objeto que contiene la estructura del campo a crear, así como su valor
+ * Devuelve el cï¿½digo HTML para un campo suplementario de tipo texto largo
+ * @param: Objeto que contiene la estructura del campo a crear, asï¿½ como su valor
  */
 function getHTMLCampoTextoLargo(campo,mostrarDescTramite){    
     try{ 
@@ -1398,7 +1499,7 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
                 
         if(campo.soloLectura=="true") modoLectura="readonly";
         if(campo.bloqueado=="SI") modoLectura="readonly";      
-        // Si se están consultando, entonces se deshabilita el campo de texto largo
+        // Si se estï¿½n consultando, entonces se deshabilita el campo de texto largo
         if(gConsultando) disabled='disabled';            
         
         if(campo.valorCampo.valorDatoSuplementario!=null && campo.valorCampo.valorDatoSuplementario!=""){
@@ -1425,8 +1526,15 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
         var enlaceTodo;
         enlaceTodo = "<A href='javascript:void(0);' onclick=\"verTexto('" + nombreCampo + "','"+descCampo+"');\" style='top: 105px;position: relative;'>";
         enlaceTodo += "<span class='fa fa-expand' id='enlaceTodo' name='enlaceTodo' alt='Maximizar Campo'></span>";
-        enlaceTodo += "</A>";   
-      
+        enlaceTodo += "</A>";
+        var botonPdfVidaLaboral = "";
+        if(esCampoVidaLaboralRespuesta(descCampo)){
+            var descCampoEscapado = (descCampo || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
+            botonPdfVidaLaboral += "&nbsp;<input type='button' class='botonGeneral' value='PDF' ";
+            botonPdfVidaLaboral += "onclick=\"generarCertificadoConsultaVidaLaboral('" + nombreCampo + "','" + descCampoEscapado + "');\"";
+            botonPdfVidaLaboral += " title='Generar certificado PDF de llamada y respuesta de vida laboral'>";
+        }
+       
         if(campo.descripcionTramite==undefined || campo.descripcionTramite==''){
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
             inputForm +="<div id='campo_" + campo.codCampo + "' style='width:" + campo.tamanoVista + "%'>";
@@ -1436,13 +1544,13 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
             inputForm += "<td class='columnP' align='left'>"            
             inputForm += "<textarea class='" + estiloCSS + "' style='width:95%;height:130px !important;text-transform: none;' name='" + nombreCampo + "' id='" + nombreCampo + "'" + 
             " title='" + descCampo + "' onchange='modificaVariableCambiosCamposSupl();' onkeyup='return xValidarCaracteres(this);' " + modoLectura + ' ' + disabled + ">" + valor + "</textarea>";
-            inputForm += enlaceTodo+"</td></tr></table>";
+            inputForm += enlaceTodo + botonPdfVidaLaboral + "</td></tr></table>";
             inputForm +="</div>";
         }else{                              
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
             inputForm +="<div id='campo_" + campo.codCampo + "' style='width:" + campo.tamanoVista + "%'>";
             if(mostrarDescTramite)
-                inputForm +="<div class='deTramite'> Trámite " + campo.descripcionTramite + "</div>";
+                inputForm +="<div class='deTramite'> Trï¿½mite " + campo.descripcionTramite + "</div>";
             inputForm +="<table id='" + idTabla + "' name='" + idTabla + "' width='100%' border='0px' cellspacing='2px' cellpadding='1px'>";        
             
             inputForm +="<tr><td class='deTramite' style='width:3%;text-transform:capitalize;'>&nbsp;</td><td class='etiqueta' style='text-transform:capitalize;' width='150px' align='left'>";
@@ -1450,14 +1558,14 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
             inputForm += "<td class='columnP' align='left'>"            
             inputForm += "<textarea class='" + estiloCSS + "' style='width:95%;height:130px !important;text-transform: none;' name='" + nombreCampo + "' id='" + nombreCampo + "'" + 
             " title='" + descCampo + "' onchange='modificaVariableCambiosCamposSupl();' onkeyup='return xValidarCaracteres(this);' " + modoLectura + ' ' + disabled + ">" + valor + "</textarea>";
-            inputForm += enlaceTodo+"</td></tr></table>";
+            inputForm += enlaceTodo + botonPdfVidaLaboral + "</td></tr></table>";
             inputForm +="</div>";
         }        
        
         return inputForm;
         
     } catch(Err){
-        alert("Error al obtener el HTML de un campo suplementario de texto con código " + codCampo + ": " + Err.description);
+        alert("Error al obtener el HTML de un campo suplementario de texto con cï¿½digo " + codCampo + ": " + Err.description);
     }
 }
 
@@ -1470,8 +1578,8 @@ function verTexto(id,codigo){
 }
 
 /**
- * Devuelve el código HTML para un campo suplementario de tipo fecha
- * @param: Objeto que contiene la estructura del campo a crear, así como su valor
+ * Devuelve el cï¿½digo HTML para un campo suplementario de tipo fecha
+ * @param: Objeto que contiene la estructura del campo a crear, asï¿½ como su valor
  */
 function getHTMLCampoFecha(campo,mostrarDescTramite){        
     try{ 
@@ -1582,8 +1690,8 @@ function getHTMLCampoFecha(campo,mostrarDescTramite){
        }
            
        if(campo.plazoFecha!=undefined && campo.checkPlazoFecha!=undefined && campo.plazoFecha!='' && campo.checkPlazoFecha!=''){                      
-           if(valorPlazoActivo=="0"){ // Está desactivada la alarma, se da la posibilidad de activarla
-                                      // Si está desactivada la alarma, habrá que activarla               
+           if(valorPlazoActivo=="0"){ // Estï¿½ desactivada la alarma, se da la posibilidad de activarla
+                                      // Si estï¿½ desactivada la alarma, habrï¿½ que activarla               
                campoFormulario += "<A id='enlaceActivar" + id + "' style=\"text-decoration:none;visibility:inline;display:inline;\" onclick=\"onClickActivar('" + id + "');\">";
                campoFormulario += "<span class='fa fa-times-circle' id='cmdActivar" + id + "' name='cmdActivar" + nombreCampo + "' title='" + mensajeEtiquetaActivar + "'" + disabled + "></span>";
                campoFormulario += "</A>";      
@@ -1593,7 +1701,7 @@ function getHTMLCampoFecha(campo,mostrarDescTramite){
                campoFormulario += "</A>"; 
                
            }else
-           if(valorPlazoActivo=="1"){ // Está activada la alarma, se da la posibilidad de desactivarla               
+           if(valorPlazoActivo=="1"){ // Estï¿½ activada la alarma, se da la posibilidad de desactivarla               
                campoFormulario += "<A id='enlaceActivar" + id + "' style=\"text-decoration:none;visibility:none;display:none;\" onclick=\"onClickActivar('" + id + "');\">";
                campoFormulario += "<span class='fa fa-times-circle' id='cmdActivar" + id + "' name='cmdActivar" + nombreCampo + "' title='" + mensajeEtiquetaActivar + "'" + disabled + "></span>";
                campoFormulario += "</A>";
@@ -1622,7 +1730,7 @@ function getHTMLCampoFecha(campo,mostrarDescTramite){
        }else{                  
             inputForm +="<div id='campo_" + campo.codCampo + "' style='width:" + campo.tamanoVista + "%'>";
             if(mostrarDescTramite)
-                inputForm +="<div class='deTramite'> Trámite " + campo.descripcionTramite + "</div>";
+                inputForm +="<div class='deTramite'> Trï¿½mite " + campo.descripcionTramite + "</div>";
             inputForm +="<table id='" + idTabla + "' name='" + idTabla + "' width='100%' border='0px' cellspacing='2px' cellpadding='1px'>";                                
             inputForm +="<tr><td class='deTramite' style='width:3%;text-transform:capitalize;'>&nbsp;</td><td class='etiqueta' style='text-transform:capitalize;' width='150px' align='left'>";
             inputForm += descCampo + "</td>";       
@@ -1634,7 +1742,7 @@ function getHTMLCampoFecha(campo,mostrarDescTramite){
        return inputForm;
         
     } catch(Err){
-        alert("Error al obtener el HTML de un campo suplementario de texto con código " + codCampo + ": " + Err.description);
+        alert("Error al obtener el HTML de un campo suplementario de texto con cï¿½digo " + codCampo + ": " + Err.description);
     }
 } 
 
@@ -1642,8 +1750,8 @@ function getHTMLCampoFecha(campo,mostrarDescTramite){
 
 
 /**
- * Devuelve el código HTML para un campo suplementario de tipo fecha calculado
- * @param: Objeto que contiene la estructura del campo a crear, así como su valor
+ * Devuelve el cï¿½digo HTML para un campo suplementario de tipo fecha calculado
+ * @param: Objeto que contiene la estructura del campo a crear, asï¿½ como su valor
  */
 function getHTMLCampoFechaCalculado(campo,mostrarDescTramite){        
     try{ 
@@ -1708,7 +1816,7 @@ function getHTMLCampoFechaCalculado(campo,mostrarDescTramite){
         }else{                              
             inputForm +="<div id='campo_" + campo.codCampo + "' style='width:" + campo.tamanoVista + "%'>";
             if(mostrarDescTramite)
-                inputForm +="<div class='deTramite'> Trámite " + campo.descripcionTramite + "</div>";
+                inputForm +="<div class='deTramite'> Trï¿½mite " + campo.descripcionTramite + "</div>";
             inputForm +="<table id='" + idTabla + "' name='" + idTabla + "' width='100%' border='0px' cellspacing='2px' cellpadding='1px'>"; 
             inputForm +="<tr><td class='deTramite' style='width:3%;text-transform:capitalize;'>&nbsp;</td><td class='etiqueta' style='text-transform:capitalize;' width='150px' align='left'>";
             inputForm += descCampo + "</td>";        
@@ -1720,7 +1828,7 @@ function getHTMLCampoFechaCalculado(campo,mostrarDescTramite){
         return inputForm;
         
     } catch(Err){
-        alert("Error al obtener el HTML de un campo suplementario de fecha calculado con código " + codCampo + ": " + Err.description);
+        alert("Error al obtener el HTML de un campo suplementario de fecha calculado con cï¿½digo " + codCampo + ": " + Err.description);
     }
 } 
 
@@ -1798,7 +1906,7 @@ function getHTMLCampoDesplegable(campo,mostrarDescTramite){
         }else{                  
             inputForm +="<div id='campo_" + campo.codCampo + "' style='width:" +tamanoVista + "%'>";
             if(mostrarDescTramite)
-                inputForm +="<div class='deTramite'> Trámite " + campo.descripcionTramite + "</div>";
+                inputForm +="<div class='deTramite'> Trï¿½mite " + campo.descripcionTramite + "</div>";
             inputForm +="<table id='" + idTabla + "' name='" + idTabla + "' width='100%' border='0px' cellspacing='2px' cellpadding='1px'>";        
             inputForm +="<tr><td class='deTramite' style='width:3%;text-transform:capitalize;'>&nbsp;</td><td class='etiqueta' style='text-transform:capitalize;' width='150px' align='left'>";
             inputForm += descCampo + "</td>";
@@ -1813,14 +1921,14 @@ function getHTMLCampoDesplegable(campo,mostrarDescTramite){
         return inputForm;
                 
     } catch(Err){
-        alert("Error al obtener el HTML de un campo suplementario desplegable con código " + codCampo + ": " + Err.description);
+        alert("Error al obtener el HTML de un campo suplementario desplegable con cï¿½digo " + codCampo + ": " + Err.description);
     }
 }
 
 
 /**
- * Devuelve el código HTML para un campo suplementario de tipo numérico calculado
- * @param: Objeto que contiene la estructura del campo a crear, así como su valor
+ * Devuelve el cï¿½digo HTML para un campo suplementario de tipo numï¿½rico calculado
+ * @param: Objeto que contiene la estructura del campo a crear, asï¿½ como su valor
  */
 function getHTMLCampoNumericoCalculado(campo,mostrarDescTramite){    
    try{          
@@ -1838,7 +1946,7 @@ function getHTMLCampoNumericoCalculado(campo,mostrarDescTramite){
         var disabled = '';
         
         modoLectura="readonly";        
-        // Si se están consultando, entonces se deshabilita el campo numérico calculado
+        // Si se estï¿½n consultando, entonces se deshabilita el campo numï¿½rico calculado
         if(gConsultando) disabled='disabled';            
    
         if(campo.valorCampo.valorDatoSuplementario!=null && campo.valorCampo.valorDatoSuplementario!=""){
@@ -1888,7 +1996,7 @@ function getHTMLCampoNumericoCalculado(campo,mostrarDescTramite){
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
             inputForm +="<div id='campo_" + campo.codCampo + "' style='width:" + campo.tamanoVista + "%'>";
             if(mostrarDescTramite)
-                inputForm +="<div class='deTramite'> Trámite " + campo.descripcionTramite + "</div>";
+                inputForm +="<div class='deTramite'> Trï¿½mite " + campo.descripcionTramite + "</div>";
             inputForm +="<table id='" + idTabla + "' name='" + idTabla + "' width='100%' border='0px' cellspacing='2px' cellpadding='1px'>";        
             inputForm +="<tr><td class='deTramite' style='width:3%;text-transform:capitalize;'>&nbsp;</td><td class='etiqueta' style='text-transform:capitalize;' width='150px' align='left'>";
             inputForm += descCampo + "</td>";        
@@ -1901,15 +2009,15 @@ function getHTMLCampoNumericoCalculado(campo,mostrarDescTramite){
        return inputForm;
         
     }catch(Err){
-        alert("Error al obtener el HTML de un campo suplementario numérico calculado con código " + codCampo + ": " + Err.description);
+        alert("Error al obtener el HTML de un campo suplementario numï¿½rico calculado con cï¿½digo " + codCampo + ": " + Err.description);
     }
 }
 
 
 
 /**
- * Devuelve el código HTML para un campo suplementario desplegable exerno
- * @param: Objeto que contiene la estructura del campo a crear, así como su valor
+ * Devuelve el cï¿½digo HTML para un campo suplementario desplegable exerno
+ * @param: Objeto que contiene la estructura del campo a crear, asï¿½ como su valor
  */
 function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){    
    try{          
@@ -1988,7 +2096,7 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
             inputForm +="<div id='campo_" + campo.codCampo + "' style='width:" + campo.tamanoVista + "%'>";
             if(mostrarDescTramite)
-                inputForm +="<div class='deTramite'> Trámite " + campo.descripcionTramite + "</div>";
+                inputForm +="<div class='deTramite'> Trï¿½mite " + campo.descripcionTramite + "</div>";
             inputForm +="<table id='" + idTabla + "' name='" + idTabla + "' width='100%' border='0px' cellspacing='2px' cellpadding='1px'>";        
             inputForm +="<tr><td class='deTramite' style='width:3%;text-transform:capitalize;'>&nbsp;</td><td class='etiqueta' style='text-transform:capitalize;' width='150px' align='left'>";
             inputForm += descCampo + "</td>";        
@@ -2001,13 +2109,13 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
         return inputForm;
         
     }catch(Err){
-        alert("Error al obtener el HTML de un campo suplementario numérico calculado con código " + codCampo + ": " + Err.description);
+        alert("Error al obtener el HTML de un campo suplementario numï¿½rico calculado con cï¿½digo " + codCampo + ": " + Err.description);
     }
 }
  
  
  /**
-  * Crea la tabla que contendrá las agrupaciones con sus campos suplementarios correspondientes
+  * Crea la tabla que contendrï¿½ las agrupaciones con sus campos suplementarios correspondientes
   */ 
  function getCabeceraTablaAgrupacionesDatosSuplementarios(){     
      return "<table id='tablaDatosSuplementariosAgrupaciones' class='contenidoPestanha'>";     
@@ -2066,11 +2174,11 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
         var contadorCampos           = 0;
         var salida;                
            
-        // Se vacía el contenido del DIV en el que se mostrarán los datos suplementarios
+        // Se vacï¿½a el contenido del DIV en el que se mostrarï¿½n los datos suplementarios
         $('#capaDatosSuplementarios').html('');
         // Se almacena en el campo oculto "jsonEstructuraCamposSuplementarios" la estructura de los campos 
-        // suplementarios en formato JSON. De modo al grabar, la estructura podrá ser recuperada desde el Action y 
-        // parseada a la colección de objetos EstructuraCampo, para proceder a grabar los valores de los campos
+        // suplementarios en formato JSON. De modo al grabar, la estructura podrï¿½ ser recuperada desde el Action y 
+        // parseada a la colecciï¿½n de objetos EstructuraCampo, para proceder a grabar los valores de los campos
         $('#jsonEstructuraCamposSuplementarios').val(ajaxResult);
            
         contadorValoresCamposSuplementariosExpediente = 0;   
@@ -2078,8 +2186,8 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
         tiposCamposRecargarCalculados = "";
         salida = getCabeceraTablaAgrupacionesDatosSuplementarios();       
                      
-        // Se recorre cada agrupación y se recupera la estructura de campos de cada de ellas.
-        // Por cada campo, se recupera además su valor
+        // Se recorre cada agrupaciï¿½n y se recupera la estructura de campos de cada de ellas.
+        // Por cada campo, se recupera ademï¿½s su valor
         for(var i=0;agrupaciones!=null && i<agrupaciones.length;i++){        
             var codAgrupacion  = agrupaciones[i].codAgrupacion;
             var descAgrupacion = agrupaciones[i].descAgrupacion;
@@ -2103,8 +2211,8 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
                 if(codAgrupacion=='DVT'){
                     codTramiteActual = campoInicial.codTramite;
                     if(codTramiteActual!=codTramiteTramiteAnterior){
-                        // Si la agrupación es de trámite y el campo pertenece a un trámite distinto del anterior, se añade una 
-                        // fila para indicar el nombre del trámite                        
+                        // Si la agrupaciï¿½n es de trï¿½mite y el campo pertenece a un trï¿½mite distinto del anterior, se aï¿½ade una 
+                        // fila para indicar el nombre del trï¿½mite                        
                         codTramiteTramiteAnterior = codTramiteActual;
                         tituloTramite = true;
                     }
@@ -2123,7 +2231,7 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
                 
                 rellenarPosicionesCampos(campoInicial);                
                 switch(codTipoDato){
-                    case "1": // Numérico                            
+                    case "1": // Numï¿½rico                            
                         campoFormulario += getHTMLCampoNumerico(campoInicial,tituloTramite);                                                    
                         break;                        
                     case "2": // Texto                                                   
@@ -2142,7 +2250,7 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
                          campoFormulario += getHTMLCampoDesplegable(campoInicial,tituloTramite);
                          listaCamposDesplegables.push(campoInicial);
                          break;
-                    case "8": // Numérico calculado
+                    case "8": // Numï¿½rico calculado
                         campoFormulario += getHTMLCampoNumericoCalculado(campoInicial,tituloTramite);    
                         contadorCamposCalculados++;
                         break;
@@ -2166,7 +2274,7 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
         
             // Se generan los combos por cada uno de los campos desplegables
             generarCombos(listaCamposDesplegables);
-            // Si hay cambios calculados, se llama a la función recargarCamposCalculados para mostrar su valor
+            // Si hay cambios calculados, se llama a la funciï¿½n recargarCamposCalculados para mostrar su valor
             if(contadorCamposCalculados>0) recargarCamposCalculados();
             cambiarColorFondoPestanaCampoSuplementarios();                        
             try{            
@@ -2182,8 +2290,8 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
         }else            
             $('#capaDatosSuplementarios').append(mostrarDIVNoHayCamposSuplementarios());    
            
-        // Se pone a true la variable, para que al hacer click sobre la pestaña "Datos Suplementarios", no se 
-        // vuelva a recargar la pestaña
+        // Se pone a true la variable, para que al hacer click sobre la pestaï¿½a "Datos Suplementarios", no se 
+        // vuelva a recargar la pestaï¿½a
         cargadoCamposSuplementarios = true;        
         pleaseWait('off');      
         
@@ -2198,9 +2306,9 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
  }
  
   /**
-     * Función que es llamada para cambiar el color de fondo de la pestaña de los datos suplementarios.
+     * Funciï¿½n que es llamada para cambiar el color de fondo de la pestaï¿½a de los datos suplementarios.
      * Para ello tiene en cuenta el que el valor de la variable global contadorValoresCamposSuplementariosExpediente, sea
-     * mayor que cero, que es el número de campos suplementarios a mostrar en la pestaña "Datos Suplementarios"
+     * mayor que cero, que es el nï¿½mero de campos suplementarios a mostrar en la pestaï¿½a "Datos Suplementarios"
      **/
   function cambiarColorFondoPestanaCampoSuplementarios(){
      
@@ -2215,7 +2323,7 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
  }
 
  /**
-  * Eliminar del parámetro cadena las comillas simples que hay al principio y al final del string
+  * Eliminar del parï¿½metro cadena las comillas simples que hay al principio y al final del string
   * @param cadena
   * @return cadena limpia
   */
@@ -2246,7 +2354,7 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
             if(campo.valorCampo.valorDatoSuplementario!=null && campo.valorCampo.valorDatoSuplementario!="")
                 valor = campo.valorCampo.valorDatoSuplementario;
 
-            // Se obtiene la lista con los códigos del desplegable
+            // Se obtiene la lista con los cï¿½digos del desplegable
             for(propiedad in campo.listaCodDesplegable){
                 codigos.push(limpiarCadena(campo.listaCodDesplegable[propiedad]));
             }
@@ -2275,11 +2383,11 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
             }
             
             if(gConsultando){                
-                // Si se está consulntando
+                // Si se estï¿½ consulntando
                combo.deactivate();
             }         
             
-            // Se añade el combo en el array de combos
+            // Se aï¿½ade el combo en el array de combos
             nombreCombos.push(combo);
             campo = null;
             codigos = new Array();
@@ -2288,7 +2396,7 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
 
          }// for     
      }catch(Err){
-         alert(" Error en función generarCombos(): " + Err.description);
+         alert(" Error en funciï¿½n generarCombos(): " + Err.description);
      }
  }
  
@@ -2313,7 +2421,7 @@ function getNombreCompletoInteresado(nombre,apellido1,apellido2,masInteresados){
             nombreCompleto += " Y OTROS";
         
     }catch(Err){
-        alert("Error al generar el nombre completo del interesado de una anotación de registro: " + nombreCompleto);
+        alert("Error al generar el nombre completo del interesado de una anotaciï¿½n de registro: " + nombreCompleto);
     }        
     return nombreCompleto;
 }
@@ -2357,7 +2465,7 @@ function muestraErrorRespuestaListadoCamposSuplementarios(result){
     mostrarMensajeErrorCargarParcialExpediente(TIPO_ERROR_CARGAR_LISTADO_DATOS_SUPLEMENTARIOS);    
 }
 
-// Muestra un mensaje de error. Se le pasa el código del campo de formulario y el tamaño máximo para su contenido
+// Muestra un mensaje de error. Se le pasa el cï¿½digo del campo de formulario y el tamaï¿½o mï¿½ximo para su contenido
 function validarLongitudTexto(campo) {        
     var valor = campo.value;
     if (valor!=''){            
@@ -2371,7 +2479,7 @@ function validarLongitudTexto(campo) {
 
 
 /**
- * FUNCIONES USADAS POR LOS CAMPOS SUPLEMENTARIOS NUMÉRICOS CALCULADOS
+ * FUNCIONES USADAS POR LOS CAMPOS SUPLEMENTARIOS NUMï¿½RICOS CALCULADOS
  */
  function SoloDigitosNumericosCampoNumericoCal(e) {
       var tecla, caracter;
@@ -2772,7 +2880,7 @@ function isInt(n)
 }
 
 function marcarExpedienteNotifTelematica(){
-    //comprobarmos  si se marca el check de notificación telemática en la pestaña de Notificaciones
+    //comprobarmos  si se marca el check de notificaciï¿½n telemï¿½tica en la pestaï¿½a de Notificaciones
     if(mostrarCheckNotificaciones){
         for(i=0; i<listaNotificacionesElectronicas.length; i++){
             if(listaNotificacionesElectronicas[i]=="1"){
