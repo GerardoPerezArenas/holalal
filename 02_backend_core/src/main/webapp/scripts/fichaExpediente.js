@@ -14,7 +14,7 @@ var TIPO_ERROR_CSV_DOCUMENTO_FORMATO_NO_SOPORTADO = 111;
 var TIPO_ERROR_CSV_CODIGO_DESCONOCIDO = 112;
 var ESTILO_CSS_INPUT_NORMAL      = "inputTexto";
 var ESTILO_CSS_INPUT_OBLIGATORIO = "inputTextoObligatorio";
-var BLOB_URL_CLEANUP_DELAY_MS = 60000;
+var BLOB_URL_CLEANUP_DELAY_MS = 300000;
 var separador = '��';
 var MAPA_ACENTOS_NORMALIZACION = {
     'á': 'a', 'à': 'a', 'ä': 'a', 'â': 'a',
@@ -55,6 +55,14 @@ function escaparHtml(texto) {
         .replace(/'/g, '&#39;');
 }
 
+function formatearFechaHoraCertificado(fecha) {
+    var dosDigitos = function (num) {
+        return (num < 10 ? '0' : '') + num;
+    };
+    return dosDigitos(fecha.getDate()) + '/' + dosDigitos(fecha.getMonth() + 1) + '/' + fecha.getFullYear()
+        + ' ' + dosDigitos(fecha.getHours()) + ':' + dosDigitos(fecha.getMinutes()) + ':' + dosDigitos(fecha.getSeconds());
+}
+
 function obtenerValorCampoSuplementarioVidaLaboral(esCampoBuscadoFn, campoExcluirId) {
     var valor = '';
     $('#capaDatosSuplementarios td.etiqueta').each(function () {
@@ -87,14 +95,7 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
         respuesta = 'No disponible';
     }
 
-    var fechaGeneracion = new Date().toLocaleString('es-ES', {
-        day: '2-digit',
-        month: '2-digit',
-        year: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    });
+    var fechaGeneracion = formatearFechaHoraCertificado(new Date());
     var etiquetaRespuesta = 'Respuesta consulta vida laboral';
     var controlRespuesta = $('#' + nombreCampoRespuesta);
     if (controlRespuesta && controlRespuesta.length > 0) {
