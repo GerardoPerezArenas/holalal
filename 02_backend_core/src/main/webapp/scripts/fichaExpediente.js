@@ -71,7 +71,7 @@ function obtenerValorCampoSuplementarioVidaLaboral(esCampoBuscadoFn, campoExclui
     return valor;
 }
 
-function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRespuesta) {
+function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
     var respuesta = $('#' + nombreCampoRespuesta).val() || '';
     var peticion = obtenerValorCampoSuplementarioVidaLaboral(esCampoVidaLaboralPeticion, nombreCampoRespuesta);
     if (peticion === '') {
@@ -89,20 +89,22 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRe
         minute: '2-digit',
         second: '2-digit'
     });
-    var ventanaPdf = window.open('', '_blank', 'noopener,noreferrer');
-    if (!ventanaPdf) {
-        jsp_alerta('A', 'No se pudo abrir la ventana para generar el PDF. Por favor, verifique que su navegador permite ventanas emergentes.');
-        return;
+    var etiquetaRespuesta = 'Respuesta consulta vida laboral';
+    var controlRespuesta = $('#' + nombreCampoRespuesta);
+    if (controlRespuesta && controlRespuesta.length > 0) {
+        var celdaRespuesta = controlRespuesta.closest('td');
+        var etiquetaCampo = celdaRespuesta.prevAll('td.etiqueta').first().text();
+        if (etiquetaCampo && etiquetaCampo !== '') {
+            etiquetaRespuesta = etiquetaCampo;
+        }
     }
 
     var titulo = 'Certificado de consulta de vida laboral';
-    var etiquetaRespuesta = descCampoRespuesta || 'Respuesta consulta vida laboral';
     var html = '';
     html += '<!DOCTYPE html><html><head><meta charset="UTF-8"><title>' + escaparHtml(titulo) + '</title>';
     html += '<style>';
     html += 'body{font-family:Arial,sans-serif;color:#111;margin:24px;}';
-    html += '.acciones{margin-bottom:12px;text-align:right;}';
-    html += '.acciones button{background:#1766A7;color:#fff;border:0;padding:8px 14px;cursor:pointer;font-weight:bold;border-radius:3px;}';
+    html += '.indicacion{margin-bottom:12px;color:#333;font-size:12px;}';
     html += '.cert{border:2px solid #000;padding:20px;}';
     html += '.titulo{font-size:20px;font-weight:bold;text-transform:uppercase;text-align:center;margin-bottom:6px;}';
     html += '.subtitulo{text-align:center;color:#444;margin-bottom:20px;}';
@@ -111,7 +113,7 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRe
     html += '.contenido{border:1px solid #d8d8d8;background:#fafafa;padding:10px;white-space:pre-wrap;word-break:break-word;font-family:"Courier New",monospace;font-size:12px;}';
     html += '.pie{margin-top:18px;font-size:12px;color:#444;}';
     html += '</style></head><body>';
-    html += '<div class="acciones"><button type="button" onclick="window.print();">Imprimir / Guardar PDF</button></div>';
+    html += '<div class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opción de imprimir del navegador (Ctrl+P).</div>';
     html += '<div class="cert">';
     html += '<div class="titulo">' + escaparHtml(titulo) + '</div>';
     html += '<div class="subtitulo">Documento generado automáticamente desde datos suplementarios del expediente</div>';
@@ -119,12 +121,19 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta, descCampoRe
     html += '<div class="bloque"><h3>' + escaparHtml(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtml(respuesta) + '</div></div>';
     html += '<div class="pie"><strong>Fecha/Hora de generación:</strong> ' + escaparHtml(fechaGeneracion) + '</div>';
     html += '</div>';
-    html += '<script>window.onload=function(){window.focus();};</script>';
     html += '</body></html>';
 
-    ventanaPdf.document.open();
-    ventanaPdf.document.write(html);
-    ventanaPdf.document.close();
+    var blobHtml = new Blob([html], {type: 'text/html'});
+    var blobUrl = URL.createObjectURL(blobHtml);
+    var ventanaPdf = window.open(blobUrl, '_blank', 'noopener,noreferrer');
+    if (!ventanaPdf) {
+        jsp_alerta('A', 'No se pudo abrir la ventana para generar el PDF. Por favor, verifique que su navegador permite ventanas emergentes.');
+        URL.revokeObjectURL(blobUrl);
+        return;
+    }
+    setTimeout(function () {
+        URL.revokeObjectURL(blobUrl);
+    }, 60000);
 }
  
 function validarDocumento(){ 
@@ -1539,9 +1548,8 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
         enlaceTodo += "</A>";
         var botonPdfVidaLaboral = "";
         if(esCampoVidaLaboralRespuesta(descCampo)){
-            var descCampoEscapado = (descCampo || '').replace(/\\/g, '\\\\').replace(/'/g, "\\'");
             botonPdfVidaLaboral += "&nbsp;<input type='button' class='botonGeneral' value='PDF' ";
-            botonPdfVidaLaboral += "onclick=\"generarCertificadoConsultaVidaLaboral('" + nombreCampo + "','" + descCampoEscapado + "');\"";
+            botonPdfVidaLaboral += "onclick=\"generarCertificadoConsultaVidaLaboral('" + nombreCampo + "');\"";
             botonPdfVidaLaboral += " title='Generar certificado PDF de llamada y respuesta de vida laboral'>";
         }
        
