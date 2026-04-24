@@ -16,6 +16,28 @@ var ESTILO_CSS_INPUT_NORMAL      = "inputTexto";
 var ESTILO_CSS_INPUT_OBLIGATORIO = "inputTextoObligatorio";
 var separador = '��';
 
+// ---------------------------------------------------------------------------
+// RELACION JSP <-> JS: Deteccion de campos de vida laboral
+// ---------------------------------------------------------------------------
+// Los campos suplementarios se definen en la base de datos del procedimiento
+// y se renderizan dinamicamente desde el servidor (via peticion Ajax).
+// El JSON que llega al navegador contiene, entre otros:
+//   - campo.codCampo  : codigo identificador del campo (ej: "RESPUESTCVL")
+//   - campo.descCampo : etiqueta visible del campo (ej: "Respuesta consulta vida laboral")
+//   - campo.codTipoDato : tipo de dato ("4" = texto largo, "1" = numerico, etc.)
+//
+// En el JSP (fichaExpediente.jsp, linea ~4838) se declara el contenedor:
+//   <DIV id="capaDatosSuplementarios" ...></DIV>
+// Este DIV vacio es el punto de insercion donde el JS inyecta el HTML de
+// cada campo suplementario (ver funcion cargarDatosSuplementarios, mas abajo).
+//
+// Las funciones esCampoVidaLaboral* reciben campo.descCampo y devuelven true
+// cuando el campo es el de peticion o el de respuesta de la consulta CVL.
+// ---------------------------------------------------------------------------
+
+// NOTA: estas funciones quedan disponibles para futuras condiciones personalizadas.
+// Actualmente el boton PDF se muestra siempre en todos los campos de texto largo
+// (ver getHTMLCampoTextoLargo), independientemente de si el campo es de vida laboral.
 function esCampoVidaLaboralRespuesta(descCampo) {
     var texto = (descCampo || '').toLowerCase();
     return texto.indexOf('vida laboral') >= 0
@@ -46,14 +68,31 @@ function formatearFechaHoraCertificado(fecha) {
         + ' ' + dosDigitos(fecha.getHours()) + ':' + dosDigitos(fecha.getMinutes()) + ':' + dosDigitos(fecha.getSeconds());
 }
 
+// ---------------------------------------------------------------------------
+// RELACION JSP <-> JS: Lectura del campo de peticion desde el DOM
+// ---------------------------------------------------------------------------
+// '#capaDatosSuplementarios' referencia al DIV declarado en fichaExpediente.jsp:
+//   <DIV id="capaDatosSuplementarios" ...></DIV>
+// Dentro de ese DIV, getHTMLCampoTextoLargo genera celdas <td class="etiqueta">
+// con el texto de campo.descCampo, y la siguiente <td class="columnP"> contiene
+// el <textarea id="nombreCampo"> con el valor editable.
+//
+// Esta funcion recorre todas las etiquetas del contenedor de datos suplementarios
+// y busca el campo que corresponde a la peticion de vida laboral para incluirlo
+// en el certificado PDF junto con la respuesta.
+// ---------------------------------------------------------------------------
 function obtenerPeticionVidaLaboral(campoExcluirId) {
     var valor = '';
+    // Busca todas las celdas etiqueta dentro del contenedor de datos suplementarios
+    // (#capaDatosSuplementarios -> DIV definido en fichaExpediente.jsp ~linea 4838)
     var celdas = $('#capaDatosSuplementarios td.etiqueta');
     for(var i = 0; i < celdas.length; i++) {
         var celda = $(celdas[i]);
+        // esCampoVidaLaboralPeticion comprueba el texto visible de la etiqueta
         if(!esCampoVidaLaboralPeticion(celda.text())) continue;
         var celdaValor = celda.next('td');
         if(!celdaValor || celdaValor.length == 0) continue;
+        // El textarea tiene como id el valor de nombreCampo (campo.codCampo o T_codTramite_codCampo)
         var control = celdaValor.find('textarea, input[type="text"]').first();
         if(!control || control.length == 0) continue;
         if(campoExcluirId && control.attr('id') == campoExcluirId) continue;
@@ -63,8 +102,28 @@ function obtenerPeticionVidaLaboral(campoExcluirId) {
     return valor;
 }
 
+// ---------------------------------------------------------------------------
+// RELACION JSP <-> JS: Generacion del certificado PDF desde el boton PDF
+// ---------------------------------------------------------------------------
+// El boton PDF se genera en getHTMLCampoTextoLargo con:
+//   onclick="generarCertificadoConsultaVidaLaboral('<nombreCampo>')"
+// donde <nombreCampo> es el id del <textarea> de ese campo.
+//
+// El id del textarea corresponde a:
+//   - campo.codCampo          si el campo es de expediente (no de tramite)
+//   - T_<codTramite>_<codCampo>        si pertenece a un tramite sin ocurrencia
+//   - T_<codTramite>_<ocurrencia>_<codCampo>  si tiene ocurrencia
+//
+// Ejemplos reales del JSP del procedimiento:
+//   campo.codCampo = "RESPUESTCVL"  -> id del textarea = "RESPUESTCVL"
+//   campo.codCampo = "IDPETICIONCVL" -> id del textarea = "IDPETICIONCVL"
+//
+// $('#' + nombreCampoRespuesta) localiza el textarea por su id para leer su valor.
+// ---------------------------------------------------------------------------
 function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
+    // Lee el valor actual del textarea de respuesta identificado por su id HTML
     var respuesta = $('#' + nombreCampoRespuesta).val() || '';
+    // Busca el campo de peticion recorriendo las etiquetas del contenedor de datos suplementarios
     var peticion = obtenerPeticionVidaLaboral(nombreCampoRespuesta);
     if(peticion == '') {
         peticion = 'No disponible';
@@ -1490,6 +1549,27 @@ function getHTMLCampoFichero(campo,mostrarDescTramite){
 /**
  * Devuelve el c�digo HTML para un campo suplementario de tipo texto largo
  * @param: Objeto que contiene la estructura del campo a crear, as� como su valor
+ *
+ * RELACION JSP <-> JS:
+ * Esta funcion es invocada desde cargarDatosSuplementarios (mas abajo) cuando
+ * el JSON del servidor indica que un campo tiene codTipoDato == "4" (texto largo).
+ * El HTML generado aqui se inserta en el DIV "capaDatosSuplementarios" del JSP:
+ *   fichaExpediente.jsp ~linea 4838:
+ *     <DIV id="capaDatosSuplementarios" name="capaDatosSuplementarios" ...></DIV>
+ *
+ * El objeto "campo" viene del JSON de la respuesta Ajax y contiene:
+ *   - campo.codCampo      : ID unico del campo (ej: "RESPUESTCVL", "IDPETICIONCVL")
+ *   - campo.descCampo     : etiqueta visible en pantalla (el texto de la celda td.etiqueta)
+ *   - campo.codTramite    : codigo del tramite (null si es campo de expediente)
+ *   - campo.ocurrencia    : numero de ocurrencia dentro del tramite (puede ser null)
+ *   - campo.valorCampo.valorDatoSuplementario : valor guardado en BBDD para este campo
+ *
+ * El <textarea> generado tiene id = nombreCampo, calculado asi:
+ *   - Solo campo.codCampo                            si no tiene tramite
+ *   - "T_" + campo.codTramite + "_" + campo.codCampo si tiene tramite sin ocurrencia
+ *   - "T_" + campo.codTramite + "_" + campo.ocurrencia + "_" + campo.codCampo si tiene ocurrencia
+ * Ese mismo id es el que usa generarCertificadoConsultaVidaLaboral para leer el valor
+ * del campo cuando el usuario pulsa el boton PDF.
  */
 function getHTMLCampoTextoLargo(campo,mostrarDescTramite){    
     try{ 
@@ -1530,11 +1610,17 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
         enlaceTodo += "<span class='fa fa-expand' id='enlaceTodo' name='enlaceTodo' alt='Maximizar Campo'></span>";
         enlaceTodo += "</A>";
         var botonPdfVidaLaboral = "";
-        if(esCampoVidaLaboralRespuesta(descCampo)){
-            botonPdfVidaLaboral += "&nbsp;<input type='button' class='botonGeneral' value='PDF' ";
-            botonPdfVidaLaboral += "onclick=\"generarCertificadoConsultaVidaLaboral('" + nombreCampo + "');\"";
-            botonPdfVidaLaboral += " title='Generar certificado PDF de llamada y respuesta de vida laboral'>";
-        }
+        // ---------------------------------------------------------------------------
+        // BOTON PDF: se muestra siempre en todos los campos de tipo texto largo.
+        // El onclick llama a generarCertificadoConsultaVidaLaboral pasandole el id
+        // del textarea (nombreCampo), que es el mismo id con el que se genera el
+        // elemento <textarea id="nombreCampo"> unas lineas mas abajo.
+        // El id "nombreCampo" equivale a campo.codCampo (o T_codTramite_codCampo
+        // con ocurrencia) definido en la configuracion del procedimiento/JSP.
+        // ---------------------------------------------------------------------------
+        botonPdfVidaLaboral += "&nbsp;<input type='button' class='botonGeneral' value='PDF' ";
+        botonPdfVidaLaboral += "onclick=\"generarCertificadoConsultaVidaLaboral('" + nombreCampo + "');\"";
+        botonPdfVidaLaboral += " title='Generar certificado PDF de llamada y respuesta de vida laboral'>";
        
         if(campo.descripcionTramite==undefined || campo.descripcionTramite==''){
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
@@ -2230,7 +2316,17 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
                     }                    
                 }                
                 
-                rellenarPosicionesCampos(campoInicial);                
+                rellenarPosicionesCampos(campoInicial);
+                // ---------------------------------------------------------------------------
+                // RELACION JSP <-> JS: Dispatch por tipo de campo
+                // ---------------------------------------------------------------------------
+                // "codTipoDato" viene del JSON del servidor, que a su vez lo obtiene de la
+                // configuracion del procedimiento en BBDD. Cada tipo se corresponde con una
+                // funcion JS que genera el HTML del campo y lo inserta en capaDatosSuplementarios.
+                //   "4" = Texto largo -> getHTMLCampoTextoLargo -> genera <textarea> + boton PDF
+                // El HTML resultante se inserta en el DIV del JSP:
+                //   fichaExpediente.jsp ~linea 4838: <DIV id="capaDatosSuplementarios" ...>
+                // ---------------------------------------------------------------------------
                 switch(codTipoDato){
                     case "1": // Num�rico                            
                         campoFormulario += getHTMLCampoNumerico(campoInicial,tituloTramite);                                                    
@@ -2241,7 +2337,7 @@ function getHTMLCampoDesplegableExterno(campo,mostrarDescTramite){
                     case "3": // Fecha                           
                         campoFormulario += getHTMLCampoFecha(campoInicial,tituloTramite);
                         break;           
-                    case "4": // Texto largo
+                    case "4": // Texto largo -> incluye boton PDF siempre visible
                         campoFormulario += getHTMLCampoTextoLargo(campoInicial,tituloTramite);
                         break;
                     case "5": // Fichero
