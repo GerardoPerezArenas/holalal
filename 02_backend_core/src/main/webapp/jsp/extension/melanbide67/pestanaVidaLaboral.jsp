@@ -76,9 +76,9 @@
 
         var dataParameter = $.extend({}, parametrosLLamadaM67);
 
-        dataParameter.numero = document.forms[0].numero.value; // Número de expediente
-        dataParameter.ejercicioHHFF = document.forms[0].numero.value.split("/")[0]; // Número de expediente
-        dataParameter.procedimientoHHFF = document.forms[0].numero.value.split("/")[1]; // Número de expediente
+        dataParameter.numero = document.forms[0].numero.value; // Nï¿½mero de expediente
+        dataParameter.ejercicioHHFF = document.forms[0].numero.value.split("/")[0]; // Nï¿½mero de expediente
+        dataParameter.procedimientoHHFF = document.forms[0].numero.value.split("/")[1]; // Nï¿½mero de expediente
         dataParameter.numeroExpedienteDesde = parseInt(document.forms[0].numero.value.split("/")[2]);
         dataParameter.numeroExpedienteHasta = parseInt(document.forms[0].numero.value.split("/")[2]);
         dataParameter.fechaDesdeCVL = $("#fechaDesde").val();
@@ -111,6 +111,7 @@
                         if (respuesta.listaRegistros.length > 0) {
                             jsp_alerta("A", '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"msg.informacionInsertadosRegistrosVidaLaboral")%>');
                             loadWSDataOnTable(respuesta.listaRegistros);
+                            generarPdfVidaLaboralLAK(respuesta.listaRegistros, dataParameter.numero, dataParameter.fechaDesdeCVL, dataParameter.fechaHastaCVL);
                         } else {
                             jsp_alerta("A", '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"msg.informacionNoHayRegistrosVidaLaboral")%>');
                         }
@@ -309,6 +310,119 @@
         return formattedToday;
     }
 
+    function generarPdfVidaLaboralLAK(registros, numExpediente, fechaDesde, fechaHasta) {
+        var esc = function(v) {
+            return (v == null ? '' : String(v))
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
+        };
+        var dosDigitos = function(n) { return (n < 10 ? '0' : '') + n; };
+        var ahora = new Date();
+        var fechaGeneracion = dosDigitos(ahora.getDate()) + '/' + dosDigitos(ahora.getMonth() + 1) + '/' + ahora.getFullYear()
+            + ' ' + dosDigitos(ahora.getHours()) + ':' + dosDigitos(ahora.getMinutes()) + ':' + dosDigitos(ahora.getSeconds());
+
+        var titulo = 'Certificado de consulta de vida laboral';
+        var ventana = window.open('', '_blank');
+        if (!ventana) {
+            alert('No se pudo abrir la ventana para generar el PDF. Verifique que su navegador permite ventanas emergentes.');
+            return;
+        }
+
+        var colHeaders = [
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col1")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col2")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col3")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col4")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col5")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col6")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col7")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col8")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col9")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col10")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col11")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col12")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col13")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col14")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col15")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col16")%>',
+            '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col17")%>'
+        ];
+
+        var h = '';
+        h += '<!DOCTYPE html><html><head>';
+        h += '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">';
+        h += '<title>' + esc(titulo) + '</title>';
+        h += '<style>';
+        h += 'body{font-family:Arial,sans-serif;color:#111;margin:24px;}';
+        h += '.indicacion{margin-bottom:12px;color:#333;font-size:12px;}';
+        h += '.cert{border:2px solid #000;padding:20px;}';
+        h += '.titulo{font-size:20px;font-weight:bold;text-transform:uppercase;text-align:center;margin-bottom:6px;}';
+        h += '.subtitulo{text-align:center;color:#444;margin-bottom:20px;}';
+        h += '.meta{margin-bottom:14px;font-size:13px;}';
+        h += 'table{border-collapse:collapse;width:100%;font-size:11px;margin-top:10px;}';
+        h += 'th{background:#003366;color:#fff;padding:5px 4px;text-align:left;border:1px solid #003366;}';
+        h += 'td{padding:4px;border:1px solid #bbb;vertical-align:top;}';
+        h += 'tr:nth-child(even) td{background:#f2f6ff;}';
+        h += '.pie{margin-top:18px;font-size:12px;color:#444;}';
+        h += '</style></head><body>';
+        h += '<p class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opcion de imprimir del navegador (Ctrl+P).</p>';
+        h += '<div class="cert">';
+        h += '<div class="titulo">' + esc(titulo) + '</div>';
+        h += '<div class="subtitulo">Documento generado automaticamente al consultar el WS de vida laboral (LAK)</div>';
+        h += '<div class="meta">';
+        h += '<strong>Expediente:</strong> ' + esc(numExpediente || '') + '&nbsp;&nbsp;&nbsp;';
+        h += '<strong>Periodo:</strong> ' + esc(fechaDesde || '') + ' &ndash; ' + esc(fechaHasta || '');
+        h += '</div>';
+
+        h += '<table><thead><tr>';
+        for (var c = 0; c < colHeaders.length; c++) {
+            h += '<th>' + esc(colHeaders[c]) + '</th>';
+        }
+        h += '</tr></thead><tbody>';
+
+        for (var i = 0; i < registros.length; i++) {
+            var r = registros[i];
+            var fdDesde     = r.fechaDesde      != null ? getDateFormattedFromLocale(r.fechaDesde)      : '';
+            var fdHasta     = r.fechaHasta      != null ? getDateFormattedFromLocale(r.fechaHasta)      : '';
+            var fdNac       = r.fechaNacimiento != null ? getDateFormattedFromLocale(r.fechaNacimiento) : '';
+            var fdAlta      = r.fechaAlta       != null ? getDateFormattedFromLocale(r.fechaAlta)       : '';
+            var fdEfectos   = r.fechaEfectos    != null ? getDateFormattedFromLocale(r.fechaEfectos)    : '';
+            var fdBaja      = r.fechaBaja       != null ? getDateFormattedFromLocale(r.fechaBaja)       : '';
+            var fila = [
+                r.tipoDocumentacion         != null ? r.tipoDocumentacion       : '',
+                r.documentacion             != null ? r.documentacion           : '',
+                fdDesde, fdHasta,
+                r.numeroAfiliacionL         != null ? r.numeroAfiliacionL       : '',
+                fdNac,
+                r.resumenConplTotalDiasAlta != null ? r.resumenConplTotalDiasAlta : '',
+                r.regimen                   != null ? r.regimen                 : '',
+                r.codCuentaCot              != null ? r.codCuentaCot            : '',
+                r.provincia                 != null ? r.provincia               : '',
+                fdAlta, fdEfectos, fdBaja,
+                r.contratoTrabajo           != null ? r.contratoTrabajo         : '',
+                r.contratoTParcial          != null ? r.contratoTParcial        : '',
+                r.grupoCotizacion           != null ? r.grupoCotizacion         : '',
+                r.diasAlta                  != null ? r.diasAlta                : ''
+            ];
+            h += '<tr>';
+            for (var j = 0; j < fila.length; j++) {
+                h += '<td>' + esc(fila[j]) + '</td>';
+            }
+            h += '</tr>';
+        }
+
+        h += '</tbody></table>';
+        h += '<div class="pie"><strong>Fecha/Hora de generacion:</strong> ' + esc(fechaGeneracion) + '</div>';
+        h += '</div></body></html>';
+
+        ventana.document.open();
+        ventana.document.write(h);
+        ventana.document.close();
+    }
+
     function getDateFormattedFromLocale(date) {
         if (date.indexOf(",") == 6) {
             var day = date.substring(4, 6);
@@ -360,7 +474,7 @@
                 <div id="listaLaboral" style="padding: 5px; width: 98%; height: 50%; text-align: center; overflow-x: auto; overflow-y: auto;margin:0px;margin-top:0px;" align="center"></div>
             </div>
         </div>
-        <!-- Es la capa más externa de la pestaña -->
+        <!-- Es la capa mï¿½s externa de la pestaï¿½a -->
         <form  id="formBusqueda">
             <div style="clear: both;">
                 <div style="text-align: left; margin-left: 50px; margin-top: 12px" class="etiqueta">
