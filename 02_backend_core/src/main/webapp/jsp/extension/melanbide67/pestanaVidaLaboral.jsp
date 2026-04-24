@@ -356,32 +356,32 @@
         h += '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">';
         h += '<title>' + esc(titulo) + '</title>';
         h += '<style>';
-        h += 'body{font-family:Arial,sans-serif;color:#111;margin:24px;}';
-        h += '.indicacion{margin-bottom:12px;color:#333;font-size:12px;}';
-        h += '.cert{border:2px solid #000;padding:20px;}';
-        h += '.titulo{font-size:20px;font-weight:bold;text-transform:uppercase;text-align:center;margin-bottom:6px;}';
-        h += '.subtitulo{text-align:center;color:#444;margin-bottom:20px;}';
-        h += '.meta{margin-bottom:14px;font-size:13px;}';
-        h += 'table{border-collapse:collapse;width:100%;font-size:11px;margin-top:10px;}';
-        h += 'th{background:#003366;color:#fff;padding:5px 4px;text-align:left;border:1px solid #003366;}';
-        h += 'td{padding:4px;border:1px solid #bbb;vertical-align:top;}';
-        h += 'tr:nth-child(even) td{background:#f2f6ff;}';
-        h += '.pie{margin-top:18px;font-size:12px;color:#444;}';
+        h += '@media print{.indicacion{display:none;}}';
+        h += 'body{font-family:Arial,sans-serif;color:#111;margin:40px 48px;}';
+        h += '.indicacion{margin-bottom:16px;color:#555;font-size:12px;border:1px dashed #bbb;padding:6px 10px;background:#fffbe6;}';
+        h += '.titulo{font-size:18px;font-weight:bold;text-transform:uppercase;text-align:center;margin-bottom:4px;letter-spacing:1px;}';
+        h += '.subtitulo{text-align:center;color:#555;font-size:12px;margin-bottom:6px;}';
+        h += '.separador{border:none;border-top:2px solid #222;margin:14px 0;}';
+        h += '.separador-fino{border:none;border-top:1px solid #bbb;margin:10px 0;}';
+        h += '.meta{font-size:13px;margin-bottom:8px;}';
+        h += '.meta span{margin-right:24px;}';
+        h += '.registro{margin-bottom:18px;padding:12px 16px;border-left:4px solid #003366;background:#f7f9ff;}';
+        h += '.registro-titulo{font-size:13px;font-weight:bold;color:#003366;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;}';
+        h += '.campo{display:flex;flex-wrap:wrap;margin-bottom:4px;font-size:12px;}';
+        h += '.campo-etiqueta{font-weight:bold;min-width:220px;color:#333;}';
+        h += '.campo-valor{color:#111;flex:1;}';
+        h += '.pie{margin-top:20px;font-size:12px;color:#555;text-align:right;}';
+        h += '.pie-linea{border-top:1px solid #bbb;padding-top:6px;}';
         h += '</style></head><body>';
-        h += '<p class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opcion de imprimir del navegador (Ctrl+P).</p>';
-        h += '<div class="cert">';
+        h += '<p class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opcion de imprimir del navegador (Ctrl+P). La barra de indicacion no aparecera en el PDF impreso.</p>';
         h += '<div class="titulo">' + esc(titulo) + '</div>';
         h += '<div class="subtitulo">Documento generado automaticamente al consultar el WS de vida laboral (LAK)</div>';
+        h += '<hr class="separador">';
         h += '<div class="meta">';
-        h += '<strong>Expediente:</strong> ' + esc(numExpediente || '') + '&nbsp;&nbsp;&nbsp;';
-        h += '<strong>Periodo:</strong> ' + esc(fechaDesde || '') + ' &ndash; ' + esc(fechaHasta || '');
+        h += '<span><strong>Expediente:</strong> ' + esc(numExpediente || '&mdash;') + '</span>';
+        h += '<span><strong>Periodo:</strong> ' + esc(fechaDesde || '&mdash;') + ' &ndash; ' + esc(fechaHasta || '&mdash;') + '</span>';
         h += '</div>';
-
-        h += '<table><thead><tr>';
-        for (var c = 0; c < colHeaders.length; c++) {
-            h += '<th>' + esc(colHeaders[c]) + '</th>';
-        }
-        h += '</tr></thead><tbody>';
+        h += '<hr class="separador-fino">';
 
         for (var i = 0; i < registros.length; i++) {
             var r = registros[i];
@@ -391,32 +391,44 @@
             var fdAlta      = r.fechaAlta       != null ? getDateFormattedFromLocale(r.fechaAlta)       : '';
             var fdEfectos   = r.fechaEfectos    != null ? getDateFormattedFromLocale(r.fechaEfectos)    : '';
             var fdBaja      = r.fechaBaja       != null ? getDateFormattedFromLocale(r.fechaBaja)       : '';
-            var fila = [
-                r.tipoDocumentacion         != null ? r.tipoDocumentacion       : '',
-                r.documentacion             != null ? r.documentacion           : '',
-                fdDesde, fdHasta,
-                r.numeroAfiliacionL         != null ? r.numeroAfiliacionL       : '',
-                fdNac,
-                r.resumenConplTotalDiasAlta != null ? r.resumenConplTotalDiasAlta : '',
-                r.regimen                   != null ? r.regimen                 : '',
-                r.codCuentaCot              != null ? r.codCuentaCot            : '',
-                r.provincia                 != null ? r.provincia               : '',
-                fdAlta, fdEfectos, fdBaja,
-                r.contratoTrabajo           != null ? r.contratoTrabajo         : '',
-                r.contratoTParcial          != null ? r.contratoTParcial        : '',
-                r.grupoCotizacion           != null ? r.grupoCotizacion         : '',
-                r.diasAlta                  != null ? r.diasAlta                : ''
+
+            var campos = [
+                [colHeaders[0],  r.tipoDocumentacion         != null ? r.tipoDocumentacion          : ''],
+                [colHeaders[1],  r.documentacion             != null ? r.documentacion              : ''],
+                [colHeaders[2],  fdDesde],
+                [colHeaders[3],  fdHasta],
+                [colHeaders[4],  r.numeroAfiliacionL         != null ? r.numeroAfiliacionL          : ''],
+                [colHeaders[5],  fdNac],
+                [colHeaders[6],  r.resumenConplTotalDiasAlta != null ? r.resumenConplTotalDiasAlta  : ''],
+                [colHeaders[7],  r.regimen                   != null ? r.regimen                    : ''],
+                [colHeaders[8],  r.codCuentaCot              != null ? r.codCuentaCot               : ''],
+                [colHeaders[9],  r.provincia                 != null ? r.provincia                  : ''],
+                [colHeaders[10], fdAlta],
+                [colHeaders[11], fdEfectos],
+                [colHeaders[12], fdBaja],
+                [colHeaders[13], r.contratoTrabajo           != null ? r.contratoTrabajo            : ''],
+                [colHeaders[14], r.contratoTParcial          != null ? r.contratoTParcial           : ''],
+                [colHeaders[15], r.grupoCotizacion           != null ? r.grupoCotizacion            : ''],
+                [colHeaders[16], r.diasAlta                  != null ? r.diasAlta                   : '']
             ];
-            h += '<tr>';
-            for (var j = 0; j < fila.length; j++) {
-                h += '<td>' + esc(fila[j]) + '</td>';
+
+            h += '<div class="registro">';
+            h += '<div class="registro-titulo">Registro ' + (i + 1) + ' de ' + registros.length + '</div>';
+            for (var j = 0; j < campos.length; j++) {
+                h += '<div class="campo">';
+                h += '<span class="campo-etiqueta">' + esc(campos[j][0]) + ':</span>';
+                h += '<span class="campo-valor">' + esc(campos[j][1]) + '</span>';
+                h += '</div>';
             }
-            h += '</tr>';
+            h += '</div>';
+            if (i < registros.length - 1) {
+                h += '<hr class="separador-fino">';
+            }
         }
 
-        h += '</tbody></table>';
-        h += '<div class="pie"><strong>Fecha/Hora de generacion:</strong> ' + esc(fechaGeneracion) + '</div>';
-        h += '</div></body></html>';
+        h += '<hr class="separador">';
+        h += '<div class="pie pie-linea"><strong>Fecha/Hora de generacion:</strong> ' + esc(fechaGeneracion) + '</div>';
+        h += '</body></html>';
 
         ventana.document.open();
         ventana.document.write(h);
