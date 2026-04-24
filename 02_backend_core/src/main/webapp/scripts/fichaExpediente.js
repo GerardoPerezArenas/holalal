@@ -151,6 +151,7 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
     }
 
     var anchoCertificado = 760;
+    // Reintentos durante ~2s para esperar el render del certificado en la ventana nueva.
     var intentosMaximosImagen = 10;
     var retardoReintentoMs = 200;
     var estilosPdf = '';
