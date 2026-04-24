@@ -48,6 +48,9 @@ public class KONTU_JobUtils {
 
     private final Logger log = LogManager.getLogger(KONTU_JobUtils.class);
 
+    private static final String PROP_WS_TRAMITACION_ENDPOINT = "WSTramitacion_EndPoint";
+    private static final String PROP_WS_TRAMITACION_ENDPOINT_OPERACIONES = "WSTramitacion_EndPoint_Operaciones";
+
     //Instancia
     private static KONTU_JobUtils instance = null;
 
@@ -62,8 +65,8 @@ public class KONTU_JobUtils {
     }
 
     /**
-     * Inicia un expediente en Regexlan, a travÈs del WS de tramitaciÛn interno de flexia, y en miCarpeta, ejecutando
-     * las operaciones integradas en el tr·mite de inicio
+     * Inicia un expediente en Regexlan, a trav√©s del WS de tramitaci√≥n interno de flexia, y en miCarpeta, ejecutando
+     * las operaciones integradas en el tr√°mite de inicio
      * @param nomUsuario
      * @param expedienteVO
      * @param infoConexionVO
@@ -78,15 +81,15 @@ public class KONTU_JobUtils {
         RespuestasTramitacionVO respuestaLlamada = null;
 
         try {
-            //Comprobamos si entre los documentos de la anotaciÛn hay un fichero FLX_DATOS_INTEGRACION_SOLICITUD para aÒadir otros datos al expediente
+            //Comprobamos si entre los documentos de la anotaci√≥n hay un fichero FLX_DATOS_INTEGRACION_SOLICITUD para a√±adir otros datos al expediente
             RegistroValueObject documentoXML = recuperarXMLDatosIntegracion(expedienteVO.getOrganizacionUsuario(), documentosAnotacion);
             if (documentoXML != null && documentoXML.getDoc() != null && documentoXML.getDoc().length > 0) {
                 log.debug("Existe el fichero  " + ConstantesDatos.NOMBRE_FICHERO_DATOS_INTEGRACION_SOLICITUD);
-                //Existe el fichero. Extraemos de el los datos de campos suplementarios e interesados para aÒadirlos al expediente
+                //Existe el fichero. Extraemos de el los datos de campos suplementarios e interesados para a√±adirlos al expediente
                 anadirDatosExtraDeXMLaExpediente(documentoXML, expedienteVO);
             } else {
                 log.debug("No existe el fichero  " + ConstantesDatos.NOMBRE_FICHERO_DATOS_INTEGRACION_SOLICITUD);
-                throw new GestionAutomaticaKONTUException(3, "No existe el fichero  " + ConstantesDatos.NOMBRE_FICHERO_DATOS_INTEGRACION_SOLICITUD + " en la anotaciÛn");
+                throw new GestionAutomaticaKONTUException(3, "No existe el fichero  " + ConstantesDatos.NOMBRE_FICHERO_DATOS_INTEGRACION_SOLICITUD + " en la anotaci√≥n");
             }
 
             //Al iniciar expediente se inicia el tramite de inicio
@@ -104,7 +107,7 @@ public class KONTU_JobUtils {
                 // Se registran las operaciones de expediente en bbdd
                 registrarOperacionesInicio(infoConexionVO.getOrganizacion(), respuestaLlamada.getTramite().getCodTramite(), nomUsuario, expedienteVO, con);
 
-                // Se comprueba si se ha ejecutado la operaciÛn de inicio del tr·mite: generarMisGestInicio(); es decir, si se ha iniciado el expediente en MiCarpeta
+                // Se comprueba si se ha ejecutado la operaci√≥n de inicio del tr√°mite: generarMisGestInicio(); es decir, si se ha iniciado el expediente en MiCarpeta
                 try {
                     boolean iniciadoEnMiCarpeta = MeLanbide43DAO.getInstance().iniciadoEnMiCarpeta(numExpediente, con);
                     if(!iniciadoEnMiCarpeta) {
@@ -127,7 +130,7 @@ public class KONTU_JobUtils {
                 throw new GestionAutomaticaKONTUException(4, "Ha ocurrido un error al llamar a iniciarExpedienteOperacion: expediente NO inicado en Regexlan");
             }
         } catch (AlmacenDocumentoTramitacionException e) {
-            String mensaje = "Ha ocurrido un error al recuperar el contenido del fichero " + ConstantesDatos.NOMBRE_FICHERO_DATOS_INTEGRACION_SOLICITUD + " adjunto a la anotaciÛn: " + e.getMessage();
+            String mensaje = "Ha ocurrido un error al recuperar el contenido del fichero " + ConstantesDatos.NOMBRE_FICHERO_DATOS_INTEGRACION_SOLICITUD + " adjunto a la anotaci√≥n: " + e.getMessage();
             log.error(mensaje, e);
             throw new GestionAutomaticaKONTUException(8, mensaje);
         } catch (RemoteException e) {
@@ -155,9 +158,28 @@ public class KONTU_JobUtils {
     }
 
     public boolean asociarExpedienteRegistro(ExpedienteVO expedienteVO, RegistroValueObject registroVO, InfoConexionVO infoConexionVO) throws GestionAutomaticaKONTUException {
-        log.info(String.format("asociarExpedienteRegistro() - expediente %s; anotaciÛn %d/%d", expedienteVO.getNumero(), registroVO.getAnoReg(), registroVO.getNumReg()));
-        URL urlEndpoint = null;
-        WSTramitacionBindingStub wsTramitacionCliente = null;
+            wsTramitacionCliente = getWsTramitacionCliente();
+
+    private WSTramitacionBindingStub getWsTramitacionCliente() throws MalformedURLException, ServiceException {
+        String endpointConfigurado = ConfigurationParameter.getParameter(PROP_WS_TRAMITACION_ENDPOINT_OPERACIONES, "common");
+        if (StringUtils.isNullOrEmpty(endpointConfigurado)) {
+            endpointConfigurado = ConfigurationParameter.getParameter(PROP_WS_TRAMITACION_ENDPOINT, "common");
+        }
+
+        String endpoint = System.getProperty(PROP_WS_TRAMITACION_ENDPOINT_OPERACIONES, endpointConfigurado);
+        if (StringUtils.isNullOrEmpty(endpoint)) {
+            endpoint = System.getProperty(PROP_WS_TRAMITACION_ENDPOINT);
+        }
+
+        if (StringUtils.isNullOrEmpty(endpoint)) {
+            throw new MalformedURLException("No se ha configurado ninguna URL para WSTramitacion. Revise las propiedades "
+                    + PROP_WS_TRAMITACION_ENDPOINT_OPERACIONES + " o " + PROP_WS_TRAMITACION_ENDPOINT);
+        }
+
+        URL urlEndpoint = new URL(endpoint);
+        log.info("URL WSTramitacion utilizada: {}", endpoint);
+        return (WSTramitacionBindingStub) new WSTramitacionServiceLocator().getWSTramitacionPort(urlEndpoint);
+    }
 
         try {
             urlEndpoint = new URL(ConfigurationParameter.getParameter("WSTramitacion_EndPoint", "common"));
@@ -168,10 +190,10 @@ public class KONTU_JobUtils {
                     wsTramitacionCliente.asociarExpRegistro(expedienteFlexiaWS2ExpedienteTramClient(expedienteVO),
                             registroVO2RegistroAsociadoVO(registroVO), infoConFlexiaWS2InfoConTramClient(infoConexionVO));
             if (respuestaLlamada.getStatus() == 0) {
-                log.info(String.format("Expediente %s y anotaciÛn %d/%d asociados correctamente", expedienteVO.getNumero(), registroVO.getAnoReg(), registroVO.getNumReg()));
+                log.info(String.format("Expediente %s y anotaci√≥n %d/%d asociados correctamente", expedienteVO.getNumero(), registroVO.getAnoReg(), registroVO.getNumReg()));
                 return true;
             } else {
-                String mensaje = String.format("Expediente %s y anotaciÛn %d/%d NO asociados", expedienteVO.getNumero(), registroVO.getAnoReg(), registroVO.getNumReg());
+                String mensaje = String.format("Expediente %s y anotaci√≥n %d/%d NO asociados", expedienteVO.getNumero(), registroVO.getAnoReg(), registroVO.getNumReg());
                 log.info(mensaje);
                 throw new GestionAutomaticaKONTUException(6, mensaje, expedienteVO.getNumero());
             }
@@ -217,17 +239,17 @@ public class KONTU_JobUtils {
 
                 String codTramOrigen;
                 String codTramDestino;
-                if ("N".equals(valorCampo)) { // Si el valor del campo es N: Avanzar del tr·mite 10 al 20
+                if ("N".equals(valorCampo)) { // Si el valor del campo es N: Avanzar del tr√°mite 10 al 20
                     codTramOrigen = ConfigurationParameter.getParameter("codTramKONTU_codVis10", ConstantesMeLanbide43.FICHERO_PROPIEDADES);
                     codTramDestino = ConfigurationParameter.getParameter("codTramKONTU_codVis20", ConstantesMeLanbide43.FICHERO_PROPIEDADES);
                     exito = avanzarTramite(tramiteVO, codTramOrigen, codTramDestino, "no", expedienteVO, infoConexionVO);
                     if(!exito) {
-                        String mensaje = String.format("No se ha podido avanzar el expediente del tr·mite %s al %s", codTramOrigen, codTramDestino);
+                        String mensaje = String.format("No se ha podido avanzar el expediente del tr√°mite %s al %s", codTramOrigen, codTramDestino);
                         log.debug(mensaje);
                         throw new GestionAutomaticaKONTUException(7, mensaje, expedienteVO.getNumero());
                     }
                 } else { // Si el valor del campo es S:
-                    // 1. Avanzar del tr·mite 10 al 30
+                    // 1. Avanzar del tr√°mite 10 al 30
                     codTramOrigen = ConfigurationParameter.getParameter("codTramKONTU_codVis10", ConstantesMeLanbide43.FICHERO_PROPIEDADES);
                     codTramDestino = ConfigurationParameter.getParameter("codTramKONTU_codVis30", ConstantesMeLanbide43.FICHERO_PROPIEDADES);
                     exito = avanzarTramite(tramiteVO, codTramOrigen, codTramDestino, "si" , expedienteVO, infoConexionVO);
@@ -240,11 +262,11 @@ public class KONTU_JobUtils {
 
                         // El siguiente paso depende del exito de este, si no se graba entonces se notifica el error
                         if (salida != null && salida.getStatus() == 0) {
-                            // 3. Finalizar el tr·mite 30 y con ello el expediente.
+                            // 3. Finalizar el tr√°mite 30 y con ello el expediente.
                             codTramOrigen = ConfigurationParameter.getParameter("codTramKONTU_codVis30", ConstantesMeLanbide43.FICHERO_PROPIEDADES);
                             exito = avanzarTramite(tramiteVO, codTramOrigen, null, "", expedienteVO, infoConexionVO);
                             if(!exito){
-                                String mensaje = String.format("No se ha podido avanzar el tr·mite %s que finaliza el expediente.", codTramOrigen);
+                                String mensaje = String.format("No se ha podido avanzar el tr√°mite %s que finaliza el expediente.", codTramOrigen);
                                 log.debug(mensaje);
                                 throw new GestionAutomaticaKONTUException(7, mensaje, expedienteVO.getNumero());
                             }
@@ -257,7 +279,7 @@ public class KONTU_JobUtils {
                             throw new GestionAutomaticaKONTUException(7, mensaje, expedienteVO.getNumero());
                         }
                     } else {
-                        String mensaje = String.format("No se ha podido avanzar el expediente del tr·mite %s al %s", codTramOrigen, codTramDestino);
+                        String mensaje = String.format("No se ha podido avanzar el expediente del tr√°mite %s al %s", codTramOrigen, codTramDestino);
                         log.debug(mensaje);
                         throw new GestionAutomaticaKONTUException(7, mensaje, expedienteVO.getNumero());
                     }
@@ -319,7 +341,7 @@ public class KONTU_JobUtils {
     }
 
     /**
-     * Crea un objeto InfoConexionVO de WSTramitacionFlexia con la aplicaciÛn permitida por el servicio y el cÛdigo de organizaciÛn que permite obtener una conexiÛn de bd
+     * Crea un objeto InfoConexionVO de WSTramitacionFlexia con la aplicaci√≥n permitida por el servicio y el c√≥digo de organizaci√≥n que permite obtener una conexi√≥n de bd
      * @param codOrganizacion
      * @return
      * @throws NumberFormatException
@@ -348,7 +370,7 @@ public class KONTU_JobUtils {
      * @return
      */
     private InteresadoVO[] crearListaInteresadosExpediente(List<InteresadoAnotacionVO> listaInteresadosReg) throws Exception {
-        log.debug(String.format("crearListaInteresadosExpediente() - Se aÒaden al expediente los %d interesados de la anotaciÛn", listaInteresadosReg.size()));
+        log.debug(String.format("crearListaInteresadosExpediente() - Se a√±aden al expediente los %d interesados de la anotaci√≥n", listaInteresadosReg.size()));
         InteresadoVO[] listaInteresadosExp = new InteresadoVO[listaInteresadosReg.size()];
         for (int i = 0; i < listaInteresadosReg.size(); i++) {
             InteresadoAnotacionVO interesadoRegistro = listaInteresadosReg.get(i);
@@ -453,7 +475,7 @@ public class KONTU_JobUtils {
                 registroAsociadoVO.setNumAsiento((int) valorLong);
             } else {
                 log.warn("El valor de la propiedad 'numReg' de RegistroValueObject (objeto origen) es de tipo long " +
-                        "y est· fuera del rango del tipo int, tipo de la propiedad 'numAsiento' de RegistroAsociadoVO (objeto destino)");
+                        "y est√° fuera del rango del tipo int, tipo de la propiedad 'numAsiento' de RegistroAsociadoVO (objeto destino)");
             }
         }catch(Exception e){
             log.error("Ha ocurrido un error al convertir el objeto RegistroValueObject en el esperado por WSTramitacion: " + e.getMessage(), e);
@@ -496,7 +518,7 @@ public class KONTU_JobUtils {
     }
 
     /**
-     * Realiza el avance en la tramitacion, cerrando un tr·mite inicado y abriendo otro si asÌ se indica.
+     * Realiza el avance en la tramitacion, cerrando un tr√°mite inicado y abriendo otro si as√≠ se indica.
      * @param tramiteVO
      * @param codTramOrigen
      * @param codTramDestino
@@ -505,7 +527,7 @@ public class KONTU_JobUtils {
      * @return
      */
     private boolean avanzarTramite(TramiteVO tramiteVO, String codTramOrigen, String codTramDestino, String respuesta, ExpedienteVO expedienteVO, InfoConexionVO infoConexionVO) throws GestionAutomaticaKONTUException {
-        log.info(String.format("avanzarTramite() - Avance del expediente %s del tr·mite de cod interno %s al de cod interno %s", expedienteVO.getNumero(), codTramOrigen, codTramDestino));
+        log.info(String.format("avanzarTramite() - Avance del expediente %s del tr√°mite de cod interno %s al de cod interno %s", expedienteVO.getNumero(), codTramOrigen, codTramDestino));
         final String ORIGEN_LLAMADA = ConstantesDatos.ORIGEN_LLAMADA_BATCH_KONTU;
         WSTramitacionFlexiaImplSoapBindingImpl wsTramitacionFlexiaImpl = null;
         SalidaBoolean respuestaLlamada = null;
@@ -553,7 +575,7 @@ public class KONTU_JobUtils {
     }
 
     /**
-     * Crea un objeto TramiteVO de WSTramitacionFlexia y lo rellena con datos del objeto ExpedienteVO, tambiÈn de WSTramitacionFlexia
+     * Crea un objeto TramiteVO de WSTramitacionFlexia y lo rellena con datos del objeto ExpedienteVO, tambi√©n de WSTramitacionFlexia
      * @param expedienteVO
      * @return
      */
@@ -576,7 +598,7 @@ public class KONTU_JobUtils {
     }
 
     /**
-     * Crea un objeto CondicionFinalizacionVO de WSTramitacionFlexia con los datos necesarios para realizar el avance en la tramitaciÛn requerido
+     * Crea un objeto CondicionFinalizacionVO de WSTramitacionFlexia con los datos necesarios para realizar el avance en la tramitaci√≥n requerido
      * @param tipoFinalizacion
      * @param codTramite
      * @return
@@ -657,15 +679,15 @@ public class KONTU_JobUtils {
             listaInteresados = datosFichero.get("DATOS_INTERESADOS");
             //TODO obtener datos de ME
 
-            //AÒadimos al expediente los datos de campos suplementarios seteando la propiedad 'campos'
+            //A√±adimos al expediente los datos de campos suplementarios seteando la propiedad 'campos'
             if ((listaCSExpediente != null && !listaCSExpediente.isEmpty()) || (listaCSTramite != null && !listaCSTramite.isEmpty())) {
-                log.debug("El fichero XML tiene etiquetas de campos suplementarios de expediente y/o tr·mite.");
+                log.debug("El fichero XML tiene etiquetas de campos suplementarios de expediente y/o tr√°mite.");
                 anadirDatosCamposSuplementarios(listaCSExpediente, listaCSTramite, expedienteVO);
             } else {
                 log.debug("El fichero XML no tiene etiquetas de campos suplementarios.");
             }
 
-            //AÒadimos al expediente los datos de interesados, excepto los campos suplementarios de estos
+            //A√±adimos al expediente los datos de interesados, excepto los campos suplementarios de estos
             if (listaInteresados != null && !listaInteresados.isEmpty()) {
                 log.debug("El fichero XML tiene etiquetas de interesados.");
                 anadirDatosInteresados(listaInteresados, expedienteVO);
@@ -779,7 +801,7 @@ public class KONTU_JobUtils {
         String rol = ((String) gVODatosInteresado.getAtributo(ConstantesDatos.TAG_XML_ROL)).trim();
         String notifElectronica = (String) gVODatosInteresado.getAtributo(ConstantesDatos.TAG_XML_NOTIFICACIONELECTRONICA);
         StringUtils.trimNotNull(notifElectronica);
-        //El campo codigo de via no se recupera del XML porque no se va utilizar al ser diferentes los codigos de vÌa que
+        //El campo codigo de via no se recupera del XML porque no se va utilizar al ser diferentes los codigos de v√≠a que
         //manejan ellos con los que tenemos nosotros en Flexia
 
         //Recupera el tipo de documento
@@ -788,8 +810,8 @@ public class KONTU_JobUtils {
             // Se trata de un tercero cuyo documento es un NIF, ya que al menos tiene el primer apellido
             tipoDoc = ConstantesDatos.TIPO_DOCUMENTO_NIF;
         } else if (Utilities.validaNIF(documento) && nombre != null && (apellido1 == null || apellido1.length() == 0) && (apellido2 == null || apellido2.length() == 0)) {
-            // Si el documento es un NIF, y sÛlo se ha enviado un nombre sin apellidos.
-            // Se entiende que se trata de un CIF, ya que en Flexia por configuraciÛn se permite el alta
+            // Si el documento es un NIF, y s√≥lo se ha enviado un nombre sin apellidos.
+            // Se entiende que se trata de un CIF, ya que en Flexia por configuraci√≥n se permite el alta
             // de cif que sean un NIF.
             tipoDoc = ConstantesDatos.TIPO_DOCUMENTO_CIF;
         } else if (Utilities.validaCIF(documento)) {
@@ -802,7 +824,7 @@ public class KONTU_JobUtils {
         }
 
         //Rellenamos el objeto InteresadoVO con los datos del xml
-        interesadoVO.setCodigo("-1"); //Indicamos que se est· ejecutando el job de KONTU y el interesado viene del XML
+        interesadoVO.setCodigo("-1"); //Indicamos que se est√° ejecutando el job de KONTU y el interesado viene del XML
         interesadoVO.setDoc(documento);
         interesadoVO.setTipoDoc(String.valueOf(tipoDoc));
         interesadoVO.setNombre(nombre);
@@ -825,7 +847,7 @@ public class KONTU_JobUtils {
         Config m_ConfigCommon = ConfigServiceHelper.getConfig("common");
         DomicilioVO domicilio = new DomicilioVO();
 
-        String pais = ConstantesDatos.CODIGO_PAIS_ESPA—A;
+        String pais = ConstantesDatos.CODIGO_PAIS_ESPA√ëA;
         String provincia = ((String) gVODatosInteresado.getAtributo(ConstantesDatos.TAG_XML_PROVINCIA));
         if (provincia != null) {
             provincia = provincia.trim();
@@ -1071,7 +1093,7 @@ public class KONTU_JobUtils {
             codigoCampoExp = ConfigurationParameter.getParameter("codCampo_IBAN", ConstantesMeLanbide43.FICHERO_PROPIEDADES);
             codigoCampoTer = ConfigurationParameter.getParameter("codCampo_CUENTA", ConstantesMeLanbide43.FICHERO_PROPIEDADES);
             log.info(String.format("grabarIBANCampoTercero() - Vamos a grabar el valor del campo suplementario %s del expediente %s " +
-                    "en el campo suplementario %s del interesado de rol 1 del mismo, el de cÛdigo %d", codigoCampoExp, numExpediente, codigoCampoTer, codTercero));
+                    "en el campo suplementario %s del interesado de rol 1 del mismo, el de c√≥digo %d", codigoCampoExp, numExpediente, codigoCampoTer, codTercero));
 
             // Se recupera el valor del campo suplementario IBAN del expediente
             salidaGetCampo = iIntegracionExterna.getCampoSuplementarioExpediente(organizacion, ejercicio, numExpediente,
