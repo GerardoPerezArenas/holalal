@@ -150,32 +150,119 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
         return;
     }
 
+    var anchoCertificado = 760;
+    var estilosPdf = '';
+    estilosPdf += 'body{font-family:Arial,sans-serif;color:#000;margin:24px;background:#fff;}';
+    estilosPdf += '.indicacion{margin-bottom:12px;color:#333;font-size:12px;}';
+    estilosPdf += '.cert{border:2px solid #000;padding:20px;width:' + anchoCertificado + 'px;box-sizing:border-box;margin:0 auto;background:#fff;}';
+    estilosPdf += '.titulo{font-size:20px;font-weight:bold;text-transform:uppercase;text-align:center;margin-bottom:6px;color:#000;}';
+    estilosPdf += '.subtitulo{text-align:center;color:#000;margin-bottom:20px;}';
+    estilosPdf += '.bloque{margin-bottom:16px;}';
+    estilosPdf += '.bloque h3{font-size:14px;margin:0 0 8px 0;border-bottom:1px solid #000;padding-bottom:4px;text-transform:uppercase;color:#000;}';
+    estilosPdf += '.contenido{border:1px solid #000;background:#fff;padding:10px;white-space:pre-wrap;word-break:break-word;font-family:"Courier New",monospace;font-size:12px;color:#000;}';
+    estilosPdf += '.pie{margin-top:18px;font-size:12px;color:#000;}';
+    estilosPdf += '.imagen-certificado{width:' + anchoCertificado + 'px;box-sizing:border-box;margin:20px auto 0 auto;}';
+    estilosPdf += '.imagen-certificado img{display:block;max-width:100%;border:1px solid #000;}';
+    estilosPdf += '.imagen-titulo{font-size:12px;font-weight:bold;margin-bottom:6px;color:#000;}';
+    estilosPdf += '.descargar-imagen{display:inline-block;margin-top:8px;font-size:12px;color:#000;text-decoration:underline;}';
+    estilosPdf += '.imagen-error{font-size:12px;color:#000;margin-top:6px;}';
+
     var html = '';
     html += '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>' + escaparHtmlVidaLaboral(titulo) + '</title>';
-    html += '<style>';
-    html += 'body{font-family:Arial,sans-serif;color:#111;margin:24px;}';
-    html += '.indicacion{margin-bottom:12px;color:#333;font-size:12px;}';
-    html += '.cert{border:2px solid #000;padding:20px;}';
-    html += '.titulo{font-size:20px;font-weight:bold;text-transform:uppercase;text-align:center;margin-bottom:6px;}';
-    html += '.subtitulo{text-align:center;color:#444;margin-bottom:20px;}';
-    html += '.bloque{margin-bottom:16px;}';
-    html += '.bloque h3{font-size:14px;margin:0 0 8px 0;border-bottom:1px solid #ccc;padding-bottom:4px;text-transform:uppercase;}';
-    html += '.contenido{border:1px solid #d8d8d8;background:#fafafa;padding:10px;white-space:pre-wrap;word-break:break-word;font-family:"Courier New",monospace;font-size:12px;}';
-    html += '.pie{margin-top:18px;font-size:12px;color:#444;}';
-    html += '</style></head><body>';
+    html += '<style>' + estilosPdf + '</style></head><body>';
     html += '<p class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opcion de imprimir del navegador (Ctrl+P).</p>';
-    html += '<div class="cert">';
+    html += '<div class="cert" id="certificadoVidaLaboral">';
     html += '<div class="titulo">' + escaparHtmlVidaLaboral(titulo) + '</div>';
     html += '<div class="subtitulo">Documento generado automaticamente desde datos suplementarios del expediente</div>';
     html += '<div class="bloque"><h3>Datos de llamada (peticion)</h3><div class="contenido">' + escaparHtmlVidaLaboral(peticion) + '</div></div>';
     html += '<div class="bloque"><h3>' + escaparHtmlVidaLaboral(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtmlVidaLaboral(respuesta) + '</div></div>';
     html += '<div class="pie"><strong>Fecha/Hora de generacion:</strong> ' + escaparHtmlVidaLaboral(fechaGeneracion) + '</div>';
     html += '</div>';
+    html += '<div class="imagen-certificado" id="imagenCertificadoVidaLaboral"></div>';
     html += '</body></html>';
 
     ventanaPdf.document.open();
     ventanaPdf.document.write(html);
     ventanaPdf.document.close();
+    generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, 10);
+}
+
+function generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, intentos) {
+    if(!ventanaPdf || !ventanaPdf.document) return;
+    var doc = ventanaPdf.document;
+    var certificado = doc.getElementById('certificadoVidaLaboral');
+    var contenedor = doc.getElementById('imagenCertificadoVidaLaboral');
+    if(!certificado || !contenedor) {
+        if(intentos > 0) {
+            ventanaPdf.setTimeout(function() {
+                generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, intentos - 1);
+            }, 200);
+        }
+        return;
+    }
+
+    contenedor.innerHTML = '';
+    var titulo = doc.createElement('div');
+    titulo.className = 'imagen-titulo';
+    titulo.appendChild(doc.createTextNode('Imagen del certificado'));
+    contenedor.appendChild(titulo);
+
+    if(!ventanaPdf.XMLSerializer || !ventanaPdf.URL || !ventanaPdf.URL.createObjectURL) {
+        var mensaje = doc.createElement('div');
+        mensaje.className = 'imagen-error';
+        mensaje.appendChild(doc.createTextNode('No se pudo generar la imagen del certificado.'));
+        contenedor.appendChild(mensaje);
+        return;
+    }
+
+    var ancho = certificado.offsetWidth;
+    var alto = certificado.offsetHeight;
+    if(ancho <= 0 || alto <= 0) {
+        var mensajeMedidas = doc.createElement('div');
+        mensajeMedidas.className = 'imagen-error';
+        mensajeMedidas.appendChild(doc.createTextNode('No se pudo generar la imagen del certificado.'));
+        contenedor.appendChild(mensajeMedidas);
+        return;
+    }
+
+    var estilosSvg = estilosPdf + '.cert{margin:0;}';
+    var contenido = '<div xmlns="http://www.w3.org/1999/xhtml"><style>' + estilosSvg + '</style>' + certificado.outerHTML + '</div>';
+    var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + ancho + '" height="' + alto + '"><foreignObject width="100%" height="100%">' + contenido + '</foreignObject></svg>';
+    var blob = new ventanaPdf.Blob([svg], {type:'image/svg+xml;charset=utf-8'});
+    var url = ventanaPdf.URL.createObjectURL(blob);
+    var imagen = new ventanaPdf.Image();
+
+    imagen.onload = function() {
+        var canvas = doc.createElement('canvas');
+        canvas.width = ancho;
+        canvas.height = alto;
+        var ctx = canvas.getContext('2d');
+        ctx.fillStyle = '#fff';
+        ctx.fillRect(0, 0, ancho, alto);
+        ctx.drawImage(imagen, 0, 0);
+        var dataUrl = canvas.toDataURL('image/png');
+        var imgFinal = doc.createElement('img');
+        imgFinal.src = dataUrl;
+        imgFinal.alt = 'Imagen del certificado';
+        contenedor.appendChild(imgFinal);
+        var enlace = doc.createElement('a');
+        enlace.href = dataUrl;
+        enlace.download = 'certificado_vida_laboral.png';
+        enlace.className = 'descargar-imagen';
+        enlace.appendChild(doc.createTextNode('Descargar imagen'));
+        contenedor.appendChild(enlace);
+        ventanaPdf.URL.revokeObjectURL(url);
+    };
+
+    imagen.onerror = function() {
+        var mensajeError = doc.createElement('div');
+        mensajeError.className = 'imagen-error';
+        mensajeError.appendChild(doc.createTextNode('No se pudo generar la imagen del certificado.'));
+        contenedor.appendChild(mensajeError);
+        ventanaPdf.URL.revokeObjectURL(url);
+    };
+
+    imagen.src = url;
 }
 
 function validarDocumento(){ 
