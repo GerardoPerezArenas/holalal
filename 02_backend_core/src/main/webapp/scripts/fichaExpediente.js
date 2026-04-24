@@ -1609,7 +1609,7 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
         enlaceTodo = "<A href='javascript:void(0);' onclick=\"verTexto('" + nombreCampo + "','"+descCampo+"');\" style='top: 105px;position: relative;'>";
         enlaceTodo += "<span class='fa fa-expand' id='enlaceTodo' name='enlaceTodo' alt='Maximizar Campo'></span>";
         enlaceTodo += "</A>";
-        var botonPdfVidaLaboral = "";
+        var botonPdf = "";
         // ---------------------------------------------------------------------------
         // BOTON PDF: se muestra siempre en todos los campos de tipo texto largo.
         // El onclick llama a generarCertificadoConsultaVidaLaboral pasandole el id
@@ -1618,9 +1618,9 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
         // El id "nombreCampo" equivale a campo.codCampo (o T_codTramite_codCampo
         // con ocurrencia) definido en la configuracion del procedimiento/JSP.
         // ---------------------------------------------------------------------------
-        botonPdfVidaLaboral += "&nbsp;<input type='button' class='botonGeneral' value='PDF' ";
-        botonPdfVidaLaboral += "onclick=\"generarCertificadoConsultaVidaLaboral('" + nombreCampo + "');\"";
-        botonPdfVidaLaboral += " title='Generar certificado PDF de llamada y respuesta de vida laboral'>";
+        botonPdf += "&nbsp;<input type='button' class='botonGeneral' value='PDF' ";
+        botonPdf += "onclick=\"generarCertificadoConsultaVidaLaboral('" + nombreCampo + "');\"";
+        botonPdf += " title='Generar certificado PDF'>";
        
         if(campo.descripcionTramite==undefined || campo.descripcionTramite==''){
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
@@ -1631,7 +1631,7 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
             inputForm += "<td class='columnP' align='left'>"            
             inputForm += "<textarea class='" + estiloCSS + "' style='width:95%;height:130px !important;text-transform: none;' name='" + nombreCampo + "' id='" + nombreCampo + "'" + 
             " title='" + descCampo + "' onchange='modificaVariableCambiosCamposSupl();' onkeyup='return xValidarCaracteres(this);' " + modoLectura + ' ' + disabled + ">" + valor + "</textarea>";
-            inputForm += enlaceTodo + botonPdfVidaLaboral + "</td></tr></table>";
+            inputForm += enlaceTodo + botonPdf + "</td></tr></table>";
             inputForm +="</div>";
         }else{                              
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
@@ -1645,7 +1645,7 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
             inputForm += "<td class='columnP' align='left'>"            
             inputForm += "<textarea class='" + estiloCSS + "' style='width:95%;height:130px !important;text-transform: none;' name='" + nombreCampo + "' id='" + nombreCampo + "'" + 
             " title='" + descCampo + "' onchange='modificaVariableCambiosCamposSupl();' onkeyup='return xValidarCaracteres(this);' " + modoLectura + ' ' + disabled + ">" + valor + "</textarea>";
-            inputForm += enlaceTodo + botonPdfVidaLaboral + "</td></tr></table>";
+            inputForm += enlaceTodo + botonPdf + "</td></tr></table>";
             inputForm +="</div>";
         }        
        
