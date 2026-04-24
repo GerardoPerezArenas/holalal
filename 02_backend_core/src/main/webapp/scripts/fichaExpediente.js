@@ -151,6 +151,8 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
     }
 
     var anchoCertificado = 760;
+    var intentosMaximosImagen = 10;
+    var retardoReintentoMs = 200;
     var estilosPdf = '';
     estilosPdf += 'body{font-family:Arial,sans-serif;color:#000;margin:24px;background:#fff;}';
     estilosPdf += '.indicacion{margin-bottom:12px;color:#333;font-size:12px;}';
@@ -170,24 +172,27 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
     var html = '';
     html += '<!DOCTYPE html><html><head><meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1"><title>' + escaparHtmlVidaLaboral(titulo) + '</title>';
     html += '<style>' + estilosPdf + '</style></head><body>';
+    var certificadoHtml = '';
+    certificadoHtml += '<div class="cert" id="certificadoVidaLaboral">';
+    certificadoHtml += '<div class="titulo">' + escaparHtmlVidaLaboral(titulo) + '</div>';
+    certificadoHtml += '<div class="subtitulo">Documento generado automaticamente desde datos suplementarios del expediente</div>';
+    certificadoHtml += '<div class="bloque"><h3>Datos de llamada (peticion)</h3><div class="contenido">' + escaparHtmlVidaLaboral(peticion) + '</div></div>';
+    certificadoHtml += '<div class="bloque"><h3>' + escaparHtmlVidaLaboral(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtmlVidaLaboral(respuesta) + '</div></div>';
+    certificadoHtml += '<div class="pie"><strong>Fecha/Hora de generacion:</strong> ' + escaparHtmlVidaLaboral(fechaGeneracion) + '</div>';
+    certificadoHtml += '</div>';
+
     html += '<p class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opcion de imprimir del navegador (Ctrl+P).</p>';
-    html += '<div class="cert" id="certificadoVidaLaboral">';
-    html += '<div class="titulo">' + escaparHtmlVidaLaboral(titulo) + '</div>';
-    html += '<div class="subtitulo">Documento generado automaticamente desde datos suplementarios del expediente</div>';
-    html += '<div class="bloque"><h3>Datos de llamada (peticion)</h3><div class="contenido">' + escaparHtmlVidaLaboral(peticion) + '</div></div>';
-    html += '<div class="bloque"><h3>' + escaparHtmlVidaLaboral(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtmlVidaLaboral(respuesta) + '</div></div>';
-    html += '<div class="pie"><strong>Fecha/Hora de generacion:</strong> ' + escaparHtmlVidaLaboral(fechaGeneracion) + '</div>';
-    html += '</div>';
+    html += certificadoHtml;
     html += '<div class="imagen-certificado" id="imagenCertificadoVidaLaboral"></div>';
     html += '</body></html>';
 
     ventanaPdf.document.open();
     ventanaPdf.document.write(html);
     ventanaPdf.document.close();
-    generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, 10);
+    generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, certificadoHtml, intentosMaximosImagen, retardoReintentoMs);
 }
 
-function generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, intentos) {
+function generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, certificadoHtml, intentos, retardoReintentoMs) {
     if(!ventanaPdf || !ventanaPdf.document) return;
     var doc = ventanaPdf.document;
     var certificado = doc.getElementById('certificadoVidaLaboral');
@@ -195,8 +200,8 @@ function generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, intentos) {
     if(!certificado || !contenedor) {
         if(intentos > 0) {
             ventanaPdf.setTimeout(function() {
-                generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, intentos - 1);
-            }, 200);
+                generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, certificadoHtml, intentos - 1, retardoReintentoMs);
+            }, retardoReintentoMs);
         }
         return;
     }
@@ -226,10 +231,20 @@ function generarImagenCertificadoVidaLaboral(ventanaPdf, estilosPdf, intentos) {
     }
 
     var estilosSvg = estilosPdf + '.cert{margin:0;}';
-    var contenido = '<div xmlns="http://www.w3.org/1999/xhtml"><style>' + estilosSvg + '</style>' + certificado.outerHTML + '</div>';
+    var contenido = '<div xmlns="http://www.w3.org/1999/xhtml"><style>' + estilosSvg + '</style>' + certificadoHtml + '</div>';
     var svg = '<svg xmlns="http://www.w3.org/2000/svg" width="' + ancho + '" height="' + alto + '"><foreignObject width="100%" height="100%">' + contenido + '</foreignObject></svg>';
-    var blob = new ventanaPdf.Blob([svg], {type:'image/svg+xml;charset=utf-8'});
-    var url = ventanaPdf.URL.createObjectURL(blob);
+    var blob = null;
+    var url = null;
+    try {
+        blob = new ventanaPdf.Blob([svg], {type:'image/svg+xml;charset=utf-8'});
+        url = ventanaPdf.URL.createObjectURL(blob);
+    } catch (error) {
+        var mensajeSvg = doc.createElement('div');
+        mensajeSvg.className = 'imagen-error';
+        mensajeSvg.appendChild(doc.createTextNode('No se pudo generar la imagen del certificado.'));
+        contenedor.appendChild(mensajeSvg);
+        return;
+    }
     var imagen = new ventanaPdf.Image();
 
     imagen.onload = function() {
