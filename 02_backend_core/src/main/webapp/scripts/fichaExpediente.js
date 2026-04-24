@@ -175,10 +175,10 @@ function generarCertificadoConsultaVidaLaboral(nombreCampoRespuesta) {
     var certificadoHtml = '';
     certificadoHtml += '<div class="cert" id="certificadoVidaLaboral">';
     certificadoHtml += '<div class="titulo">' + escaparHtmlVidaLaboral(titulo) + '</div>';
-    certificadoHtml += '<div class="subtitulo">Documento generado automaticamente desde datos suplementarios del expediente</div>';
+    certificadoHtml += '<div class="subtitulo">Documento generado automáticamente desde datos suplementarios del expediente</div>';
     certificadoHtml += '<div class="bloque"><h3>Datos de llamada (peticion)</h3><div class="contenido">' + escaparHtmlVidaLaboral(peticion) + '</div></div>';
     certificadoHtml += '<div class="bloque"><h3>' + escaparHtmlVidaLaboral(etiquetaRespuesta) + '</h3><div class="contenido">' + escaparHtmlVidaLaboral(respuesta) + '</div></div>';
-    certificadoHtml += '<div class="pie"><strong>Fecha/Hora de generacion:</strong> ' + escaparHtmlVidaLaboral(fechaGeneracion) + '</div>';
+    certificadoHtml += '<div class="pie"><strong>Fecha/Hora de generación:</strong> ' + escaparHtmlVidaLaboral(fechaGeneracion) + '</div>';
     certificadoHtml += '</div>';
 
     html += '<p class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opcion de imprimir del navegador (Ctrl+P).</p>';
