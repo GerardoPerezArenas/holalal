@@ -327,7 +327,7 @@
         var titulo = 'Certificado de consulta de vida laboral';
         var ventana = window.open('', '_blank');
         if (!ventana) {
-            alert('No se pudo abrir la ventana para generar el PDF. Verifique que su navegador permite ventanas emergentes.');
+            jsp_alerta('No se pudo abrir la ventana para generar el PDF. Verifique que su navegador permite ventanas emergentes.');
             return;
         }
 
