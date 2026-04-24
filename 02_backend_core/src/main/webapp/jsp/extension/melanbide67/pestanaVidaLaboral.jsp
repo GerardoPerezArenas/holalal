@@ -331,6 +331,10 @@
             return;
         }
 
+        var baseUrl = window.location.origin + APP_CONTEXT_PATH;
+        var logoLanbide = baseUrl + '/imagenes/lanbide_logo.png';
+        var logoGobiernoVasco = baseUrl + '/imagenes/gobierno_vasco_logo.png';
+
         var colHeaders = [
             '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col1")%>',
             '<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.vidalaboral.col2")%>',
@@ -356,31 +360,53 @@
         h += '<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">';
         h += '<title>' + esc(titulo) + '</title>';
         h += '<style>';
-        h += '@media print{.indicacion{display:none;}}';
-        h += 'body{font-family:Arial,sans-serif;color:#111;margin:40px 48px;}';
-        h += '.indicacion{margin-bottom:16px;color:#555;font-size:12px;border:1px dashed #bbb;padding:6px 10px;background:#fffbe6;}';
-        h += '.titulo{font-size:18px;font-weight:bold;text-transform:uppercase;text-align:center;margin-bottom:4px;letter-spacing:1px;}';
-        h += '.subtitulo{text-align:center;color:#555;font-size:12px;margin-bottom:6px;}';
-        h += '.separador{border:none;border-top:2px solid #222;margin:14px 0;}';
-        h += '.separador-fino{border:none;border-top:1px solid #bbb;margin:10px 0;}';
-        h += '.meta{font-size:13px;margin-bottom:8px;}';
-        h += '.meta span{margin-right:24px;}';
-        h += '.registro{margin-bottom:18px;padding:12px 16px;border-left:4px solid #003366;background:#f7f9ff;}';
-        h += '.registro-titulo{font-size:13px;font-weight:bold;color:#003366;margin-bottom:8px;text-transform:uppercase;letter-spacing:0.5px;}';
-        h += '.campo{display:flex;flex-wrap:wrap;margin-bottom:4px;font-size:12px;}';
-        h += '.campo-etiqueta{font-weight:bold;min-width:220px;color:#333;}';
+        h += '@media print{.indicacion{display:none;} body{margin:20px;} .cabecera-logos{page-break-inside:avoid;}}';
+        h += 'body{font-family:Arial,sans-serif;color:#111;margin:32px 40px;font-size:12px;}';
+        h += '.indicacion{margin-bottom:14px;color:#555;font-size:11px;border:1px dashed #bbb;padding:5px 10px;background:#fffbe6;}';
+        h += '.cabecera-logos{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;}';
+        h += '.cabecera-logos img{max-height:60px;max-width:180px;object-fit:contain;}';
+        h += '.cabecera-titulo{text-align:center;flex:1;padding:0 10px;}';
+        h += '.titulo{font-size:15px;font-weight:bold;text-transform:uppercase;color:#003366;letter-spacing:0.5px;margin-bottom:2px;}';
+        h += '.subtitulo{font-size:10px;color:#666;}';
+        h += '.separador{border:none;border-top:2px solid #003366;margin:10px 0;}';
+        h += '.separador-fino{border:none;border-top:1px solid #ccc;margin:8px 0;}';
+        h += '.info-bloque{background:#f0f4fa;border:1px solid #c0cce0;padding:7px 12px;margin-bottom:10px;font-size:12px;}';
+        h += '.info-bloque table{border-collapse:collapse;width:100%;}';
+        h += '.info-bloque td{padding:3px 8px 3px 0;vertical-align:top;}';
+        h += '.info-bloque td.etq{font-weight:bold;color:#003366;white-space:nowrap;width:1%;}';
+        h += '.registro{margin-bottom:14px;border:1px solid #b0bfd0;border-top:3px solid #003366;}';
+        h += '.registro-cabecera{background:#003366;color:#fff;font-weight:bold;font-size:11px;padding:4px 10px;text-transform:uppercase;letter-spacing:0.3px;}';
+        h += '.registro-cuerpo{padding:6px 10px;}';
+        h += '.campo-fila{display:flex;margin-bottom:3px;font-size:11px;border-bottom:1px dotted #e0e0e0;padding-bottom:2px;}';
+        h += '.campo-fila:last-child{border-bottom:none;}';
+        h += '.campo-etiqueta{font-weight:bold;color:#003366;min-width:210px;flex-shrink:0;}';
         h += '.campo-valor{color:#111;flex:1;}';
-        h += '.pie{margin-top:20px;font-size:12px;color:#555;text-align:right;}';
-        h += '.pie-linea{border-top:1px solid #bbb;padding-top:6px;}';
+        h += '.pie{margin-top:16px;font-size:10px;color:#666;border-top:1px solid #bbb;padding-top:6px;display:flex;justify-content:space-between;}';
         h += '</style></head><body>';
-        h += '<p class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opcion de imprimir del navegador (Ctrl+P). La barra de indicacion no aparecera en el PDF impreso.</p>';
+
+        h += '<p class="indicacion"><strong>Imprimir/guardar PDF:</strong> use la opcion de imprimir del navegador (Ctrl+P). Esta barra no aparecera en el PDF impreso.</p>';
+
+        h += '<div class="cabecera-logos">';
+        h += '<img src="' + esc(logoLanbide) + '" alt="Lanbide" onerror="this.style.display=\'none\'">';
+        h += '<div class="cabecera-titulo">';
         h += '<div class="titulo">' + esc(titulo) + '</div>';
         h += '<div class="subtitulo">Documento generado automaticamente al consultar el WS de vida laboral (LAK)</div>';
-        h += '<hr class="separador">';
-        h += '<div class="meta">';
-        h += '<span><strong>Expediente:</strong> ' + esc(numExpediente || '&mdash;') + '</span>';
-        h += '<span><strong>Periodo:</strong> ' + esc(fechaDesde || '&mdash;') + ' &ndash; ' + esc(fechaHasta || '&mdash;') + '</span>';
         h += '</div>';
+        h += '<img src="' + esc(logoGobiernoVasco) + '" alt="Gobierno Vasco" onerror="this.style.display=\'none\'">';
+        h += '</div>';
+
+        h += '<hr class="separador">';
+
+        h += '<div class="info-bloque">';
+        h += '<table><tr>';
+        h += '<td class="etq">Expediente:</td><td>' + esc(numExpediente || '&mdash;') + '</td>';
+        h += '<td class="etq" style="padding-left:20px;">Periodo:</td>';
+        h += '<td>' + esc(fechaDesde || '&mdash;') + ' &ndash; ' + esc(fechaHasta || '&mdash;') + '</td>';
+        h += '<td class="etq" style="padding-left:20px;">Fecha generacion:</td>';
+        h += '<td>' + esc(fechaGeneracion) + '</td>';
+        h += '</tr></table>';
+        h += '</div>';
+
         h += '<hr class="separador-fino">';
 
         for (var i = 0; i < registros.length; i++) {
@@ -413,21 +439,22 @@
             ];
 
             h += '<div class="registro">';
-            h += '<div class="registro-titulo">Registro ' + (i + 1) + ' de ' + registros.length + '</div>';
+            h += '<div class="registro-cabecera">Registro ' + (i + 1) + ' de ' + registros.length + '</div>';
+            h += '<div class="registro-cuerpo">';
             for (var j = 0; j < campos.length; j++) {
-                h += '<div class="campo">';
-                h += '<span class="campo-etiqueta">' + esc(campos[j][0]) + ':</span>';
+                h += '<div class="campo-fila">';
+                h += '<span class="campo-etiqueta">' + esc(campos[j][0]) + '</span>';
                 h += '<span class="campo-valor">' + esc(campos[j][1]) + '</span>';
                 h += '</div>';
             }
             h += '</div>';
-            if (i < registros.length - 1) {
-                h += '<hr class="separador-fino">';
-            }
+            h += '</div>';
         }
 
-        h += '<hr class="separador">';
-        h += '<div class="pie pie-linea"><strong>Fecha/Hora de generacion:</strong> ' + esc(fechaGeneracion) + '</div>';
+        h += '<div class="pie">';
+        h += '<span>Lanbide - Servicio Vasco de Empleo</span>';
+        h += '<span><strong>Generado el:</strong> ' + esc(fechaGeneracion) + '</span>';
+        h += '</div>';
         h += '</body></html>';
 
         ventana.document.open();
