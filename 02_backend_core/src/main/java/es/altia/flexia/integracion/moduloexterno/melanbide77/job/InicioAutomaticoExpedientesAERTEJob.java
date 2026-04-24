@@ -247,7 +247,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                             }
 
                                         } else {
-                                            log.info("El interesado con documento n∫: " + cif + " tiene expediente AERTE previo. ");
+                                            log.info("El interesado con documento n¬∫: " + cif + " tiene expediente AERTE previo. ");
                                             numExpediente = numExpedientePrevio;
                                             log.info("numeroExpediente: " + numExpediente);
                                             tieneExpediente = true;
@@ -290,12 +290,12 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                             registroBatch.setObservaciones("");
                                             if (solicitud.getNumSolicitud() == null) {
                                                 registroBatch.setResultado("KO");
-                                                registroBatch.setObservaciones("No existe solicitud con n˙mero " + numSolicitud + " en la tabla " + ConfigurationParameter.getParameter(ConstantesMeLanbide77.TABLA_SOLICITUDES, ConstantesMeLanbide77.FICHERO_PROPIEDADES));
+                                                registroBatch.setObservaciones("No existe solicitud con n√∫mero " + numSolicitud + " en la tabla " + ConfigurationParameter.getParameter(ConstantesMeLanbide77.TABLA_SOLICITUDES, ConstantesMeLanbide77.FICHERO_PROPIEDADES));
                                                 MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
 
                                                 ErrorBean err = new ErrorBean();
                                                 err.setIdError("TRAMITACION_AERTE_003");
-                                                err.setMensajeError("Error en el job de inicio autom·tico de expedientes AERTE. No existe solicitud " + numSolicitud + " en el registro: " + anoRegistro + "/" + numRegistro);
+                                                err.setMensajeError("Error en el job de inicio autom√°tico de expedientes AERTE. No existe solicitud " + numSolicitud + " en el registro: " + anoRegistro + "/" + numRegistro);
                                                 err.setSituacion("JobExecute");
                                                 String causa = "";
                                                 String error = "";
@@ -307,12 +307,12 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 //                                            // error solicitud recuperada no es la del registro
 //
 //                                            registroBatch.setResultado("KO");
-//                                            registroBatch.setObservaciones("El n˙mero de solicitud: " + numSolRecuperado + " recuperado no coincide con el asociado al registro: " + numSolicitud);
+//                                            registroBatch.setObservaciones("El n√∫mero de solicitud: " + numSolRecuperado + " recuperado no coincide con el asociado al registro: " + numSolicitud);
 //                                            MeLanbide77DAO.getInstance().insertarRegistroBatch(con, registroBatch);
 //
 //                                            ErrorBean err = new ErrorBean();
 //                                            err.setIdError("TRAMITACION_AERTE_006");
-//                                            err.setMensajeError("Error en el job de TramitaciÛn autom·tica de agencias AERTE. El n˙mero de solicitud: " + numSolRecuperado + " recuperado no coincide con el asociado al registro: " + numSolicitud);
+//                                            err.setMensajeError("Error en el job de Tramitaci√≥n autom√°tica de agencias AERTE. El n√∫mero de solicitud: " + numSolRecuperado + " recuperado no coincide con el asociado al registro: " + numSolicitud);
 //                                            err.setSituacion("JobExecute");
 //                                            String causa = "";
 //                                            String error = "";
@@ -342,7 +342,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                                 }
 
                                             }
-//avanzar tr·mite
+//avanzar tr√°mite
                                             idTramite = new TramiteVO();
                                             idTram = new IdTramiteVO();
                                             idTramAvanzar = new IdTramiteVO();
@@ -351,18 +351,18 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                             IdTramiteVO[] listaRespuesta = new IdTramiteVO[1];
                                             String tipoFin = "";
                                             if (continuar) {
-//Buscar en quÈ tr·mite est·
+//Buscar en qu√© tr√°mite est√°
                                                 codTramite = meLanbide77DAO.buscarTramite(numExpediente, con);
                                                 if (codTramite == codTramInicio) {
                                                     idTram.setCodTramite(codTramite);
                                                     idTram.setOcurrencia(1);
                                                     idTramite.setId(idTram);
-                                                    idTramite.setUtr(codigoUOR); //CÛdigo interno de la unidad org·nica de Flexia que proceder· a finalizar el tr·mite deseado.
-                                                    idTramite.setUsuarioFin(registroAERTE.getResUsu()); //CÛdigo interno del usuario que figurar· como encargadao de la finalizaciÛn del tr·mite.
+                                                    idTramite.setUtr(codigoUOR); //C√≥digo interno de la unidad org√°nica de Flexia que proceder√° a finalizar el tr√°mite deseado.
+                                                    idTramite.setUsuarioFin(registroAERTE.getResUsu()); //C√≥digo interno del usuario que figurar√° como encargadao de la finalizaci√≥n del tr√°mite.
                                                     idTramite.setFechaFin(Calendar.getInstance());
                                                     tipoFin = meLanbide77DAO.buscarTipoFinalizacion(codOrg, codProcedimiento, codTramite, con);
                                                     condFinalizacion.setTipoFinalizacion(tipoFin);
-                                                    //Recogemos el CÛdigo interno del tr·mite a iniciar del properties:
+                                                    //Recogemos el C√≥digo interno del tr√°mite a iniciar del properties:
                                                     idTramAvanzar.setCodTramite(codTramRevision);
                                                     idTramAvanzar.setOcurrencia(1);
                                                     listaRespuesta[0] = idTramAvanzar;
@@ -370,13 +370,13 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                                     flujo.setTipoApertura(1);   // 1--> Obligatoria
                                                     condFinalizacion.setFlujoSI(flujo);
                                                     idTramite.setCondFinalizacion(condFinalizacion);
-                                                    // finalizar tr·mite 10 y avanzar al 20
+                                                    // finalizar tr√°mite 10 y avanzar al 20
                                                     if (!finalizarTramite(registroAERTE, expediente, idTramite, condFinalizacion, inf, binding)) {
                                                         continuar = false;
                                                         log.error("no finaliza tramite. Reg: " + registroAERTE.getResEje() + "/" + registroAERTE.getResNum() + " Exp.: " + numExpediente + " Tramite: " + codTramite + " Tipo Fin: " + tipoFin + " Cod.FinS: " + condFinalizacion + " - " + inf);
                                                     }
                                                 } else {
-                                                    log.info("El expediente " + numExpediente + " ya est· en " + codTramite + " - REVISION DOCUMENTACION");
+                                                    log.info("El expediente " + numExpediente + " ya est√° en " + codTramite + " - REVISION DOCUMENTACION");
                                                 }
                                             }
 
@@ -424,7 +424,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                     continuar = meLanbide77DAO.ponerEstadoRelanzado(idRegBatch, con);
 
                                     if (continuar) {
-                                        // compruebo si el registro ya est· asociado a algun expediente
+                                        // compruebo si el registro ya est√° asociado a algun expediente
                                         libre = meLanbide77DAO.esRegistroLibre(anoRegistro, numRegistro, con);
 
                                         if ("".equals(numExpedientePend)) {// habia fallado al iniciar expediente
@@ -459,7 +459,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                                     MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
                                                 }
                                             } else {
-                                                log.info("El registro " + anoRegistro + "/" + numRegistro + " est· asociado a un expediente");
+                                                log.info("El registro " + anoRegistro + "/" + numRegistro + " est√° asociado a un expediente");
                                                 continuar = false;
                                             }
                                         } else {
@@ -478,7 +478,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
                                     }
 
-                                    //pregunta si el expediente est· asociado al registro (buscar si existe en la tabla E_EXR con expediente y registro)
+                                    //pregunta si el expediente est√° asociado al registro (buscar si existe en la tabla E_EXR con expediente y registro)
                                     if (continuar) {
                                         if (!meLanbide77DAO.buscarRegistroAsociado(numExpedientePend, anoRegistro, numRegistro, con)) {
                                             log.debug("No tiene registro asociado al expediente ");
@@ -496,7 +496,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                     }
 
                                     if (continuar) {
-                                        //Buscar en quÈ tr·mite est·
+                                        //Buscar en qu√© tr√°mite est√°
                                         codTramite = meLanbide77DAO.buscarTramite(numExpedientePend, con);
                                         asunto = registroAERTE.getResAsu();
                                         if ((codTramite == codTramInicio) || (codTramite == codTramRevision)) {
@@ -521,12 +521,12 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                             if (solicitud.getNumSolicitud() == null) {
                                                 registroBatch.setNumSolicitud(numSolicitud);
                                                 registroBatch.setResultado("KO");
-                                                registroBatch.setObservaciones("No existe solicitud con n˙mero " + numSolicitud + " en la tabla " + ConfigurationParameter.getParameter(ConstantesMeLanbide77.TABLA_SOLICITUDES, ConstantesMeLanbide77.FICHERO_PROPIEDADES));
+                                                registroBatch.setObservaciones("No existe solicitud con n√∫mero " + numSolicitud + " en la tabla " + ConfigurationParameter.getParameter(ConstantesMeLanbide77.TABLA_SOLICITUDES, ConstantesMeLanbide77.FICHERO_PROPIEDADES));
                                                 MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
 
                                                 ErrorBean err = new ErrorBean();
                                                 err.setIdError("TRAMITACION_AERTE_003");
-                                                err.setMensajeError("Error en el job de TramitaciÛn autom·tica de agencias AERTE.  No existe solicitud " + numSolicitud + " en el registro: " + anoRegistro + "/" + numRegistro);
+                                                err.setMensajeError("Error en el job de Tramitaci√≥n autom√°tica de agencias AERTE.  No existe solicitud " + numSolicitud + " en el registro: " + anoRegistro + "/" + numRegistro);
                                                 err.setSituacion("JobExecute");
                                                 String causa = "";
                                                 String error = "";
@@ -547,7 +547,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                     }
 
                                     if (continuar) {
-                                        //Buscar en quÈ tr·mite est·
+                                        //Buscar en qu√© tr√°mite est√°
                                         codTramite = meLanbide77DAO.buscarTramite(numExpedientePend, con);
                                         if ((codTramite == codTramInicio) || (codTramite == codTramRevision)) {
                                             if (!grabadoDatosSuplementariosSolicitud(solicitud, numExpedientePend, registroAERTE, con)) {
@@ -571,13 +571,13 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                             idTram.setCodTramite(codTramite);
                                             idTram.setOcurrencia(1);
                                             idTramite.setId(idTram);
-                                            idTramite.setUtr(codigoUOR); //CÛdigo interno de la unidad org·nica de Flexia que proceder· a finalizar el tr·mite deseado.                                  
-                                            idTramite.setUsuarioFin(registroAERTE.getResUsu()); //CÛdigo interno del usuario que figurar· como encargadao de la finalizaciÛn del tr·mite.                                   						
+                                            idTramite.setUtr(codigoUOR); //C√≥digo interno de la unidad org√°nica de Flexia que proceder√° a finalizar el tr√°mite deseado.                                  
+                                            idTramite.setUsuarioFin(registroAERTE.getResUsu()); //C√≥digo interno del usuario que figurar√° como encargadao de la finalizaci√≥n del tr√°mite.                                   						
                                             idTramite.setFechaFin(Calendar.getInstance());
                                             tipoFin = meLanbide77DAO.buscarTipoFinalizacion(codOrg, codProcedimiento, codTramite, con);
                                             condFinalizacion.setTipoFinalizacion(tipoFin);
                                             flujo.setTipoApertura(1);   // 1--> Obligatoria
-                                            //Recogemos el CÛdigo interno del tr·mite a iniciar del properties:
+                                            //Recogemos el C√≥digo interno del tr√°mite a iniciar del properties:
                                             idTramAvanzar.setCodTramite(codTramRevision);
                                             idTramAvanzar.setOcurrencia(1);
                                             listaRespuesta[0] = idTramAvanzar;
@@ -585,13 +585,13 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                             flujo.setTipoApertura(1);   // 1--> Obligatoria     
                                             condFinalizacion.setFlujoSI(flujo);
                                             idTramite.setCondFinalizacion(condFinalizacion);
-                                            // finalizar tr·mite 10 y avanzar al 20
+                                            // finalizar tr√°mite 10 y avanzar al 20
                                             if (!finalizarTramite(registroAERTE, expediente, idTramite, condFinalizacion, inf, binding)) {
                                                 continuar = false;
                                                 log.error("no finaliza tramite. Reg :" + registroAERTE + " Exp.: " + numExpedientePend + " Tramite" + idTramite + " Tipo Fin: " + tipoFin + " Cod.FinS: " + condFinalizacion + " - " + inf);
                                             }
                                         } else {
-                                            log.info("El expediente " + numExpedientePend + " ya est· en " + codTramite + "-REVISION DOCUMENTACION");
+                                            log.info("El expediente " + numExpedientePend + " ya est√° en " + codTramite + "-REVISION DOCUMENTACION");
                                         }
                                     }
 
@@ -615,7 +615,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                                 if (con != null && !con.isClosed()) {
                                     con.close();
                                 }
-                                log.debug("ConexiÛn cerrada en el OAD");
+                                log.debug("Conexi√≥n cerrada en el OAD");
                             } catch (SQLException sqle) {
                                 log.error("*** ConexionBD: " + sqle.toString());
                                 throw new BDException(999, "Error, no se pudo cerrar la conexion", sqle.toString());
@@ -627,7 +627,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
                         try {
                         } catch (Exception i) {
-                            log.error("Error en la funciÛn actualizarError: " + i.getMessage());
+                            log.error("Error en la funci√≥n actualizarError: " + i.getMessage());
                         }
 
                         try {
@@ -672,7 +672,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
             ExpedienteVO exp = new ExpedienteVO();
             IdExpedienteVO idexpediente = new IdExpedienteVO();
-            idexpediente.setEjercicio(Calendar.getInstance().get(Calendar.YEAR));//aÒo actual
+            idexpediente.setEjercicio(Calendar.getInstance().get(Calendar.YEAR));//a√±o actual
             int anioActual = idexpediente.getEjercicio();
             idexpediente.setProcedimiento(codProcedimiento);
             int usuarioRegistro = registro.getResUsu();
@@ -714,8 +714,8 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
             log.info("------------Datos Interesado----------");
             log.info("Rol: " + interesado.getRol());
             log.info("-----------------Datos de remitente/Datos del Tercero---------------");
-            log.info("CÛdigo: " + registro.getResTer());
-            log.info("VersiÛn: " + versionTercero);
+            log.info("C√≥digo: " + registro.getResTer());
+            log.info("Versi√≥n: " + versionTercero);
             log.info("Apellido 1 remitente: " + interesado.getTercero().getAp1());
             log.info("Apellido 2 remitente: " + interesado.getTercero().getAp2());
             log.info("Nombre: " + interesado.getTercero().getNombre());
@@ -726,7 +726,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
             log.info("----------------------fin Datos de remitente/Datos del Tercero-----------");
 
             log.info("------------Datos Domicilio----------");
-            log.info("Domicilio CÛdigo: " + codDomTercero);
+            log.info("Domicilio C√≥digo: " + codDomTercero);
             log.info("Domicilio Bloque: " + interesado.getTercero().getDomicilio().getBloque());
             log.info("Domicilio COdMunicipio: " + interesado.getTercero().getDomicilio().getCodMunicipio());
             log.info("Domicilio CodPais: " + interesado.getTercero().getDomicilio().getCodPais());
@@ -773,7 +773,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                 log.info("Documento: " + value.getDocumento());
                 log.info("Expediente: " + value.getExpediente());
                 log.info("Ejercicio: " + value.getIdExpediente().getEjercicio());
-                log.info("N˙mero: " + value.getIdExpediente().getNumero());
+                log.info("N√∫mero: " + value.getIdExpediente().getNumero());
                 log.info("Numero_Expediente: " + value.getIdExpediente().getNumeroExpediente());
                 log.info("Procedimiento: " + value.getIdExpediente().getProcedimiento());
                 //casca porque getExpediente() == null
@@ -863,7 +863,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
                     try {
                         OperacionesExpedienteDAO.getInstance().registrarAltaInteresado(codOrg, numExpediente, registro.getResUsu(), "ADMINISTRADOR", tercero, con);
-                        log.info("Se ha registrado lel alta del interesado en el HistÛrico de Operaciones.");
+                        log.info("Se ha registrado lel alta del interesado en el Hist√≥rico de Operaciones.");
                     } catch (TechnicalException e) {
                         log.error("Ha ocurrido un error al grabar la operacion Alta Interesadoen Historico Operaciones. ", e);
                     }
@@ -875,11 +875,11 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                     registroBatch.setResultado("KO");
                     registroBatch.setRelanzar(1);
                     registroBatch.setNumExpediente(numExpediente);
-                    registroBatch.setObservaciones("Fallo al iniciarExpedienteRegistro. Volver· a intentarlo en la siguiente ejecuciÛn");
+                    registroBatch.setObservaciones("Fallo al iniciarExpedienteRegistro. Volver√° a intentarlo en la siguiente ejecuci√≥n");
                     MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
                     ErrorBean err = new ErrorBean();
                     err.setIdError("TRAMITACION_AERTE_001");
-                    err.setMensajeError("Error en el job de inicio autom·tico de expedientes AERTE. Error al iniciar el expediente. Status: " + value.getStatus() + ". Error: " + value.getError());
+                    err.setMensajeError("Error en el job de inicio autom√°tico de expedientes AERTE. Error al iniciar el expediente. Status: " + value.getStatus() + ". Error: " + value.getError());
                     err.setSituacion("JobExecute");
 
                     String causa = "";
@@ -892,7 +892,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
             } catch (Exception e) {
                 registroBatch.setResultado("KO");
-                registroBatch.setObservaciones("ExcepciÛn en iniciarExpedienteRegistro");
+                registroBatch.setObservaciones("Excepci√≥n en iniciarExpedienteRegistro");
                 registroBatch.setEjerRegistro(registro.getResEje());
                 registroBatch.setNumRegistro(registro.getResNum());
                 registroBatch.setNumSolicitud(registro.getNumSolicitud());
@@ -905,7 +905,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
                 ErrorBean err = new ErrorBean();
                 err.setIdError("TRAMITACION_AERTE_001");
-                err.setMensajeError("Error en el job de inicio autom·tico de expedientes AERTE. Error al llamar al SW iniciarExpedienteRegistro ");
+                err.setMensajeError("Error en el job de inicio autom√°tico de expedientes AERTE. Error al llamar al SW iniciarExpedienteRegistro ");
                 err.setSituacion("JobExecute");
                 String causa = "";
                 //String causa = e.getCause().getMessage();
@@ -934,7 +934,6 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
     public boolean asociarExpedienteRegistro(RegistroAerteVO registro, ExpedienteVO expediente, InfoConexionVO inf, WSTramitacionBindingStub binding) {
         log.info("begin asociarExpedienteRegistro()");
-        RespuestasTramitacionVO value = null;
         RegistroBatchVO registroBatch = new RegistroBatchVO();
         int tramite = Integer.parseInt(ConfigurationParameter.getParameter(ConstantesMeLanbide77.INICIO_EXPEDIENTE, ConstantesMeLanbide77.FICHERO_PROPIEDADES));
         String numExpediente = expediente.getIdExpedienteVO().getNumeroExpediente();
@@ -948,22 +947,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
         try {
             con = adaptador.getConnection();
 
-            RegistroAsociadoVO registroAsociado = new RegistroAsociadoVO();
-            //obligatorios
-            registroAsociado.setCodDepartamento(registro.getResDep());
-            registroAsociado.setEjercicioAnotacion(registro.getResEje());
-            registroAsociado.setNumAsiento(registro.getResNum());
-            registroAsociado.setTipoEntrada(registro.getResTip());
-            registroAsociado.setUorRegistro(registro.getResUor());
-
-            ///Datos Registro
-            log.info("------------Datos Registro----------");
-            log.info("codDepartamento " + registroAsociado.getCodDepartamento());
-            log.info("ejercicioAnotacion " + registroAsociado.getEjercicioAnotacion());
-            log.info("numAsiento " + registroAsociado.getNumAsiento());
-            log.info("tipoEntrada " + registroAsociado.getTipoEntrada());
-            log.info("uorRegistro " + registroAsociado.getUorRegistro());
-            log.info("------------Llamamos a ws tramitacion asociarExpRegistro() ----------");
+            log.info("------------Llamamos al procedure asociarexpregistro() ----------");
 
             registroBatch.setEjerRegistro(registro.getResEje());
             registroBatch.setNumRegistro(registro.getResNum());
@@ -976,41 +960,46 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
             registroBatch.setObservaciones("");
 
             try {
-                value = binding.asociarExpRegistro(expediente, registroAsociado, inf);
-                log.info("------------Respuesta de asociarExpRegistro----------");
-                log.info("Status: " + value.getStatus());
-                if (value.getStatus() == 0) {
-                    registroBatch.setObservaciones("Asociado el registro " + registro.getResEje() + "/" + registro.getResNum() + " al expediente " + numExpediente);
+                String[] salida = MeLanbide77DAO.getInstance().asociarExpedienteRegistroBBDD(registro.getResEje(), registro.getResNum(), numExpediente, con);
+                String resultado = salida[0];
+                String mensajeProc = salida[1];
+
+                log.info("------------Respuesta de asociarexpregistro----------");
+                log.info("resultado: " + resultado);
+                log.info("mensaje: " + mensajeProc);
+
+                if ("OK".equalsIgnoreCase(resultado)) {
+                    registroBatch.setObservaciones(mensajeProc);
                     registroBatch.setResultado("OK");
                     MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
                     return true;
                 } else {
                     registroBatch.setResultado("KO");
-                    // registroBatch.setRelanzar(1);
-                    registroBatch.setObservaciones("Error al asociarExpRegistro con el expediente " + numExpediente + " y el registro" + registro.getResEje() + "/" + registro.getResNum() + ". Status: " + value.getStatus() + " Error: " + value.getError());
+                    registroBatch.setObservaciones(mensajeProc);
                     MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
 
                     ErrorBean err = new ErrorBean();
                     err.setIdError("TRAMITACION_AERTE_002");
-                    err.setMensajeError("Error en el job de Inicio automatico expediente AERTE. Error al llamar al SW asociarExpRegistro con el expediente " + numExpediente + " y el registro" + registro.getResEje() + "/" + registro.getResNum() + ". Status: " + value.getStatus() + " Error: " + value.getError());
+                    err.setMensajeError("Error al ejecutar asociarexpregistro para expediente " + numExpediente + " y registro " + registro.getResEje() + "/" + registro.getResNum() + ". Mensaje: " + mensajeProc);
                     err.setSituacion("JobExecute");
-                    String causa = "";
-                    String error = value.getError();
-                    grabarError(err, error, causa, numExpediente);
+                    grabarError(err, mensajeProc, "", numExpediente);
                     return false;
                 }
 
             } catch (Exception e) {
                 registroBatch.setResultado("KO");
                 registroBatch.setRelanzar(1);
-                registroBatch.setObservaciones("ExcepciÛn en asociarExpRegistro");
+                registroBatch.setObservaciones("Excepcin en asociarexpregistro");
                 MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
 
                 ErrorBean err = new ErrorBean();
                 err.setIdError("TRAMITACION_AERTE_002");
-                err.setMensajeError("Error en el job de inicio autom·tico de expedientes AERTE. Error al llamar al SW asociarExpRegistro con el expediente " + numExpediente + " y el registro" + registro.getResEje() + "/" + registro.getResNum());
+                err.setMensajeError("Error en el job de inicio automtico de expedientes AERTE. Error al ejecutar asociarexpregistro para expediente " + numExpediente + " y registro " + registro.getResEje() + "/" + registro.getResNum());
                 err.setSituacion("JobExecute");
-                String causa = e.getCause().getMessage();
+                String causa = "";
+                if (e.getCause() != null) {
+                    causa = e.getCause().getMessage();
+                }
                 String error = e.getMessage();
 
                 grabarError(err, error, causa, numExpediente);
@@ -1206,12 +1195,12 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                         camposGrabados++;
                     }
                 } catch (Exception ex) {
-                    log.error("Error en grabadoDatosSuplementariosSOLICITUD en expediente: " + numExpediente + " ,cÛdigo: " + codCampo + " valor: " + valorCampo + " nombre tabla: " + nombreTabla, ex);
+                    log.error("Error en grabadoDatosSuplementariosSOLICITUD en expediente: " + numExpediente + " ,c√≥digo: " + codCampo + " valor: " + valorCampo + " nombre tabla: " + nombreTabla, ex);
                     ret = false;
                     //GRABAR EN LA NUEVA TABLA   
                     registroBatch.setRelanzar(1);
                     registroBatch.setResultado("KO");
-                    registroBatch.setObservaciones("ExcepciÛn al grabar " + codCampo + " valor: " + valorCampo);
+                    registroBatch.setObservaciones("Excepci√≥n al grabar " + codCampo + " valor: " + valorCampo);
                     try {
                         MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
                     } catch (Exception ex1) {
@@ -1220,7 +1209,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
                     ErrorBean err = new ErrorBean();
                     err.setIdError("TRAMITACION_AERTE_004");
-                    err.setMensajeError("Error en el job de TramitaciÛn autom·tica de agencias AERTE. Error al grabar " + codCampo + " valor: " + valorCampo + " con el expediente " + numExpediente + " y el registro" + registro.getResEje() + "/" + registro.getResNum());
+                    err.setMensajeError("Error en el job de Tramitaci√≥n autom√°tica de agencias AERTE. Error al grabar " + codCampo + " valor: " + valorCampo + " con el expediente " + numExpediente + " y el registro" + registro.getResEje() + "/" + registro.getResNum());
                     err.setSituacion("JobExecute");
                     String causa = ex.getCause().getMessage();
                     String error = ex.getMessage();
@@ -1229,10 +1218,10 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                 }
             }
             if (resSup == 0) {
-                log.error("grabadoDatosSuplementariosSOLICITUD: No ha guardado los datos suplementarios del fichero. Puede que no hayan o que ya existÌan");
+                log.error("grabadoDatosSuplementariosSOLICITUD: No ha guardado los datos suplementarios del fichero. Puede que no hayan o que ya exist√≠an");
                 registroBatch.setResultado("--");
                 registroBatch.setRelanzar(0);
-                registroBatch.setObservaciones("No ha grabado los Datos Suplementarios de la SOLICITUD. Puede ser que no haya datos o que ya existÌan.");
+                registroBatch.setObservaciones("No ha grabado los Datos Suplementarios de la SOLICITUD. Puede ser que no haya datos o que ya exist√≠an.");
                 try {
                     MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
                 } catch (Exception ex1) {
@@ -1261,7 +1250,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                     infoExp.setAtributo("observaciones", observaciones);
                     try {
                         OperacionesExpedienteDAO.getInstance().registrarGrabarExpediente(infoExp, con);
-                        log.info("Se ha registrado la grabaciÛn de suplementarios en el HistÛrico de Operaciones.");
+                        log.info("Se ha registrado la grabaci√≥n de suplementarios en el Hist√≥rico de Operaciones.");
                     } catch (TechnicalException ex) {
                         log.error("Ha ocurrido un error al grabar la operacion en Historico Operaciones. " + ex);
                     }
@@ -1297,7 +1286,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                 nomTramRevision = MeLanbide77DAO.getInstance().getNombreTramite(codProcedimiento, codTramRevision, con);
             } catch (Exception e) {
             }
-            log.info("------------datos que enviamos a finalizar tr·mite ----------");
+            log.info("------------datos que enviamos a finalizar tr√°mite ----------");
             ///Expediente 
             log.info("------------Datos Expediente----------");
             //IdExpedientesVO            
@@ -1308,7 +1297,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
             log.info("------------FIN ID EXPEDIENTE1----------");
             //TramiteVO:            
             log.info("------------TramiteVO:----------");
-            log.info("CÛdigo interno " + idTramite.getId().getCodTramite());
+            log.info("C√≥digo interno " + idTramite.getId().getCodTramite());
             log.info("Ocurrencia " + idTramite.getId().getOcurrencia());
             log.info("Utr " + idTramite.getUtr());
             log.info("Usuario fin " + idTramite.getUsuarioFin());
@@ -1318,16 +1307,16 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                 log.info("flujoSI:  ");
                 log.info("tipoApertura " + idTramite.getCondFinalizacion().getFlujoSI().getTipoApertura());
                 for (int i = 0; i < idTramite.getCondFinalizacion().getFlujoSI().getListaRespuesta().length; i++) {
-                    log.info("Cod.Tr·mite a iniciar " + i + ": " + idTramite.getCondFinalizacion().getFlujoSI().getListaRespuesta()[i].getCodTramite());
+                    log.info("Cod.Tr√°mite a iniciar " + i + ": " + idTramite.getCondFinalizacion().getFlujoSI().getListaRespuesta()[i].getCodTramite());
                 }
-                log.info("Ocurrencia Tr·mite a iniciar " + idTramite.getCondFinalizacion().getFlujoSI().getListaRespuesta()[0].getOcurrencia());
+                log.info("Ocurrencia Tr√°mite a iniciar " + idTramite.getCondFinalizacion().getFlujoSI().getListaRespuesta()[0].getOcurrencia());
 //                ocuTramIniciar = idTramite.getCondFinalizacion().getFlujoSI().getListaRespuesta()[0].getOcurrencia();
             }
             if (idTramite.getCondFinalizacion().getFlujoNO() != null) {
                 log.info("flujoNO:  ");
                 log.info("tipoApertura " + idTramite.getCondFinalizacion().getFlujoNO().getTipoApertura());
-                log.info("Cod.Tr·mite a iniciar " + idTramite.getCondFinalizacion().getFlujoNO().getListaRespuesta()[0].getCodTramite());
-                log.info("Ocurrencia Tr·mite a iniciar " + idTramite.getCondFinalizacion().getFlujoNO().getListaRespuesta()[0].getOcurrencia());
+                log.info("Cod.Tr√°mite a iniciar " + idTramite.getCondFinalizacion().getFlujoNO().getListaRespuesta()[0].getCodTramite());
+                log.info("Ocurrencia Tr√°mite a iniciar " + idTramite.getCondFinalizacion().getFlujoNO().getListaRespuesta()[0].getOcurrencia());
 //                ocuTramIniciar = idTramite.getCondFinalizacion().getFlujoNO().getListaRespuesta()[0].getOcurrencia();
             }
             //InfoConexionVO:            
@@ -1359,14 +1348,14 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
                 if (value.getStatus() == 0) {
                     registroBatch.setResultado("OK");
-                    registroBatch.setObservaciones("Se ha finalizado el tr·mite " + nomTramInicio);
+                    registroBatch.setObservaciones("Se ha finalizado el tr√°mite " + nomTramInicio);
                     MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
 
                     // operacion expediente
                     fechaFin = formateadorFecha.format(Calendar.getInstance().getTime());
                     log.debug("Fecha Fin: " + fechaFin);
                     // Finaliza tramite
-                    log.debug("Grabar en Operaciones Expedientes el fin e inicio de tr·mites");
+                    log.debug("Grabar en Operaciones Expedientes el fin e inicio de tr√°mites");
                     TramitacionExpedientesValueObject tramiteFin = new TramitacionExpedientesValueObject();
                     tramiteFin.setCodMunicipio(codOrganizacion);
                     tramiteFin.setCodProcedimiento(codProcedimiento);
@@ -1383,9 +1372,9 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
                     try {
                         OperacionesExpedienteDAO.getInstance().registrarFinalizarTramite(tramiteFin, false, con);
-                        log.debug("Grabado en Operaciones Expedientes el fin de tr·mite");
+                        log.debug("Grabado en Operaciones Expedientes el fin de tr√°mite");
                     } catch (TechnicalException ex) {
-                        log.error("Ha ocurrido un error al grabar la operacion Finalizar Tr·mite en Historico Operaciones. ", ex);
+                        log.error("Ha ocurrido un error al grabar la operacion Finalizar Tr√°mite en Historico Operaciones. ", ex);
                     }
                     // Inicia tramite
                     GeneralValueObject tramiteIni = new GeneralValueObject();
@@ -1402,9 +1391,9 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
                     try {
                         OperacionesExpedienteDAO.getInstance().registrarIniciarTramite(tramiteIni, false, con);
-                        log.debug("Grabado en Operaciones Expedientes el inicio de tr·mite");
+                        log.debug("Grabado en Operaciones Expedientes el inicio de tr√°mite");
                     } catch (TechnicalException e) {
-                        log.error("Ha ocurrido un error al grabar la operacion Finalizar Tr·mite en Historico Operaciones. ", e);
+                        log.error("Ha ocurrido un error al grabar la operacion Finalizar Tr√°mite en Historico Operaciones. ", e);
                     }
                     return true;
                 } else {
@@ -1415,7 +1404,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
 
                     ErrorBean err = new ErrorBean();
                     err.setIdError("TRAMITACION_AERTE_005");
-                    err.setMensajeError("Error en el job de inicio autom·tico de expedientes AERTE. Error al avanzar el tr·mite " + nomTramInicio + ": " + value.getError());
+                    err.setMensajeError("Error en el job de inicio autom√°tico de expedientes AERTE. Error al avanzar el tr√°mite " + nomTramInicio + ": " + value.getError());
                     err.setSituacion("JobExecute");
                     String causa = "";
                     String error = value.getError();
@@ -1426,12 +1415,12 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
             } catch (Exception e) {
                 registroBatch.setRelanzar(1);
                 registroBatch.setResultado("KO");
-                registroBatch.setObservaciones("ExcepciÛn en finalizarTramite");
+                registroBatch.setObservaciones("Excepci√≥n en finalizarTramite");
                 MeLanbide77DAO.getInstance().insertarRegistroBatch(registroBatch, con);
 
                 ErrorBean err = new ErrorBean();
                 err.setIdError("TRAMITACION_AERTE_005");
-                err.setMensajeError("Error en el job de inicio autom·tico de expedientes AERTE. Error al avanzar el tr·mite " + idTramite.getId().getCodTramite());
+                err.setMensajeError("Error en el job de inicio autom√°tico de expedientes AERTE. Error al avanzar el tr√°mite " + idTramite.getId().getCodTramite());
                 err.setSituacion("JobExecute");
                 String causa = e.getCause().getMessage();
                 String error = e.getMessage();
@@ -1440,7 +1429,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
             }
 
         } catch (Exception ex) {
-            log.error("Error al AVANZAR EL TR¡MITE ", ex);
+            log.error("Error al AVANZAR EL TR√ÅMITE ", ex);
             return false;
 
         } finally {
@@ -1471,7 +1460,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
                     log.debug("He cogido el jndi: " + jndiGenerico);
                 }
                 ds = (DataSource) pc.lookup(jndiGenerico, DataSource.class);
-                // ConexiÔøΩn al esquema genÔøΩrico
+                // Conexi√Ø¬ø¬Ωn al esquema gen√Ø¬ø¬Ωrico
                 conGenerico = ds.getConnection();
 
                 String sql = "SELECT EEA_BDE FROM A_EEA WHERE EEA_APL=" + ConstantesDatos.APP_GESTION_EXPEDIENTES + " AND AAE_ORG=" + codOrganizacion;
@@ -1593,12 +1582,12 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
             mensaje = MeLanbide43I18n.getInstance().getMensaje(1, "error.errorGen");
             log.error(mensaje);
             //insertar error en registro de errores           
-            log.error("Error en la funciÛn generarMisGestionesOficio: ", ex);
-            String error = "Error en la funciÛn generarMisGestionesOficio: " + ex.getMessage() != null ? ex.getMessage() : "null";
+            log.error("Error en la funci√≥n generarMisGestionesOficio: ", ex);
+            String error = "Error en la funci√≥n generarMisGestionesOficio: " + ex.getMessage() != null ? ex.getMessage() : "null";
 
             ErrorBean errorB = new ErrorBean();
             errorB.setIdError("TRAMITACION_AERTE_006");
-            errorB.setMensajeError("Error en el job de inicio autom·tico de expedientes AERTE. Error al iniciar un expediente en la funciÛn generarMisGestionesOficio");
+            errorB.setMensajeError("Error en el job de inicio autom√°tico de expedientes AERTE. Error al iniciar un expediente en la funci√≥n generarMisGestionesOficio");
             errorB.setSituacion("JobExecute");
 
             grabarError(errorB, error, ex.toString(), numExpediente);
@@ -1649,7 +1638,7 @@ public class InicioAutomaticoExpedientesAERTEJob implements Job {
         operacion.setDescripcionOperacion(descripcion);
         try {
             OperacionesExpedienteDAO.getInstance().insertarOperacionExpediente(operacion, con);
-            log.info("Registrada la operaciÛn Asociar Expediente Registro");
+            log.info("Registrada la operaci√≥n Asociar Expediente Registro");
         } catch (TechnicalException ex) {
             log.error("Ha ocurrido un error al grabar la operacion en Historico Operaciones. ", ex);
         }
