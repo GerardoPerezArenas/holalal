@@ -1530,11 +1530,16 @@ function getHTMLCampoTextoLargo(campo,mostrarDescTramite){
         enlaceTodo += "<span class='fa fa-expand' id='enlaceTodo' name='enlaceTodo' alt='Maximizar Campo'></span>";
         enlaceTodo += "</A>";
         var botonPdfVidaLaboral = "";
-        if(esCampoVidaLaboralRespuesta(descCampo)){
-            botonPdfVidaLaboral += "&nbsp;<input type='button' class='botonGeneral' value='PDF' ";
-            botonPdfVidaLaboral += "onclick=\"generarCertificadoConsultaVidaLaboral('" + nombreCampo + "');\"";
-            botonPdfVidaLaboral += " title='Generar certificado PDF de llamada y respuesta de vida laboral'>";
-        }
+        // CAMBIO TEMPORAL: Se elimina la condición esCampoVidaLaboralRespuesta(descCampo) para que el botón PDF
+        // se muestre siempre en todos los campos de tipo texto largo de la pestaña "Datos Suplementarios".
+        // Motivo: el campo "RESPUESTA CONSULTA VIDA LABORAL" no era detectado por la función de validación
+        // y el botón no aparecía. Esta solución temporal permite verificar que el botón es visible.
+        // Una vez confirmado, se volverá a añadir la condición adecuada con los criterios correctos.
+        // if(esCampoVidaLaboralRespuesta(descCampo)){
+        botonPdfVidaLaboral += "&nbsp;<input type='button' class='botonGeneral' value='PDF' ";
+        botonPdfVidaLaboral += "onclick=\"generarCertificadoConsultaVidaLaboral('" + nombreCampo + "');\"";
+        botonPdfVidaLaboral += " title='Generar certificado PDF de llamada y respuesta de vida laboral'>";
+        // }
        
         if(campo.descripcionTramite==undefined || campo.descripcionTramite==''){
             var idTabla = "T" + campo.codTramite + campo.ocurrencia + campo.codCampo;
