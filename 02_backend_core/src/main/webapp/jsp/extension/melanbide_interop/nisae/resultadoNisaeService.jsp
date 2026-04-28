@@ -81,7 +81,7 @@
             <!--SERVICIOS-->
             <div class="form-group">
                             <label for="listaWebServices"><%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.servicio.web")%></label>
-                            <select class="selectpicker form-control" data-actions-box="true" name="listaWebServices" id="listaWebServices" title="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.servicio.web")%>" onChange="onChangeCVL()">
+                            <select class="selectpicker form-control" data-actions-box="true" name="listaWebServices" id="listaWebServices" title="<%=meLanbideInteropI18n.getMensaje(idiomaUsuario,"label.servicio.web")%>">
                                 <option value=""><%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "label.select.option.default")%></option>
                                 <c:forEach items="${listaWebServices}" var="elementLista" varStatus="contador">
                                     <option value="<c:out value="${elementLista.id}"/>" title="<c:out value="${elementLista.valor}"/>"><c:out value="${elementLista.valor}"/></option>
