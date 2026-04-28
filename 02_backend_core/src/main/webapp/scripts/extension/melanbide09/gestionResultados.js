@@ -35,7 +35,10 @@ var parametrosLlamada = {
             "scrollCollapse": true,
             "searching": false,
             "paging": false,
-            "pageLength": -1});
+            "pageLength": -1,
+            "drawCallback": function () {
+                rehidratarSeleccionEnTabla();
+            }});
     pleaseWait('off');
     $("#tablaLog").attr("hidden",true);
    comboTramite = document.getElementById("listaTramite");
@@ -126,6 +129,7 @@ function lanzarProcesoFiltroTablaLog() {
     if ((datosParameter.fechaEnvioPeticionDesde === "" || validarFecha(datosParameter.fechaEnvioPeticionDesde))
     && (datosParameter.fechaEnvioPeticionHasta === "" || validarFecha(datosParameter.fechaEnvioPeticionHasta))){
 
+        limpiarSeleccionadas();
         tableLog.destroy();
         datosParameter.operacion = "cargarDatosPrincipalConsultaSinNotificarFiltros";
         tableLog = $('#tableLog').DataTable({
@@ -159,14 +163,24 @@ function lanzarProcesoFiltroTablaLog() {
                     if (data !== null) {
                         var all = [];
                         for (var i = 0; i < data.length; i++) {
+                            var fechaRegistrado = "";
+                            if (data[i].fechaRegistrado) {
+                                var trozosFecha = data[i].fechaRegistrado.split(" ");
+                                if (trozosFecha.length > 1) {
+                                    fechaRegistrado = trozosFecha[0] + " " + trozosFecha[1];
+                                } else {
+                                    fechaRegistrado = data[i].fechaRegistrado;
+                                }
+                            }
                             var row = {
                             id: data[i].id,
                             ejercicio: data[i].ejercicio,
                             procedimiento: data[i].procedimiento,
                             numExpediente: data[i].numExpediente,
-                            fechaRegistrado: data[i].fechaRegistrado.split(" ")[0]+data[i].fechaRegistrado.split(" ")[1],
+                            fechaRegistrado: fechaRegistrado,
                             desTramite: data[i].desTramite
                             };
+                            row.claveSeleccion = construirClaveFila(row);
                             all.push(row);
                         }
                         pleaseWait('off');

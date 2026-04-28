@@ -133,8 +133,18 @@
             <table class="xTabla compact tablaDatos" id="tableLog">
                 <thead>
                     <tr role="row">
+                        <th field="seleccion" datatype="String" class="selectedUp" rowspan="1" colspna="1">
+                            <input type="checkbox" id="check-todas-filas" title="Seleccionar todas las filas visibles" />
+                        </th>
                         <th field="id" datatype="String" class="selectedUp" rowspan="1" colspna="1" >ID</th>
-                        <th field="codOrganizacion" datatype="String"  class="selectedUp" rowspan="1" colspna="1" >Cod Organización</th>
+                            <td align="center" valign="middle">
+                                <input type="checkbox" class="check-fila" />
+                            </td>
+            <div id="resumenSeleccion" style="margin-top: 8px; font-size: 12px; color: #4b4b4b;">
+                Filas seleccionadas: <span id="numFilasSeleccionadas">0</span>
+            </div>
+        <input type="hidden" name="texto-anterior" id="texto-anterior" value="<%=descriptor.getDescripcion("anterior")%>">
+                        <th field="codOrganizacion" datatype="String"  class="selectedUp" rowspan="1" colspna="1" >Cod OrganizaciÃ³n</th>
                         <th field="ejercicioHHFF" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Ejercicio</th>
                         <th field="procedimientoHHFF" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Procedimiento</th>
                         <th field="estadoExpediente" datatype="String"  class="selectedUp" rowspan="1" colspna="1" >Estado Expediente</th>
@@ -145,14 +155,14 @@
                         <th field="fechaAhoraEnvioPeticion" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Fecha Envio</th>
                         <th field="codigoEstadoSecundario" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Codigo Estado Secundario</th>
                         <th field="estado" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Estado</th>
-                        <th field="descripcionEstado" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Descripción Estado</th>
+                        <th field="descripcionEstado" datatype="String" class="selectedUp" rowspan="1" colspna="1" >DescripciÃ³n Estado</th>
                         <th field="resultado" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Resultado</th>
                         <th field="textoJsonDatosRecibidos" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Datos Recibidos</th>
                         <th field="documentoInteresado" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Documento Interesado</th>
                         <th field="tiempoEstimadoRespuesta" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Tiempo Estimado Respuesta</th>
                         <th field="territorioHistorico" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Territorio Historico</th>
                         <th field="observaciones" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Observaciones</th>
-                        <th field="idPeticionPadre" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Id Petición Padre</th>
+                        <th field="idPeticionPadre" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Id PeticiÃ³n Padre</th>
                         <th field="fkwsSolicitado" datatype="String" class="selectedUp" rowspan="1" colspna="1" >FKWS Solicitado</th>
                     </tr>
                 </thead>

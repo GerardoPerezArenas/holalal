@@ -134,6 +134,9 @@
             <table class="xTabla compact tablaDatos" id="tableLog">
                 <thead>
                     <tr role="row">
+                        <th field="seleccion" datatype="String" class="selectedUp" rowspan="1" colspna="1">
+                            <input type="checkbox" id="check-todas-filas" title="Seleccionar todas las filas visibles" />
+                        </th>
                         <th field="ejercicio" datatype="String" class="selectedUp" rowspan="1" colspna="1" ><%=meLanbide09I18n.getMensaje(idiomaUsuario, "tabla.titulo.ejercicio")%></th>
                         <th field="procedimiento" datatype="String" class="selectedUp" rowspan="1" colspna="1" ><%=meLanbide09I18n.getMensaje(idiomaUsuario, "tabla.titulo.procedimiento")%></th>
                         <th field="numExpediente" datatype="String"  class="selectedUp" rowspan="1" colspna="1" ><%=meLanbide09I18n.getMensaje(idiomaUsuario, "tabla.titulo.numero")%></th>
@@ -145,19 +148,26 @@
                 <tbody>
                     <c:forEach items="${lstInteropLlamadas}" var="elementLista" varStatus="contador">
                         <tr value="<c:out value="${elementLista.id}"/>">
+                            <td align="center" valign="middle">
+                                <input type="checkbox" class="check-fila" />
+                            </td>
                             <td align="left" valign="middle"><c:out value="${elementLista.ejercicio}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.procedimiento}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.numExpediente}" /></td>
-                            <td align="left" valign="middle"><c:out value="${elementLista.desTramite}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.fechaRegistrado}" /></td>
+                            <td align="left" valign="middle"><c:out value="${elementLista.desTramite}" /></td>
                             
                            </tr>
                     </c:forEach>
                 </tbody>
             </table>
+            <div id="resumenSeleccion" style="margin-top: 8px; font-size: 12px; color: #4b4b4b;">
+                Filas seleccionadas: <span id="numFilasSeleccionadas">0</span>
+            </div>
         </div>
         <!-- Campos Ocultos con texto por idioma -->
         <input type="hidden" name="texto-buscar" id="texto-buscar" value="<%=descriptor.getDescripcion("buscar")%>">
+        <input type="hidden" name="texto-anterior" id="texto-anterior" value="<%=descriptor.getDescripcion("anterior")%>">
         <input type="hidden" name="texto-siguiente" id="texto-siguiente" value="<%=descriptor.getDescripcion("siguiente")%>">
         <input type="hidden" name="texto-mosFilasPag" id="texto-mosFilasPag" value="<%=descriptor.getDescripcion("mosFilasPag")%>">
         <input type="hidden" name="texto-msgNoResultBusq" id="texto-msgNoResultBusq" value="<%=descriptor.getDescripcion("msgNoResultBusq")%>">

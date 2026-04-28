@@ -22,12 +22,16 @@ var parametrosLlamada = {
         , documentoInteresado: null
     };
  var urlBaseLlamada = APP_CONTEXT_PATH + "/PeticionModuloIntegracion.do";
- var tableLog;   
+ var tableLog;
+ var seleccionadas = [];
+ var seleccionadasMap = {};
     
 $(document).ready(function() {
     
     var datosParameter = $.extend({}, parametrosLlamada);
     datosParameter.operacion = "cargarPantallaLogServiciosNISAEFiltros";
+    registrarEventosSeleccion();
+    actualizarResumenSeleccion();
     tableLog = $('#tableLog').DataTable({
         "serverSide": true,
         "ordering": false,
@@ -46,6 +50,9 @@ $(document).ready(function() {
             "info": $("#texto-mosPagDePags").val(),
             "infoEmpty": $("#texto-noRegDisp").val(),
             "infoFiltered": $("#texto-filtrDeTotal").val()
+        },
+        "drawCallback": function () {
+            rehidratarSeleccionEnTabla();
         },
         "ajax": {
             "url": urlBaseLlamada,
@@ -82,6 +89,7 @@ $(document).ready(function() {
                             idPeticionPadre: data[i].idPeticionPadre,
                             fkWSSolicitado: data[i].fkWSSolicitado
                         };
+                        row.claveSeleccion = construirClaveFila(row);
                         all.push(row);
                     }
                     pleaseWait('off');
@@ -90,6 +98,11 @@ $(document).ready(function() {
             }
         },
         "columns": [
+            {"data": "claveSeleccion", "orderable": false, "searchable": false, "width": "30px",
+             "render": function (data, type, row) {
+                var checked = seleccionadasMap[data] ? " checked=\"checked\"" : "";
+                return "<input type=\"checkbox\" class=\"check-fila\" data-clave=\"" + data + "\"" + checked + " />";
+             }},
             {"data": "id"},
             {"data": "codOrganizacion"},
             {"data": "ejercicioHHFF"},
@@ -115,6 +128,122 @@ $(document).ready(function() {
     });
 });
 
+function construirClaveFila(row) {
+    if (row && row.id !== undefined && row.id !== null && row.id !== "") {
+        return String(row.id);
+    }
+    return "";
+}
+
+function actualizarResumenSeleccion() {
+    $("#numFilasSeleccionadas").text(seleccionadas.length);
+}
+
+function eliminarSeleccionada(clave) {
+    var nuevasSeleccionadas = [];
+    for (var i = 0; i < seleccionadas.length; i++) {
+        if (seleccionadas[i] !== clave) {
+            nuevasSeleccionadas.push(seleccionadas[i]);
+        }
+    }
+    seleccionadas = nuevasSeleccionadas;
+    actualizarResumenSeleccion();
+}
+
+function limpiarSeleccionadas() {
+    seleccionadas = [];
+    seleccionadasMap = {};
+    $("#check-todas-filas").prop("checked", false);
+    actualizarResumenSeleccion();
+}
+
+function sincronizarCheckboxCabecera() {
+    var checkboxesVisibles = $('#tableLog tbody .check-fila:visible');
+    if (checkboxesVisibles.length === 0) {
+        $("#check-todas-filas").prop("checked", false);
+        return;
+    }
+
+    var todosMarcados = true;
+    checkboxesVisibles.each(function () {
+        if (!$(this).is(":checked")) {
+            todosMarcados = false;
+            return false;
+        }
+    });
+    $("#check-todas-filas").prop("checked", todosMarcados);
+}
+
+function rehidratarSeleccionEnTabla() {
+    if (!tableLog) {
+        return;
+    }
+    $('#tableLog tbody tr').each(function () {
+        var rowData = tableLog.row(this).data();
+        var $checkbox = $(this).find(".check-fila");
+        if ($checkbox.length === 0 || !rowData) {
+            return;
+        }
+        var clave = rowData.claveSeleccion ? rowData.claveSeleccion : construirClaveFila(rowData);
+        if (!clave) {
+            return;
+        }
+        $checkbox.attr("data-clave", clave).prop("checked", !!seleccionadasMap[clave]);
+    });
+    sincronizarCheckboxCabecera();
+}
+
+function registrarEventosSeleccion() {
+    $(document).off("click", "#tableLog .check-fila").on("click", "#tableLog .check-fila", function () {
+        var clave = $(this).attr("data-clave");
+        if (!clave) {
+            var rowData = tableLog.row($(this).closest("tr")).data();
+            clave = rowData && rowData.claveSeleccion ? rowData.claveSeleccion : construirClaveFila(rowData);
+            $(this).attr("data-clave", clave);
+        }
+        if (!clave) {
+            return;
+        }
+        if ($(this).is(":checked")) {
+            if (!seleccionadasMap[clave]) {
+                seleccionadasMap[clave] = true;
+                seleccionadas.push(clave);
+                actualizarResumenSeleccion();
+            }
+        } else if (seleccionadasMap[clave]) {
+            delete seleccionadasMap[clave];
+            eliminarSeleccionada(clave);
+        }
+        sincronizarCheckboxCabecera();
+    });
+
+    $(document).off("click", "#check-todas-filas").on("click", "#check-todas-filas", function () {
+        var marcar = $(this).is(":checked");
+        $('#tableLog tbody .check-fila:visible').each(function () {
+            var clave = $(this).attr("data-clave");
+            if (!clave) {
+                var rowData = tableLog.row($(this).closest("tr")).data();
+                clave = rowData && rowData.claveSeleccion ? rowData.claveSeleccion : construirClaveFila(rowData);
+                $(this).attr("data-clave", clave);
+            }
+            if (!clave) {
+                return;
+            }
+            $(this).prop("checked", marcar);
+            if (marcar) {
+                if (!seleccionadasMap[clave]) {
+                    seleccionadasMap[clave] = true;
+                    seleccionadas.push(clave);
+                    actualizarResumenSeleccion();
+                }
+            } else if (seleccionadasMap[clave]) {
+                delete seleccionadasMap[clave];
+                eliminarSeleccionada(clave);
+            }
+        });
+    });
+}
+
 //Function filtrar
 function lanzarProcesoFiltroTablaLog() {
     var datosParameter = $.extend({}, parametrosLlamada);
@@ -131,6 +260,7 @@ function lanzarProcesoFiltroTablaLog() {
     datosParameter.documentoInteresado = $("#documentoInteresado").val();
     if (datosParameter.fechaEnvioPeticion === "" || validarFecha(datosParameter.fechaEnvioPeticion)) {
 
+        limpiarSeleccionadas();
         tableLog.destroy();
         datosParameter.operacion = "cargarPantallaLogServiciosNISAEFiltros";
         tableLog = $('#tableLog').DataTable({
@@ -150,6 +280,9 @@ function lanzarProcesoFiltroTablaLog() {
                 "info": $("#texto-mosPagDePags").val(),
                 "infoEmpty": $("#texto-noRegDisp").val(),
                 "infoFiltered": $("#texto-filtrDeTotal").val()
+            },
+            "drawCallback": function () {
+                rehidratarSeleccionEnTabla();
             },
             "ajax": {
                 "url": urlBaseLlamada,
@@ -186,6 +319,7 @@ function lanzarProcesoFiltroTablaLog() {
                                 idPeticionPadre: data[i].idPeticionPadre,
                                 fkWSSolicitado: data[i].fkWSSolicitado
                             };
+                            row.claveSeleccion = construirClaveFila(row);
                             all.push(row);
                         }
                         pleaseWait('off');
@@ -194,6 +328,11 @@ function lanzarProcesoFiltroTablaLog() {
                 }
             },
             "columns": [
+                {"data": "claveSeleccion", "orderable": false, "searchable": false, "width": "30px",
+                 "render": function (data, type, row) {
+                    var checked = seleccionadasMap[data] ? " checked=\"checked\"" : "";
+                    return "<input type=\"checkbox\" class=\"check-fila\" data-clave=\"" + data + "\"" + checked + " />";
+                 }},
                 {"data": "id"},
                 {"data": "codOrganizacion"},
                 {"data": "ejercicioHHFF"},
@@ -224,6 +363,10 @@ function lanzarProcesoFiltroTablaLog() {
 
 //Function exportar
 function lanzarProcesoExportarTablaLog() {
+    if (seleccionadas.length === 0) {
+        alert("Debe seleccionar al menos una fila para exportar.");
+        return;
+    }
     pleaseWait('on');
     var datosParameter = $.extend({}, parametrosLlamada);
     datosParameter.operacion = "exportarLogServiciosNISAEFiltros";
@@ -238,6 +381,7 @@ function lanzarProcesoExportarTablaLog() {
     datosParameter.estado = $("#estado").val();
     datosParameter.resultado = $("#resultado").val();
     datosParameter.documentoInteresado = $("#documentoInteresado").val();
+    datosParameter.idsSeleccionados = seleccionadas.join(",");
     if (datosParameter.fechaEnvioPeticion === "" || validarFecha(datosParameter.fechaEnvioPeticion)) {
         window.location.href = urlBaseLlamada +  "?" + $.param(datosParameter);
     } else {
@@ -260,4 +404,3 @@ function numeroEntero(e) {
     }
     return false;
 }
-
