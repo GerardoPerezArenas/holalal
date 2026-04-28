@@ -126,7 +126,7 @@
             <button type="button" id="filtrar" class="btn btn-primary" onclick="lanzarProcesoFiltroTablaLog();"><%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "resultado.button.filtrar")%></button>
             <!--BOTON Exportar-->
             <button type="button" id="exportar" class="btn btn-primary" onclick="lanzarProcesoExportarTablaLog();"><%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "resultado.button.exportar")%></button>
-            <button type="button" id="exportarPdf" class="btn btn-primary" onclick="lanzarProcesoExportarPdfSeleccion();">Generar PDF seleccionadas</button>
+            <button type="button" id="exportarPdf" class="btn btn-primary" style="margin-left: 6px;" onclick="lanzarProcesoExportarPdfSeleccion();">Generar PDF seleccionadas</button>
     </div>         
     <div>
         <!--TABLA -->
@@ -163,6 +163,7 @@
                 <tbody>
                     <c:forEach items="${lstInteropLlamadas}" var="elementLista" varStatus="contador">
                         <tr value="<c:out value="${elementLista.id}"/>">
+                            <td align="center" valign="middle"><input type="checkbox" class="check-fila" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.id}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.codOrganizacion}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.ejercicioHHFF}" /></td>
