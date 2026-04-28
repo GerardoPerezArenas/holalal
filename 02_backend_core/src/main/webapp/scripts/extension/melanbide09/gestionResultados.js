@@ -23,7 +23,8 @@ var parametrosLlamada = {
     };
  var urlBaseLlamada = APP_CONTEXT_PATH + "/PeticionModuloIntegracion.do";
  var tableLog;   
- var comboTramite;   
+ var comboTramite;
+ var seleccionadas = [];
     
    $(document).ready(function() {
     //Ocultamos la tabla
@@ -39,8 +40,28 @@ var parametrosLlamada = {
     $("#tablaLog").attr("hidden",true);
    comboTramite = document.getElementById("listaTramite");
   // comboTramite.deactivate(); 
+   inicializarSeleccionTabla();
    
    });
+
+function inicializarSeleccionTabla() {
+    $('#tableLog tbody').off('click', 'tr').on('click', 'tr', function () {
+        var identificador = $(this).attr('data-id') || $(this).attr('value');
+
+        if (!identificador) {
+            return;
+        }
+
+        var index = $.inArray(identificador, seleccionadas);
+        if (index === -1) {
+            seleccionadas.push(identificador);
+            $(this).addClass('selected');
+        } else {
+            seleccionadas.splice(index, 1);
+            $(this).removeClass('selected');
+        }
+    });
+}
 
  function cargarDesplegableTramites(){
          var datosParameter = $.extend({}, parametrosLlamada);
@@ -133,11 +154,13 @@ function lanzarProcesoFiltroTablaLog() {
                     pleaseWait('on');
                 },
                 "dataSrc": function (response) {
+                    seleccionadas = [];
                     var data = response.lstRegistros;
                     if (data !== null) {
                         var all = [];
                         for (var i = 0; i < data.length; i++) {
                             var row = {
+                            id: data[i].id,
                             ejercicio: data[i].ejercicio,
                             procedimiento: data[i].procedimiento,
                             numExpediente: data[i].numExpediente,
@@ -152,7 +175,13 @@ function lanzarProcesoFiltroTablaLog() {
                     }
                 }
             },
+            "createdRow": function (row, data) {
+                if (data && data.id) {
+                    $(row).attr('data-id', data.id);
+                }
+            },
             "columns": [
+            {"data": "id", "visible": false},
             {"data": "ejercicio"},
             {"data": "procedimiento"},
             {"data": "numExpediente"},
@@ -160,9 +189,89 @@ function lanzarProcesoFiltroTablaLog() {
             {"data": "desTramite"}
             ]
         });
+        inicializarSeleccionTabla();
     } else {
         alert("Fecha con formato no valido");
     }
+}
+
+function mostrarMensajeControlado(mensaje) {
+    if (!mensaje) {
+        return;
+    }
+
+    var contenedor = $("#mensajesResultado");
+    if (contenedor.length) {
+        contenedor.text(mensaje).show();
+    } else if (typeof jsp_alerta === "function") {
+        jsp_alerta('A', mensaje);
+    } else {
+        alert(mensaje);
+    }
+}
+
+function ocultarMensajeControlado() {
+    $("#mensajesResultado").hide().text('');
+}
+
+function generarPdfSeleccion() {
+    ocultarMensajeControlado();
+
+    if (!seleccionadas || seleccionadas.length === 0) {
+        mostrarMensajeControlado($("#texto-error-seleccion-vacia").val());
+        return;
+    }
+
+    var formId = "formGenerarPdfResultados";
+    var iframeId = "iframeGenerarPdfResultados";
+    var action = APP_CONTEXT_PATH + "/PeticionModuloIntegracion.do";
+
+    $("#" + formId + ", #" + iframeId).remove();
+
+    var iframe = $('<iframe>', {
+        id: iframeId,
+        name: iframeId,
+        style: 'display:none;'
+    });
+
+    $('body').append(iframe);
+
+    iframe.on('load', function () {
+        try {
+            var iframeDocument = this.contentDocument || this.contentWindow.document;
+            var contenido = "";
+            if (iframeDocument && iframeDocument.body) {
+                contenido = $.trim($(iframeDocument.body).text());
+            }
+
+            if (contenido && contenido.length > 0) {
+                mostrarMensajeControlado(contenido);
+            }
+        } catch (e) {
+            mostrarMensajeControlado($("#texto-error-generar-pdf").val());
+        }
+    });
+
+    var form = $('<form>', {
+        id: formId,
+        method: 'POST',
+        action: action,
+        target: iframeId,
+        style: 'display:none;'
+    });
+
+    form.append($('<input>', {type: 'hidden', name: 'tarea', value: 'preparar'}));
+    form.append($('<input>', {type: 'hidden', name: 'modulo', value: 'MELANBIDE09'}));
+    form.append($('<input>', {type: 'hidden', name: 'operacion', value: 'generarPdfResultadosSeleccionados'}));
+    form.append($('<input>', {type: 'hidden', name: 'tipo', value: '0'}));
+    form.append($('<input>', {type: 'hidden', name: 'control', value: new Date().getTime()}));
+
+    for (var i = 0; i < seleccionadas.length; i++) {
+        form.append($('<input>', {type: 'hidden', name: 'identificadoresFilas', value: seleccionadas[i]}));
+    }
+
+    $('body').append(form);
+    form.submit();
 }
 //Funcion validar fecha
 function validarFecha(fecha) {
@@ -178,4 +287,3 @@ function numeroEntero(e) {
     }
     return false;
 }
-
