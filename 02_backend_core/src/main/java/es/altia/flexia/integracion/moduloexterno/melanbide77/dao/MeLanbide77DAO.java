@@ -13,6 +13,7 @@ import es.altia.flexia.integracion.moduloexterno.melanbide77.vo.RegistroBatchVO;
 import es.altia.flexia.integracion.moduloexterno.melanbide77.vo.SolicitudAerteVO;
 import es.altia.webservice.client.tramitacion.ws.wto.InteresadoExpedienteVO;
 import es.altia.webservice.client.tramitacion.ws.wto.TerceroVO;
+import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -242,6 +243,38 @@ public class MeLanbide77DAO {
                 throw new Exception(e);
             }
         }
+    }
+
+
+    public String[] asociarExpedienteRegistroBBDD(int ejercicioRegistro, int numeroRegistro, String numeroExpediente, Connection con) throws Exception {
+        log.info(" BEGIN asociarExpedienteRegistroBBDD " );
+        CallableStatement st = null;
+        String[] salida = new String[]{"KO", "No se ha ejecutado el procedure asociarexpregistro"};
+        try {
+            String query = "call asociarexpregistro(?,?,?,?,?)";
+            if (log.isDebugEnabled()) {
+                log.debug("sql = " + query);
+            }
+            st = con.prepareCall(query);
+            st.setInt("ejercicio", ejercicioRegistro);
+            st.setInt("numregistro", numeroRegistro);
+            st.setString("numexpediente", numeroExpediente);
+            st.registerOutParameter("resultado", java.sql.Types.VARCHAR);
+            st.registerOutParameter("mensaje", java.sql.Types.VARCHAR);
+            st.executeUpdate();
+
+            salida[0] = st.getString("resultado");
+            salida[1] = st.getString("mensaje");
+        } catch (Exception ex) {
+            log.error("Se ha producido un error en asociarExpedienteRegistroBBDD", ex);
+            throw new Exception(ex);
+        } finally {
+            log.debug(" END asociarExpedienteRegistroBBDD  " );
+            if (st != null) {
+                st.close();
+            }
+        }
+        return salida;
     }
 
     public String getTipoCampo(int codOrg, String codProc, String codCampo, Connection con) throws Exception {
@@ -540,7 +573,7 @@ public class MeLanbide77DAO {
             rs = st.executeQuery(query);
             if (rs.next()) {
                 codtra = rs.getInt("CRO_TRA");
-                log.debug("Código trámite:" + codtra);
+                log.debug("CÃ³digo trÃ¡mite:" + codtra);
             }
         } catch (Exception ex) {
             log.debug("Se ha producido un error en buscarTramite" + " - " + ex.getMessage() + ex);
@@ -805,7 +838,7 @@ public class MeLanbide77DAO {
                 log.debug("tramite :" + nombre);
             }
         } catch (Exception ex) {
-            log.error("Se ha producido un error al recuperar el nombre del trámite - " + ex.getMessage() + ex);
+            log.error("Se ha producido un error al recuperar el nombre del trÃ¡mite - " + ex.getMessage() + ex);
             throw new Exception(ex);
         } finally {
             try {
@@ -895,7 +928,7 @@ public class MeLanbide77DAO {
                 codDomicilio = rs.getInt("CODIGO");
             }
         } catch (SQLException ex) {
-            log.error("Se ha producido un error al recuperar el código del domicilio del tercero - " + ex.getMessage() + ex);
+            log.error("Se ha producido un error al recuperar el cÃ³digo del domicilio del tercero - " + ex.getMessage() + ex);
             throw new SQLException(ex);
         } finally {
             try {
