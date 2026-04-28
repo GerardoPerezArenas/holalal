@@ -132,6 +132,9 @@
             <table class="xTabla compact tablaDatos" id="tableLog">
                 <thead>
                     <tr role="row">
+                        <th field="seleccion" datatype="String" class="selectedUp" rowspan="1" colspna="1">
+                            <input type="checkbox" id="check-todas-filas" title="Seleccionar todas las filas visibles" />
+                        </th>
                         <th field="ejercicio" datatype="String" class="selectedUp" rowspan="1" colspna="1" ><%=meLanbide09I18n.getMensaje(idiomaUsuario, "tabla.titulo.ejercicio")%></th>
                         <th field="procedimiento" datatype="String" class="selectedUp" rowspan="1" colspna="1" ><%=meLanbide09I18n.getMensaje(idiomaUsuario, "tabla.titulo.procedimiento")%></th>
                         <th field="numExpediente" datatype="String"  class="selectedUp" rowspan="1" colspna="1" ><%=meLanbide09I18n.getMensaje(idiomaUsuario, "tabla.titulo.numero")%></th>
@@ -143,6 +146,9 @@
                 <tbody>
                     <c:forEach items="${lstInteropLlamadas}" var="elementLista" varStatus="contador">
                         <tr value="<c:out value="${elementLista.id}"/>">
+                            <td align="center" valign="middle">
+                                <input type="checkbox" class="check-fila" />
+                            </td>
                             <td align="left" valign="middle"><c:out value="${elementLista.ejercicio}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.procedimiento}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.numExpediente}" /></td>
@@ -164,4 +170,3 @@
         <input type="hidden" name="texto-filtrDeTotal" id="texto-filtrDeTotal" value="<%=descriptor.getDescripcion("filtrDeTotal")%>">
     </div>
 </div>
-
