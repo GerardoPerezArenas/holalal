@@ -152,8 +152,8 @@
                             <td align="left" valign="middle"><c:out value="${elementLista.ejercicio}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.procedimiento}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.numExpediente}" /></td>
-                            <td align="left" valign="middle"><c:out value="${elementLista.desTramite}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.fechaRegistrado}" /></td>
+                            <td align="left" valign="middle"><c:out value="${elementLista.desTramite}" /></td>
                             
                            </tr>
                     </c:forEach>
@@ -165,6 +165,7 @@
         </div>
         <!-- Campos Ocultos con texto por idioma -->
         <input type="hidden" name="texto-buscar" id="texto-buscar" value="<%=descriptor.getDescripcion("buscar")%>">
+        <input type="hidden" name="texto-anterior" id="texto-anterior" value="<%=descriptor.getDescripcion("anterior")%>">
         <input type="hidden" name="texto-siguiente" id="texto-siguiente" value="<%=descriptor.getDescripcion("siguiente")%>">
         <input type="hidden" name="texto-mosFilasPag" id="texto-mosFilasPag" value="<%=descriptor.getDescripcion("mosFilasPag")%>">
         <input type="hidden" name="texto-msgNoResultBusq" id="texto-msgNoResultBusq" value="<%=descriptor.getDescripcion("msgNoResultBusq")%>">

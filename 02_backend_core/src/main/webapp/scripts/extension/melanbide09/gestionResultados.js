@@ -366,7 +366,7 @@ function lanzarProcesoFiltroTablaLog() {
                             if (data[i].fechaRegistrado) {
                                 var trozosFecha = data[i].fechaRegistrado.split(" ");
                                 if (trozosFecha.length > 1) {
-                                    fechaRegistrado = trozosFecha[0] + trozosFecha[1];
+                                    fechaRegistrado = trozosFecha[0] + " " + trozosFecha[1];
                                 } else {
                                     fechaRegistrado = data[i].fechaRegistrado;
                                 }
