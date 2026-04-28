@@ -25,6 +25,7 @@ var parametrosLlamada = {
  var tableLog;
  var seleccionadas = [];
  var seleccionadasMap = {};
+ var seleccionadasDataMap = {};
     
 $(document).ready(function() {
     
@@ -153,8 +154,33 @@ function eliminarSeleccionada(clave) {
 function limpiarSeleccionadas() {
     seleccionadas = [];
     seleccionadasMap = {};
+    seleccionadasDataMap = {};
     $("#check-todas-filas").prop("checked", false);
     actualizarResumenSeleccion();
+}
+
+function copiarDatosFila(rowData) {
+    if (!rowData) {
+        return null;
+    }
+    return {
+        id: rowData.id || "",
+        codOrganizacion: rowData.codOrganizacion || "",
+        ejercicioHHFF: rowData.ejercicioHHFF || "",
+        procedimientoHHFF: rowData.procedimientoHHFF || "",
+        estadoExpediente: rowData.estadoExpediente || "",
+        numeroExpedienteDesde: rowData.numeroExpedienteDesde || "",
+        numeroExpedienteHasta: rowData.numeroExpedienteHasta || "",
+        numeroExpediente: rowData.numeroExpediente || "",
+        fechaHoraEnvioPeticion: rowData.fechaHoraEnvioPeticion || "",
+        estado: rowData.estado || "",
+        descripcionEstado: rowData.descripcionEstado || "",
+        resultado: rowData.resultado || "",
+        documentoInteresado: rowData.documentoInteresado || "",
+        tiempoEstimadoRespuesta: rowData.tiempoEstimadoRespuesta || "",
+        territorioHistorico: rowData.territorioHistorico || "",
+        observaciones: rowData.observaciones || ""
+    };
 }
 
 function sincronizarCheckboxCabecera() {
@@ -196,8 +222,8 @@ function rehidratarSeleccionEnTabla() {
 function registrarEventosSeleccion() {
     $(document).off("click", "#tableLog .check-fila").on("click", "#tableLog .check-fila", function () {
         var clave = $(this).attr("data-clave");
+        var rowData = tableLog.row($(this).closest("tr")).data();
         if (!clave) {
-            var rowData = tableLog.row($(this).closest("tr")).data();
             clave = rowData && rowData.claveSeleccion ? rowData.claveSeleccion : construirClaveFila(rowData);
             $(this).attr("data-clave", clave);
         }
@@ -208,10 +234,12 @@ function registrarEventosSeleccion() {
             if (!seleccionadasMap[clave]) {
                 seleccionadasMap[clave] = true;
                 seleccionadas.push(clave);
+                seleccionadasDataMap[clave] = copiarDatosFila(rowData);
                 actualizarResumenSeleccion();
             }
         } else if (seleccionadasMap[clave]) {
             delete seleccionadasMap[clave];
+            delete seleccionadasDataMap[clave];
             eliminarSeleccionada(clave);
         }
         sincronizarCheckboxCabecera();
@@ -221,8 +249,8 @@ function registrarEventosSeleccion() {
         var marcar = $(this).is(":checked");
         $('#tableLog tbody .check-fila:visible').each(function () {
             var clave = $(this).attr("data-clave");
+            var rowData = tableLog.row($(this).closest("tr")).data();
             if (!clave) {
-                var rowData = tableLog.row($(this).closest("tr")).data();
                 clave = rowData && rowData.claveSeleccion ? rowData.claveSeleccion : construirClaveFila(rowData);
                 $(this).attr("data-clave", clave);
             }
@@ -234,14 +262,95 @@ function registrarEventosSeleccion() {
                 if (!seleccionadasMap[clave]) {
                     seleccionadasMap[clave] = true;
                     seleccionadas.push(clave);
+                    seleccionadasDataMap[clave] = copiarDatosFila(rowData);
                     actualizarResumenSeleccion();
                 }
             } else if (seleccionadasMap[clave]) {
                 delete seleccionadasMap[clave];
+                delete seleccionadasDataMap[clave];
                 eliminarSeleccionada(clave);
             }
         });
     });
+}
+
+function escaparHtml(valor) {
+    var texto = valor === null || valor === undefined ? "" : String(valor);
+    return texto.replace(/&/g, "&amp;")
+               .replace(/</g, "&lt;")
+               .replace(/>/g, "&gt;")
+               .replace(/\"/g, "&quot;")
+               .replace(/'/g, "&#39;");
+}
+
+function lanzarProcesoExportarPdfSeleccion() {
+    if (seleccionadas.length === 0) {
+        alert("Debe seleccionar al menos una fila para generar el PDF.");
+        return;
+    }
+
+    var filas = [];
+    for (var i = 0; i < seleccionadas.length; i++) {
+        var clave = seleccionadas[i];
+        if (seleccionadasDataMap[clave]) {
+            filas.push(seleccionadasDataMap[clave]);
+        }
+    }
+
+    if (filas.length === 0) {
+        alert("No hay datos disponibles para las filas seleccionadas. Vuelva a cargar las filas y reintente.");
+        return;
+    }
+
+    var html = "";
+    html += "<html><head><title>Log resultados NISAE</title>";
+    html += "<style>body{font-family:Arial,sans-serif;font-size:11px;}";
+    html += "h2{margin-bottom:10px;}table{width:100%;border-collapse:collapse;}";
+    html += "th,td{border:1px solid #555;padding:4px;vertical-align:top;}th{background:#efefef;}";
+    html += "</style></head><body>";
+    html += "<h2>Log resultados NISAE - Filas seleccionadas</h2>";
+    html += "<table><thead><tr>";
+    html += "<th>ID</th><th>Cod Organización</th><th>Ejercicio</th><th>Procedimiento</th>";
+    html += "<th>Estado Expediente</th><th>Nº Exp. Desde</th><th>Nº Exp. Hasta</th><th>Nº Expediente</th>";
+    html += "<th>Fecha Envío</th><th>Estado</th><th>Descripción Estado</th><th>Resultado</th>";
+    html += "<th>Documento Interesado</th><th>Tiempo Estimado</th><th>Territorio Histórico</th><th>Observaciones</th>";
+    html += "</tr></thead><tbody>";
+
+    for (var j = 0; j < filas.length; j++) {
+        var fila = filas[j];
+        html += "<tr>";
+        html += "<td>" + escaparHtml(fila.id) + "</td>";
+        html += "<td>" + escaparHtml(fila.codOrganizacion) + "</td>";
+        html += "<td>" + escaparHtml(fila.ejercicioHHFF) + "</td>";
+        html += "<td>" + escaparHtml(fila.procedimientoHHFF) + "</td>";
+        html += "<td>" + escaparHtml(fila.estadoExpediente) + "</td>";
+        html += "<td>" + escaparHtml(fila.numeroExpedienteDesde) + "</td>";
+        html += "<td>" + escaparHtml(fila.numeroExpedienteHasta) + "</td>";
+        html += "<td>" + escaparHtml(fila.numeroExpediente) + "</td>";
+        html += "<td>" + escaparHtml(fila.fechaHoraEnvioPeticion) + "</td>";
+        html += "<td>" + escaparHtml(fila.estado) + "</td>";
+        html += "<td>" + escaparHtml(fila.descripcionEstado) + "</td>";
+        html += "<td>" + escaparHtml(fila.resultado) + "</td>";
+        html += "<td>" + escaparHtml(fila.documentoInteresado) + "</td>";
+        html += "<td>" + escaparHtml(fila.tiempoEstimadoRespuesta) + "</td>";
+        html += "<td>" + escaparHtml(fila.territorioHistorico) + "</td>";
+        html += "<td>" + escaparHtml(fila.observaciones) + "</td>";
+        html += "</tr>";
+    }
+
+    html += "</tbody></table></body></html>";
+
+    var ventanaPdf = window.open("", "_blank");
+    if (!ventanaPdf) {
+        alert("No se ha podido abrir la ventana de impresión. Revise el bloqueador de popups.");
+        return;
+    }
+
+    ventanaPdf.document.open();
+    ventanaPdf.document.write(html);
+    ventanaPdf.document.close();
+    ventanaPdf.focus();
+    ventanaPdf.print();
 }
 
 //Function filtrar

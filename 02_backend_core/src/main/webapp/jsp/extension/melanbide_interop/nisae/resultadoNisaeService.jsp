@@ -85,7 +85,7 @@
                                 <option value=""><%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "label.select.option.default")%></option>
                                 <c:forEach items="${listaWebServices}" var="elementLista" varStatus="contador">
                                     <option value="<c:out value="${elementLista.id}"/>" title="<c:out value="${elementLista.valor}"/>"><c:out value="${elementLista.valor}"/></option>
-                                </c:forEach>c
+                                </c:forEach>
                             </select>
                         </div>
             <!--ESTADOEXPEDIENTE-->
@@ -125,7 +125,8 @@
             <!--BOTON FILTRAR-->
             <button type="button" id="filtrar" class="btn btn-primary" onclick="lanzarProcesoFiltroTablaLog();"><%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "resultado.button.filtrar")%></button>
             <!--BOTON Exportar-->
-            <button type="button" id="exportar" class="btn btn-primary" onclick="lanzarProcesoExportarTablaLog();"><%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "resultado.button.exportar")%></button>            
+            <button type="button" id="exportar" class="btn btn-primary" onclick="lanzarProcesoExportarTablaLog();"><%=meLanbideInteropI18n.getMensaje(idiomaUsuario, "resultado.button.exportar")%></button>
+            <button type="button" id="exportarPdf" class="btn btn-primary" style="margin-left: 6px;" onclick="lanzarProcesoExportarPdfSeleccion();">Generar PDF seleccionadas</button>
     </div>         
     <div>
         <!--TABLA -->
@@ -137,13 +138,6 @@
                             <input type="checkbox" id="check-todas-filas" title="Seleccionar todas las filas visibles" />
                         </th>
                         <th field="id" datatype="String" class="selectedUp" rowspan="1" colspna="1" >ID</th>
-                            <td align="center" valign="middle">
-                                <input type="checkbox" class="check-fila" />
-                            </td>
-            <div id="resumenSeleccion" style="margin-top: 8px; font-size: 12px; color: #4b4b4b;">
-                Filas seleccionadas: <span id="numFilasSeleccionadas">0</span>
-            </div>
-        <input type="hidden" name="texto-anterior" id="texto-anterior" value="<%=descriptor.getDescripcion("anterior")%>">
                         <th field="codOrganizacion" datatype="String"  class="selectedUp" rowspan="1" colspna="1" >Cod Organización</th>
                         <th field="ejercicioHHFF" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Ejercicio</th>
                         <th field="procedimientoHHFF" datatype="String" class="selectedUp" rowspan="1" colspna="1" >Procedimiento</th>
@@ -169,6 +163,7 @@
                 <tbody>
                     <c:forEach items="${lstInteropLlamadas}" var="elementLista" varStatus="contador">
                         <tr value="<c:out value="${elementLista.id}"/>">
+                            <td align="center" valign="middle"><input type="checkbox" class="check-fila" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.id}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.codOrganizacion}" /></td>
                             <td align="left" valign="middle"><c:out value="${elementLista.ejercicioHHFF}" /></td>
@@ -194,8 +189,12 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <div id="resumenSeleccion" style="margin-top: 8px; font-size: 12px; color: #4b4b4b;">
+                Filas seleccionadas: <span id="numFilasSeleccionadas">0</span>
+            </div>
         </div>
         <!-- Campos Ocultos con texto por idioma -->
+        <input type="hidden" name="texto-anterior" id="texto-anterior" value="<%=descriptor.getDescripcion("anterior")%>">
         <input type="hidden" name="texto-buscar" id="texto-buscar" value="<%=descriptor.getDescripcion("buscar")%>">
         <input type="hidden" name="texto-siguiente" id="texto-siguiente" value="<%=descriptor.getDescripcion("siguiente")%>">
         <input type="hidden" name="texto-mosFilasPag" id="texto-mosFilasPag" value="<%=descriptor.getDescripcion("mosFilasPag")%>">
@@ -205,4 +204,3 @@
         <input type="hidden" name="texto-filtrDeTotal" id="texto-filtrDeTotal" value="<%=descriptor.getDescripcion("filtrDeTotal")%>">
     </div>
 </div>
-
