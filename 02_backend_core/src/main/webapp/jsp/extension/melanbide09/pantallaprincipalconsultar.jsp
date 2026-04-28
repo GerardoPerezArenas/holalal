@@ -125,7 +125,9 @@
             
             <!--BOTON FILTRAR-->
             <button type="button" id="filtrar" class="btn btn-primary" onclick="lanzarProcesoFiltroTablaLog();"><%=meLanbide09I18n.getMensaje(idiomaUsuario, "resultado.button.filtrar")%></button>
+            <button type="button" id="generarPdf" class="btn btn-secondary" onclick="generarPdfSeleccion();"><%=meLanbide09I18n.getMensaje(idiomaUsuario, "resultado.button.generarpdf")%></button>
             </div>         
+    <div id="mensajesResultado" class="alert alert-danger" style="display:none; margin: 15px 30px 0 30px;"></div>
     <div>
         <!--TABLA -->
         <div id="tablaLog" style="margin-top: 30px; margin-bottom: 100px; margin-left: 30px; margin-right: 30px; height: 250px;">
@@ -172,5 +174,7 @@
         <input type="hidden" name="texto-mosPagDePags" id="texto-mosPagDePags" value="<%=descriptor.getDescripcion("mosPagDePags")%>">
         <input type="hidden" name="texto-noRegDisp" id="texto-noRegDisp" value="<%=descriptor.getDescripcion("noRegDisp")%>">
         <input type="hidden" name="texto-filtrDeTotal" id="texto-filtrDeTotal" value="<%=descriptor.getDescripcion("filtrDeTotal")%>">
+        <input type="hidden" name="texto-error-seleccion-vacia" id="texto-error-seleccion-vacia" value="<%=meLanbide09I18n.getMensaje(idiomaUsuario, "error.seleccion.vacia")%>">
+        <input type="hidden" name="texto-error-generar-pdf" id="texto-error-generar-pdf" value="<%=meLanbide09I18n.getMensaje(idiomaUsuario, "error.generarpdf")%>">
     </div>
 </div>
