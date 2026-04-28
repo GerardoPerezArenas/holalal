@@ -46,6 +46,7 @@ var parametrosLlamada = {
   // comboTramite.deactivate(); 
    registrarEventosSeleccion();
    registrarValidacionExportacion();
+   actualizarResumenSeleccion();
    });
 
 function construirClaveFila(data) {
@@ -61,17 +62,84 @@ function construirClaveFila(data) {
     return [ejercicio, procedimiento, numExpediente, fechaRegistrado, desTramite].join("|");
 }
 
+function trimLegacy(texto) {
+    if (texto === undefined || texto === null) {
+        return "";
+    }
+    return String(texto).replace(/^\s+|\s+$/g, "");
+}
+
+function construirClaveDesdeArrayFila(dataArray) {
+    if (!dataArray || dataArray.length < 6) {
+        return "";
+    }
+    return [
+        trimLegacy(dataArray[1]),
+        trimLegacy(dataArray[2]),
+        trimLegacy(dataArray[3]),
+        trimLegacy(dataArray[4]),
+        trimLegacy(dataArray[5])
+    ].join("|");
+}
+
+function construirClaveDesdeDom($fila) {
+    var $celdas = $fila.find("td");
+    if ($celdas.length < 6) {
+        return "";
+    }
+    return [
+        trimLegacy($celdas.eq(1).text()),
+        trimLegacy($celdas.eq(2).text()),
+        trimLegacy($celdas.eq(3).text()),
+        trimLegacy($celdas.eq(4).text()),
+        trimLegacy($celdas.eq(5).text())
+    ].join("|");
+}
+
+function obtenerClaveFila($checkbox, rowData, $fila) {
+    var clave = $checkbox.attr("data-clave");
+    if (clave) {
+        return clave;
+    }
+    if (rowData) {
+        if (typeof rowData === "object" && rowData.length === undefined) {
+            clave = rowData.claveSeleccion ? rowData.claveSeleccion : construirClaveFila(rowData);
+            if (clave) {
+                return clave;
+            }
+        } else if (typeof rowData === "object" && rowData.length !== undefined) {
+            clave = construirClaveDesdeArrayFila(rowData);
+            if (clave) {
+                return clave;
+            }
+        }
+    }
+
+    if ($fila && $fila.length > 0) {
+        return construirClaveDesdeDom($fila);
+    }
+    return "";
+}
+
 function registrarEventosSeleccion() {
     $(document).off("click", "#tableLog .check-fila").on("click", "#tableLog .check-fila", function () {
-        var clave = $(this).attr("data-clave");
+        var $checkbox = $(this);
+        var $fila = $checkbox.closest("tr");
+        var rowData = null;
+        if (tableLog) {
+            rowData = tableLog.row($fila).data();
+        }
+        var clave = obtenerClaveFila($checkbox, rowData, $fila);
         if (!clave) {
             return;
         }
+        $checkbox.attr("data-clave", clave);
 
-        if ($(this).is(":checked")) {
+        if ($checkbox.is(":checked")) {
             if (!seleccionadasMap[clave]) {
                 seleccionadasMap[clave] = true;
                 seleccionadas.push(clave);
+                actualizarResumenSeleccion();
             }
         } else {
             if (seleccionadasMap[clave]) {
@@ -86,16 +154,24 @@ function registrarEventosSeleccion() {
     $(document).off("click", "#check-todas-filas").on("click", "#check-todas-filas", function () {
         var marcar = $(this).is(":checked");
         $('#tableLog tbody .check-fila:visible').each(function () {
-            var clave = $(this).attr("data-clave");
+            var $checkbox = $(this);
+            var $fila = $checkbox.closest("tr");
+            var rowData = null;
+            if (tableLog) {
+                rowData = tableLog.row($fila).data();
+            }
+            var clave = obtenerClaveFila($checkbox, rowData, $fila);
             if (!clave) {
                 return;
             }
+            $checkbox.attr("data-clave", clave);
 
-            $(this).prop("checked", marcar);
+            $checkbox.prop("checked", marcar);
             if (marcar) {
                 if (!seleccionadasMap[clave]) {
                     seleccionadasMap[clave] = true;
                     seleccionadas.push(clave);
+                    actualizarResumenSeleccion();
                 }
             } else {
                 if (seleccionadasMap[clave]) {
@@ -115,12 +191,18 @@ function eliminarSeleccionada(clave) {
         }
     }
     seleccionadas = nuevasSeleccionadas;
+    actualizarResumenSeleccion();
 }
 
 function limpiarSeleccionadas() {
     seleccionadas = [];
     seleccionadasMap = {};
     $("#check-todas-filas").prop("checked", false);
+    actualizarResumenSeleccion();
+}
+
+function actualizarResumenSeleccion() {
+    $("#numFilasSeleccionadas").text(seleccionadas.length);
 }
 
 function sincronizarCheckboxCabecera() {
@@ -147,14 +229,18 @@ function rehidratarSeleccionEnTabla() {
     }
 
     $('#tableLog tbody tr').each(function () {
+        var $fila = $(this);
         var rowData = tableLog.row(this).data();
-        if (!rowData || typeof rowData !== "object") {
+        var $checkbox = $fila.find(".check-fila");
+        if ($checkbox.length === 0) {
             return;
         }
-
-        var clave = rowData.claveSeleccion ? rowData.claveSeleccion : construirClaveFila(rowData);
+        var clave = obtenerClaveFila($checkbox, rowData, $fila);
+        if (!clave) {
+            return;
+        }
         var marcado = !!seleccionadasMap[clave];
-        $(this).find(".check-fila").attr("data-clave", clave).prop("checked", marcado);
+        $checkbox.attr("data-clave", clave).prop("checked", marcado);
     });
 
     sincronizarCheckboxCabecera();
@@ -174,6 +260,10 @@ function registrarValidacionExportacion() {
         .on("click.validarSeleccion", function () {
             return validarSeleccionParaExportacion();
         });
+}
+
+function obtenerFilasSeleccionadas() {
+    return seleccionadas.slice(0);
 }
 
  function cargarDesplegableTramites(){

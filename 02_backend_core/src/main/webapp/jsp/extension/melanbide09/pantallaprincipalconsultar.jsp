@@ -159,6 +159,9 @@
                     </c:forEach>
                 </tbody>
             </table>
+            <div id="resumenSeleccion" style="margin-top: 8px; font-size: 12px; color: #4b4b4b;">
+                Filas seleccionadas: <span id="numFilasSeleccionadas">0</span>
+            </div>
         </div>
         <!-- Campos Ocultos con texto por idioma -->
         <input type="hidden" name="texto-buscar" id="texto-buscar" value="<%=descriptor.getDescripcion("buscar")%>">
